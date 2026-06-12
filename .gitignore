@@ -4,6 +4,7 @@ v1-*.html
 v2-*.html
 v3-*.html
 .DS_Store
+.gh-token
 jmr-architektur-website.bundle
 GO-LIVE-CHECKLISTE.md
 Analyse-Seitenaufbau-Empfehlung.md
