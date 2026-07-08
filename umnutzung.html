@@ -41,7 +41,7 @@ html{scroll-behavior:smooth}
   --bg:#0c1e2c;--bg-2:#102838;--panel:#15303f;--panel-2:#193847;
   --ink-text:#c4d2dc;--ink-soft:#8ba0ac;--white:#fff;--line:rgba(255,255,255,.12);
   --disp:'Switzer','Space Grotesk',-apple-system,sans-serif;--sans:'Inter',-apple-system,sans-serif;--mono:'Inter',-apple-system,sans-serif;
-  --maxw:1180px;--pad:clamp(72px,11vh,140px);--r:18px;--r-lg:26px;
+  --maxw:1180px;--pad:clamp(72px,11vh,140px);--r:16px;--r-lg:16px;
   --shadow:0 30px 70px -30px rgba(0,0,0,.6);
 }
 body{font-family:var(--sans);color:var(--ink-text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -57,7 +57,7 @@ section{padding:var(--pad) 0;position:relative}
 .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:.7rem}
 .kicker::before{content:'';width:30px;height:2px;background:var(--accent);border-radius:2px}
 .kicker.c{justify-content:center}.kicker.c::before{display:none}
-.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--sans);font-weight:600;font-size:.95rem;padding:1.05rem 1.9rem;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:.25s}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--sans);font-weight:600;font-size:.95rem;padding:1.05rem 1.9rem;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:.25s}
 .btn-accent{background:var(--accent-d);color:#fff !important;box-shadow:0 14px 34px -14px rgba(190,74,42,.7)}
 .btn-accent:hover{transform:translateY(-2px);background:#a83e22;box-shadow:0 20px 44px -14px rgba(190,74,42,.85)}
 .btn-accent *{color:#fff !important}
@@ -74,7 +74,7 @@ section{padding:var(--pad) 0;position:relative}
 .brand .mk{height:30px;width:auto;display:block;filter:brightness(0) invert(1)}
 .brand .nm{font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--white)}
 .nlinks{display:flex;align-items:center;gap:.1rem;font-size:.86rem}
-.nlinks a:not(.btn){color:var(--ink-soft);padding:.45rem .85rem;border-radius:999px;transition:.2s;font-weight:500}
+.nlinks a:not(.btn){color:var(--ink-soft);padding:.45rem .85rem;border-radius:8px;transition:.2s;font-weight:500}
 .nlinks a:not(.btn):hover{color:var(--white)}
 .nlinks .btn{margin-left:.6rem;padding:.6rem 1.3rem;font-size:.85rem}
 @media(max-width:1000px){.nlinks a:not(.btn){display:none}}
