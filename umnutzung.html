@@ -182,13 +182,13 @@ section{padding:var(--pad) 0;position:relative}
 #garagePlan.show-after .fx-cap .cap-after{display:inline;color:var(--accent)}
 @media(prefers-reduced-motion:reduce){.gplan .g-before,.gplan .g-after,.gplan .g-after *{transition:none}}
 /* Fall 1 Gewerbe: Vorher (SVG) / Nachher-Platzhalter, per Scroll umgeschaltet */
-#gewerbePlan .gp-before{width:auto;height:auto;max-width:90%;max-height:84%;object-fit:contain;transition:opacity .6s ease}
-#gewerbePlan .gp-after-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;line-height:1.7;opacity:0;transition:opacity .6s ease}
-#gewerbePlan.show-after .gp-before{opacity:0}
-#gewerbePlan.show-after .gp-after-ph{opacity:1}
-#gewerbePlan.show-after .fx-cap .cap-before{display:none}
-#gewerbePlan.show-after .fx-cap .cap-after{display:inline;color:var(--accent)}
-@media(prefers-reduced-motion:reduce){#gewerbePlan .gp-before,#gewerbePlan .gp-after-ph{transition:none}}
+.img-plan .gp-before{width:auto;height:auto;max-width:90%;max-height:84%;object-fit:contain;transition:opacity .6s ease}
+.img-plan .gp-after-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;line-height:1.7;opacity:0;transition:opacity .6s ease}
+.img-plan.show-after .gp-before{opacity:0}
+.img-plan.show-after .gp-after-ph{opacity:1}
+.img-plan.show-after .fx-cap .cap-before{display:none}
+.img-plan.show-after .fx-cap .cap-after{display:inline;color:var(--accent)}
+@media(prefers-reduced-motion:reduce){.img-plan .gp-before,.img-plan .gp-after-ph{transition:none}}
 .fx-cap .vh-lbl-b{color:var(--steel);font-weight:700}
 .fx-cap .vh-lbl-n{color:var(--accent);font-weight:700;opacity:.45;transition:opacity .4s}
 .fx-cap .vh-arrow{margin:0 .3rem}
@@ -455,12 +455,16 @@ section{padding:var(--pad) 0;position:relative}
         <!-- RECHTS: Visual-Buehne (Grundriss-Platzhalter, spaeter echte Plaene) -->
         <div>
           <div class="fx-stage">
-            <div class="fx-vis fx-vis-plan on" id="gewerbePlan">
+            <div class="fx-vis fx-vis-plan img-plan on" id="gewerbePlan">
               <img class="fx-plan gp-before" src="img/fall1-grundriss.svg" alt="Grundriss Gewerbe zu Wohnen, Bestand">
               <div class="ph gp-after-ph">Neuplanung folgt<br>Gewerbe zu Wohnen</div>
               <span class="fx-cap"><b class="cap-before">Bestand</b><b class="cap-after">Neuplanung</b></span>
             </div>
-            <div class="fx-vis"><div class="ph">Visualisierung folgt<br>Ferienwohnung</div></div>
+            <div class="fx-vis fx-vis-plan img-plan" id="ferienPlan">
+              <img class="fx-plan gp-before" src="img/fall2-grundriss.png" alt="Grundriss Ferienwohnung, Bestand">
+              <div class="ph gp-after-ph">Neuplanung folgt<br>Ferienwohnung</div>
+              <span class="fx-cap"><b class="cap-before">Bestand</b><b class="cap-after">Neuplanung</b></span>
+            </div>
             <div class="fx-vis"><div class="ph">Visualisierung folgt<br>Dachausbau</div></div>
             <div class="fx-vis fx-vis-plan" id="garagePlan">
               <svg class="fx-plan gplan" viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" aria-label="Grundriss Garagenumnutzung, vorher und nachher">
@@ -742,8 +746,9 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
   const N=items.length;let cur=-1;
   const gplan=document.getElementById('garagePlan');
   const gewplan=document.getElementById('gewerbePlan');
+  const ferplan=document.getElementById('ferienPlan');
   // Faelle mit Vorher/Nachher-Umschaltung: Fall-Index -> Plan-Element
-  const EXPAND={0:gewplan,3:gplan};
+  const EXPAND={0:gewplan,1:ferplan,3:gplan};
   function setPlan(el,after){if(!el)return;const w=!!after;if(el._after===w)return;el._after=w;el.classList.toggle('show-after',w);}
   function show(i){if(i!==cur){cur=i;items.forEach((el,n)=>el.classList.toggle('on',n===i));vis.forEach((el,n)=>el.classList.toggle('on',n===i));dots.forEach((el,n)=>el.classList.toggle('on',n===i));}}
   // Auf kleinen Screens oder ohne GSAP: alles statisch sichtbar lassen
@@ -760,6 +765,7 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
       const s=stopMap[Math.min(STOPS-1,Math.max(0,Math.round(self.progress*(STOPS-1))))];
       show(s.idx);
       setPlan(gewplan, s.idx===0 && s.after);
+      setPlan(ferplan, s.idx===1 && s.after);
       setPlan(gplan, s.idx===3 && s.after);
     }
   });
