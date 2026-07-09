@@ -503,11 +503,11 @@ section{padding:var(--pad) 0;position:relative}
         <div class="fcard alt">
           <div class="ftop"><span class="fno">KfW 261 · Kredit</span></div>
           <div class="fbig">bis 120.000&nbsp;€</div>
-          <div class="fsub">je Wohneinheit als zinsgünstiger Kredit mit Tilgungszuschuss von 5 bis 45 Prozent, für die energetische Qualität des fertigen Wohngebäudes.</div>
+          <div class="fsub">je Wohneinheit als zinsgünstiger Kredit mit Tilgungszuschuss, für die energetische Qualität des fertigen Wohngebäudes.</div>
         </div>
       </div>
     </div>
-    <p class="fnote fnote-center">Stand Juli 2026. Angaben ohne Gewähr, maßgeblich sind die Bedingungen&nbsp;der&nbsp;KfW. Ob, in welcher Höhe und in welcher Kombination eine Förderung möglich ist, hängt vom Einzelfall ab.</p>
+    <p class="fnote fnote-center">Stand Juli 2026. Zum 21. Juli 2026 ändern sich die Förderbedingungen der BEG (u.&nbsp;a. beim KfW-Kredit 261); die neuen Regeln beziehen wir für Ihr Vorhaben mit ein. Angaben ohne Gewähr, maßgeblich sind die Bedingungen&nbsp;der&nbsp;KfW. Ob, in welcher Höhe und in welcher Kombination eine Förderung möglich ist, hängt vom Einzelfall ab.</p>
   </div>
 </section>
 
@@ -724,7 +724,7 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
     setSplit(50);
     function sway(){
       if(nudged||RM)return;
-      const home=50, amp=8, period=4200, t0=performance.now();
+      const home=50, amp=4, period=4200, t0=performance.now();
       (function tick(t){
         if(nudged){setSplit(home);return;}
         const e=Math.sin(((t-t0)%period)/period*Math.PI*2);
