@@ -412,7 +412,7 @@ section{padding:var(--pad) 0;position:relative}
       <!-- Fall 01: Gewerbe zu Wohnen (Einzelbild) -->
       <article class="fcase fade">
         <div class="fcase-txt">
-          <div class="fx-step">Fall 01 / 05</div>
+          <div class="fx-step">Fall 01 / 04</div>
           <h3>Gewerbe zu Wohnen</h3>
           <p>Aus Büro, Laden oder Praxis werden Wohnungen. Genau hier greifen die KfW-Programme 266 und 261.</p>
           <span class="utag">KfW 266 + 261</span>
@@ -428,22 +428,10 @@ section{padding:var(--pad) 0;position:relative}
         </div>
       </article>
 
-      <!-- Fall 02: Ferienwohnung (Einzelbild) -->
+      <!-- Fall 02: Dachausbau (Schieberegler Vorher/Nachher) -->
       <article class="fcase fade">
         <div class="fcase-txt">
-          <div class="fx-step">Fall 02 / 05</div>
-          <h3>Ferienwohnung</h3>
-          <p>Sie möchten eine Wohnung als Ferienwohnung nutzen. Wir klären Zweckentfremdung und Baurecht und beantragen die Änderung.</p>
-        </div>
-        <div class="fcase-vis">
-          <div class="fx-stage single dark"><img class="fx-plan" src="img/fall2-grundriss.png" alt="Bauantragsplan Ferienwohnung"><span class="fx-cap">Bauantrag</span></div>
-        </div>
-      </article>
-
-      <!-- Fall 03: Dachausbau (Schieberegler Vorher/Nachher) -->
-      <article class="fcase fade">
-        <div class="fcase-txt">
-          <div class="fx-step">Fall 03 / 05</div>
+          <div class="fx-step">Fall 02 / 04</div>
           <h3>Dachausbau und Aufstockung</h3>
           <p>Aus ungenutztem Dachraum oder einer Aufstockung entsteht zusätzlicher Wohnraum. Ziehen Sie den Regler, um Bestand und Neuplanung zu vergleichen.</p>
         </div>
@@ -458,10 +446,10 @@ section{padding:var(--pad) 0;position:relative}
         </div>
       </article>
 
-      <!-- Fall 04: Garage zu Wohnraum (Schieberegler Vorher/Nachher) -->
+      <!-- Fall 03: Garage zu Wohnraum (Schieberegler Vorher/Nachher) -->
       <article class="fcase fade">
         <div class="fcase-txt">
-          <div class="fx-step">Fall 04 / 05</div>
+          <div class="fx-step">Fall 03 / 04</div>
           <h3>Garage zu Wohnraum</h3>
           <p>Eine Garage oder ein Nebengebäude wird zu Wohn- oder Nutzfläche umgewidmet. Ziehen Sie den Regler, um Bestand und Neuplanung zu vergleichen.</p>
         </div>
@@ -476,10 +464,10 @@ section{padding:var(--pad) 0;position:relative}
         </div>
       </article>
 
-      <!-- Fall 05: Neue Wohneinheiten (Platzhalter) -->
+      <!-- Fall 04: Neue Wohneinheiten (Platzhalter) -->
       <article class="fcase fade">
         <div class="fcase-txt">
-          <div class="fx-step">Fall 05 / 05</div>
+          <div class="fx-step">Fall 04 / 04</div>
           <h3>Neue Wohneinheiten</h3>
           <p>Aus einer Einheit werden mehrere, zum Beispiel vom Zwei- zum Dreifamilienhaus.</p>
         </div>
@@ -707,13 +695,14 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
     const lblV=ba.querySelector('.ba-lbl-v');
     const lblN=ba.querySelector('.ba-lbl-n');
     let nudged=false;
+    const MINP=7, MAXP=93;   // Regler nicht ganz an den Rand ziehbar (vgl. Energieberatung)
     function setSplit(pct){
-      pct=Math.max(0,Math.min(100,pct));
+      pct=Math.max(MINP,Math.min(MAXP,pct));
       ba.style.setProperty('--split',pct+'%');
       if(handle)handle.setAttribute('aria-valuenow',Math.round(pct));
       // Label ausblenden, sobald der Regler in seine Naehe kommt
-      if(lblV)lblV.style.opacity = pct<18?0:1;
-      if(lblN)lblN.style.opacity = pct>82?0:1;
+      if(lblV)lblV.style.opacity = pct<20?0:1;
+      if(lblN)lblN.style.opacity = pct>80?0:1;
     }
     function fromClientX(cx){const r=ba.getBoundingClientRect();return (cx-r.left)/r.width*100;}
     let drag=false;
