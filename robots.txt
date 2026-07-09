@@ -1,0 +1,10 @@
+# REVIEW-MODUS: Seite ist noch nicht oeffentlich, Suchmaschinen komplett gesperrt.
+# Vor dem Go-live diesen Block durch die untenstehende oeffentliche Version ersetzen.
+User-agent: *
+Disallow: /
+
+# ----- OEFFENTLICHE VERSION FUER GO-LIVE (dann einkommentieren) -----
+# User-agent: *
+# Allow: /
+#
+# Sitemap: https://jmr-architektur.de/sitemap.xml
