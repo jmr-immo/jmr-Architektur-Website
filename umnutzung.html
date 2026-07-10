@@ -87,6 +87,8 @@ section{padding:var(--pad) 0;position:relative}
 .hero h1{margin-bottom:0}
 .h1-hero{font-size:clamp(2.5rem,5.6vw,4.9rem)}
 .h1-hero .h1l{display:block;white-space:nowrap}
+@media(max-width:600px){.h1-hero{font-size:clamp(2rem,8vw,2.9rem)}.h1-hero .h1l{white-space:normal}}
+@media(max-width:640px){#faelle .sh p{display:none}}
 .rot{display:inline-flex;flex-wrap:wrap;justify-content:center;color:var(--accent);min-height:1.04em}
 .rot .ch{display:inline-block;opacity:0;transform:translateY(.55em);animation:rise .5s forwards}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -303,8 +305,11 @@ section{padding:var(--pad) 0;position:relative}
 .faq .fq-a{padding:0 .2rem 1.4rem;color:var(--ink-soft);font-size:.97rem;line-height:1.65;max-width:680px}
 /* KONTAKT */
 .contact{background:linear-gradient(150deg,var(--bg-2),var(--bg))}
-.cgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:stretch}
-@media(max-width:880px){.cgrid{grid-template-columns:1fr}}
+.cgrid{display:grid;grid-template-columns:1.05fr .95fr;grid-template-rows:auto 1fr;column-gap:3rem;row-gap:1.8rem;align-items:stretch}
+.cgrid .kontakt-left{grid-column:1;grid-row:1}
+.cgrid .kontakt-formcol{grid-column:2;grid-row:1/3}
+.cgrid .kontakt-photo{grid-column:1;grid-row:2;height:100%;min-height:220px}
+@media(max-width:880px){.cgrid{grid-template-columns:1fr;grid-template-rows:none}.cgrid .kontakt-left,.cgrid .kontakt-formcol,.cgrid .kontakt-photo{grid-column:1;grid-row:auto;height:auto}.kontakt-photo{min-height:260px}}
 .kontakt-left{display:flex;flex-direction:column}
 .cgrid h2{margin:1.4rem 0 1.2rem}
 .clead{font-size:1.12rem;color:var(--ink-text);max-width:440px}
@@ -317,8 +322,7 @@ section{padding:var(--pad) 0;position:relative}
 .ke-card .ke-ic{width:42px;height:42px;border-radius:11px;background:rgba(63,209,135,.2);color:var(--eco);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ke-card p{font-size:.92rem;color:var(--ink-text);margin:0}
 .ke-card a{color:var(--eco);font-weight:700;white-space:nowrap}
-.kontakt-photo{margin-top:1.8rem;flex:1 1 0;min-height:200px;border-radius:var(--r-lg);background:#dfe4e0 url("img/beratung.jpg") center 35%/cover;box-shadow:0 30px 70px -34px rgba(0,0,0,.6)}
-@media(max-width:880px){.kontakt-photo{flex:none;min-height:260px}}
+.kontakt-photo{border-radius:var(--r-lg);background:#dfe4e0 url("img/beratung.jpg") center 35%/cover;box-shadow:0 30px 70px -34px rgba(0,0,0,.6)}
 .ccard{position:relative;overflow:hidden;background:linear-gradient(135deg,#F0D9CD,#DCE6F2);border:1px solid rgba(225,98,61,.28);border-radius:var(--r-lg);padding:2.6rem 2.3rem;box-shadow:0 40px 90px -40px rgba(11,28,43,.18)}
 .ccard > *{position:relative;z-index:1}
 .ccard h3{margin-bottom:.3rem;color:var(--white)}.ccard .ds{color:var(--ink-soft);font-size:.9rem;margin-bottom:1.5rem}
@@ -330,7 +334,8 @@ section{padding:var(--pad) 0;position:relative}
 .fld textarea{resize:vertical;min-height:88px;line-height:1.5}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--accent);background:#FFFFFF;box-shadow:0 0 0 3px rgba(225,98,61,.15)}
 .fld-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-@media(max-width:480px){.fld-row{grid-template-columns:1fr}}
+@media(max-width:345px){.fld-row{grid-template-columns:1fr}}
+@media(max-width:560px){.ccard{padding:1.7rem 1.4rem}.fld{margin-bottom:.8rem}.fld-row{gap:.8rem}.fld label{margin-bottom:.3rem}.fld input,.fld select,.fld textarea{font-size:16px;padding:.72rem .9rem}.fld textarea{min-height:64px}.ccard .fld-row label{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}}
 .kf-status{margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;font-size:.92rem;line-height:1.5}
 .kf-status.ok{background:rgba(63,209,135,.14);border:1px solid rgba(63,209,135,.45);color:#158a5a;font-weight:600}
 .kf-status.err{background:rgba(214,69,69,.1);border:1px solid rgba(214,69,69,.4);color:#b3271e}
@@ -628,9 +633,8 @@ section{padding:var(--pad) 0;position:relative}
           <li class="half"><span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span> <a href="tel:+4917634458871" style="color:inherit;text-decoration:none">0176 34458871</a></li>
           <li class="half"><span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span> <a href="mailto:info@jmr-architektur.de" style="color:inherit;text-decoration:none">info@jmr-architektur.de</a></li>
         </ul>
-        <div class="kontakt-photo"></div>
       </div>
-      <div class="fade d1">
+      <div class="fade d1 kontakt-formcol">
         <div class="ccard">
           <h3>Anfrage senden</h3>
           <p class="ds">Wir melden uns zeitnah zurück.</p>
@@ -653,6 +657,7 @@ section{padding:var(--pad) 0;position:relative}
           </form>
         </div>
       </div>
+      <div class="kontakt-photo fade"></div>
     </div>
   </div>
 </section>
