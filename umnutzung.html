@@ -124,6 +124,14 @@ section{padding:var(--pad) 0;position:relative}
 .sh.c .kicker{justify-content:center}.sh.c .kicker::before{display:none}
 .sh h2{margin:1.2rem 0 0}.sh p{font-size:1.12rem;color:var(--ink-soft);margin-top:1.1rem}
 .sh.c p{margin-left:auto;margin-right:auto}
+.team-hero{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:clamp(1.6rem,4vw,3.2rem);align-items:stretch;margin-top:1rem}
+@media(max-width:860px){.team-hero{grid-template-columns:1fr;justify-items:center}}
+.team-photo{position:relative;margin:0;width:100%;min-height:280px;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 90px -40px rgba(11,28,43,.4);background:linear-gradient(160deg,#dde4ea,#cdd8e0)}
+@media(max-width:860px){.team-photo{min-height:0;width:100%;max-width:440px;aspect-ratio:4/5}}
+.team-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.team-story p{color:var(--ink-text);font-size:1.02rem;line-height:1.7}
+.team-story p+p{margin-top:1rem}
+@media(max-width:860px){.team-story{max-width:560px}}
 /* PROBLEM (gleich grosse Karten) */
 .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
 @media(max-width:900px){.prob-grid{grid-template-columns:1fr 1fr}}
@@ -577,13 +585,18 @@ section{padding:var(--pad) 0;position:relative}
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="stimmen">
+<section id="ueber">
   <div class="container">
-    <div class="sh c fade"><span class="kicker c">Kundenstimmen</span><h2>Das sagen unsere Kunden.</h2></div>
-    <div class="rev-grid">
-      <div class="rev fade"><div class="stars">★★★★★</div><p>Hier steht eine echte Kundenstimme, sobald das erste Projekt abgeschlossen und freigegeben ist.</p><div class="who"><span class="av"></span><span>Name folgt</span></div></div>
-      <div class="rev fade d1"><div class="stars">★★★★★</div><p>Hier steht eine echte Kundenstimme, sobald das erste Projekt abgeschlossen und freigegeben ist.</p><div class="who"><span class="av"></span><span>Name folgt</span></div></div>
-      <div class="rev fade d2"><div class="stars">★★★★★</div><p>Hier steht eine echte Kundenstimme, sobald das erste Projekt abgeschlossen und freigegeben ist.</p><div class="who"><span class="av"></span><span>Name folgt</span></div></div>
+    <div class="sh fade"><span class="kicker">Über Maximilian Rudorf</span><h2>Planung mit Erfahrung im Bestand.</h2></div>
+    <div class="team-hero fade">
+      <figure class="team-photo">
+        <img class="team-img" src="img/team-foto.jpg" alt="Maximilian Rudorf" loading="lazy">
+      </figure>
+      <div class="team-story">
+        <p>Das Büro von Maximilian Rudorf ist auf das Bauen im Bestand spezialisiert: Umnutzung, Aufteilung, Umbau und Sanierung, von der ersten Bewertung bis zum genehmigten Plan.</p>
+        <p>Im Mittelpunkt steht eine ehrliche, durchdachte Planung. Was sinnvoll und genehmigungsfähig ist, klären wir vor der ersten Zeichnung. So vermeiden Sie teure Umwege, und Sie haben über das gesamte Vorhaben einen festen Ansprechpartner.</p>
+        <p>Gerade im Bestand steckt der Aufwand im Detail: Tragwerk, vorhandene Substanz und das geltende Baurecht müssen zusammenpassen. Wir nehmen den Bestand genau auf, denken die Lösung von Anfang an zu Ende und behalten Aufwand und Kosten realistisch im Blick.</p>
+      </div>
     </div>
   </div>
 </section>
