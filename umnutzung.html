@@ -110,12 +110,12 @@ section{padding:var(--pad) 0;position:relative}
 .stat .lbl{font-size:.86rem;color:var(--ink-soft);margin-top:.5rem}
 /* STATEMENT */
 .statement{padding:clamp(60px,9vh,110px) 0;position:relative;overflow:hidden}
-.statement.s1{background:linear-gradient(135deg,#EDE6D8,var(--bg))}
-.statement.s2{background:linear-gradient(135deg,#E4EAF0 -10%,var(--bg-2) 60%)}
-.statement .big{font-family:var(--disp);font-weight:600;font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.16;letter-spacing:-.03em;color:var(--white);max-width:1000px}
+.statement.s1{background:radial-gradient(120% 120% at 12% 0%,rgba(225,98,61,.16),transparent 55%),linear-gradient(160deg,#0B1C2B,#08151F)}
+.statement.s2{background:radial-gradient(120% 120% at 88% 100%,rgba(225,98,61,.16),transparent 55%),linear-gradient(160deg,#0B1C2B,#08151F)}
+.statement .big{font-family:var(--disp);font-weight:600;font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.16;letter-spacing:-.03em;color:#fff;max-width:1000px}
 .statement.center .big{margin:0 auto;text-align:center}
 .statement .big .hl{color:var(--accent)}
-.statement .sub{margin-top:1.2rem;font-size:1.1rem;color:var(--ink-soft);max-width:640px}
+.statement .sub{margin-top:1.2rem;font-size:1.1rem;color:#a9b7c2;max-width:640px}
 .statement.center .sub{margin-left:auto;margin-right:auto;text-align:center}
 /* SECTION HEAD */
 .sh{max-width:760px;margin-bottom:3.2rem}
@@ -292,7 +292,11 @@ section{padding:var(--pad) 0;position:relative}
 .faq[open] summary .fq-i{background:var(--accent);color:#fff;border-color:var(--accent);transform:rotate(45deg)}
 .faq .fq-a{padding:0 .2rem 1.4rem;color:var(--ink-soft);font-size:.97rem;line-height:1.65;max-width:680px}
 /* KONTAKT */
-.contact{background:linear-gradient(150deg,var(--bg-2),var(--bg))}
+.contact{background:radial-gradient(130% 110% at 85% 0%,rgba(225,98,61,.12),transparent 55%),linear-gradient(160deg,#0B1C2B,#08151F)}
+.contact h2{color:#fff}
+.contact .clead{color:#a9b7c2}
+.contact .clist li{color:#e6ebf0}
+.contact .clist .ic{border-color:rgba(255,255,255,.16)}
 .cgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:stretch}
 @media(max-width:880px){.cgrid{grid-template-columns:1fr}}
 .kontakt-left{display:flex;flex-direction:column}
@@ -412,7 +416,7 @@ section{padding:var(--pad) 0;position:relative}
 </section>
 
 <!-- ANWENDUNGSFAELLE -->
-<section id="faelle">
+<section id="faelle" style="background:linear-gradient(135deg,#F1EAD9,var(--bg-2));border-top:2px solid rgba(225,98,61,.45)">
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Für jede Nutzung</span><h2>Was sich umwandeln lässt.</h2><p>Ob ganzes Gebäude oder einzelne Fläche: Wir kennen die Anforderungen der jeweiligen Nutzung und bringen Ihr Vorhaben durch das Verfahren.</p></div>
     <div class="fcarousel fade" id="fcarousel">
