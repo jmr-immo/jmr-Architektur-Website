@@ -110,12 +110,12 @@ section{padding:var(--pad) 0;position:relative}
 .stat .lbl{font-size:.86rem;color:var(--ink-soft);margin-top:.5rem}
 /* STATEMENT */
 .statement{padding:clamp(60px,9vh,110px) 0;position:relative;overflow:hidden}
-.statement.s1{background:radial-gradient(120% 120% at 12% 0%,rgba(225,98,61,.14),transparent 55%),linear-gradient(150deg,#2C4A62,#16303F)}
-.statement.s2{background:radial-gradient(120% 120% at 88% 100%,rgba(225,98,61,.14),transparent 55%),linear-gradient(150deg,#2C4A62,#16303F)}
-.statement .big{font-family:var(--disp);font-weight:600;font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.16;letter-spacing:-.03em;color:#fff;max-width:1000px}
+.statement.s1{background:linear-gradient(135deg,#EDE6D8,var(--bg))}
+.statement.s2{background:linear-gradient(135deg,#E4EAF0 -10%,var(--bg-2) 60%)}
+.statement .big{font-family:var(--disp);font-weight:600;font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.16;letter-spacing:-.03em;color:var(--white);max-width:1000px}
 .statement.center .big{margin:0 auto;text-align:center}
 .statement .big .hl{color:var(--accent)}
-.statement .sub{margin-top:1.2rem;font-size:1.1rem;color:#a9b7c2;max-width:640px}
+.statement .sub{margin-top:1.2rem;font-size:1.1rem;color:var(--ink-soft);max-width:640px}
 .statement.center .sub{margin-left:auto;margin-right:auto;text-align:center}
 /* SECTION HEAD */
 .sh{max-width:760px;margin-bottom:3.2rem}
@@ -213,9 +213,9 @@ section{padding:var(--pad) 0;position:relative}
 .flow{position:relative;max-width:920px;margin:0 auto;padding:1rem 0}
 .flow-rail{position:absolute;left:50%;transform:translateX(-50%);top:.4rem;bottom:.4rem;width:2px;background:rgba(11,28,43,.12);overflow:hidden;z-index:0}
 .flow-rail::after{content:"";position:absolute;left:0;top:0;width:100%;height:var(--fp,0%);background:linear-gradient(var(--steel),var(--accent))}
-.fstep{position:relative;z-index:1;width:calc(50% - 1.2rem);box-sizing:border-box;background:linear-gradient(165deg,#C6D1DE,#B2C0D0);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem 1.7rem;margin-bottom:-.6rem;
+.fstep{position:relative;z-index:1;width:calc(50% - 1.2rem);box-sizing:border-box;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem 1.7rem;margin-bottom:-.6rem;
   transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .55s,filter .55s,box-shadow .55s,border-color .55s,background .55s;
-  opacity:.5;filter:saturate(.8);}
+  opacity:.26;filter:saturate(.5);}
 /* links / rechts abwechselnd, Ursprung der Skalierung zeigt zur Mittelachse */
 .fstep.left{margin-right:auto;text-align:right;transform-origin:right center;transform:scale(.88) translateX(-8px)}
 .fstep.right{margin-left:auto;text-align:left;transform-origin:left center;transform:scale(.88) translateX(8px)}
@@ -227,7 +227,7 @@ section{padding:var(--pad) 0;position:relative}
 .fstep p{color:var(--ink-soft);font-size:.97rem;margin:.6rem 0 0;transition:.55s}
 .fstep.left p{margin-left:auto}
 /* AKTIV: gross, hell, Akzentrahmen + Glow */
-.fstep.active{opacity:1;filter:none;background:linear-gradient(165deg,#FFFFFF,#EDF1F6);border-color:rgba(225,98,61,.55);box-shadow:0 26px 60px -28px rgba(225,98,61,.5),0 0 0 1px rgba(225,98,61,.22)}
+.fstep.active{opacity:1;filter:none;background:linear-gradient(165deg,var(--panel-2),var(--bg-2));border-color:rgba(225,98,61,.55);box-shadow:0 26px 60px -28px rgba(225,98,61,.5),0 0 0 1px rgba(225,98,61,.22)}
 .fstep.left.active{transform:scale(1.05) translateX(-2px)}
 .fstep.right.active{transform:scale(1.05) translateX(2px)}
 .fstep.active .sidx{color:var(--accent)}
@@ -412,7 +412,7 @@ section{padding:var(--pad) 0;position:relative}
 </section>
 
 <!-- ANWENDUNGSFAELLE -->
-<section id="faelle" style="background:linear-gradient(160deg,#DCE4EC,#E6E9E5);border-top:2px solid rgba(225,98,61,.45)">
+<section id="faelle">
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Für jede Nutzung</span><h2>Was sich umwandeln lässt.</h2><p>Ob ganzes Gebäude oder einzelne Fläche: Wir kennen die Anforderungen der jeweiligen Nutzung und bringen Ihr Vorhaben durch das Verfahren.</p></div>
     <div class="fcarousel fade" id="fcarousel">
@@ -554,7 +554,7 @@ section{padding:var(--pad) 0;position:relative}
 </section>
 
 <!-- ANGEBOTE -->
-<section id="pakete" style="background:linear-gradient(160deg,#E7ECF2,var(--bg))">
+<section id="pakete">
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Unsere Angebote</span><h2>Zwei Wege, mit uns zu starten.</h2><p>Die komplette Umnutzung von der Prüfung bis zum Bescheid, oder vorab der vertiefte Machbarkeits-Check, wenn Sie Förderung und Potenzial erst gründlich ausloten möchten.</p></div>
     <div class="pak-grid pak-grid-2">
