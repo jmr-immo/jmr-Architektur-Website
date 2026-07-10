@@ -182,6 +182,7 @@ section{padding:var(--pad) 0;position:relative}
 .hero-sign{margin-top:2.2rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;align-items:center;gap:.8rem;max-width:480px}
 .hero-sign .q{font-family:var(--disp);font-size:1.22rem;color:var(--ink);line-height:1.3;font-weight:600}
 .hero-sign .b{font-family:var(--disp);font-size:2rem;color:var(--green);line-height:.6}
+@media(max-width:640px){.hero-act{flex-wrap:nowrap;gap:.6rem}.hero-act .btn{flex:1 1 0;min-width:0;justify-content:center;padding:.85rem .7rem;font-size:.82rem;white-space:nowrap}.hero-act .btn .ar{display:none}.hero-sign{display:none}}
 /* PHOTO FRAME */
 .photo{position:relative}
 .photo-img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;border-radius:var(--r-lg);background:#dde7ef;box-shadow:var(--shadow-lg);overflow:hidden}
@@ -203,6 +204,15 @@ section{padding:var(--pad) 0;position:relative}
 .tfact .tt small{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:1px}
 .tfact-div{width:1px;height:30px;background:var(--line)}
 @media(max-width:760px){.trust-row{gap:1rem 1.4rem}.tfact-div{display:none}}
+.trust-contact{display:none}
+@media(max-width:640px){
+  .trust{padding:0;border:none;background:transparent;margin-top:-2.6rem;margin-bottom:1.6rem;position:relative;z-index:6}
+  .trust-row{display:none}
+  .trust-contact{display:flex;flex-direction:column;gap:.6rem;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 22px 48px -24px rgba(11,28,43,.55);padding:1rem 1.2rem}
+  .tc-item{display:flex;align-items:center;gap:.75rem;color:var(--ink);text-decoration:none;font-family:var(--disp);font-weight:600;font-size:1.02rem}
+  .tc-item .ti{flex-shrink:0;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--steel-d);background:rgba(31,111,165,.1)}
+  .tc-item .ti svg{width:18px;height:18px}
+}
 
 /* SECTION HEAD */
 .sh{max-width:760px;margin-bottom:3.2rem}
@@ -308,10 +318,10 @@ section{padding:var(--pad) 0;position:relative}
 .zg-card.sec li::before{background:var(--muted)}
 
 /* PROZESS-KETTE */
-.chain{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:2.8rem;position:relative}
-@media(max-width:980px){.chain{grid-template-columns:1fr 1fr 1fr}}
-@media(max-width:620px){.chain{grid-template-columns:1fr 1fr}}
-.cstep{padding:1.5rem 1.2rem;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.04);position:relative;transition:.3s}
+.chain{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem;margin-top:2.8rem;position:relative}
+@media(max-width:980px){.chain{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){.chain{grid-template-columns:repeat(2,minmax(0,1fr))}.chain .cstep:nth-child(5){grid-column:1/-1}}
+.cstep{min-width:0;padding:1.5rem 1.2rem;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.04);position:relative;transition:.3s}
 .cstep:hover{background:rgba(75,163,214,.12);border-color:rgba(75,163,214,.4);transform:translateY(-4px)}
 .cstep .cn{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(150deg,var(--green),var(--green-d));font-family:var(--disp);font-weight:700;font-size:1rem;margin-bottom:.9rem}
 .cstep.opt .cn{background:linear-gradient(150deg,var(--steel),var(--ink))}
@@ -353,16 +363,18 @@ section{padding:var(--pad) 0;position:relative}
 .ref-note p{color:var(--muted);font-size:1rem;max-width:520px;margin:0 auto}
 
 /* KONTAKT */
-.cgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:stretch}
-@media(max-width:880px){.cgrid{grid-template-columns:1fr}}
+.cgrid{display:grid;grid-template-columns:1.05fr .95fr;grid-template-rows:auto 1fr;column-gap:3rem;row-gap:1.8rem;align-items:stretch}
+.cgrid .kontakt-left{grid-column:1;grid-row:1}
+.cgrid .kontakt-formcol{grid-column:2;grid-row:1/3}
+.cgrid .kontakt-photo{grid-column:1;grid-row:2;height:100%;min-height:220px}
+@media(max-width:880px){.cgrid{grid-template-columns:1fr;grid-template-rows:none}.cgrid .kontakt-left,.cgrid .kontakt-formcol,.cgrid .kontakt-photo{grid-column:1;grid-row:auto;height:auto}.kontakt-photo{min-height:240px}}
 .kontakt-left{display:flex;flex-direction:column}
 .clist{list-style:none;display:flex;flex-wrap:wrap;gap:.85rem 1.6rem;margin-top:1.6rem}
 .clist li{display:flex;align-items:center;gap:.9rem;font-size:1rem}
 .clist .half{flex:0 1 auto}.clist .loc{flex:1 1 100%}
 @media(max-width:520px){.clist .half{flex:1 1 100%}}
 .clist .ic{font-family:var(--mono);font-size:.66rem;color:var(--blueprint);border:1px solid rgba(255,255,255,.18);border-radius:11px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.kontakt-photo{margin-top:1.8rem;flex:1;min-height:220px;border-radius:var(--r-lg);background:#0e2433 url("img/beratung.jpg") center/cover;box-shadow:var(--shadow-lg)}
-@media(max-width:880px){.kontakt-photo{min-height:240px}}
+.kontakt-photo{border-radius:var(--r-lg);background:#0e2433 url("img/beratung.jpg") center/cover;box-shadow:var(--shadow-lg)}
 .ccard{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:2.1rem;color:var(--text);box-shadow:var(--shadow-lg)}
 .ccard h3{margin-bottom:.3rem;color:var(--ink)}.ccard .ds{color:var(--muted);font-size:.9rem;margin-bottom:1.4rem}
 .fld{margin-bottom:1rem}.fld label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
@@ -374,7 +386,8 @@ section{padding:var(--pad) 0;position:relative}
 .fld textarea{resize:vertical;min-height:84px;line-height:1.5}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--steel);background:#fff;box-shadow:0 0 0 3px rgba(31,111,165,.12)}
 .fld-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-@media(max-width:480px){.fld-row{grid-template-columns:1fr}}
+@media(max-width:345px){.fld-row{grid-template-columns:1fr}}
+@media(max-width:560px){.ccard{padding:1.5rem}.fld{margin-bottom:.8rem}.fld-row{gap:.8rem}.fld label{margin-bottom:.3rem}.fld input,.fld select,.fld textarea{font-size:16px;padding:.72rem .9rem}.fld textarea{min-height:64px}.ccard .fld-row label{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}}
 .form-note{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-top:.9rem;line-height:1.55;text-align:center}
 
 /* FOOTER */
@@ -454,6 +467,10 @@ section{padding:var(--pad) 0;position:relative}
       <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M15.5 20c0-2 .9-3.3 2.5-3.7"/></svg></span><span class="tt"><strong>Starkes Netzwerk</strong><small>aus Fachplanern</small></span></div>
       <span class="tfact-div" aria-hidden="true"></span>
       <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.3 1 2.5h6c0-1.2.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span class="tt"><strong>Energieberatung</strong><small>Förderung mitgedacht</small></span></div>
+    </div>
+    <div class="trust-contact">
+      <a class="tc-item" href="tel:+4917634458871"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span><span>0176 34458871</span></a>
+      <a class="tc-item" href="mailto:info@jmr-architektur.de"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><span>info@jmr-architektur.de</span></a>
     </div>
   </div>
 </div>
@@ -649,9 +666,8 @@ section{padding:var(--pad) 0;position:relative}
           <li class="half"><span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span> <a href="tel:+4917634458871" style="color:inherit;text-decoration:none">0176 34458871</a></li>
           <li class="half"><span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span> <a href="mailto:info@jmr-architektur.de" style="color:inherit;text-decoration:none">info@jmr-architektur.de</a></li>
         </ul>
-        <div class="kontakt-photo"></div>
       </div>
-      <div class="fade d1">
+      <div class="fade d1 kontakt-formcol">
         <div class="ccard">
           <h3>Anfrage senden</h3>
           <p class="ds">Wir melden uns zeitnah zurück.</p>
@@ -675,6 +691,7 @@ section{padding:var(--pad) 0;position:relative}
           </form>
         </div>
       </div>
+      <div class="kontakt-photo fade"></div>
     </div>
   </div>
 </section>
