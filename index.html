@@ -204,11 +204,11 @@ section{padding:var(--pad) 0;position:relative}
 .tfact .tt small{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:1px}
 .tfact-div{width:1px;height:30px;background:var(--line)}
 @media(max-width:760px){.trust-row{gap:1rem 1.4rem}.tfact-div{display:none}}
-.trust-contact{display:none}
+.hero-contact{display:none}
 @media(max-width:640px){
-  .trust{padding:0;border:none;background:transparent;margin-top:-2.6rem;margin-bottom:1.6rem;position:relative;z-index:6}
-  .trust-row{display:none}
-  .trust-contact{display:flex;flex-direction:column;gap:.6rem;background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 22px 48px -24px rgba(11,28,43,.55);padding:1rem 1.2rem}
+  .trust{display:none}
+  .hero-grid .hero-photo{order:3}
+  .hero-contact{display:flex;order:2;flex-direction:column;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 45px -26px rgba(11,28,43,.4);padding:1rem 1.2rem}
   .tc-item{display:flex;align-items:center;gap:.75rem;color:var(--ink);text-decoration:none;font-family:var(--disp);font-weight:600;font-size:1.02rem}
   .tc-item .ti{flex-shrink:0;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--steel-d);background:rgba(31,111,165,.1)}
   .tc-item .ti svg{width:18px;height:18px}
@@ -448,11 +448,15 @@ section{padding:var(--pad) 0;position:relative}
         </div>
         <div class="hero-sign"><span class="b">&ldquo;</span><span class="q">Klartext im Behördendschungel.</span></div>
       </div>
-      <div class="fade vis d2">
+      <div class="fade vis d2 hero-photo">
         <figure class="photo">
           <img class="photo-img" src="img/header-foto.jpg" alt="Maximilian Rudorf, freischaffender Architekt" loading="lazy">
           <figcaption><strong>Maximilian Rudorf</strong><span>Freischaffender Architekt</span></figcaption>
         </figure>
+      </div>
+      <div class="hero-contact">
+        <a class="tc-item" href="tel:+4917634458871"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span><span>0176 34458871</span></a>
+        <a class="tc-item" href="mailto:info@jmr-architektur.de"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><span>info@jmr-architektur.de</span></a>
       </div>
     </div>
   </div>
@@ -467,10 +471,6 @@ section{padding:var(--pad) 0;position:relative}
       <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M15.5 20c0-2 .9-3.3 2.5-3.7"/></svg></span><span class="tt"><strong>Starkes Netzwerk</strong><small>aus Fachplanern</small></span></div>
       <span class="tfact-div" aria-hidden="true"></span>
       <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.3 1 2.5h6c0-1.2.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span class="tt"><strong>Energieberatung</strong><small>Förderung mitgedacht</small></span></div>
-    </div>
-    <div class="trust-contact">
-      <a class="tc-item" href="tel:+4917634458871"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span><span>0176 34458871</span></a>
-      <a class="tc-item" href="mailto:info@jmr-architektur.de"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><span>info@jmr-architektur.de</span></a>
     </div>
   </div>
 </div>
