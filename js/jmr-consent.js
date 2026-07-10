@@ -43,7 +43,7 @@
     // === Beim Go-live eintragen (solange leer, wird nichts geladen) ===
     googleAdsId: '',        // z. B. 'AW-XXXXXXXXXX'
     conversionSendTo: '',   // z. B. 'AW-XXXXXXXXXX/xxxxxxxxxxxxxxxx'
-    ga4Id: '',              // z. B. 'G-XXXXXXXXXX'
+    ga4Id: 'G-QBT976RCEC',  // GA4 jmr Architektur
     clarityId: ''           // Projekt-ID aus clarity.microsoft.com
   };
 
