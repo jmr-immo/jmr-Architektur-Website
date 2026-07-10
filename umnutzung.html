@@ -111,7 +111,7 @@ section{padding:var(--pad) 0;position:relative}
 /* STATEMENT */
 .statement{padding:clamp(60px,9vh,110px) 0;position:relative;overflow:hidden}
 .statement.s1{background:radial-gradient(120% 120% at 12% 0%,rgba(225,98,61,.14),transparent 55%),linear-gradient(150deg,#2C4A62,#16303F)}
-.statement.s2{background:radial-gradient(120% 120% at 88% 100%,rgba(225,98,61,.16),transparent 55%),linear-gradient(160deg,#0B1C2B,#08151F)}
+.statement.s2{background:radial-gradient(120% 120% at 88% 100%,rgba(225,98,61,.14),transparent 55%),linear-gradient(150deg,#2C4A62,#16303F)}
 .statement .big{font-family:var(--disp);font-weight:600;font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.16;letter-spacing:-.03em;color:#fff;max-width:1000px}
 .statement.center .big{margin:0 auto;text-align:center}
 .statement .big .hl{color:var(--accent)}
@@ -213,9 +213,9 @@ section{padding:var(--pad) 0;position:relative}
 .flow{position:relative;max-width:920px;margin:0 auto;padding:1rem 0}
 .flow-rail{position:absolute;left:50%;transform:translateX(-50%);top:.4rem;bottom:.4rem;width:2px;background:rgba(11,28,43,.12);overflow:hidden;z-index:0}
 .flow-rail::after{content:"";position:absolute;left:0;top:0;width:100%;height:var(--fp,0%);background:linear-gradient(var(--steel),var(--accent))}
-.fstep{position:relative;z-index:1;width:calc(50% - 1.2rem);box-sizing:border-box;background:linear-gradient(165deg,#DFE5EC,#CFD8E3);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem 1.7rem;margin-bottom:-.6rem;
+.fstep{position:relative;z-index:1;width:calc(50% - 1.2rem);box-sizing:border-box;background:linear-gradient(165deg,#C6D1DE,#B2C0D0);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem 1.7rem;margin-bottom:-.6rem;
   transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .55s,filter .55s,box-shadow .55s,border-color .55s,background .55s;
-  opacity:.26;filter:saturate(.5);}
+  opacity:.5;filter:saturate(.8);}
 /* links / rechts abwechselnd, Ursprung der Skalierung zeigt zur Mittelachse */
 .fstep.left{margin-right:auto;text-align:right;transform-origin:right center;transform:scale(.88) translateX(-8px)}
 .fstep.right{margin-left:auto;text-align:left;transform-origin:left center;transform:scale(.88) translateX(8px)}
