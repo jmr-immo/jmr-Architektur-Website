@@ -44,7 +44,7 @@
     googleAdsId: '',        // z. B. 'AW-XXXXXXXXXX'
     conversionSendTo: '',   // z. B. 'AW-XXXXXXXXXX/xxxxxxxxxxxxxxxx'
     ga4Id: 'G-QBT976RCEC',  // GA4 jmr Architektur
-    clarityId: ''           // Projekt-ID aus clarity.microsoft.com
+    clarityId: 'xke0kr03ej' // Clarity jmr Architektur
   };
 
   // ===== gtag-Grundgerüst + Consent Mode v2 (Standard: alles abgelehnt) =====
