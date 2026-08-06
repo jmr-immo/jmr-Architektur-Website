@@ -289,7 +289,7 @@ section{padding:var(--pad) 0;position:relative}
 .footer:hover .spot{opacity:1}
 /* UMBRUCH LANGER DEUTSCHER KOMPOSITA (Abgeschlossenheitsbescheinigung, Wohnungseigentumsgesetz)
    Silbentrennung statt harter Wortbruch: sonst landet der letzte Buchstabe allein
-   in einer neuen Zeile. text-wrap:balance verteilt die Zeilen gleichmaessig. */
+   in einer neuen Zeile. text-wrap:balance verteilt die Zeilen gleichmaessig.
    Zusaetzlich stehen in den langen Fachwoertern weiche Trennstellen (&shy;) im Text,
    damit die Trennung auch in Browsern ohne deutsches Trennmuster sauber aussieht. */
 h1,h2,h3,.dq,.pak-h,.stitle{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
@@ -359,6 +359,45 @@ p{text-wrap:pretty}
 .btn-steel2:hover{transform:translateY(-2px);background:#18587f;box-shadow:0 20px 44px -14px rgba(31,111,165,.85)}
 .btn-steel2 *{color:#fff !important}
 @media(prefers-reduced-motion:reduce){.pak-steel::before{animation:none}}
+/* SICHTBARKEIT JE NACH BILDSCHIRMBREITE
+   Damit lassen sich einzelne Saetze auf schmalen Displays weglassen,
+   ohne den Inhalt auf dem Desktop zu verlieren. */
+.m-only{display:none}
+.m-only-i{display:none}
+@media(max-width:700px){
+  .d-only{display:none}
+  .d-only-i{display:none}
+  .m-only{display:block}
+  .m-only-i{display:inline}
+}
+/* GRUENDE-KARTEN: auf schmalen Displays eine Aufklapp-Liste.
+   Auf dem Desktop bleibt der Kopf ein normaler Block, also alles wie bisher. */
+.acc-plus{display:none}
+@media(max-width:700px){
+  #gruende .prob-grid{grid-template-columns:1fr;gap:.7rem}
+  #gruende .prob{padding:0}
+  /* Rahmen und Akzentlinie hier ruhiger als bei den uebrigen Karten */
+  #gruende .prob,#gruende .prob:hover{border-color:var(--line)}
+  #gruende .prob::after,#gruende .prob:hover::after{width:0}
+  #gruende .acc-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.9rem;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+  #gruende .acc-head:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:var(--r)}
+  #gruende .prob .pn{font-size:1.3rem;margin:0;line-height:1}
+  #gruende .prob h3{margin:0;min-height:0;font-size:1.02rem;line-height:1.28}
+  /* Plus, das sich beim Aufklappen zum Minus dreht */
+  #gruende .acc-plus{display:block;position:relative;width:22px;height:22px}
+  #gruende .acc-plus::before,#gruende .acc-plus::after{content:'';position:absolute;left:50%;top:50%;background:var(--accent);border-radius:2px;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
+  #gruende .acc-plus::before{width:14px;height:2px;transform:translate(-50%,-50%)}
+  #gruende .acc-plus::after{width:2px;height:14px;transform:translate(-50%,-50%)}
+  #gruende .prob.auf .acc-plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+  /* Aufklappen ueber Rasterzeilen: laeuft in allen aktuellen Browsern fluessig */
+  #gruende .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1)}
+  #gruende .prob.auf .acc-body{grid-template-rows:1fr}
+  /* Der innere Rahmen traegt kein eigenes Innenabstandsmass, sonst bliebe im
+     zugeklappten Zustand die Hoehe des Abstands stehen. */
+  #gruende .acc-inner{overflow:hidden;min-height:0}
+  #gruende .acc-inner p{margin:0;padding:0 1.25rem 1.25rem}
+  @media(prefers-reduced-motion:reduce){#gruende .acc-body,#gruende .acc-plus::before,#gruende .acc-plus::after{transition:none}}
+}
 /* ANKLICKBARE PROBLEM-KARTEN mit Info-Fenster */
 .prob-click{cursor:pointer;display:flex;flex-direction:column}
 .prob-more{margin-top:auto;padding-top:1.3rem;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-weight:700;font-size:.9rem;color:var(--accent-d);transition:gap .25s}
@@ -366,6 +405,10 @@ p{text-wrap:pretty}
 .prob-click:hover .prob-more{gap:.8rem}
 .prob-click:hover .prob-more .ar{transform:translateX(3px)}
 .prob-click:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+/* Auf Touch-Geraeten bleibt sonst nach dem Schliessen des Info-Fensters ein
+   Rahmen um die Karte stehen, weil der Fokus dorthin zurueckspringt.
+   Fuer die Tastaturbedienung am Rechner bleibt der Rahmen erhalten. */
+@media(hover:none){.prob-click:focus,.prob-click:focus-visible{outline:none}}
 @media(prefers-reduced-motion:reduce){.prob-more,.prob-more .ar{transition:none}}
 /* Info-Fenster (natives dialog, schliesst mit Escape und Klick auf den Hintergrund) */
 /* margin:auto ist noetig, weil der globale Reset oben margin:0 auf alles setzt
@@ -467,8 +510,9 @@ p{text-wrap:pretty}
 <!-- STATEMENT 1 -->
 <section class="statement s1 center">
   <div class="container">
-    <p class="big fade">Eine Aufteilung ist schnell beurkundet. Ob die Einheiten auch <span class="hl">baurechtlich zulässig</span> sind, steht auf einem anderen Blatt.</p>
-    <p class="sub fade d1">Genau diese zweite Frage klären wir mit, bevor etwas ins Grundbuch geht.</p>
+    <p class="big fade d-only">Eine Aufteilung ist schnell beurkundet. Ob die Einheiten auch <span class="hl">baurechtlich zulässig</span> sind, steht auf einem anderen Blatt.</p>
+    <p class="big fade m-only">Eine Aufteilung ist schnell beurkundet. <span class="hl">Baurechtlich zulässig</span> ist sie damit noch nicht.</p>
+    <p class="sub fade d1 d-only">Genau diese zweite Frage klären wir mit, bevor etwas ins Grundbuch geht.</p>
   </div>
 </section>
 
@@ -477,12 +521,12 @@ p{text-wrap:pretty}
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Der wirtschaftliche Hintergrund</span><h2>Warum sich eine Aufteilung lohnt.</h2><p>Solange ein Gebäude im Grundbuch eine einzige Sache ist, lässt es sich nur als Ganzes verkaufen, beleihen und vererben. Die Aufteilung macht daraus einzeln handelbare Einheiten.</p></div>
     <div class="prob-grid">
-      <div class="prob fade"><div class="pn">01</div><h3>Einzeln verkaufen statt nur im Ganzen</h3><p>Jede Einheit bekommt ein eigenes Wohnungsgrundbuch und lässt sich für sich verkaufen. Das vergrößert den Kreis der Käufer, weil eine Wohnung für viele finanzierbar ist.</p></div>
-      <div class="prob fade d1"><div class="pn">02</div><h3>Einzeln finanzieren und beleihen</h3><p>Belastungen lassen sich einer einzelnen Einheit zuordnen, statt auf dem gesamten Objekt zu liegen. Das schafft Spielraum bei der Finanzierung und macht Teilverkäufe möglich.</p></div>
-      <div class="prob fade d2"><div class="pn">03</div><h3>Schrittweise verwerten statt auf einmal</h3><p>Sie müssen nicht alles gleichzeitig veräußern. Einheiten lassen sich nacheinander verkaufen, während die übrigen vermietet bleiben und weiterhin Ertrag bringen.</p></div>
-      <div class="prob fade"><div class="pn">04</div><h3>Übertragung und Erbfolge klar regeln</h3><p>Statt unklarer Bruchteile am gesamten Haus erhält jeder eine abgegrenzte Einheit mit eigenem Grundbuchblatt. Das nimmt Streit über Zuständigkeiten die Grundlage.</p></div>
-      <div class="prob fade d1"><div class="pn">05</div><h3>Wohnen und Gewerbe sauber trennen</h3><p>Wohnungen werden zu Wohnungseigentum, Laden, Büro oder Praxis zu Teileigentum. Beides steht nebeneinander im selben Gebäude, jeweils mit eigener Zweckbestimmung.</p></div>
-      <div class="prob fade d2"><div class="pn">06</div><h3>Verwaltung auf feste Regeln stellen</h3><p>Teilungserklärung und Gemeinschaftsordnung legen fest, wem welche Fläche gehört, wer welche Kosten trägt und wer worüber entscheidet. Das trägt jede Verwaltung.</p></div>
+      <div class="prob fade"><div class="acc-head"><div class="pn">01</div><h3>Einzeln verkaufen statt nur im Ganzen</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Jede Einheit bekommt ein eigenes Wohnungsgrundbuch und lässt sich für sich verkaufen. Das vergrößert den Kreis der Käufer, weil eine Wohnung für viele finanzierbar ist.</p></div></div></div>
+      <div class="prob fade d1"><div class="acc-head"><div class="pn">02</div><h3>Einzeln finanzieren und beleihen</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Belastungen lassen sich einer einzelnen Einheit zuordnen, statt auf dem gesamten Objekt zu liegen. Das schafft Spielraum bei der Finanzierung und macht Teilverkäufe möglich.</p></div></div></div>
+      <div class="prob fade d2"><div class="acc-head"><div class="pn">03</div><h3>Schrittweise verwerten statt auf einmal</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Sie müssen nicht alles gleichzeitig veräußern. Einheiten lassen sich nacheinander verkaufen, während die übrigen vermietet bleiben und weiterhin Ertrag bringen.</p></div></div></div>
+      <div class="prob fade"><div class="acc-head"><div class="pn">04</div><h3>Übertragung und Erbfolge klar regeln</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Statt unklarer Bruchteile am gesamten Haus erhält jeder eine abgegrenzte Einheit mit eigenem Grundbuchblatt. Das nimmt Streit über Zuständigkeiten die Grundlage.</p></div></div></div>
+      <div class="prob fade d1"><div class="acc-head"><div class="pn">05</div><h3>Wohnen und Gewerbe sauber trennen</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Wohnungen werden zu Wohnungseigentum, Laden, Büro oder Praxis zu Teileigentum. Beides steht nebeneinander im selben Gebäude, jeweils mit eigener Zweckbestimmung.</p></div></div></div>
+      <div class="prob fade d2"><div class="acc-head"><div class="pn">06</div><h3>Verwaltung auf feste Regeln stellen</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Teilungserklärung und Gemeinschaftsordnung legen fest, wem welche Fläche gehört, wer welche Kosten trägt und wer worüber entscheidet. Das trägt jede Verwaltung.</p></div></div></div>
     </div>
   </div>
 </section>
@@ -497,14 +541,14 @@ p{text-wrap:pretty}
 <!-- ZWEI EBENEN -->
 <section id="ebenen">
   <div class="container">
-    <div class="sh c fade"><span class="kicker c">Der wichtigste Unterschied</span><h2>Zwei Ebenen, die oft verwechselt werden.</h2><p>Eine Aufteilung nach dem Wohnungs&shy;eigentums&shy;gesetz und eine baurechtlich genehmigte Nutzung sind nicht dasselbe. Wer nur die eine Ebene bearbeitet, hat am Ende ein Grundbuch, das nicht zur Wirklichkeit passt.</p></div>
+    <div class="sh c fade"><span class="kicker c">Der wichtigste Unterschied</span><h2>Zwei Ebenen, die oft verwechselt werden.</h2><p><span class="d-only-i">Eine Aufteilung nach dem Wohnungs&shy;eigentums&shy;gesetz und eine baurechtlich genehmigte Nutzung sind nicht dasselbe. </span>Wer nur die eine Ebene bearbeitet, hat am Ende ein Grundbuch, das nicht zur Wirklichkeit passt.</p></div>
     <div class="dual">
       <article class="dcard a fade">
         <span class="dlvl">Ebene 1 · Zivilrecht</span>
         <h3>WEG-Recht</h3>
         <p class="dsub">Wohnungs&shy;eigentums&shy;gesetz · Notar · Grundbuchamt</p>
         <p class="dq">Was gehört wem allein, was allen gemeinsam?</p>
-        <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Hier wird das Eigentum am Gebäude in Sondereigentum und Gemeinschafts&shy;eigentum aufgeteilt.</span></p>
+        <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Hier wird das Eigentum<span class="d-only-i"> am Gebäude</span> in Sondereigentum und Gemeinschafts&shy;eigentum aufgeteilt.</span></p>
         <ul class="dlist">
           <li>Aufteilungsplan mit Grundrissen, Schnitten und Ansichten</li>
           <li>Abgeschlossen&shy;heits&shy;bescheinigung der Bau&shy;aufsichts&shy;behörde</li>
@@ -534,8 +578,9 @@ p{text-wrap:pretty}
     <div class="warnband fade">
       <span class="wi" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
       <div>
-        <p><b>Der häufigste Irrtum:</b> Die Abgeschlossen&shy;heits&shy;bescheinigung ist keine Baugenehmigung. Sie wird ungeachtet bauordnungsrechtlicher Vorschriften erteilt und enthält keine verbindliche Aussage darüber, in welchem Umfang die Räume genutzt werden dürfen. Ein baurechtlich nicht genehmigter Zustand wird durch sie nicht legalisiert.</p>
-        <p>Praktisch heißt das: Eine Dachgeschosswohnung kann als abgeschlossen bescheinigt, im Grundbuch eingetragen und verkauft sein, und trotzdem baurechtlich keine genehmigte Wohnung darstellen. Das fällt oft erst beim Weiterverkauf, bei der Finanzierung oder bei einer Beschwerde auf. Deshalb sehen wir uns beide Ebenen an, bevor die Teilungserklärung entsteht.</p>
+        <p><b>Der häufigste Irrtum:</b> Die Abgeschlossen&shy;heits&shy;bescheinigung ist keine Baugenehmigung.<span class="d-only-i"> Sie wird ungeachtet bauordnungsrechtlicher Vorschriften erteilt und enthält keine verbindliche Aussage darüber, in welchem Umfang die Räume genutzt werden dürfen.</span> Ein baurechtlich nicht genehmigter Zustand wird durch sie nicht legalisiert.</p>
+        <p class="d-only">Praktisch heißt das: Eine Dachgeschosswohnung kann als abgeschlossen bescheinigt, im Grundbuch eingetragen und verkauft sein, und trotzdem baurechtlich keine genehmigte Wohnung darstellen. Das fällt oft erst beim Weiterverkauf, bei der Finanzierung oder bei einer Beschwerde auf. Deshalb sehen wir uns beide Ebenen an, bevor die Teilungserklärung entsteht.</p>
+        <p class="m-only">Eine Wohnung kann bescheinigt, eingetragen und verkauft sein und trotzdem baurechtlich keine Wohnung sein.</p>
       </div>
     </div>
   </div>
@@ -585,7 +630,7 @@ p{text-wrap:pretty}
 <!-- WORAUF ES ANKOMMT -->
 <section id="qualitaet">
   <div class="container">
-    <div class="sh c fade"><span class="kicker c">Warum die Planqualität zählt</span><h2>Wo Aufteilungen später Probleme machen können.</h2><p>Ein Aufteilungsplan ist kein hübscher Grundriss, sondern die rechtliche Grenzziehung im Gebäude. Vier Punkte entscheiden darüber, ob die Aufteilung dauerhaft trägt.</p></div>
+    <div class="sh c fade"><span class="kicker c">Warum die Planqualität zählt</span><h2>Vier Fehler, die später teuer werden.</h2><p>Eine Aufteilung an sich macht keine Probleme, unsauber vorbereitete Unterlagen schon. Der Aufteilungsplan ist keine hübsche Zeichnung, sondern die rechtliche Grenzziehung im Gebäude.</p></div>
     <div class="prob-grid g2">
       <div class="prob prob-click fade" role="button" tabindex="0" aria-haspopup="dialog" data-dialog="folge-01"><div class="pn">01</div><h3>Plan und Bestand müssen übereinstimmen</h3><p>Die Pläne für das Bauamt müssen den baulichen Zustand vor Ort exakt abbilden. Für die Grenze des Sondereigentums ist der Aufteilungsplan maßgeblich, nicht die Wand, die wirklich steht. Weicht beides ab, passen Bescheinigung und Grundbucheintrag später nicht mehr zur Wirklichkeit. Deshalb messen wir, wo nötig, vorher auf.</p><span class="prob-more">Was passiert, wenn nicht? <span class="ar">→</span></span></div>
       <div class="prob prob-click fade d1" role="button" tabindex="0" aria-haspopup="dialog" data-dialog="folge-02"><div class="pn">02</div><h3>Maßangaben, wo das Gesetz sie verlangt</h3><p>Soll Sondereigentum auch außerhalb des Gebäudes bestehen, etwa an einem Stellplatz im Freien oder einer Gartenfläche, verlangt das Wohnungs&shy;eigentums&shy;gesetz Maßangaben, aus denen sich Lage und Größe bestimmen lassen. Fehlen sie, kann das Grundbuchamt die Eintragung zurückweisen. Wir tragen sie von vornherein ein.</p><span class="prob-more">Was passiert, wenn nicht? <span class="ar">→</span></span></div>
@@ -627,7 +672,7 @@ p{text-wrap:pretty}
         <span class="pdlg-tag"><span class="pdlg-dot" aria-hidden="true"></span> Wenn es schiefgeht</span>
         <div class="pdlg-no">04</div>
         <h4 id="folge-04-t">Die Zweckbestimmung passt nicht zur Nutzung</h4>
-        <p>Dann steht im Grundbuch etwas anderes, als tatsächlich genutzt wird. Ein als Speicher oder Hobbyraum ausgewiesener Raum darf nicht dauerhaft bewohnt werden, auch wenn er als Wohnung verkauft wurde. Die Eigentümergemeinschaft kann die Nutzung untersagen lassen und der Anspruch verjährt nicht, solange sie andauert. Eine Genehmigung des Bauamts hilft dabei nicht, denn sie regelt nur das Verhältnis zur Behörde, nicht das unter den Eigentümern. Ändern lässt sich die Zweckbestimmung in der Regel nur mit Zustimmung aller Eigentümer und über den Notar mit Eintragung im Grundbuch.</p>
+        <p>Dann steht im Grundbuch etwas anderes, als tatsächlich genutzt wird. Ein als Speicher oder Hobbyraum ausgewiesener Raum darf nicht dauerhaft bewohnt werden, auch wenn er als Wohnung verkauft wurde. Die Eigentümergemeinschaft kann die Nutzung untersagen lassen<span class="d-only-i"> und der Anspruch verjährt nicht, solange sie andauert</span>. Eine Genehmigung des Bauamts hilft dabei nicht<span class="d-only-i">, denn sie regelt nur das Verhältnis zur Behörde, nicht das unter den Eigentümern</span>.<span class="d-only-i"> Ändern lässt sich die Zweckbestimmung in der Regel nur mit Zustimmung aller Eigentümer und über den Notar mit Eintragung im Grundbuch.</span></p>
       </div>
     </dialog>
     <p class="fnote fnote-center">Die Angaben auf dieser Seite geben den allgemeinen Rahmen wieder und ersetzen keine Rechtsberatung im Einzelfall. Für die notarielle Beurkundung und die Gestaltung der Gemeinschaftsordnung arbeiten wir mit dem Notar Ihres Vertrauens zusammen.</p>
@@ -811,6 +856,30 @@ document.querySelectorAll('.prob,.dcard,.res').forEach(c=>c.addEventListener('mo
  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
  addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
  upd();})();
+/* Gruende: auf schmalen Displays eine Aufklapp-Liste, immer nur eine offen */
+(function(){
+  var karten=[].slice.call(document.querySelectorAll('#gruende .prob'));if(!karten.length)return;
+  var mq=window.matchMedia('(max-width:700px)');
+  function zu(){karten.forEach(function(k){k.classList.remove('auf');});}
+  karten.forEach(function(k){
+    var kopf=k.querySelector('.acc-head');
+    kopf.setAttribute('role','button');kopf.setAttribute('tabindex','0');
+    function um(){
+      if(!mq.matches)return;
+      var war=k.classList.contains('auf');zu();
+      if(!war)k.classList.add('auf');
+      karten.forEach(function(o){o.querySelector('.acc-head').setAttribute('aria-expanded',o.classList.contains('auf')?'true':'false');});
+    }
+    kopf.addEventListener('click',um);
+    kopf.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();um();}});
+  });
+  function sync(){
+    if(!mq.matches){zu();karten.forEach(function(k){k.querySelector('.acc-head').removeAttribute('aria-expanded');});}
+    else karten.forEach(function(k){k.querySelector('.acc-head').setAttribute('aria-expanded',k.classList.contains('auf')?'true':'false');});
+  }
+  if(mq.addEventListener)mq.addEventListener('change',sync);else mq.addListener(sync);
+  sync();
+})();
 /* Info-Fenster zu den Problem-Karten */
 (function(){
   const karten=document.querySelectorAll('.prob-click');if(!karten.length)return;
