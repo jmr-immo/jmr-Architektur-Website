@@ -619,11 +619,11 @@ section{padding:var(--pad) 0;position:relative}
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Häufige Fragen</span><h2>Gut zu wissen.</h2></div>
     <div class="faq-wrap">
-      <details class="faq fade"><summary>Ist meine Nutzungsänderung überhaupt genehmigungspflichtig?<span class="fq-i">+</span></summary><div class="fq-a">In vielen Fällen ja, auch wenn baulich nichts verändert wird. Ob Ihr Vorhaben genehmigungspflichtig ist, klären wir vorab und übernehmen den Antrag.</div></details>
-      <details class="faq fade"><summary>Was kostet eine Planung oder ein Bauantrag?<span class="fq-i">+</span></summary><div class="fq-a">Die Kosten richten sich nach Umfang und Komplexität des Vorhabens. Ein kleiner Umbau ist anders zu bewerten als eine Umnutzung mit mehreren Einheiten. Im Erstgespräch sehen wir uns Ihr Projekt an und nennen Ihnen die nächsten Schritte und eine Einschätzung.</div></details>
-      <details class="faq fade"><summary>Können Sie auch die Umsetzung begleiten?<span class="fq-i">+</span></summary><div class="fq-a">Ja. Auf Wunsch übernehmen wir auch die Bauleitung und begleiten die Umsetzung auf der Baustelle. Sie buchen aber nur die Schritte, die Sie wirklich brauchen.</div></details>
-      <details class="faq fade"><summary>Was ist, wenn keine aktuellen Pläne vorhanden sind?<span class="fq-i">+</span></summary><div class="fq-a">Das ist im Bestand oft so und kein Problem. Je nach Aktualität vorhandener Pläne nehmen wir den Bestand vor Ort auf. Bevor alles neu aufgemessen wird, prüfen wir per Akteneinsicht im Bauarchiv, ob brauchbare Unterlagen vorliegen. Daraus erstellen wir die Planunterlagen.</div></details>
-      <details class="faq fade"><summary>In welchem Gebiet sind Sie tätig?<span class="fq-i">+</span></summary><div class="fq-a">Wir sind vor allem im Saarland und der angrenzenden Region tätig. Sprechen Sie uns bei Vorhaben außerhalb gern an.</div></details>
+      <details class="faq fade" name="faq"><summary>Ist meine Nutzungsänderung überhaupt genehmigungspflichtig?<span class="fq-i">+</span></summary><div class="fq-a">In vielen Fällen ja, auch wenn baulich nichts verändert wird. Ob Ihr Vorhaben genehmigungspflichtig ist, klären wir vorab und übernehmen den Antrag.</div></details>
+      <details class="faq fade" name="faq"><summary>Was kostet eine Planung oder ein Bauantrag?<span class="fq-i">+</span></summary><div class="fq-a">Die Kosten richten sich nach Umfang und Komplexität des Vorhabens. Ein kleiner Umbau ist anders zu bewerten als eine Umnutzung mit mehreren Einheiten. Im Erstgespräch sehen wir uns Ihr Projekt an und nennen Ihnen die nächsten Schritte und eine Einschätzung.</div></details>
+      <details class="faq fade" name="faq"><summary>Können Sie auch die Umsetzung begleiten?<span class="fq-i">+</span></summary><div class="fq-a">Ja. Auf Wunsch übernehmen wir auch die Bauleitung und begleiten die Umsetzung auf der Baustelle. Sie buchen aber nur die Schritte, die Sie wirklich brauchen.</div></details>
+      <details class="faq fade" name="faq"><summary>Was ist, wenn keine aktuellen Pläne vorhanden sind?<span class="fq-i">+</span></summary><div class="fq-a">Das ist im Bestand oft so und kein Problem. Je nach Aktualität vorhandener Pläne nehmen wir den Bestand vor Ort auf. Bevor alles neu aufgemessen wird, prüfen wir per Akteneinsicht im Bauarchiv, ob brauchbare Unterlagen vorliegen. Daraus erstellen wir die Planunterlagen.</div></details>
+      <details class="faq fade" name="faq"><summary>In welchem Gebiet sind Sie tätig?<span class="fq-i">+</span></summary><div class="fq-a">Wir sind vor allem im Saarland und der angrenzenden Region tätig. Sprechen Sie uns bei Vorhaben außerhalb gern an.</div></details>
     </div>
   </div>
 </section>
@@ -680,10 +680,11 @@ section{padding:var(--pad) 0;position:relative}
       </div>
       <div class="fcol">
         <div class="fnav">
+          <a href="index.html">Startseite</a>
+          <a href="aufteilung.html">Aufteilung</a>
           <a href="#faelle">Anwendungsfälle</a>
           <a href="#foerderung">Förderung</a>
           <a href="#ablauf">Ablauf</a>
-          <a href="#pakete">Pakete</a>
           <a href="#kontakt">Erstgespräch</a>
         </div>
       </div>
@@ -802,6 +803,10 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
   dots.forEach((d,n)=>d.addEventListener('click',()=>go(n)));
   go(0);
 })();
+
+/* FAQ: es bleibt immer nur eine Frage offen */
+(function(){var f=[].slice.call(document.querySelectorAll('details.faq'));if(f.length<2)return;
+ f.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)f.forEach(function(o){if(o!==d)o.open=false;});});});})();
 </script>
 </body>
 </html>

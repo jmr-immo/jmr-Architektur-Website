@@ -57,13 +57,16 @@
     {"@type": "City", "name": "Zweibrücken"}
   ],
   "founder": {"@type": "Person", "name": "Maximilian Rudorf", "jobTitle": "Architekt (bauvorlageberechtigt)"},
-  "knowsAbout": ["Architektur", "Bauantrag", "Genehmigungsplanung", "Entwurfsplanung", "Umnutzung", "Aufteilung", "Bestandsumbau", "Sanierungsplanung", "Bauvorlageberechtigung"],
+  "knowsAbout": ["Architektur", "Bauantrag", "Genehmigungsplanung", "Entwurfsplanung", "Umnutzung", "Nutzungsänderung", "Aufteilung", "Wohnungseigentum", "Teilungserklärung", "Aufteilungsplan", "Abgeschlossenheitsbescheinigung", "Aufmaß", "3D-Laserscan", "Wohnflächenberechnung", "Anbau", "Erweiterung", "Bestandsumbau", "Sanierungsplanung", "Bauvorlageberechtigung"],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Leistungen",
     "itemListElement": [
       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Bauantrag & Genehmigungsplanung", "description": "Genehmigungsplanung und Einreichung des Bauantrags durch einen bauvorlageberechtigten Architekten."}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Umnutzung & Aufteilung", "description": "Nutzungsänderung und Aufteilung von Bestandsgebäuden, planerisch und genehmigungsrechtlich begleitet."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Umnutzung", "url": "https://jmr-architektur.de/umnutzung.html", "description": "Nutzungsänderung von Bestandsgebäuden, zum Beispiel von Gewerbe zu Wohnen, planerisch und genehmigungsrechtlich begleitet."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Aufteilung", "url": "https://jmr-architektur.de/aufteilung.html", "description": "Aufteilung von Gebäuden in Wohnungs- und Teileigentum: Aufteilungsplan, Abgeschlossenheitsbescheinigung, Wohnflächen und Miteigentumsanteile sowie die baurechtliche Prüfung der Einheiten."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Aufmaß & Pläne", "description": "Bestandsaufnahme vor Ort, auf Wunsch per 3D-Laserscan, mit prüffähigen Grundrissen, Ansichten und Schnitten, Wohnflächenberechnung nach WoFlV und Digitalisierung alter Pläne."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Anbau & Erweiterung", "description": "Zusätzlicher Wohnraum durch Anbau, Wintergarten, überdachte Terrasse oder Aufstockung, von der Planung bis zur Genehmigung."}},
       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Bestandsumbau & Sanierungsplanung", "description": "Planung von Umbau und Sanierung im Bestand, abgestimmt mit der energetischen Beratung."}}
     ]
   }
@@ -500,7 +503,7 @@ section{padding:var(--pad) 0;position:relative}
         <p>Bestand neu nutzen. Gewerbe zu Wohnen, Garage zu Wohnraum oder Laden zu Praxis, geplant und beantragt aus einer Hand.</p>
         <span class="tile-link">Mehr erfahren <span class="ar">→</span></span>
       </a>
-      <div class="tile tile-soon fade d1">
+      <a class="tile fade d1" href="aufteilung.html">
         <span class="tile-sketch" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="40" y="40" width="120" height="120"/><path d="M100 40v120"/><path d="M40 100h120"/><path d="M70 70h.5M130 70h.5M70 130h.5M130 130h.5"/></svg></span>
         <div class="tile-top">
           <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 9h16M4 15h16M12 3v18"/></svg></span>
@@ -508,8 +511,8 @@ section{padding:var(--pad) 0;position:relative}
         </div>
         <h3>Aufteilung</h3>
         <p>Ein Haus, mehrere Einheiten. Aufteilungspläne, Abgeschlossenheit und Eigentumsteilung für Verkauf oder Bestand.</p>
-        <span class="tile-link tile-link-soon">Seite folgt in Kürze</span>
-      </div>
+        <span class="tile-link">Mehr erfahren <span class="ar">→</span></span>
+      </a>
       <div class="tile tile-soon fade d2">
         <span class="tile-sketch" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="50" y="50" width="100" height="100"/><path d="M50 100h100M100 50v100"/><path d="M30 50h-10v100h10M170 50h10v100h-10"/><path d="M75 75h.5M125 75h.5M75 125h.5M125 125h.5"/></svg></span>
         <div class="tile-top">
@@ -650,11 +653,11 @@ section{padding:var(--pad) 0;position:relative}
       <h2>Gut zu wissen.</h2>
     </div>
     <div class="faq-wrap">
-      <details class="faq fade"><summary>Ist meine Nutzungsänderung überhaupt genehmigungspflichtig?<span class="fq-i">+</span></summary><div class="fq-a">In vielen Fällen ja, auch wenn baulich nichts verändert wird. Ob Ihr Vorhaben genehmigungspflichtig ist, klären wir vorab und übernehmen den Antrag.</div></details>
-      <details class="faq fade"><summary>Was kostet eine Planung oder ein Bauantrag?<span class="fq-i">+</span></summary><div class="fq-a">Die Kosten richten sich nach Umfang und Komplexität des Vorhabens. Ein kleiner Umbau ist anders zu bewerten als eine Umnutzung mit mehreren Einheiten. Im Erstgespräch sehen wir uns Ihr Projekt an und nennen Ihnen die nächsten Schritte und eine Einschätzung.</div></details>
-      <details class="faq fade"><summary>Können Sie auch die Umsetzung begleiten?<span class="fq-i">+</span></summary><div class="fq-a">Ja. Auf Wunsch übernehmen wir auch die Bauleitung und begleiten die Umsetzung auf der Baustelle. Sie buchen aber nur die Schritte, die Sie wirklich brauchen.</div></details>
-      <details class="faq fade"><summary>Was ist, wenn keine aktuellen Pläne vorhanden sind?<span class="fq-i">+</span></summary><div class="fq-a">Das ist im Bestand oft so und kein Problem. Je nach Aktualität vorhandener Pläne nehmen wir den Bestand vor Ort auf. Bevor alles neu aufgemessen wird, prüfen wir per Akteneinsicht im Bauarchiv, ob brauchbare Unterlagen vorliegen. Daraus erstellen wir die Planunterlagen.</div></details>
-      <details class="faq fade"><summary>In welchem Gebiet sind Sie tätig?<span class="fq-i">+</span></summary><div class="fq-a">Wir sind vor allem im Saarland und der angrenzenden Region tätig. Sprechen Sie uns bei Vorhaben außerhalb gern an.</div></details>
+      <details class="faq fade" name="faq"><summary>Ist meine Nutzungsänderung überhaupt genehmigungspflichtig?<span class="fq-i">+</span></summary><div class="fq-a">In vielen Fällen ja, auch wenn baulich nichts verändert wird. Ob Ihr Vorhaben genehmigungspflichtig ist, klären wir vorab und übernehmen den Antrag.</div></details>
+      <details class="faq fade" name="faq"><summary>Was kostet eine Planung oder ein Bauantrag?<span class="fq-i">+</span></summary><div class="fq-a">Die Kosten richten sich nach Umfang und Komplexität des Vorhabens. Ein kleiner Umbau ist anders zu bewerten als eine Umnutzung mit mehreren Einheiten. Im Erstgespräch sehen wir uns Ihr Projekt an und nennen Ihnen die nächsten Schritte und eine Einschätzung.</div></details>
+      <details class="faq fade" name="faq"><summary>Können Sie auch die Umsetzung begleiten?<span class="fq-i">+</span></summary><div class="fq-a">Ja. Auf Wunsch übernehmen wir auch die Bauleitung und begleiten die Umsetzung auf der Baustelle. Sie buchen aber nur die Schritte, die Sie wirklich brauchen.</div></details>
+      <details class="faq fade" name="faq"><summary>Was ist, wenn keine aktuellen Pläne vorhanden sind?<span class="fq-i">+</span></summary><div class="fq-a">Das ist im Bestand oft so und kein Problem. Je nach Aktualität vorhandener Pläne nehmen wir den Bestand vor Ort auf. Bevor alles neu aufgemessen wird, prüfen wir per Akteneinsicht im Bauarchiv, ob brauchbare Unterlagen vorliegen. Daraus erstellen wir die Planunterlagen.</div></details>
+      <details class="faq fade" name="faq"><summary>In welchem Gebiet sind Sie tätig?<span class="fq-i">+</span></summary><div class="fq-a">Wir sind vor allem im Saarland und der angrenzenden Region tätig. Sprechen Sie uns bei Vorhaben außerhalb gern an.</div></details>
     </div>
   </div>
 </section>
@@ -688,7 +691,7 @@ section{padding:var(--pad) 0;position:relative}
               <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Telefonnummer"></div>
               <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" required></div>
             </div>
-            <div class="fld"><label for="thema">Thema</label><select id="thema" name="Thema"><option value="" disabled selected>Bitte auswählen …</option><option>Umnutzung</option><option>Aufteilung</option><option>Umbau &amp; Sanierung</option><option>Etwas anderes</option></select></div>
+            <div class="fld"><label for="thema">Thema</label><select id="thema" name="Thema"><option value="" disabled selected>Bitte auswählen …</option><option>Umnutzung (Nutzungsänderung)</option><option>Aufteilung</option><option>Aufmaß &amp; Pläne</option><option>Anbau &amp; Erweiterung</option><option>Etwas anderes</option></select></div>
             <div class="fld"><label for="kf-msg">Ihre Nachricht an uns</label><textarea id="kf-msg" name="Nachricht" rows="3" placeholder="Worum geht es konkret? (optional)"></textarea></div>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <button type="submit" class="btn btn-steel" id="kfSubmit" style="width:100%;justify-content:center">Anfrage senden <span class="ar">→</span></button>
@@ -715,7 +718,8 @@ section{padding:var(--pad) 0;position:relative}
       <div class="fcol">
         <div class="fnav">
           <a href="#leistungen">Leistungen</a>
-          <a href="#huerden">Häufige Stolperfallen</a>
+          <a href="umnutzung.html">Umnutzung</a>
+          <a href="aufteilung.html">Aufteilung</a>
           <a href="#kette">Vom Erstgespräch zum Plan</a>
           <a href="#ueber">Über uns</a>
           <a href="#kontakt">Erstgespräch</a>
@@ -824,6 +828,10 @@ if(!RM&&matchMedia('(pointer:fine)').matches){
     }catch(err){st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}
   });
 })();
+
+/* FAQ: es bleibt immer nur eine Frage offen */
+(function(){var f=[].slice.call(document.querySelectorAll('details.faq'));if(f.length<2)return;
+ f.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)f.forEach(function(o){if(o!==d)o.open=false;});});});})();
 </script>
 </body>
 </html>
