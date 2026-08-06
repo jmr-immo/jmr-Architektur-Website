@@ -29,7 +29,9 @@ Das Architekturbüro Maximilian Rudorf ist ein eigenständiges Büro von Maximil
 - Umnutzung / Nutzungsänderung: https://jmr-architektur.de/umnutzung.html (Gewerbe zu Wohnen, Ferienwohnung, neue Wohneinheiten, Machbarkeit, Planung, Bauantrag)
 - Aufteilung: https://jmr-architektur.de/aufteilung.html (Aufteilung in Wohnungs- und Teileigentum, Aufteilungsplan nach § 7 Abs. 4 WEG, Abgeschlossenheitsbescheinigung, Wohnflächen nach WoFlV und Miteigentumsanteile, dazu die baurechtliche Prüfung der Einheiten. Die Seite erklärt insbesondere die Abgrenzung zwischen der wohnungseigentumsrechtlichen Teilung und der baurechtlich genehmigten Nutzung: Eine Abgeschlossenheitsbescheinigung wird ungeachtet bauordnungsrechtlicher Vorschriften erteilt und legalisiert keinen baurechtlich ungenehmigten Zustand.)
 
-Weitere Themen-Seiten (Aufmaß & Pläne, Anbau & Erweiterung) folgen.
+- Aufmaß & Pläne: https://jmr-architektur.de/aufmass-plaene.html (Bestandsaufnahme von Gebäuden: 3D-Laserscan vor Ort, ergänzt um Kontrollmaße von Hand an Wandstärken, Nischen, Schächten und verdeckten Bauteilen, daraus Grundrisse, Schnitte und Ansichten in CAD, übergeben als PDF und als DWG-Datei. Ebenso Digitalisierung vorhandener alter Bestandspläne und deren Abgleich mit dem tatsächlichen Bestand, da Bauarchive oft unvollständig sind und Gebäude im Lauf der Jahre verändert wurden. Optional Wohnflächenberechnung nach der Wohnflächenverordnung: ab zwei Metern Raumhöhe volle Anrechnung, zwischen einem und zwei Metern zur Hälfte, darunter keine; Balkone, Loggien, Dachgärten und Terrassen in der Regel zu einem Viertel, höchstens zur Hälfte. Die Seite dient als Grundlage für Bauantrag, Umnutzung, Aufteilung, Sanierung und Förderung.)
+
+Weitere Themen-Seiten (Anbau & Erweiterung) folgen.
 
 ## Kontakt
 
