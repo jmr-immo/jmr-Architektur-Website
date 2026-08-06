@@ -382,7 +382,9 @@ p{text-wrap:pretty}
   #gruende .acc-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.9rem;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
   #gruende .acc-head:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:var(--r)}
   #gruende .prob .pn{font-size:1.3rem;margin:0;line-height:1}
-  #gruende .prob h3{margin:0;min-height:0;font-size:1.02rem;line-height:1.28}
+  /* Zwei Zeilen fest reserviert, damit alle zugeklappten Koepfe gleich hoch sind.
+     Punkt 02 passt als einziger in eine Zeile und wuerde sonst herausfallen. */
+  #gruende .prob h3{margin:0;font-size:1.02rem;line-height:1.28;min-height:2.56em;display:flex;align-items:center}
   /* Plus, das sich beim Aufklappen zum Minus dreht */
   #gruende .acc-plus{display:block;position:relative;width:22px;height:22px}
   #gruende .acc-plus::before,#gruende .acc-plus::after{content:'';position:absolute;left:50%;top:50%;background:var(--accent);border-radius:2px;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
@@ -397,6 +399,14 @@ p{text-wrap:pretty}
   #gruende .acc-inner{overflow:hidden;min-height:0}
   #gruende .acc-inner p{margin:0;padding:0 1.25rem 1.25rem}
   @media(prefers-reduced-motion:reduce){#gruende .acc-body,#gruende .acc-plus::before,#gruende .acc-plus::after{transition:none}}
+}
+/* Auf sehr schmalen Geraeten etwas enger setzen, damit auch der laengste Titel
+   in zwei Zeilen passt und alle Koepfe gleich hoch bleiben. */
+@media(max-width:365px){
+  #gruende .acc-head{padding:1rem;gap:.7rem}
+  #gruende .prob h3{font-size:.94rem}
+  #gruende .prob .pn{font-size:1.15rem}
+  #gruende .acc-inner p{padding:0 1rem 1rem}
 }
 /* ANKLICKBARE PROBLEM-KARTEN mit Info-Fenster */
 .prob-click{cursor:pointer;display:flex;flex-direction:column}
