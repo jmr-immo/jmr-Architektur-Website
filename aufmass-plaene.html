@@ -334,6 +334,7 @@ p{text-wrap:pretty}
 .sf-svg{width:100%;height:auto;display:block}
 .sf-svg-s{display:none}
 .sf-ar path{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.sf-svg-s path{stroke-width:2.9}
 .sf-ar-1 path{stroke:var(--steel-d)}
 .sf-ar-2 .ah{stroke:var(--accent-d)}
 .sf-ar-2 .sf-svg-w .ap{stroke:url(#sfv-w)}
@@ -342,27 +343,35 @@ p{text-wrap:pretty}
    voll breit untereinander, dann wird der Pfeil steil gefuehrt statt flach
    in die Breite. */
 @media(max-width:760px){
-  .sf-card{width:100%;padding:1.35rem 1.4rem 1.45rem}
-  .sf-card h3{font-size:1.1rem}
-  .sf-card p{font-size:.93rem}
-  .sf-ar{margin:-.5rem 0;display:flex;justify-content:center}
+  /* Auch hier versetzt, nur enger: die Karten stehen abwechselnd am linken und
+     am rechten Rand und lassen dem Pfeil dazwischen Platz. */
+  .sf-card{width:87%;padding:1.2rem 1.3rem 1.3rem}
+  .sf-card h3{font-size:1.07rem;margin-bottom:.4rem}
+  .sf-card p{font-size:.91rem;line-height:1.55}
+  .sf-top{gap:.6rem;margin-bottom:.7rem}
+  .sf-no{width:29px;height:29px;border-radius:8px;font-size:.82rem}
+  .sf-when{font-size:.59rem}
+  /* Der steilere Pfeil laeuft ueber die Kartenbreite, nicht als kleines
+     Zeichen in der Mitte. Die Deckelung haelt die Strichstaerke im Rahmen. */
+  .sf-ar{margin:-.3rem 0;display:flex;justify-content:center}
   .sf-svg-w{display:none}
-  .sf-svg-s{display:block;width:min(230px,58%)}
+  .sf-svg-s{display:block;width:min(100%,420px)}
 }
 @media(max-width:400px){
-  .sf-card{padding:1.2rem 1.25rem 1.3rem}
-  .sf-no{width:29px;height:29px;border-radius:8px;font-size:.82rem}
-  .sf-when{font-size:.58rem}
+  .sf-card{width:89%;padding:1.1rem 1.15rem 1.2rem}
+  .sf-card h3{font-size:1.03rem}
+  .sf-card p{font-size:.89rem}
+  .sf-no{width:27px;height:27px;font-size:.78rem}
 }
 /* Startzustand steht im Stylesheet, nicht im Skript. Wuerde ihn erst das Skript
    setzen, waeren die Karten einen Moment sichtbar und wuerden danach wieder
    ausblenden. Gleiche Bauweise wie die uebrigen .fade-Elemente der Seite. */
-.sf-card{opacity:0;transform:translateY(30px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1)}
+.sf-card{opacity:0;transform:translateY(30px);transition:opacity .88s ease,transform .88s cubic-bezier(.16,1,.3,1)}
 .sf-card.an{opacity:1;transform:none}
 /* Die Linie zeichnet sich ueber stroke-dashoffset, die Laenge setzt das Skript.
    Die Spitze kommt erst, wenn die Linie fast durchgelaufen ist. */
-.sf-ar .ap{transition:stroke-dashoffset .95s cubic-bezier(.42,0,.3,1)}
-.sf-ar .ah{opacity:0;transition:opacity .3s ease .78s}
+.sf-ar .ap{transition:stroke-dashoffset 1.2s cubic-bezier(.42,0,.3,1)}
+.sf-ar .ah{opacity:0;transition:opacity .34s ease 1s}
 .sf-ar.an .ah{opacity:1}
 @media(prefers-reduced-motion:reduce){
   .sf-card,.sf-ar .ap,.sf-ar .ah{transition:none}
@@ -378,13 +387,6 @@ p{text-wrap:pretty}
 .sf-when{font-family:var(--mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--c)}
 .sf-card h3{font-size:1.16rem;line-height:1.25;margin-bottom:.5rem}
 .sf-card p{font-size:.95rem;line-height:1.6;color:var(--ink-soft);margin:0}
-/* HINWEIS-BAND (zentrale Klarstellung) */
-.warnband{margin-top:1.6rem;display:flex;gap:1.2rem;align-items:flex-start;background:rgba(225,98,61,.09);border:1px solid rgba(225,98,61,.34);border-radius:var(--r-lg);padding:1.5rem 1.7rem}
-.warnband .wi{flex-shrink:0;width:42px;height:42px;border-radius:11px;background:rgba(225,98,61,.16);color:var(--accent-d);display:flex;align-items:center;justify-content:center}
-.warnband p{font-size:.99rem;color:var(--ink-text);line-height:1.62;margin:0}
-.warnband p+p{margin-top:.7rem}
-.warnband b{color:var(--white)}
-@media(max-width:560px){.warnband{flex-direction:column;gap:1rem;padding:1.3rem 1.2rem}}
 /* PROBLEM-KARTEN: zweispaltiges Raster fuer laengere Texte */
 .prob-grid.g2{grid-template-columns:1fr 1fr}
 @media(max-width:900px){.prob-grid.g2{grid-template-columns:1fr}}
@@ -624,35 +626,29 @@ p{text-wrap:pretty}
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Unsere Arbeitsweise</span><h2>Vom Gebäude zur fertigen Zeichnung.</h2><p><span class="d-only-i">Ein Aufmaß ist kein Zollstock und ein Zettel. </span>Wir kombinieren den 3D-Laserscan mit Kontrollmaßen von Hand und zeichnen daraus in aktueller CAD-Software.</p></div>
     <div class="sflow" id="stepflow">
-      <article class="sf-card sf-a sf-l rev" data-warte="300">
+      <article class="sf-card sf-a sf-l rev" data-warte="380">
         <div class="sf-top"><span class="sf-no">01</span><span class="sf-when">vor Ort</span></div>
         <h3>3D-Laserscan</h3>
-        <p>Wir gehen mit dem Laserscanner durch das ganze Gebäude, Geschoss für Geschoss, vom Keller bis unters Dach. Ausräumen müssen Sie dafür nichts.</p>
+        <p>Wir gehen mit dem Laserscanner durch das ganze Gebäude, vom Keller bis unters Dach. Ausräumen müssen Sie dafür nichts.</p>
       </article>
-      <div class="sf-ar sf-ar-1 rev" data-warte="1000" aria-hidden="true">
+      <div class="sf-ar sf-ar-1 rev" data-warte="1260" aria-hidden="true">
         <svg viewBox="0 0 1000 170" class="sf-svg sf-svg-w"><path class="ap" d="M290 9C302 71 382 53 482 87C582 121 662 112 700 150"/><path class="ah" d="M692 127L700 150L677 142"/></svg>
-        <svg viewBox="0 0 300 170" class="sf-svg sf-svg-s"><path class="ap" d="M96 9C104 53 148 56 172 88C196 121 190 133 178 150"/><path class="ah" d="M190 131L178 152L164 133"/></svg>
+        <svg viewBox="0 0 400 200" class="sf-svg sf-svg-s"><path class="ap" d="M120 14C128 74 176 66 210 106C244 146 258 140 278 182"/><path class="ah" d="M280 152L278 182L253 165"/></svg>
       </div>
-      <article class="sf-card sf-a sf-r rev" data-warte="300">
+      <article class="sf-card sf-a sf-r rev" data-warte="380">
         <div class="sf-top"><span class="sf-no">02</span><span class="sf-when">vor Ort</span></div>
         <h3>Kontrollmaße von Hand</h3>
-        <p>An den Stellen, die der Scanner nicht sauber erfasst, messen wir mit Lasermessgerät und Zollstock nach: Wandstärken, Nischen, Schächte, verstellte Ecken.</p>
+        <p>Wo der Scanner nicht alles erfasst, messen wir mit Lasermessgerät und Zollstock nach: Wandstärken, Nischen, Schächte, verstellte Ecken.</p>
       </article>
-      <div class="sf-ar sf-ar-2 rev" data-warte="1000" aria-hidden="true">
+      <div class="sf-ar sf-ar-2 rev" data-warte="1260" aria-hidden="true">
         <svg viewBox="0 0 1000 170" class="sf-svg sf-svg-w"><defs><linearGradient id="sfv-w" x1="710" y1="9" x2="300" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1F6FA5"/><stop offset="1" stop-color="#BE4A2A"/></linearGradient></defs><path class="ap" d="M710 9C698 71 618 53 518 87C418 121 338 112 300 150"/><path class="ah" d="M308 127L300 150L323 142"/></svg>
-        <svg viewBox="0 0 300 170" class="sf-svg sf-svg-s"><defs><linearGradient id="sfv-s" x1="204" y1="9" x2="122" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1F6FA5"/><stop offset="1" stop-color="#BE4A2A"/></linearGradient></defs><path class="ap" d="M204 9C196 53 152 56 128 88C104 121 110 133 122 150"/><path class="ah" d="M110 131L122 152L136 133"/></svg>
+        <svg viewBox="0 0 400 200" class="sf-svg sf-svg-s"><defs><linearGradient id="sfv-s" x1="280" y1="14" x2="122" y2="182" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1F6FA5"/><stop offset="1" stop-color="#BE4A2A"/></linearGradient></defs><path class="ap" d="M280 14C272 74 224 66 190 106C156 146 142 140 122 182"/><path class="ah" d="M120 152L122 182L147 165"/></svg>
       </div>
       <article class="sf-card sf-b sf-l rev" data-warte="0">
         <div class="sf-top"><span class="sf-no">03</span><span class="sf-when">im Büro</span></div>
         <h3>Zeichnung in CAD</h3>
-        <p>Aus Punktwolke und Kontrollmaßen zeichnen wir die Pläne: Grundrisse, Schnitte und Ansichten, bemaßt und beschriftet, prüffähig für Bauamt und Fachplaner.</p>
+        <p>Aus Punktwolke und Kontrollmaßen entstehen die Pläne: Grundrisse, Schnitte und Ansichten, bemaßt, beschriftet und prüffähig.</p>
       </article>
-    </div>
-    <div class="warnband fade">
-      <span class="wi" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M3 12h3M18 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg></span>
-      <div>
-        <p><b>Warum beides zusammen?</b> Der Laserscan erfasst das Gebäude schnell und in einem Zug, aber nicht restlos. Wandstärken, Schächte, verdeckte Bauteile und verstellte Ecken sieht er nicht oder nur teilweise. Genau dort messen wir mit Lasermessgerät und Zollstock nach.<span class="d-only-i"> An erster Stelle stehen maßgetreue Pläne, und die entstehen nur, wenn beides zusammenkommt.</span></p>
-      </div>
     </div>
   </div>
 </section>
