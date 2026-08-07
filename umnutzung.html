@@ -343,6 +343,16 @@ section{padding:var(--pad) 0;position:relative}
 .fld-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 @media(max-width:345px){.fld-row{grid-template-columns:1fr}}
 @media(max-width:560px){.ccard{padding:1.7rem 1.4rem}.fld{margin-bottom:.8rem}.fld-row{gap:.8rem}.fld label{margin-bottom:.3rem}.fld input,.fld select,.fld textarea{font-size:16px;padding:.72rem .9rem}.fld textarea{min-height:64px}.ccard .fld-row label{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}}
+/* PAKETWAHL im Formular: zeigt dem Kunden, dass sein Klick angekommen ist,
+   und laesst sich wieder entfernen. Ohne die Regel fuer [hidden] bliebe die
+   Zeile sichtbar, weil display:flex den Standard des Browsers ueberschreibt. */
+.pak-wahl{display:flex;align-items:center;gap:.7rem;background:rgba(225,98,61,.09);border:1px solid rgba(225,98,61,.3);border-radius:10px;padding:.6rem .7rem .6rem .85rem;margin-bottom:1.1rem}
+.pak-wahl[hidden]{display:none}
+.pw-lab{font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent-d);flex-shrink:0}
+.pw-name{font-family:var(--disp);font-weight:600;font-size:.92rem;color:var(--white);line-height:1.25;min-width:0;overflow-wrap:break-word}
+.pw-x{margin-left:auto;flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid rgba(225,98,61,.35);background:transparent;color:var(--accent-d);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
+.pw-x:hover{border-color:var(--accent);background:rgba(225,98,61,.12)}
+@media(max-width:420px){.pak-wahl{flex-wrap:wrap;gap:.35rem .7rem}.pw-x{margin-left:auto}}
 .kf-status{margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;font-size:.92rem;line-height:1.5}
 .kf-status.ok{background:rgba(63,209,135,.14);border:1px solid rgba(63,209,135,.45);color:#158a5a;font-weight:600}
 .kf-status.err{background:rgba(214,69,69,.1);border:1px solid rgba(214,69,69,.4);color:#b3271e}
@@ -584,14 +594,14 @@ section{padding:var(--pad) 0;position:relative}
         <div class="pak-h">Umnutzung komplett</div>
         <p class="pak-d">Der ganze Weg in einem Paket. Wir prüfen die Machbarkeit, erstellen die Pläne und begleiten Sie bis zur Genehmigung.</p>
         <ul class="pak-list"><li>Machbarkeit und Genehmigungsfähigkeit geprüft</li><li>Grundrisse und kompletter Bauantrag erstellt</li><li>Nachweise von Fachplanern eingeholt und gebündelt</li><li>Abstimmung mit dem Bauamt bis zum Bescheid</li></ul>
-        <a href="#kontakt" class="btn btn-accent pak-cta">Erstgespräch vereinbaren <span class="ar">→</span></a>
+        <a href="#kontakt" class="btn btn-accent pak-cta" data-paket="Umnutzung komplett">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
       <div class="pak pak-glow pak-eco fade d1">
         <span class="pak-tag pak-tag-eco">Vorab-Analyse</span>
         <div class="pak-h">Machbarkeits-Check Premium</div>
         <p class="pak-d">Die vertiefte Vorab-Analyse für alle, die vor der Entscheidung volle Klarheit über Genehmigung, Förderung und energetisches Potenzial wollen.</p>
         <ul class="pak-list"><li>Ausführliche Prüfung der Genehmigungsfähigkeit</li><li>Bauvoranfrage, wenn der Fall nicht eindeutig ist</li><li>Tiefe Förderanalyse über die infrage kommenden Programme</li><li>Energetische Einordnung mit Sanierungsempfehlungen</li></ul>
-        <a href="#kontakt" class="btn btn-energy pak-cta">Erstgespräch vereinbaren <span class="ar">→</span></a>
+        <a href="#kontakt" class="btn btn-energy pak-cta" data-paket="Machbarkeits-Check Premium">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
     </div>
   </div>
@@ -647,6 +657,12 @@ section{padding:var(--pad) 0;position:relative}
           <p class="ds">Wir melden uns zeitnah zurück.</p>
           <form id="kform" action="https://formspree.io/f/xrevynvy" method="POST">
             <input type="hidden" name="_subject" value="Neue Anfrage über jmr-architektur.de (Umnutzung)">
+            <input type="hidden" name="Paket" id="kf-paket" value="">
+            <div class="pak-wahl" id="pakWahl" hidden>
+              <span class="pw-lab">Ihre Auswahl</span>
+              <span class="pw-name" id="pakWahlName"></span>
+              <button class="pw-x" id="pakWahlWeg" type="button" aria-label="Auswahl entfernen">&times;</button>
+            </div>
             <div class="fld-row">
               <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" name="Vorname" type="text" placeholder="Vorname" required></div>
               <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" required></div>
@@ -733,12 +749,32 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
  addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
  upd();})();
+/* Angeklicktes Paket ans Formular uebergeben. Ohne das weiss der Empfaenger
+   nicht, welches Paket gemeint war, und der Kunde schreibt es meist nicht dazu,
+   weil er annimmt, der Klick habe es uebermittelt. */
+(function(){
+  var knoepfe=[].slice.call(document.querySelectorAll('[data-paket]'));if(!knoepfe.length)return;
+  var feld=document.getElementById('kf-paket'),zeile=document.getElementById('pakWahl'),
+      name=document.getElementById('pakWahlName'),weg=document.getElementById('pakWahlWeg'),
+      betreff=document.querySelector('#kform input[name="_subject"]');
+  if(!feld||!zeile||!name)return;
+  var basis=betreff?betreff.value:'';
+  function setzen(p){
+    feld.value=p||'';
+    zeile.hidden=!p;
+    if(p){name.textContent=p;if(betreff)betreff.value=basis.replace(/\)$/,', Paket: '+p+')');}
+    else if(betreff)betreff.value=basis;
+  }
+  knoepfe.forEach(function(k){k.addEventListener('click',function(){setzen(k.getAttribute('data-paket'));});});
+  if(weg)weg.addEventListener('click',function(){setzen('');});
+  document.addEventListener('jmr:gesendet',function(){setzen('');});
+})();
 /* Kontaktformular */
 (function(){const f=document.getElementById('kform'),st=document.getElementById('kfStatus');if(!f)return;
  f.addEventListener('submit',async(e)=>{e.preventDefault();
   st.style.display='block';st.className='kf-status';st.textContent='Wird gesendet …';
   try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}});
-   if(r.ok){f.reset();st.className='kf-status ok';st.textContent='Vielen Dank, Ihre Anfrage ist eingegangen. Wir melden uns zeitnah.';}
+   if(r.ok){f.reset();document.dispatchEvent(new Event('jmr:gesendet'));st.className='kf-status ok';st.textContent='Vielen Dank, Ihre Anfrage ist eingegangen. Wir melden uns zeitnah.';}
    else{st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}}
   catch(err){st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}});})();
 /* Anwendungsfaelle: Vorher-Nachher-Schieberegler (mit Sway-Animation + Label-Ausblenden) */

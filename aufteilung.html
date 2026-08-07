@@ -429,6 +429,8 @@ p{text-wrap:pretty}
 @starting-style{.pdlg[open]{opacity:0;transform:scale(.965)}}
 .pdlg::backdrop{background:rgba(11,28,43,.5);backdrop-filter:blur(3px)}
 .pdlg-in{position:relative;padding:2rem 1.9rem 1.85rem}
+/* Der Inhalt nimmt beim Oeffnen den Fokus auf, soll ihn aber nicht anzeigen. */
+.pdlg-in:focus,.pdlg-in:focus-visible{outline:none}
 .pdlg-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent-d);background:rgba(225,98,61,.11);border:1px solid rgba(225,98,61,.3);border-radius:999px;padding:.26rem .72rem;margin-bottom:1.1rem}
 .pdlg-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 .pdlg-no{font-family:var(--disp);font-weight:700;font-size:1.7rem;line-height:1;letter-spacing:-.03em;color:rgba(225,98,61,.3)}
@@ -438,6 +440,16 @@ p{text-wrap:pretty}
 .pdlg-x:hover{border-color:var(--accent);color:var(--accent)}
 @media(prefers-reduced-motion:reduce){.pdlg{transition:none}}
 @media(max-width:560px){.pdlg-in{padding:1.7rem 1.4rem 1.5rem}}
+/* PAKETWAHL im Formular: zeigt dem Kunden, dass sein Klick angekommen ist,
+   und laesst sich wieder entfernen. Ohne die Regel fuer [hidden] bliebe die
+   Zeile sichtbar, weil display:flex den Standard des Browsers ueberschreibt. */
+.pak-wahl{display:flex;align-items:center;gap:.7rem;background:rgba(225,98,61,.09);border:1px solid rgba(225,98,61,.3);border-radius:10px;padding:.6rem .7rem .6rem .85rem;margin-bottom:1.1rem}
+.pak-wahl[hidden]{display:none}
+.pw-lab{font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent-d);flex-shrink:0}
+.pw-name{font-family:var(--disp);font-weight:600;font-size:.92rem;color:var(--white);line-height:1.25;min-width:0;overflow-wrap:break-word}
+.pw-x{margin-left:auto;flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid rgba(225,98,61,.35);background:transparent;color:var(--accent-d);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
+.pw-x:hover{border-color:var(--accent);background:rgba(225,98,61,.12)}
+@media(max-width:420px){.pak-wahl{flex-wrap:wrap;gap:.35rem .7rem}.pw-x{margin-left:auto}}
 /* FAQ: mehrere Absaetze und Aufzaehlungen in einer Antwort */
 .fq-a p+p{margin-top:.85rem}
 .fq-a ul{list-style:none;margin:.9rem 0;display:flex;flex-direction:column;gap:.5rem}
@@ -714,14 +726,14 @@ p{text-wrap:pretty}
         <div class="pak-h">Aufteilung komplett</div>
         <p class="pak-d">Der ganze Weg in einem Paket. Wir nehmen den Bestand auf, erstellen die Pläne und begleiten Sie bis zur Abgeschlossen&shy;heits&shy;bescheinigung.</p>
         <ul class="pak-list"><li>Bestandsaufnahme und Akteneinsicht</li><li>Baurechtliche Prüfung der geplanten Einheiten</li><li>Aufteilungsplan mit Grundrissen, Schnitten und Ansichten</li><li>Wohnflächen nach WoFlV und Vorschlag für die Miteigentums&shy;anteile</li><li>Antrag und Begleitung bis zur Abgeschlossen&shy;heits&shy;bescheinigung</li></ul>
-        <a href="#kontakt" class="btn btn-accent pak-cta">Erstgespräch vereinbaren <span class="ar">→</span></a>
+        <a href="#kontakt" class="btn btn-accent pak-cta" data-paket="Aufteilung komplett">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
       <div class="pak pak-glow pak-steel fade d1">
         <span class="pak-tag pak-tag-steel">Vorab-Analyse</span>
         <div class="pak-h">Teilbarkeits-Check</div>
         <p class="pak-d">Die Prüfung vor der Entscheidung. Für alle, die erst wissen wollen, ob sich das Objekt sinnvoll teilen lässt und was dafür fehlt.</p>
         <ul class="pak-list"><li>Sichtung der vorhandenen Unterlagen und Genehmigungen</li><li>Einschätzung zur Abgeschlossenheit der geplanten Einheiten</li><li>Abgleich zwischen genehmigtem und tatsächlichem Zustand</li><li>Liste der offenen baurechtlichen Punkte</li><li>Schriftliche Einschätzung als Grundlage für Ihre Entscheidung</li></ul>
-        <a href="#kontakt" class="btn btn-steel2 pak-cta">Erstgespräch vereinbaren <span class="ar">→</span></a>
+        <a href="#kontakt" class="btn btn-steel2 pak-cta" data-paket="Teilbarkeits-Check">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
     </div>
   </div>
@@ -781,6 +793,12 @@ p{text-wrap:pretty}
           <p class="ds">Wir melden uns zeitnah zurück.</p>
           <form id="kform" action="https://formspree.io/f/xrevynvy" method="POST">
             <input type="hidden" name="_subject" value="Neue Anfrage über jmr-architektur.de (Aufteilung)">
+            <input type="hidden" name="Paket" id="kf-paket" value="">
+            <div class="pak-wahl" id="pakWahl" hidden>
+              <span class="pw-lab">Ihre Auswahl</span>
+              <span class="pw-name" id="pakWahlName"></span>
+              <button class="pw-x" id="pakWahlWeg" type="button" aria-label="Auswahl entfernen">&times;</button>
+            </div>
             <div class="fld-row">
               <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" name="Vorname" type="text" placeholder="Vorname" required></div>
               <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" required></div>
@@ -894,25 +912,60 @@ document.querySelectorAll('.prob,.dcard,.res').forEach(c=>c.addEventListener('mo
 /* Info-Fenster zu den Problem-Karten */
 (function(){
   const karten=document.querySelectorAll('.prob-click');if(!karten.length)return;
+  /* Der Inhalt des Fensters nimmt den Fokus auf. Ohne das setzt der Browser ihn
+     auf das Schliessen-Kreuz und zeichnet dort seinen eigenen Fokusrahmen. */
+  document.querySelectorAll('.pdlg-in').forEach(e=>e.setAttribute('tabindex','-1'));
+  let perTastatur=false;
   function oeffnen(id){const d=document.getElementById(id);if(!d)return;
-    if(typeof d.showModal==='function'){if(!d.open)d.showModal();}else{d.setAttribute('open','');}}
+    if(typeof d.showModal==='function'){if(!d.open)d.showModal();}else{d.setAttribute('open','');}
+    const inhalt=d.querySelector('.pdlg-in');
+    if(inhalt&&inhalt.focus)inhalt.focus({preventScroll:true});}
   karten.forEach(k=>{
     const id=k.dataset.dialog;
-    k.addEventListener('click',()=>oeffnen(id));
-    k.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();oeffnen(id);}});
+    k.addEventListener('click',()=>{perTastatur=false;oeffnen(id);});
+    k.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();perTastatur=true;oeffnen(id);}});
   });
   document.querySelectorAll('dialog.pdlg').forEach(d=>{
     const x=d.querySelector('.pdlg-x');
     if(x)x.addEventListener('click',()=>d.close());
     d.addEventListener('click',e=>{if(e.target===d)d.close();});
+    /* Beim Schliessen gibt der Browser den Fokus an die angeklickte Karte zurueck
+       und zeichnet dort einen Rahmen, der stehen bleibt. Wer mit der Maus geoeffnet
+       hat, soll den nicht sehen. Bei Tastaturbedienung bleibt er erhalten, sonst
+       waere nicht mehr erkennbar, wo man sich auf der Seite befindet. */
+    d.addEventListener('close',()=>{
+      if(perTastatur)return;
+      const a=document.activeElement;
+      if(a&&a.classList&&a.classList.contains('prob-click')&&a.blur)a.blur();
+    });
   });
+})();
+/* Angeklicktes Paket ans Formular uebergeben. Ohne das weiss der Empfaenger
+   nicht, welches Paket gemeint war, und der Kunde schreibt es meist nicht dazu,
+   weil er annimmt, der Klick habe es uebermittelt. */
+(function(){
+  var knoepfe=[].slice.call(document.querySelectorAll('[data-paket]'));if(!knoepfe.length)return;
+  var feld=document.getElementById('kf-paket'),zeile=document.getElementById('pakWahl'),
+      name=document.getElementById('pakWahlName'),weg=document.getElementById('pakWahlWeg'),
+      betreff=document.querySelector('#kform input[name="_subject"]');
+  if(!feld||!zeile||!name)return;
+  var basis=betreff?betreff.value:'';
+  function setzen(p){
+    feld.value=p||'';
+    zeile.hidden=!p;
+    if(p){name.textContent=p;if(betreff)betreff.value=basis.replace(/\)$/,', Paket: '+p+')');}
+    else if(betreff)betreff.value=basis;
+  }
+  knoepfe.forEach(function(k){k.addEventListener('click',function(){setzen(k.getAttribute('data-paket'));});});
+  if(weg)weg.addEventListener('click',function(){setzen('');});
+  document.addEventListener('jmr:gesendet',function(){setzen('');});
 })();
 /* Kontaktformular */
 (function(){const f=document.getElementById('kform'),st=document.getElementById('kfStatus');if(!f)return;
  f.addEventListener('submit',async(e)=>{e.preventDefault();
   st.style.display='block';st.className='kf-status';st.textContent='Wird gesendet …';
   try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}});
-   if(r.ok){f.reset();st.className='kf-status ok';st.textContent='Vielen Dank, Ihre Anfrage ist eingegangen. Wir melden uns zeitnah.';}
+   if(r.ok){f.reset();document.dispatchEvent(new Event('jmr:gesendet'));st.className='kf-status ok';st.textContent='Vielen Dank, Ihre Anfrage ist eingegangen. Wir melden uns zeitnah.';}
    else{st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}}
   catch(err){st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}});})();
 
