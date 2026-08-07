@@ -555,6 +555,8 @@ h1,h2,h3{overflow-wrap:break-word}
   .pak-tag{font-size:.68rem}
   .utag{font-size:.68rem}
   .sf-when{font-size:.68rem}
+  .typ-tag{font-size:.68rem}
+  .abx-h .abx-neu{font-size:.66rem}
 }
 
 /* 8  Hero-Knoepfe: die Basis stellt die Reihe unter 640 px auf
@@ -908,6 +910,7 @@ h1,h2,h3{overflow-wrap:break-word}
           <a href="index.html">Startseite</a>
           <a href="umnutzung.html">Umnutzung</a>
           <a href="aufmass-plaene.html">Aufmaß &amp; Pläne</a>
+          <a href="anbau-erweiterung.html">Anbau &amp; Erweiterung</a>
           <a href="#gruende">Warum aufteilen</a>
           <a href="#ebenen">WEG &amp; Baurecht</a>
           <a href="#ablauf">Ablauf</a>
@@ -1053,9 +1056,10 @@ document.querySelectorAll('.prob,.dcard,.res').forEach(c=>c.addEventListener('mo
    else{st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}}
   catch(err){st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}});})();
 
-/* FAQ: es bleibt immer nur eine Frage offen */
-(function(){var f=[].slice.call(document.querySelectorAll('details.faq'));if(f.length<2)return;
- f.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)f.forEach(function(o){if(o!==d)o.open=false;});});});})();
+/* Die Regel "immer nur eine Frage offen" liegt jetzt in js/jmr-faq.js.
+   Dort wird sie zusammen mit dem weichen Auf- und Zuklappen gesteuert.
+   Zwei Stellen wuerden sich gegenseitig stoeren: die vorherige Frage
+   klappte sofort zu, statt mit Uebergang. */
 </script>
 </body>
 </html>

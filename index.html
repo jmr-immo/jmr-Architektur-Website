@@ -472,6 +472,8 @@ h1,h2,h3{overflow-wrap:break-word}
   .pak-tag{font-size:.68rem}
   .utag{font-size:.68rem}
   .sf-when{font-size:.68rem}
+  .typ-tag{font-size:.68rem}
+  .abx-h .abx-neu{font-size:.66rem}
 }
 
 /* 8  Hero-Knoepfe: die Basis stellt die Reihe unter 640 px auf
@@ -582,7 +584,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <p>Bestand exakt erfasst. Aufmaß per 3D-Laserscan, prüffähige Grundrisse, Wohnflächenberechnung oder Plan-Digitalisierung.</p>
         <span class="tile-link">Mehr erfahren <span class="ar">→</span></span>
       </a>
-      <div class="tile tile-soon fade d3">
+      <a class="tile fade d3" href="anbau-erweiterung.html">
         <span class="tile-sketch" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M30 160V90l50-30 50 30v70"/><path d="M30 90h100"/><path d="M130 110h45v50h-45z"/><path d="M130 110l22-16 23 16"/><path d="M55 120h25v40h-25z"/></svg></span>
         <div class="tile-top">
           <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V11l6-4v14"/><path d="M11 21V7h6v14"/><path d="M17 21v-7h4v7"/></svg></span>
@@ -590,8 +592,8 @@ h1,h2,h3{overflow-wrap:break-word}
         </div>
         <h3>Anbau &amp; Erweiterung</h3>
         <p>Mehr Wohnraum schaffen. Wintergarten, Anbau oder überdachte Terrasse, von der Idee bis zur Genehmigung.</p>
-        <span class="tile-link tile-link-soon">Seite folgt in Kürze</span>
-      </div>
+        <span class="tile-link">Mehr erfahren <span class="ar">→</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -780,6 +782,7 @@ h1,h2,h3{overflow-wrap:break-word}
           <a href="umnutzung.html">Umnutzung</a>
           <a href="aufteilung.html">Aufteilung</a>
           <a href="aufmass-plaene.html">Aufmaß &amp; Pläne</a>
+          <a href="anbau-erweiterung.html">Anbau &amp; Erweiterung</a>
           <a href="#kette">Vom Erstgespräch zum Plan</a>
           <a href="#ueber">Über uns</a>
           <a href="#kontakt">Erstgespräch</a>
@@ -889,9 +892,10 @@ if(!RM&&matchMedia('(pointer:fine)').matches){
   });
 })();
 
-/* FAQ: es bleibt immer nur eine Frage offen */
-(function(){var f=[].slice.call(document.querySelectorAll('details.faq'));if(f.length<2)return;
- f.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)f.forEach(function(o){if(o!==d)o.open=false;});});});})();
+/* Die Regel "immer nur eine Frage offen" liegt jetzt in js/jmr-faq.js.
+   Dort wird sie zusammen mit dem weichen Auf- und Zuklappen gesteuert.
+   Zwei Stellen wuerden sich gegenseitig stoeren: die vorherige Frage
+   klappte sofort zu, statt mit Uebergang. */
 </script>
 </body>
 </html>

@@ -634,6 +634,8 @@ h1,h2,h3{overflow-wrap:break-word}
   .pak-tag{font-size:.68rem}
   .utag{font-size:.68rem}
   .sf-when{font-size:.68rem}
+  .typ-tag{font-size:.68rem}
+  .abx-h .abx-neu{font-size:.66rem}
 }
 
 /* 8  Hero-Knoepfe: die Basis stellt die Reihe unter 640 px auf
@@ -994,6 +996,7 @@ h1,h2,h3{overflow-wrap:break-word}
           <a href="index.html">Startseite</a>
           <a href="umnutzung.html">Umnutzung</a>
           <a href="aufteilung.html">Aufteilung</a>
+          <a href="anbau-erweiterung.html">Anbau &amp; Erweiterung</a>
           <a href="#ebenen">So arbeiten wir</a>
           <a href="#pakete">Pakete</a>
           <a href="#kontakt">Erstgespräch</a>
@@ -1166,9 +1169,10 @@ document.querySelectorAll('.prob,.erg-c').forEach(c=>c.addEventListener('mousemo
     });
   });
 })();
-/* FAQ: es bleibt immer nur eine Frage offen */
-(function(){var f=[].slice.call(document.querySelectorAll('details.faq'));if(f.length<2)return;
- f.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)f.forEach(function(o){if(o!==d)o.open=false;});});});})();
+/* Die Regel "immer nur eine Frage offen" liegt jetzt in js/jmr-faq.js.
+   Dort wird sie zusammen mit dem weichen Auf- und Zuklappen gesteuert.
+   Zwei Stellen wuerden sich gegenseitig stoeren: die vorherige Frage
+   klappte sofort zu, statt mit Uebergang. */
 /* Angeklicktes Paket ans Formular uebergeben. Ohne das weiss der Empfaenger
    nicht, welches Paket gemeint war, und der Kunde schreibt es meist nicht dazu,
    weil er annimmt, der Klick habe es uebermittelt. */

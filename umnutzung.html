@@ -438,6 +438,8 @@ h1,h2,h3{overflow-wrap:break-word}
   .pak-tag{font-size:.68rem}
   .utag{font-size:.68rem}
   .sf-when{font-size:.68rem}
+  .typ-tag{font-size:.68rem}
+  .abx-h .abx-neu{font-size:.66rem}
 }
 
 /* 8  Hero-Knoepfe: die Basis stellt die Reihe unter 640 px auf
@@ -771,6 +773,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <div class="fnav">
           <a href="index.html">Startseite</a>
           <a href="aufteilung.html">Aufteilung</a>
+          <a href="anbau-erweiterung.html">Anbau &amp; Erweiterung</a>
           <a href="aufmass-plaene.html">Aufmaß &amp; Pläne</a>
           <a href="#faelle">Anwendungsfälle</a>
           <a href="#foerderung">Förderung</a>
@@ -925,9 +928,10 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
   go(0);
 })();
 
-/* FAQ: es bleibt immer nur eine Frage offen */
-(function(){var f=[].slice.call(document.querySelectorAll('details.faq'));if(f.length<2)return;
- f.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)f.forEach(function(o){if(o!==d)o.open=false;});});});})();
+/* Die Regel "immer nur eine Frage offen" liegt jetzt in js/jmr-faq.js.
+   Dort wird sie zusammen mit dem weichen Auf- und Zuklappen gesteuert.
+   Zwei Stellen wuerden sich gegenseitig stoeren: die vorherige Frage
+   klappte sofort zu, statt mit Uebergang. */
 </script>
 </body>
 </html>
