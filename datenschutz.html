@@ -56,17 +56,75 @@ a{color:var(--steel-d);word-break:break-word}
 @media(max-width:760px){.fnav{justify-content:flex-start}}
 .fbot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;font-family:var(--sans);font-size:.72rem;color:#5a6f7d}
 .fbot a{color:#5a6f7d}.fbot a:hover{color:#fff}
+
+/* >>> mobil-feinschliff */
+/* ===================================================================
+   Mobil-Feinschliff  ·  07.08.2026
+   Wird von build.py / build2.py und patch-mobil.py in alle Seiten
+   eingesetzt. Aenderungen bitte nur hier vornehmen.
+   =================================================================== */
+
+/* 1  Kein seitliches Verschieben der Seite, auf allen Seiten gleich */
+body{overflow-x:hidden}
+
+/* 2  Lange Ueberschriften duerfen im Notfall umbrechen */
+h1,h2,h3{overflow-wrap:break-word}
+
+@media (max-width:760px){
+
+  /* 3  KfW-Teaser: Zahlenspalte darf mitschrumpfen und umbrechen.
+        Vorher wurden "KfW 266 - Zuschuss je Wohneinheit" und der
+        Tilgungszuschuss-Hinweis am rechten Rand abgeschnitten. */
+  .kfw-teaser .kt-r{flex:1 1 100%;min-width:0}
+  .kfw-teaser .kt-num small{white-space:normal}
+  .kfw-teaser .kt-hint{white-space:normal;margin-top:.5rem;line-height:1.45}
+
+  /* 4  Ablauf-Schritte: Titel darf umbrechen, sonst lief
+        "Begleitung bis zum Bescheid" aus dem Bild */
+  .fstep .stitle{white-space:normal}
+
+  /* 5  Tippflaechen im Footer und in der Kontaktliste vergroessern */
+  .fnav{gap:.1rem 1.4rem}
+  .fnav a{display:inline-block;padding:.62rem 0}
+  .fbot a{display:inline-block;padding:.5rem .15rem}
+  .clist a{display:inline-block;padding:.42rem 0}
+  .brand{padding:.4rem 0}
+
+  /* 6  Karussell-Punkte: unsichtbare Trefferflaeche statt 9x9 px */
+  .fcar-dots{gap:.9rem}
+  .fcar-dot{position:relative}
+  .fcar-dot::before{content:"";position:absolute;top:-15px;bottom:-15px;left:-7px;right:-7px}
+
+  /* 7  Schriftgroessen unter 10 px anheben */
+  .footer .bn small{font-size:.7rem;line-height:1.5}
+  .ba-lbl{font-size:.66rem}
+  .res>.res-opt{font-size:.68rem}
+  .pak-tag{font-size:.68rem}
+  .utag{font-size:.68rem}
+  .sf-when{font-size:.68rem}
+}
+
+/* 8  Hero-Knoepfe: die Basis stellt die Reihe unter 640 px auf
+      flex-wrap:nowrap mit min-width:0. Auf 320 px wurde dadurch der
+      zweite Knopf angeschnitten und die ganze Hero-Spalte 22 px zu
+      breit. Mit einer Mindestbreite bricht die Reihe von selbst um,
+      sobald es zu eng wird, und bleibt sonst unveraendert. */
+@media (max-width:640px){
+  .hero-act{flex-wrap:wrap}
+  .hero-act .btn{min-width:8.6rem}
+}
+/* <<< mobil-feinschliff */
 </style>
 </head>
 <body>
 <nav class="nav">
-  <a href="index.html" class="brand"><img src="img/logo-blue.png" alt="jmr Architektur"><span class="nm">jmr Architektur</span></a>
+  <a href="index.html" class="brand"><img src="img/logo-blue-s.png" alt="jmr Architektur" width="115" height="90"><span class="nm">jmr Architektur</span></a>
   <div class="nlinks">
     <a href="index.html">← Zurück zur Startseite</a>
   </div>
 </nav>
 <main>
-  <h1>Datenschutzerklärung</h1>
+  <h1>Daten&shy;schutz&shy;erklärung</h1>
 
   <h2>1. Datenschutz auf einen Blick</h2>
   <h3>Allgemeine Hinweise</h3>
@@ -203,7 +261,7 @@ a{color:var(--steel-d);word-break:break-word}
   <div class="container">
     <div class="ftop">
       <div class="bn">
-        <img class="flogo" src="img/logo-white.png" alt="jmr Architektur">
+        <img class="flogo" src="img/logo-white-s.png" alt="jmr Architektur" width="115" height="90">
         jmr Architektur
         <small>Architektur · Bauantrag · Genehmigungsplanung</small>
       </div>

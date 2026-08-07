@@ -278,7 +278,7 @@
       '.jmrc-accent:hover{background:#BE4A2A}' +
       '.jmrc-ghost{background:transparent;color:#0B1C2B;border-color:#cfcabb}' +
       '.jmrc-ghost:hover{border-color:#1F6FA5;color:#16527c}' +
-      '.jmrc-link{background:none;border:none;cursor:pointer;font-family:inherit;font-size:.82rem;color:#5b6b78;text-decoration:underline;padding:.4rem .3rem}' +
+      '.jmrc-link{background:none;border:none;cursor:pointer;font-family:inherit;font-size:.82rem;color:#5b6b78;text-decoration:underline;padding:.62rem .3rem}' +
       '.jmrc-link:hover{color:#16527c}' +
       '@media(max-width:760px){#jmr-consent .jmrc-bar{gap:.9rem}#jmr-consent .jmrc-actions{width:100%}#jmr-consent .jmrc-btn{flex:1 1 auto}#jmr-consent .jmrc-link{order:3;width:100%;text-align:center}}' +
       '@media(max-width:520px){#jmr-consent-modal .jmrc-btns-modal .jmrc-btn{flex:1 1 auto}}';
