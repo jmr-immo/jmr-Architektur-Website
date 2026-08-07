@@ -346,12 +346,20 @@ section{padding:var(--pad) 0;position:relative}
 /* PAKETWAHL im Formular: zeigt dem Kunden, dass sein Klick angekommen ist,
    und laesst sich wieder entfernen. Ohne die Regel fuer [hidden] bliebe die
    Zeile sichtbar, weil display:flex den Standard des Browsers ueberschreibt. */
-.pak-wahl{display:flex;align-items:center;gap:.7rem;background:rgba(225,98,61,.09);border:1px solid rgba(225,98,61,.3);border-radius:10px;padding:.6rem .7rem .6rem .85rem;margin-bottom:1.1rem}
+.pak-wahl{--pw:var(--accent-d);--pw-bg:rgba(225,98,61,.09);--pw-line:rgba(225,98,61,.3);--pw-voll:var(--accent);--pw-hell:rgba(225,98,61,.14)}
+/* Die Anzeige nimmt die Farbe des gewaehlten Pakets an: Terrakotta beim
+   Komplettpaket, Stahlblau bei der Vorabanalyse, Gruen beim Energie-Paket,
+   gedeckt beim Einstiegspaket. Das Skript setzt die passende Klasse. */
+.pak-wahl.ton-terra{--pw:var(--accent-d);--pw-bg:rgba(225,98,61,.09);--pw-line:rgba(225,98,61,.3);--pw-voll:var(--accent);--pw-hell:rgba(225,98,61,.14)}
+.pak-wahl.ton-steel{--pw:var(--steel-d);--pw-bg:rgba(46,134,199,.1);--pw-line:rgba(46,134,199,.34);--pw-voll:var(--steel);--pw-hell:rgba(46,134,199,.15)}
+.pak-wahl.ton-eco{--pw:#1a8b5e;--pw-bg:rgba(63,209,135,.12);--pw-line:rgba(63,209,135,.4);--pw-voll:#1f9e6b;--pw-hell:rgba(63,209,135,.18)}
+.pak-wahl.ton-neutral{--pw:var(--ink-soft);--pw-bg:rgba(11,28,43,.05);--pw-line:var(--line);--pw-voll:var(--ink-soft);--pw-hell:rgba(11,28,43,.08)}
+.pak-wahl{display:flex;align-items:center;gap:.7rem;background:var(--pw-bg);border:1px solid var(--pw-line);border-radius:10px;padding:.6rem .7rem .6rem .85rem;margin-bottom:1.1rem;transition:background .25s,border-color .25s}
 .pak-wahl[hidden]{display:none}
-.pw-lab{font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent-d);flex-shrink:0}
+.pw-lab{font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--pw);flex-shrink:0;transition:color .25s}
 .pw-name{font-family:var(--disp);font-weight:600;font-size:.92rem;color:var(--white);line-height:1.25;min-width:0;overflow-wrap:break-word}
-.pw-x{margin-left:auto;flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid rgba(225,98,61,.35);background:transparent;color:var(--accent-d);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
-.pw-x:hover{border-color:var(--accent);background:rgba(225,98,61,.12)}
+.pw-x{margin-left:auto;flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid var(--pw-line);background:transparent;color:var(--pw);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s,color .25s}
+.pw-x:hover{border-color:var(--pw-voll);background:var(--pw-hell)}
 @media(max-width:420px){.pak-wahl{flex-wrap:wrap;gap:.35rem .7rem}.pw-x{margin-left:auto}}
 .kf-status{margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;font-size:.92rem;line-height:1.5}
 .kf-status.ok{background:rgba(63,209,135,.14);border:1px solid rgba(63,209,135,.45);color:#158a5a;font-weight:600}
@@ -657,7 +665,7 @@ section{padding:var(--pad) 0;position:relative}
           <p class="ds">Wir melden uns zeitnah zurück.</p>
           <form id="kform" action="https://formspree.io/f/xrevynvy" method="POST">
             <input type="hidden" name="_subject" value="Neue Anfrage über jmr-architektur.de (Umnutzung)">
-            <input type="hidden" name="Paket" id="kf-paket" value="">
+            <input type="hidden" name="Paket" id="kf-paket" value="keine Auswahl">
             <div class="pak-wahl" id="pakWahl" hidden>
               <span class="pw-lab">Ihre Auswahl</span>
               <span class="pw-name" id="pakWahlName"></span>
@@ -759,13 +767,24 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
       betreff=document.querySelector('#kform input[name="_subject"]');
   if(!feld||!zeile||!name)return;
   var basis=betreff?betreff.value:'';
-  function setzen(p){
-    feld.value=p||'';
+  var TOENE=['ton-terra','ton-steel','ton-eco','ton-neutral'];
+  /* Der Farbton wird aus dem Knopf selbst abgeleitet, nicht doppelt gepflegt.
+     Aendert jemand spaeter die Farbe eines Pakets, zieht die Anzeige mit. */
+  function ton(k){
+    if(k.classList.contains('btn-steel2'))return 'ton-steel';
+    if(k.classList.contains('btn-energy'))return 'ton-eco';
+    if(k.classList.contains('btn-ghost'))return 'ton-neutral';
+    return 'ton-terra';
+  }
+  function setzen(p,t){
+    feld.value=p||'keine Auswahl';
     zeile.hidden=!p;
-    if(p){name.textContent=p;if(betreff)betreff.value=basis.replace(/\)$/,', Paket: '+p+')');}
+    TOENE.forEach(function(c){zeile.classList.remove(c);});
+    if(p){zeile.classList.add(t||'ton-terra');name.textContent=p;
+      if(betreff)betreff.value=basis.replace(/\)$/,', Paket: '+p+')');}
     else if(betreff)betreff.value=basis;
   }
-  knoepfe.forEach(function(k){k.addEventListener('click',function(){setzen(k.getAttribute('data-paket'));});});
+  knoepfe.forEach(function(k){k.addEventListener('click',function(){setzen(k.getAttribute('data-paket'),ton(k));});});
   if(weg)weg.addEventListener('click',function(){setzen('');});
   document.addEventListener('jmr:gesendet',function(){setzen('');});
 })();
