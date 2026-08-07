@@ -451,13 +451,19 @@ p{text-wrap:pretty}
 .pak-wahl.ton-steel{--pw:var(--steel-d);--pw-bg:rgba(46,134,199,.1);--pw-line:rgba(46,134,199,.34);--pw-voll:var(--steel);--pw-hell:rgba(46,134,199,.15)}
 .pak-wahl.ton-eco{--pw:#1a8b5e;--pw-bg:rgba(63,209,135,.12);--pw-line:rgba(63,209,135,.4);--pw-voll:#1f9e6b;--pw-hell:rgba(63,209,135,.18)}
 .pak-wahl.ton-neutral{--pw:var(--ink-soft);--pw-bg:rgba(11,28,43,.05);--pw-line:var(--line);--pw-voll:var(--ink-soft);--pw-hell:rgba(11,28,43,.08)}
-.pak-wahl{display:flex;align-items:center;gap:.7rem;background:var(--pw-bg);border:1px solid var(--pw-line);border-radius:10px;padding:.6rem .7rem .6rem .85rem;margin-bottom:1.1rem;transition:background .25s,border-color .25s}
+/* Auswahlzeile: Raster statt Flex, damit jedes Paket gleich hoch angezeigt wird,
+   unabhaengig davon wie lang sein Name ist */
+#kform{container:kform / inline-size}
+.pak-wahl{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:.62rem;row-gap:.15rem;background:var(--pw-bg);border:1px solid var(--pw-line);border-radius:10px;padding:.6rem .7rem .6rem .85rem;margin-bottom:1.1rem;transition:background .25s,border-color .25s}
 .pak-wahl[hidden]{display:none}
-.pw-lab{font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--pw);flex-shrink:0;transition:color .25s}
-.pw-name{font-family:var(--disp);font-weight:600;font-size:.92rem;color:var(--white);line-height:1.25;min-width:0;overflow-wrap:break-word}
-.pw-x{margin-left:auto;flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid var(--pw-line);background:transparent;color:var(--pw);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s,color .25s}
+.pw-lab{font-family:var(--mono);font-size:.57rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:var(--pw);transition:color .25s}
+.pw-name{font-family:var(--disp);font-weight:600;font-size:.86rem;color:var(--white);line-height:1.25;min-width:0;overflow-wrap:break-word;min-height:2.5em;display:flex;align-items:center}
+.pw-x{width:24px;height:24px;border-radius:50%;border:1px solid var(--pw-line);background:transparent;color:var(--pw);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;align-self:center;transition:border-color .2s,background .2s,color .25s}
 .pw-x:hover{border-color:var(--pw-voll);background:var(--pw-hell)}
-@media(max-width:420px){.pak-wahl{flex-wrap:wrap;gap:.35rem .7rem}.pw-x{margin-left:auto}}
+/* schmale Formularspalte: Bezeichnung ueber den Namen, zwei Zeilen reserviert */
+@container kform (max-width:409px){.pak-wahl{grid-template-columns:1fr auto}.pw-lab{grid-column:1;grid-row:1;align-self:end}.pw-name{grid-column:1;grid-row:2}.pw-x{grid-column:2;grid-row:1/span 2}}
+/* breite Formularspalte: alles in einer Zeile, kein Platz reserviert */
+@container kform (min-width:410px){.pw-name{min-height:0}}
 /* FAQ: mehrere Absaetze und Aufzaehlungen in einer Antwort */
 .fq-a p+p{margin-top:.85rem}
 .fq-a ul{list-style:none;margin:.9rem 0;display:flex;flex-direction:column;gap:.5rem}
@@ -669,7 +675,6 @@ h1,h2,h3{overflow-wrap:break-word}
       <div>
         <p><b>Der häufigste Irrtum:</b> Die Abgeschlossen&shy;heits&shy;bescheinigung ist keine Baugenehmigung.<span class="d-only-i"> Sie wird ungeachtet bauordnungsrechtlicher Vorschriften erteilt und enthält keine verbindliche Aussage darüber, in welchem Umfang die Räume genutzt werden dürfen.</span> Ein baurechtlich nicht genehmigter Zustand wird durch sie nicht legalisiert.</p>
         <p class="d-only">Praktisch heißt das: Eine Dachgeschosswohnung kann als abgeschlossen bescheinigt, im Grundbuch eingetragen und verkauft sein, und trotzdem baurechtlich keine genehmigte Wohnung darstellen. Das fällt oft erst beim Weiterverkauf, bei der Finanzierung oder bei einer Beschwerde auf. Deshalb sehen wir uns beide Ebenen an, bevor die Teilungserklärung entsteht.</p>
-        <p class="m-only">Eine Wohnung kann bescheinigt, eingetragen und verkauft sein und trotzdem baurechtlich keine Wohnung sein.</p>
       </div>
     </div>
   </div>
