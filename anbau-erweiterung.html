@@ -783,7 +783,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <span class="abx-neu">Neu 2025/26 · nur Rheinland-Pfalz</span>
       </div>
     </div>
-    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen; der Rechner wendet sie bis 9,5&nbsp;m Wandhöhe an, darüber ist ein Wohngebäude praktisch keine Klasse 1 oder 2 mehr. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
+    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2, also mit höchstens zwei Nutzungseinheiten von zusammen nicht mehr als 400&nbsp;m², und höchstens drei oberirdischen Geschossen; der Rechner wendet sie bis 9,5&nbsp;m Wandhöhe an, darüber ist ein Wohngebäude praktisch keine Klasse 1 oder 2 mehr. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
   </div>
 </section>
 
@@ -1294,14 +1294,14 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       wege=e('abWege'),wliste=e('abWliste'),wlab=e('abWlab'),wahlHint=e('abWahlHint');
   var WAHLTEXT={
     rp:'In Rheinland-Pfalz ändert die Gebäude-Auswahl nichts: Für alle Wohngebäude gilt 0,4 H der Wandhöhe, mindestens 3 m.',
-    sl:'Im Saarland zählt die Gebäude-Auswahl: Kleinen Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen genügen pauschal 3 m, sonst gilt 0,4 H. Ab 9,5 m Wandhöhe rechnet der Rechner vorsichtshalber mit 0,4 H, weil diese Klassen dann praktisch ausgeschlossen sind.'
+    sl:'Im Saarland zählt die Gebäude-Auswahl: Bei kleinen Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen genügen pauschal 3 m, sonst gilt 0,4 H. Ab 9,5 m Wandhöhe rechnet der Rechner vorsichtshalber mit 0,4 H, weil diese Klassen dann praktisch ausgeschlossen sind.'
   };
 
   var LAND={
     rp:{name:'Rheinland-Pfalz', ort:'in Rheinland-Pfalz', tiefe:'§ 8 Abs. 6 LBauO Rheinland-Pfalz',
-        abweichung:'§ 69 LBauO', baulast:'§ 86 LBauO', klein:false},
+        abweichung:'§ 69 LBauO', baulast:'§ 9 LBauO', klein:false},
     sl:{name:'Saarland', ort:'im Saarland', tiefe:'§ 7 Abs. 5 LBO Saarland',
-        abweichung:'§ 68 LBO', baulast:'§ 83 LBO', klein:true}
+        abweichung:'§ 68 LBO', baulast:'§ 8 Abs. 5 LBO', klein:true}
   };
   function land(){return document.querySelector('input[name=abLand]:checked').value}
   function art(){return document.querySelector('input[name=abArt]:checked').value}
@@ -1362,7 +1362,7 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       punkte.push(diff<0.005
         ? '<b>Es reicht genau aus.</b> Schon wenige Zentimeter weniger wären zu wenig, planen Sie eine kleine Reserve ein.'
         : '<b>Reserve '+z(diff)+' m.</b> Prüfen Sie zusätzlich den Bebauungsplan, er kann eigene Baugrenzen festsetzen.');
-      if(sonder) punkte.push('<b>Nur für kleine Wohngebäude.</b> Bei mehr als zwei Wohnungen, mehr als drei Geschossen oder größerer Höhe gelten wieder 0,4 H.');
+      if(sonder) punkte.push('<b>Nur für kleine Wohngebäude.</b> Gebäudeklasse 1 und 2 heißt: höchstens zwei Nutzungseinheiten mit zusammen 400 m². Bei mehr Einheiten, mehr als drei Geschossen oder größerer Höhe gelten wieder 0,4 H.');
       else if(erf>3.0001 && a/0.4>h+0.3) punkte.push('<b>Luft nach oben.</b> Bis '+z(Math.min(HMAX,a/0.4))+' m Wandhöhe bliebe dieser Abstand ausreichend.');
     } else {
       wlab.textContent='Daraus resultiert';
@@ -1373,8 +1373,8 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
         punkte.push('<b>Flacher planen:</b> bis '+z(hOk)+' m Wandhöhe reicht der geplante Abstand, etwa eingeschossig oder mit flacherem Dach.');
       }
       else punkte.push('<b>Flacher planen hilft hier nicht:</b> unter 3 m greift das Mindestmaß, unabhängig von der Höhe.');
-      punkte.push('<b>Baulast beim Nachbarn ('+LAND[l].baulast+'):</b> er übernimmt den fehlenden Teil auf seinem Grundstück und muss dem zustimmen.');
-      punkte.push('<b>Abweichung beantragen ('+LAND[l].abweichung+'):</b> darüber entscheidet die Bauaufsicht im Einzelfall.');
+      punkte.push('<b>Abstandsfläche auf dem Nachbargrundstück ('+LAND[l].baulast+'):</b> Der Nachbar sichert den fehlenden Teil durch eine Baulast. Er darf die Fläche dann weder überbauen noch auf seine eigenen Abstandsflächen anrechnen.');
+      punkte.push('<b>Abweichung beantragen ('+LAND[l].abweichung+'):</b> Die Bauaufsicht soll sie zulassen, wenn nachbarliche Interessen gewahrt bleiben. Vorhaben im Bestand nennt das Gesetz dabei ausdrücklich.');
     }
     wliste.innerHTML=punkte.slice(0,4).map(function(t){return '<li>'+t+'</li>'}).join('');
     wege.hidden=false;
