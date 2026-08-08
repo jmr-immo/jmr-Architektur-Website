@@ -781,7 +781,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <span class="abx-neu">Neu 2025/26 · nur Rheinland-Pfalz</span>
       </div>
     </div>
-    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
+    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen; der Rechner wendet sie bis 9,5&nbsp;m Wandhöhe an, darüber ist ein Wohngebäude praktisch keine Klasse 1 oder 2 mehr. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
   </div>
 </section>
 
@@ -1271,6 +1271,13 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
      hoechstens drei oberirdischen Geschossen genuegen jedoch 3 m,
      unabhaengig von der Wandhoehe. Das ist der einzige Unterschied,
      der sich hier auswirkt.
+     Gebaeudeklasse 1 und 2 setzt nach § 2 Abs. 3 LBO eine Hoehe bis 7 m
+     voraus, gemessen bis zum Fussboden des obersten Geschosses mit
+     Aufenthaltsraeumen. Mit ueblichen Geschosshoehen entspricht das
+     Wandhoehen bis etwa 9 bis 10 m. Der Rechner wendet die Erleichterung
+     deshalb nur bis KLEINMAX = 9,5 m Wandhoehe an und rechnet darueber
+     mit 0,4 H, damit fuer hohe Gebaeude kein zu kleiner Abstand
+     angezeigt wird.
    Alles rechnet im Browser, es werden keine Angaben uebertragen.
    ------------------------------------------------------------------ */
 (function(){
@@ -1285,18 +1292,22 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       wege=e('abWege'),wliste=e('abWliste'),wlab=e('abWlab');
 
   var LAND={
-    rp:{name:'Rheinland-Pfalz', tiefe:'§ 8 Abs. 6 LBauO Rheinland-Pfalz',
+    rp:{name:'Rheinland-Pfalz', ort:'in Rheinland-Pfalz', tiefe:'§ 8 Abs. 6 LBauO Rheinland-Pfalz',
         abweichung:'§ 69 LBauO', baulast:'§ 86 LBauO', klein:false},
-    sl:{name:'Saarland', tiefe:'§ 7 Abs. 5 LBO Saarland',
+    sl:{name:'Saarland', ort:'im Saarland', tiefe:'§ 7 Abs. 5 LBO Saarland',
         abweichung:'§ 68 LBO', baulast:'§ 83 LBO', klein:true}
   };
   function land(){return document.querySelector('input[name=abLand]:checked').value}
   function art(){return document.querySelector('input[name=abArt]:checked').value}
   function z(n){return n.toFixed(2).replace('.',',')}
 
-  /* Erforderliche Tiefe je Bundesland und Gebaeudeart */
+  /* Erforderliche Tiefe je Bundesland und Gebaeudeart.
+     Die 3-m-Erleichterung gilt nur fuer Gebaeudeklasse 1 und 2, siehe
+     Rechengrundlage oben; ab KLEINMAX Wandhoehe gilt wieder 0,4 H. */
+  var KLEINMAX=9.5;
+  function kleinGilt(l,ar,h){return LAND[l].klein && ar==='klein' && h<=KLEINMAX}
   function noetig(l,ar,h){
-    if(LAND[l].klein && ar==='klein') return 3;      /* Saarland: 3 m genuegen */
+    if(kleinGilt(l,ar,h)) return 3;                  /* Saarland: 3 m genuegen */
     return Math.max(0.4*h,3);
   }
 
@@ -1324,16 +1335,18 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
     status.className='abx-status '+(passt?'gut':'eng');
     status.textContent=passt?'passt':'zu wenig';
 
-    satz.innerHTML='Bei einer Wandhöhe von '+z(h)+' m sind in '+LAND[l].name+' <b>'+z(erf)+' m</b> Abstandsfläche nötig. '+
+    satz.innerHTML='Bei einer Wandhöhe von '+z(h)+' m sind '+LAND[l].ort+' <b>'+z(erf)+' m</b> Abstandsfläche nötig. '+
       (!passt ? 'Geplant sind '+z(a)+' m, es fehlen <b>'+z(diff)+' m</b>.'
               : diff<0.005 ? 'Geplant sind '+z(a)+' m, das reicht genau aus.'
                            : 'Geplant sind '+z(a)+' m, also '+z(diff)+' m mehr als verlangt.');
 
     /* Rechenweg mit Verweis auf die Vorschrift */
-    var sonder = (LAND[l].klein && ar==='klein');
+    var sonder = kleinGilt(l,ar,h);
+    var kleinAus = (LAND[l].klein && ar==='klein' && !sonder);
     formel.textContent = sonder
       ? 'Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen: 3,00 m genügen, unabhängig von der Wandhöhe ('+LAND[l].tiefe+')'
-      : '0,4 × '+z(h)+' m = '+z(0.4*h)+' m · Mindestmaß 3,00 m · maßgeblich '+z(erf)+' m ('+LAND[l].tiefe+')';
+      : '0,4 × '+z(h)+' m = '+z(0.4*h)+' m · Mindestmaß 3,00 m · maßgeblich '+z(erf)+' m ('+LAND[l].tiefe+')'
+        +(kleinAus?' · bei dieser Wandhöhe ist ein Wohngebäude in der Regel keine Gebäudeklasse 1 oder 2 mehr, die 3-m-Erleichterung gilt deshalb nicht':'');
 
     /* Konkrete Wege, je nach Lage hoechstens drei */
     var punkte=[], HMAX=parseFloat(rH.max);
@@ -1342,12 +1355,16 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       punkte.push(diff<0.005
         ? '<b>Es reicht genau aus.</b> Schon wenige Zentimeter weniger wären zu wenig, planen Sie eine kleine Reserve ein.'
         : '<b>Reserve '+z(diff)+' m.</b> Prüfen Sie zusätzlich den Bebauungsplan, er kann eigene Baugrenzen festsetzen.');
-      if(sonder) punkte.push('<b>Nur für kleine Wohngebäude.</b> Wird daraus ein Haus mit mehr als zwei Wohnungen, gelten wieder 0,4 H.');
+      if(sonder) punkte.push('<b>Nur für kleine Wohngebäude.</b> Bei mehr als zwei Wohnungen, mehr als drei Geschossen oder größerer Höhe gelten wieder 0,4 H.');
       else if(erf>3.0001 && a/0.4>h+0.3) punkte.push('<b>Luft nach oben.</b> Bis '+z(Math.min(HMAX,a/0.4))+' m Wandhöhe bliebe dieser Abstand ausreichend.');
     } else {
       wlab.textContent='Was jetzt hilft';
       punkte.push('<b>Abstand vergrößern:</b> '+z(diff)+' m mehr.');
-      if(erf>3.0001 && a>=3) punkte.push('<b>Flacher planen:</b> bis '+z(a/0.4)+' m Wandhöhe reicht der geplante Abstand, etwa eingeschossig oder mit flacherem Dach.');
+      if(erf>3.0001 && a>=3){
+        /* Im Saarland reicht bei kleinen Wohngebaeuden 3 m bis KLEINMAX Wandhoehe */
+        var hOk=(LAND[l].klein && ar==='klein') ? Math.max(a/0.4,KLEINMAX) : a/0.4;
+        punkte.push('<b>Flacher planen:</b> bis '+z(hOk)+' m Wandhöhe reicht der geplante Abstand, etwa eingeschossig oder mit flacherem Dach.');
+      }
       else punkte.push('<b>Flacher planen hilft hier nicht:</b> unter 3 m greift das Mindestmaß, unabhängig von der Höhe.');
       punkte.push('<b>Baulast beim Nachbarn ('+LAND[l].baulast+'):</b> er übernimmt den fehlenden Teil auf seinem Grundstück und muss dem zustimmen.');
       punkte.push('<b>Abweichung beantragen ('+LAND[l].abweichung+'):</b> darüber entscheidet die Bauaufsicht im Einzelfall.');
