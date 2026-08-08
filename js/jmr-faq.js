@@ -1,18 +1,24 @@
 /* ------------------------------------------------------------------
-   FAQ: sanftes Auf- und Zuklappen
+   Aufklapplisten
    ------------------------------------------------------------------
-   Die Fragen sind <details>-Elemente. Browser klappen die hart auf und
-   zu, eine reine CSS-Loesung gibt es dafuer nicht zuverlaessig. Wir
-   steuern die Hoehe deshalb selbst und verwenden dieselbe Dauer und
-   dieselbe Kurve wie die Aufklappliste im Abschnitt "Ausgangslagen".
+   Zwei Sorten, beide aus <details> gebaut:
 
-   Ohne JavaScript bleibt das normale Verhalten erhalten: Die Fragen
-   lassen sich weiterhin oeffnen, nur eben ohne Uebergang.
+   1. Die Fragen im Abschnitt "Gut zu wissen" (.faq). Dort ist immer
+      nur eine Frage offen.
+   2. Die Zeilen in den Ergebnis-Abschnitten und bei den Stolpersteinen
+      (.akk). Die gibt es nur bis 560 px Breite. Darueber stehen sie
+      dauerhaft offen und sind gar kein Bedienelement mehr, dort sieht
+      man wieder die gewohnten Karten. Mehrere duerfen offen sein.
+
+   Browser klappen <details> hart auf und zu, eine reine CSS-Loesung
+   gibt es dafuer nicht zuverlaessig. Wir steuern die Hoehe deshalb
+   selbst und verwenden ueberall dieselbe Dauer und dieselbe Kurve.
+
+   Ohne JavaScript bleibt alles benutzbar: Die Fragen oeffnen sich
+   weiterhin, nur eben ohne Uebergang, und die Zeilen stehen offen da,
+   dann steht schlicht der ganze Text untereinander.
    ------------------------------------------------------------------ */
 (function () {
-  var gruppen = document.querySelectorAll('.faq-wrap');
-  if (!gruppen.length) return;
-
   var TEMPO_AUF = 380;
   var TEMPO_ZU  = 300;
   var KURVE     = 'cubic-bezier(.16,1,.3,1)';
@@ -22,7 +28,68 @@
                          window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var sanft = kannBewegen && !ruhigGestellt;
 
-  Array.prototype.forEach.call(gruppen, function (gruppe) {
+  /* Haengt an ein <details> das weiche Auf- und Zuklappen und gibt den
+     Kopf zurueck. "koerper" ist das Element mit dem Text darunter. */
+  function beweglich(d, koerper) {
+    var kopf = d.querySelector('summary');
+    if (!kopf || !koerper) return null;
+
+    var lauf = null, laufText = null;
+
+    function anhalten() {
+      if (lauf)     { lauf.onfinish = null; lauf.cancel(); lauf = null; }
+      if (laufText) { laufText.cancel(); laufText = null; }
+    }
+
+    function fertig(offen) {
+      lauf = null; laufText = null;
+      d.open = offen;
+      d.style.height = '';
+      d.style.overflow = '';
+    }
+
+    d.jmrZuklappen = function () {
+      if (!sanft) { d.open = false; return; }
+      if (!d.open) return;
+      var jetzt = d.offsetHeight;
+      anhalten();
+      d.style.overflow = 'hidden';
+      d.style.height = jetzt + 'px';
+      lauf = d.animate({ height: [jetzt + 'px', kopf.offsetHeight + 'px'] },
+                       { duration: TEMPO_ZU, easing: KURVE });
+      laufText = koerper.animate({ opacity: [1, 0] },
+                                 { duration: TEMPO_ZU, easing: 'ease-out' });
+      lauf.onfinish = function () { fertig(false); };
+    };
+
+    d.jmrAufklappen = function () {
+      if (!sanft) { d.open = true; return; }
+      var jetzt = d.offsetHeight;
+      anhalten();
+      d.style.overflow = 'hidden';
+      d.style.height = jetzt + 'px';
+      d.open = true;
+      var ziel = kopf.offsetHeight + koerper.offsetHeight;
+      lauf = d.animate({ height: [jetzt + 'px', ziel + 'px'] },
+                       { duration: TEMPO_AUF, easing: KURVE });
+      laufText = koerper.animate({ opacity: [0, 1] },
+                                 { duration: TEMPO_AUF, easing: 'ease-out' });
+      lauf.onfinish = function () { fertig(true); };
+    };
+
+    /* Beim Wechsel der Schirmbreite muss ein halber Lauf weg, sonst
+       bliebe eine feste Hoehe am Element haengen. */
+    d.jmrRuecksetzen = function () {
+      anhalten();
+      d.style.height = '';
+      d.style.overflow = '';
+    };
+
+    return kopf;
+  }
+
+  /* --- 1  Fragen: immer nur eine offen ---------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.faq-wrap'), function (gruppe) {
     var alle = Array.prototype.slice.call(gruppe.querySelectorAll('details.faq'));
     if (!alle.length) return;
 
@@ -31,64 +98,53 @@
     if (sanft) alle.forEach(function (d) { d.removeAttribute('name'); });
 
     alle.forEach(function (d) {
-      var kopf = d.querySelector('summary');
-      var text = d.querySelector('.fq-a');
-      if (!kopf || !text) return;
-
-      var lauf = null, laufText = null;
-
-      function anhalten() {
-        if (lauf)     { lauf.onfinish = null; lauf.cancel(); lauf = null; }
-        if (laufText) { laufText.cancel(); laufText = null; }
-      }
-
-      function fertig(offen) {
-        lauf = null; laufText = null;
-        d.open = offen;
-        d.style.height = '';
-        d.style.overflow = '';
-      }
-
-      function zuklappen() {
-        if (!sanft) { d.open = false; return; }
-        if (!d.open) return;
-        var jetzt = d.offsetHeight;
-        anhalten();
-        d.style.overflow = 'hidden';
-        d.style.height = jetzt + 'px';
-        lauf = d.animate({ height: [jetzt + 'px', kopf.offsetHeight + 'px'] },
-                         { duration: TEMPO_ZU, easing: KURVE });
-        laufText = text.animate({ opacity: [1, 0] },
-                                { duration: TEMPO_ZU, easing: 'ease-out' });
-        lauf.onfinish = function () { fertig(false); };
-      }
-
-      function aufklappen() {
-        if (!sanft) { d.open = true; return; }
-        var jetzt = d.offsetHeight;
-        anhalten();
-        d.style.overflow = 'hidden';
-        d.style.height = jetzt + 'px';
-        d.open = true;
-        var ziel = kopf.offsetHeight + text.offsetHeight;
-        lauf = d.animate({ height: [jetzt + 'px', ziel + 'px'] },
-                         { duration: TEMPO_AUF, easing: KURVE });
-        laufText = text.animate({ opacity: [0, 1] },
-                                { duration: TEMPO_AUF, easing: 'ease-out' });
-        lauf.onfinish = function () { fertig(true); };
-      }
-
-      d.jmrZuklappen = zuklappen;
-
+      var kopf = beweglich(d, d.querySelector('.fq-a'));
+      if (!kopf) return;
       kopf.addEventListener('click', function (e) {
         if (!sanft) return;               // ohne Bewegung macht der Browser das selbst
         e.preventDefault();
-        if (d.open) { zuklappen(); return; }
+        if (d.open) { d.jmrZuklappen(); return; }
         alle.forEach(function (a) {
           if (a !== d && a.open && a.jmrZuklappen) a.jmrZuklappen();
         });
-        aufklappen();
+        d.jmrAufklappen();
       });
     });
   });
+
+  /* --- 2  Zeilen: nur bis 560 px ein Bedienelement ---------------- */
+  (function () {
+    var zeilen = Array.prototype.slice.call(document.querySelectorAll('details.akk'));
+    if (!zeilen.length || !window.matchMedia) return;
+    var eng = window.matchMedia('(max-width:560px)');
+
+    zeilen.forEach(function (d) {
+      var kopf = beweglich(d, d.querySelector('.akk-b'));
+      if (!kopf) return;
+      kopf.addEventListener('click', function (e) {
+        if (!eng.matches) { e.preventDefault(); return; }   // breit: bleibt offen
+        if (!sanft) return;
+        e.preventDefault();
+        if (d.open) d.jmrZuklappen(); else d.jmrAufklappen();
+      });
+    });
+
+    function stellen() {
+      zeilen.forEach(function (d) {
+        var kopf = d.querySelector('summary');
+        if (d.jmrRuecksetzen) d.jmrRuecksetzen();
+        if (eng.matches) {
+          d.open = false;
+          if (kopf) kopf.removeAttribute('tabindex');
+        } else {
+          d.open = true;
+          if (kopf) kopf.setAttribute('tabindex', '-1');   // kein Halt im Tabulator-Lauf
+        }
+      });
+    }
+
+    if (eng.addEventListener) eng.addEventListener('change', stellen);
+    else if (eng.addListener) eng.addListener(stellen);
+    stellen();
+  })();
 })();
