@@ -521,13 +521,10 @@ p{text-wrap:pretty}
 .pak-steel .pak-h{color:var(--steel-d)}
 .pak-steel .pak-list li::before{background:var(--steel);box-shadow:0 0 0 3px rgba(46,134,199,.18)}
 .pak-tag-steel{color:var(--steel-d);background:rgba(46,134,199,.13);border-color:rgba(46,134,199,.34)}
-.pak-tag-plain{color:var(--ink-soft);background:rgba(11,28,43,.05);border-color:var(--line)}
 .btn-steel2{background:var(--steel-d);color:#fff !important;box-shadow:0 14px 34px -14px rgba(31,111,165,.7)}
 .btn-steel2:hover{transform:translateY(-2px);background:#18587f;box-shadow:0 20px 44px -14px rgba(31,111,165,.85)}
 .btn-steel2 *{color:#fff !important}
 @media(prefers-reduced-motion:reduce){.pak-steel::before{animation:none}}
-@media(max-width:1040px){.pak-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}}
-@media(min-width:1041px){.pak-grid .pak-h{min-height:3.2em}.pak-grid .pak-d{min-height:6.2em}.pak-grid .pak-cta{white-space:nowrap}}
 
 /* PAKETWAHL im Formular */
 .pak-wahl{--pw:var(--accent-d);--pw-bg:rgba(225,98,61,.09);--pw-line:rgba(225,98,61,.3);--pw-voll:var(--accent);--pw-hell:rgba(225,98,61,.14)}
@@ -776,11 +773,11 @@ h1,h2,h3{overflow-wrap:break-word}
       </div>
       <div class="abx-h fade d1">
         <h4>Wann an der Grenze gebaut werden darf</h4>
-        <p>Garagen und Gebäude ohne Aufenthalts&shy;räume und ohne Feuerstätten dürfen ohne eigene Abstands&shy;fläche an die Grenze, bis 12&nbsp;m Länge je Grundstücks&shy;grenze. Die mittlere Wandhöhe darf in Rheinland-Pfalz 3,20&nbsp;m nicht überschreiten, im Saarland 3,00&nbsp;m. Zusammengerechnet sind an allen Grenzen eines Grundstücks 18&nbsp;m erlaubt, im Saarland 15&nbsp;m. Für Wohnraum gilt das nicht.</p>
+        <p>Garagen und Gebäude ohne Aufenthalts&shy;räume und ohne Feuerstätten dürfen ohne eigene Abstands&shy;fläche an die Grenze. In Rheinland-Pfalz bis 3,20&nbsp;m mittlere Wandhöhe, 12&nbsp;m je Grenze, 18&nbsp;m insgesamt. Im Saarland 3,00&nbsp;m, 12&nbsp;m und 15&nbsp;m. Für Wohnraum gilt das nicht.</p>
       </div>
       <div class="abx-h fade d2">
         <h4>Wenn das Haus schon zu nah steht</h4>
-        <p>Ein rechtmäßig errichtetes Haus hat Bestandsschutz. Der deckt aber den Bestand, nicht die Erweiterung. Rheinland-Pfalz erlaubt an solchen Wänden ausdrücklich Vor- und Anbauten, die für sich genommen die Abstands&shy;fläche einhalten. Im Saarland fehlt eine vergleichbare Regelung, dort sind nur Änderungen ohne neue Außenmaße vorgesehen.</p>
+        <p>Bestandsschutz deckt den Bestand, nicht die Erweiterung. Rheinland-Pfalz erlaubt an zu nahen Wänden trotzdem Vor- und Anbauten, die für sich genommen die Abstands&shy;fläche einhalten. Im Saarland nur Änderungen ohne neue Außenmaße.</p>
         <span class="abx-neu">Neu 2025/26 · nur Rheinland-Pfalz</span>
       </div>
     </div>
@@ -985,28 +982,21 @@ h1,h2,h3{overflow-wrap:break-word}
 <!-- ANGEBOTE -->
 <section id="pakete">
   <div class="container">
-    <div class="sh c fade"><span class="kicker c">Unsere Angebote</span><h2>Drei Wege, mit uns zu starten.</h2><p>Vom reinen Machbarkeitsurteil bis zur Begleitung auf der Baustelle. Wenn Sie noch nicht wissen, ob überhaupt etwas geht, fangen Sie links an.</p></div>
-    <div class="pak-grid">
-      <div class="pak pak-plain fade">
-        <span class="pak-tag pak-tag-plain">Einstieg</span>
-        <div class="pak-h">Standort-Check</div>
-        <p class="pak-d">Die Vorprüfung allein. Sie erfahren schriftlich, was auf Ihrem Grundstück zulässig ist, bevor Sie planen lassen.</p>
-        <ul class="pak-list"><li>Auswertung von Bebauungs&shy;plan oder näherer Umgebung</li><li>Berechnung der Abstands&shy;flächen zu allen Grenzen</li><li>Einordnung der brandschutzrelevanten Punkte</li><li>Aussage zu Verfahren: Bauantrag nötig oder nicht</li><li>Schriftliche Zusammenfassung mit Empfehlung</li></ul>
-        <a href="#kontakt" class="btn btn-ghost pak-cta" data-paket="Standort-Check">Machbarkeit klären <span class="ar">→</span></a>
-      </div>
-      <div class="pak pak-glow pak-terra fade d1">
-        <span class="pak-tag">Empfohlen</span>
+    <div class="sh c fade"><span class="kicker c">Unsere Angebote</span><h2>Zwei Wege, mit uns zu starten.</h2><p>Der komplette Anbau von der Prüfung über den Entwurf bis zur Genehmigung, oder vorab der Standort-Check, wenn Sie erst wissen wollen, ob auf Ihrem Grundstück überhaupt etwas geht.</p></div>
+    <div class="pak-grid pak-grid-2">
+      <div class="pak pak-glow pak-terra fade">
+        <span class="pak-tag">Komplettpaket</span>
         <div class="pak-h">Anbau komplett</div>
-        <p class="pak-d">Von der Prüfung über den Entwurf bis zur Genehmigung. Der übliche Weg für einen Anbau mit Bauantrag.</p>
-        <ul class="pak-list"><li>Alle Leistungen des Standort-Checks</li><li>Aufmaß des Bestands, soweit keine Pläne vorliegen</li><li>Entwurf mit Grundrissen, Ansichten und Schnitten</li><li>Bauvorlagen und Bauantrag bei der Bauaufsicht</li><li>Abstimmung mit Statik, Energie und Brandschutz</li><li>Begleitung bis zur Genehmigung</li></ul>
-        <a href="#kontakt" class="btn btn-accent pak-cta" data-paket="Anbau komplett">Anbau anfragen <span class="ar">→</span></a>
+        <p class="pak-d">Der ganze Weg in einem Paket. Wir prüfen das Grundstück, entwerfen den Anbau und begleiten Sie bis zur Genehmigung.</p>
+        <ul class="pak-list"><li>Alle Leistungen des Standort-Checks</li><li>Aufmaß des Bestands, soweit keine Pläne vorliegen</li><li>Entwurf mit Grundrissen, Ansichten und Schnitten</li><li>Bauvorlagen und Bauantrag bei der Bauaufsicht</li><li>Abstimmung mit Statik, Energie und Brandschutz</li><li>Auf Wunsch Ausführungs&shy;planung und Begleitung auf der Baustelle</li></ul>
+        <a href="#kontakt" class="btn btn-accent pak-cta" data-paket="Anbau komplett">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
-      <div class="pak pak-glow pak-steel fade d2">
-        <span class="pak-tag pak-tag-steel">Bis zur Fertigstellung</span>
-        <div class="pak-h">Anbau mit Ausführung</div>
-        <p class="pak-d">Dieselbe Planung, erweitert um die Ausführungs&shy;planung und die Begleitung auf der Baustelle.</p>
-        <ul class="pak-list"><li>Alle Leistungen von Anbau komplett</li><li>Ausführungs&shy;planung mit Detail&shy;zeichnungen</li><li>Ausschreibung und Vergleich der Angebote</li><li>Koordination der Gewerke auf der Baustelle</li><li>Abnahme und Prüfung der Rechnungen</li></ul>
-        <a href="#kontakt" class="btn btn-steel2 pak-cta" data-paket="Anbau mit Ausführung">Begleitung anfragen <span class="ar">→</span></a>
+      <div class="pak pak-glow pak-steel fade d1">
+        <span class="pak-tag pak-tag-steel">Vorab-Analyse</span>
+        <div class="pak-h">Standort-Check</div>
+        <p class="pak-d">Die Prüfung vor der Entscheidung. Sie erfahren schriftlich, was auf Ihrem Grundstück zulässig ist, bevor Sie planen lassen.</p>
+        <ul class="pak-list"><li>Auswertung von Bebauungs&shy;plan oder näherer Umgebung</li><li>Berechnung der Abstands&shy;flächen zu allen Grenzen</li><li>Einordnung der brandschutzrelevanten Punkte</li><li>Aussage zu Verfahren: Bauantrag nötig oder nicht</li><li>Schriftliche Zusammenfassung mit Empfehlung</li></ul>
+        <a href="#kontakt" class="btn btn-steel2 pak-cta" data-paket="Standort-Check">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
     </div>
     <p class="pak-note">Die Kosten des Standort-Checks rechnen wir an, wenn Sie danach mit uns weiterplanen.</p>
