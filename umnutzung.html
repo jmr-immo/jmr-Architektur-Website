@@ -280,6 +280,18 @@ section{padding:var(--pad) 0;position:relative}
 .pak-terra .pak-h{color:var(--terra)}
 .pak-tag{display:inline-block;align-self:flex-start;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--terra);background:rgba(225,98,61,.14);border:1px solid rgba(225,98,61,.34);border-radius:999px;padding:.3rem .8rem;margin-bottom:.9rem}
 .pak-tag-eco{color:var(--eco);background:rgba(63,209,135,.13);border-color:rgba(63,209,135,.34)}
+/* Stahlblaues Paket, wortgleich mit den uebrigen Unterseiten, damit die
+   Vorab-Analyse ueberall dieselbe Farbe hat */
+.pak-steel{background:linear-gradient(165deg,rgba(46,134,199,.12),var(--panel-2) 60%);border-color:rgba(46,134,199,.4)}
+.pak-steel::before{background:linear-gradient(90deg,transparent,var(--steel) 12%,#8CC9EE 25%,var(--steel-d) 38%,transparent 50%,transparent);background-size:200% 100%;animation:pakrun 9s linear infinite}
+.pak-steel:hover{border-color:rgba(46,134,199,.6)}
+.pak-steel .pak-h{color:var(--steel-d)}
+.pak-steel .pak-list li::before{background:var(--steel);box-shadow:0 0 0 3px rgba(46,134,199,.18)}
+.pak-tag-steel{color:var(--steel-d);background:rgba(46,134,199,.13);border-color:rgba(46,134,199,.34)}
+.btn-steel2{background:var(--steel-d);color:#fff !important;box-shadow:0 14px 34px -14px rgba(31,111,165,.7)}
+.btn-steel2:hover{transform:translateY(-2px);background:#18587f;box-shadow:0 20px 44px -14px rgba(31,111,165,.85)}
+.btn-steel2 *{color:#fff !important}
+@media(prefers-reduced-motion:reduce){.pak-steel::before{animation:none}}
 /* Premium-Check: energetischer Verlauf, der sanft hin- und herwandert */
 .pak-eco::before{background:linear-gradient(120deg,transparent 8%,var(--eco) 38%,#5fe0ff 55%,var(--eco) 72%,transparent 92%);background-size:300% 300%;animation:pakflow 5.5s ease-in-out infinite}
 .pak-eco:hover{border-color:rgba(63,209,135,.5)}
@@ -671,12 +683,12 @@ h1,h2,h3{overflow-wrap:break-word}
         <ul class="pak-list"><li>Machbarkeit und Genehmigungsfähigkeit geprüft</li><li>Grundrisse und kompletter Bauantrag erstellt</li><li>Nachweise von Fachplanern eingeholt und gebündelt</li><li>Abstimmung mit dem Bauamt bis zum Bescheid</li></ul>
         <a href="#kontakt" class="btn btn-accent pak-cta" data-paket="Umnutzung komplett">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
-      <div class="pak pak-glow pak-eco fade d1">
-        <span class="pak-tag pak-tag-eco">Vorab-Analyse</span>
+      <div class="pak pak-glow pak-steel fade d1">
+        <span class="pak-tag pak-tag-steel">Vorab-Analyse</span>
         <div class="pak-h">Machbarkeits-Check Premium</div>
         <p class="pak-d">Die vertiefte Vorab-Analyse für alle, die vor der Entscheidung volle Klarheit über Genehmigung, Förderung und energetisches Potenzial wollen.</p>
         <ul class="pak-list"><li>Ausführliche Prüfung der Genehmigungsfähigkeit</li><li>Bauvoranfrage, wenn der Fall nicht eindeutig ist</li><li>Tiefe Förderanalyse über die infrage kommenden Programme</li><li>Energetische Einordnung mit Sanierungsempfehlungen</li></ul>
-        <a href="#kontakt" class="btn btn-energy pak-cta" data-paket="Machbarkeits-Check Premium">Erstgespräch vereinbaren <span class="ar">→</span></a>
+        <a href="#kontakt" class="btn btn-steel2 pak-cta" data-paket="Machbarkeits-Check Premium">Erstgespräch vereinbaren <span class="ar">→</span></a>
       </div>
     </div>
   </div>
@@ -915,17 +927,72 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
     } else { sway(); }
   });
 })();
-/* Anwendungsfaelle: Karussell (Pfeile + Punkte) */
+/* Anwendungsfaelle: Karussell mit endlosem Durchlauf.
+   Vorher sprang die Spur am Ende quer ueber alle Karten zurueck an den Anfang.
+   Jetzt haengt hinter der letzten Karte eine Kopie der ersten und vor der ersten
+   eine Kopie der letzten. Landet die Bewegung auf einer Kopie, wird nach dem
+   Uebergang lautlos auf das Original gesetzt. Fuer den Betrachter laeuft es in
+   derselben Richtung weiter, in beide Richtungen und beliebig oft. */
 (function(){
   const car=document.getElementById('fcarousel');if(!car)return;
   const track=car.querySelector('.fcases');
-  const N=car.querySelectorAll('.fcase').length;
+  const echte=[...car.querySelectorAll('.fcase')];
+  const N=echte.length; if(!N)return;
   const dots=[...car.querySelectorAll('.fcar-dot')];
-  let cur=0;
-  function go(i){cur=(i%N+N)%N;track.style.transform='translateX('+(-cur*100)+'%)';dots.forEach((d,n)=>d.classList.toggle('on',n===cur));}
-  car.querySelectorAll('.fcar-arrow').forEach(b=>b.addEventListener('click',()=>go(cur+parseInt(b.dataset.dir,10))));
-  dots.forEach((d,n)=>d.addEventListener('click',()=>go(n)));
-  go(0);
+
+  /* Der Vorher-Nachher-Regler der Kopien haette keine Funktion, weil die
+     Steuerung nur an den Originalen haengt. Deshalb steht er dort fest auf der
+     Haelfte und ist von der Bedienung und vom Vorlesen ausgenommen. */
+  function kopie(el){
+    const k=el.cloneNode(true);
+    k.setAttribute('aria-hidden','true');
+    k.querySelectorAll('.ba').forEach(b=>b.style.setProperty('--split','50%'));
+    k.querySelectorAll('.ba-handle').forEach(h=>{h.setAttribute('tabindex','-1');h.style.pointerEvents='none';});
+    k.querySelectorAll('a,button,[tabindex]').forEach(e=>e.setAttribute('tabindex','-1'));
+    return k;
+  }
+  if(N>1){
+    track.appendChild(kopie(echte[0]));
+    track.insertBefore(kopie(echte[N-1]),echte[0]);
+  }
+
+  let pos=N>1?1:0;              /* 0 = Kopie der letzten, 1..N = Originale, N+1 = Kopie der ersten */
+  let nachlauf=0, sperre=0;
+
+  function setzen(mitUebergang){
+    if(!mitUebergang){track.style.transition='none';}
+    track.style.transform='translateX('+(-pos*100)+'%)';
+    if(!mitUebergang){void track.offsetWidth;track.style.transition='';}
+    const echt=N>1?((pos-1+N)%N):0;
+    dots.forEach((d,n)=>d.classList.toggle('on',n===echt));
+  }
+  function aufraeumen(){
+    if(N<2)return;
+    if(pos===N+1){pos=1;setzen(false);}
+    else if(pos===0){pos=N;setzen(false);}
+  }
+  function go(ziel){
+    pos=ziel;setzen(true);
+    clearTimeout(nachlauf);
+    nachlauf=setTimeout(aufraeumen,640);   /* falls kein Uebergang laeuft */
+  }
+  track.addEventListener('transitionend',e=>{
+    if(e.propertyName!=='transform')return;
+    clearTimeout(nachlauf);aufraeumen();
+  });
+  car.querySelectorAll('.fcar-arrow').forEach(b=>b.addEventListener('click',()=>{
+    const jetzt=performance.now();
+    if(jetzt<sperre)return;                /* verhindert das Ueberspringen der Kopie */
+    sperre=jetzt+580;
+    go(pos+parseInt(b.dataset.dir,10));
+  }));
+  dots.forEach((d,n)=>d.addEventListener('click',()=>{
+    const jetzt=performance.now();
+    if(jetzt<sperre)return;
+    sperre=jetzt+580;
+    go(N>1?n+1:n);
+  }));
+  setzen(false);
 })();
 
 /* Die Regel "immer nur eine Frage offen" liegt jetzt in js/jmr-faq.js.

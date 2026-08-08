@@ -195,7 +195,10 @@ section{padding:var(--pad) 0;position:relative}
 @media(max-width:640px){.hero-act{flex-wrap:nowrap;gap:.6rem}.hero-act .btn{flex:1 1 0;min-width:0;justify-content:center;padding:.85rem .7rem;font-size:.82rem;white-space:nowrap}.hero-act .btn .ar{display:none}.hero-sign{display:none}}
 /* PHOTO FRAME */
 .photo{position:relative}
-.photo-img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;border-radius:var(--r-lg);background:#dde7ef;box-shadow:var(--shadow-lg);overflow:hidden}
+/* Der Rahmen zeigt 4:5, die Bilddatei ist 2:3. Angeschnitten wird deshalb
+   unten, nicht oben und unten je zur Haelfte. So bleibt der Kopf sicher im
+   Bild, denn ueber ihm ist in der Aufnahme nur wenig Luft. */
+.photo-img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:var(--r-lg);background:#dde7ef;box-shadow:var(--shadow-lg);overflow:hidden}
 .photo-placeholder{background:linear-gradient(160deg,#dde4ea,#cdd8e0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:2rem}
 .photo-placeholder .ph-b{font-family:var(--disp);font-weight:700;font-size:1.3rem;color:var(--steel-d)}
 .photo-placeholder .ph-s{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#7d909e}
