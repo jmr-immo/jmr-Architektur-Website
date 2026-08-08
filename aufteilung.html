@@ -371,44 +371,6 @@ p{text-wrap:pretty}
   .m-only{display:block}
   .m-only-i{display:inline}
 }
-/* GRUENDE-KARTEN: auf schmalen Displays eine Aufklapp-Liste.
-   Auf dem Desktop bleibt der Kopf ein normaler Block, also alles wie bisher. */
-.acc-plus{display:none}
-@media(max-width:700px){
-  #gruende .prob-grid{grid-template-columns:1fr;gap:.7rem}
-  #gruende .prob{padding:0}
-  /* Rahmen und Akzentlinie hier ruhiger als bei den uebrigen Karten */
-  #gruende .prob,#gruende .prob:hover{border-color:var(--line)}
-  #gruende .prob::after,#gruende .prob:hover::after{width:0}
-  #gruende .acc-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.9rem;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
-  #gruende .acc-head:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:var(--r)}
-  #gruende .prob .pn{font-size:1.3rem;margin:0;line-height:1}
-  /* Zwei Zeilen fest reserviert, damit alle zugeklappten Koepfe gleich hoch sind.
-     Punkt 02 passt als einziger in eine Zeile und wuerde sonst herausfallen. */
-  #gruende .prob h3{margin:0;font-size:1.02rem;line-height:1.28;min-height:2.56em;display:flex;align-items:center}
-  /* Plus, das sich beim Aufklappen zum Minus dreht */
-  #gruende .acc-plus{display:block;position:relative;width:22px;height:22px}
-  #gruende .acc-plus::before,#gruende .acc-plus::after{content:'';position:absolute;left:50%;top:50%;background:var(--accent);border-radius:2px;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
-  #gruende .acc-plus::before{width:14px;height:2px;transform:translate(-50%,-50%)}
-  #gruende .acc-plus::after{width:2px;height:14px;transform:translate(-50%,-50%)}
-  #gruende .prob.auf .acc-plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
-  /* Aufklappen ueber Rasterzeilen: laeuft in allen aktuellen Browsern fluessig */
-  #gruende .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1)}
-  #gruende .prob.auf .acc-body{grid-template-rows:1fr}
-  /* Der innere Rahmen traegt kein eigenes Innenabstandsmass, sonst bliebe im
-     zugeklappten Zustand die Hoehe des Abstands stehen. */
-  #gruende .acc-inner{overflow:hidden;min-height:0}
-  #gruende .acc-inner p{margin:0;padding:0 1.25rem 1.25rem}
-  @media(prefers-reduced-motion:reduce){#gruende .acc-body,#gruende .acc-plus::before,#gruende .acc-plus::after{transition:none}}
-}
-/* Auf sehr schmalen Geraeten etwas enger setzen, damit auch der laengste Titel
-   in zwei Zeilen passt und alle Koepfe gleich hoch bleiben. */
-@media(max-width:365px){
-  #gruende .acc-head{padding:1rem;gap:.7rem}
-  #gruende .prob h3{font-size:.94rem}
-  #gruende .prob .pn{font-size:1.15rem}
-  #gruende .acc-inner p{padding:0 1rem 1rem}
-}
 /* ANKLICKBARE PROBLEM-KARTEN mit Info-Fenster */
 .prob-click{cursor:pointer;display:flex;flex-direction:column}
 .prob-more{margin-top:auto;padding-top:1.3rem;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-weight:700;font-size:.9rem;color:var(--accent-d);transition:gap .25s}
@@ -576,8 +538,9 @@ h1,h2,h3{overflow-wrap:break-word}
 /* 9  Aufklapp-Zeilen
       ----------------------------------------------------------------
       Betrifft die Ergebnis-Abschnitte ("Was Sie von uns erhalten",
-      "Was Sie am Ende in der Hand halten") und die Stolpersteine auf
-      der Umnutzungsseite. Alle drei sind <details> mit der Klasse .akk.
+      "Was Sie am Ende in der Hand halten"). Beide sind <details> mit
+      der Klasse .akk. Die Stolpersteine und die Gruende benutzen die
+      andere Bauart, siehe Abschnitt 11 weiter unten.
 
       Bis 560 px stehen sie als Zeilen untereinander: links das Symbol
       im 28er Quadrat, daneben die Ueberschrift, rechts das Pluszeichen.
@@ -642,6 +605,54 @@ h1,h2,h3{overflow-wrap:break-word}
   .akk h3{font-size:.88rem}
 }
 
+/* 11  Aufklapp-Liste (.acc-liste)
+       ----------------------------------------------------------
+       Bis 700 px werden aus den Karten aufklappbare Punkte: Nummer,
+       Titel und ein Pluszeichen, das sich beim Oeffnen zum Minus
+       dreht. Der Text faehrt ueber Rasterzeilen sanft aus. Darueber
+       bleibt der Kopf ein normaler Block, also alles wie bisher.
+       Verwendet von "Warum sich eine Aufteilung lohnt" und
+       "Woran Umnutzungen scheitern". Bedient wird sie von
+       js/jmr-faq.js. */
+.acc-plus{display:none}
+.acc-liste .m-only-i{display:none}
+@media(max-width:700px){
+  .prob-grid.acc-liste{grid-template-columns:1fr;gap:.7rem}
+  .acc-liste .m-only-i{display:inline}
+  .acc-liste .prob{padding:0}
+  /* Rahmen und Akzentlinie hier ruhiger als bei den uebrigen Karten */
+  .acc-liste .prob,.acc-liste .prob:hover{border-color:var(--line)}
+  .acc-liste .prob::after,.acc-liste .prob:hover::after{width:0}
+  .acc-liste .acc-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.9rem;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+  .acc-liste .acc-head:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:var(--r)}
+  .acc-liste .prob .pn{font-size:1.3rem;margin:0;line-height:1}
+  /* Zwei Zeilen fest reserviert, damit alle zugeklappten Koepfe gleich hoch sind.
+     Punkt 02 passt als einziger in eine Zeile und wuerde sonst herausfallen. */
+  .acc-liste .prob h3{margin:0;font-size:1.02rem;line-height:1.28;min-height:2.56em;display:flex;align-items:center}
+  /* Plus, das sich beim Aufklappen zum Minus dreht */
+  .acc-liste .acc-plus{display:block;position:relative;width:22px;height:22px}
+  .acc-liste .acc-plus::before,.acc-liste .acc-plus::after{content:'';position:absolute;left:50%;top:50%;background:var(--accent);border-radius:2px;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
+  .acc-liste .acc-plus::before{width:14px;height:2px;transform:translate(-50%,-50%)}
+  .acc-liste .acc-plus::after{width:2px;height:14px;transform:translate(-50%,-50%)}
+  .acc-liste .prob.auf .acc-plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+  /* Aufklappen ueber Rasterzeilen: laeuft in allen aktuellen Browsern fluessig */
+  .acc-liste .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1)}
+  .acc-liste .prob.auf .acc-body{grid-template-rows:1fr}
+  /* Der innere Rahmen traegt kein eigenes Innenabstandsmass, sonst bliebe im
+     zugeklappten Zustand die Hoehe des Abstands stehen. */
+  .acc-liste .acc-inner{overflow:hidden;min-height:0}
+  .acc-liste .acc-inner p{margin:0;padding:0 1.25rem 1.25rem}
+  @media(prefers-reduced-motion:reduce){.acc-liste .acc-body,.acc-liste .acc-plus::before,.acc-liste .acc-plus::after{transition:none}}
+}
+/* 12  Auf sehr schmalen Geraeten enger setzen, damit auch der laengste
+       Titel in zwei Zeilen passt und alle Koepfe gleich hoch bleiben. */
+@media(max-width:365px){
+  .acc-liste .acc-head{padding:1rem;gap:.7rem}
+  .acc-liste .prob h3{font-size:.94rem}
+  .acc-liste .prob .pn{font-size:1.15rem}
+  .acc-liste .acc-inner p{padding:0 1rem 1rem}
+}
+
 /* <<< mobil-feinschliff */
 </style>
 </head>
@@ -691,7 +702,7 @@ h1,h2,h3{overflow-wrap:break-word}
 <section id="gruende">
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Der wirtschaftliche Hintergrund</span><h2>Warum sich eine Aufteilung lohnt.</h2><p>Solange ein Gebäude im Grundbuch eine einzige Sache ist, lässt es sich nur als Ganzes verkaufen, beleihen und vererben. Die Aufteilung macht daraus einzeln handelbare Einheiten.</p></div>
-    <div class="prob-grid">
+    <div class="prob-grid acc-liste">
       <div class="prob fade"><div class="acc-head"><div class="pn">01</div><h3>Einzeln verkaufen statt nur im Ganzen</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Jede Einheit bekommt ein eigenes Wohnungsgrundbuch und lässt sich für sich verkaufen. Das vergrößert den Kreis der Käufer, weil eine Wohnung für viele finanzierbar ist.</p></div></div></div>
       <div class="prob fade d1"><div class="acc-head"><div class="pn">02</div><h3><span>Einzeln finanzieren <br class="m-only-i">und beleihen</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Belastungen lassen sich einer einzelnen Einheit zuordnen, statt auf dem gesamten Objekt zu liegen. Das schafft Spielraum bei der Finanzierung und macht Teilverkäufe möglich.</p></div></div></div>
       <div class="prob fade d2"><div class="acc-head"><div class="pn">03</div><h3>Schrittweise verwerten statt auf einmal</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Sie müssen nicht alles gleichzeitig veräußern. Einheiten lassen sich nacheinander verkaufen, während die übrigen vermietet bleiben und weiterhin Ertrag bringen.</p></div></div></div>
@@ -1046,30 +1057,6 @@ document.querySelectorAll('.prob,.dcard,.res').forEach(c=>c.addEventListener('mo
  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
  addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
  upd();})();
-/* Gruende: auf schmalen Displays eine Aufklapp-Liste, immer nur eine offen */
-(function(){
-  var karten=[].slice.call(document.querySelectorAll('#gruende .prob'));if(!karten.length)return;
-  var mq=window.matchMedia('(max-width:700px)');
-  function zu(){karten.forEach(function(k){k.classList.remove('auf');});}
-  karten.forEach(function(k){
-    var kopf=k.querySelector('.acc-head');
-    kopf.setAttribute('role','button');kopf.setAttribute('tabindex','0');
-    function um(){
-      if(!mq.matches)return;
-      var war=k.classList.contains('auf');zu();
-      if(!war)k.classList.add('auf');
-      karten.forEach(function(o){o.querySelector('.acc-head').setAttribute('aria-expanded',o.classList.contains('auf')?'true':'false');});
-    }
-    kopf.addEventListener('click',um);
-    kopf.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();um();}});
-  });
-  function sync(){
-    if(!mq.matches){zu();karten.forEach(function(k){k.querySelector('.acc-head').removeAttribute('aria-expanded');});}
-    else karten.forEach(function(k){k.querySelector('.acc-head').setAttribute('aria-expanded',k.classList.contains('auf')?'true':'false');});
-  }
-  if(mq.addEventListener)mq.addEventListener('change',sync);else mq.addListener(sync);
-  sync();
-})();
 /* Info-Fenster zu den Problem-Karten */
 (function(){
   const karten=document.querySelectorAll('.prob-click');if(!karten.length)return;

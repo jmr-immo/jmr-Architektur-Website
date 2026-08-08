@@ -153,7 +153,7 @@ section{padding:var(--pad) 0;position:relative}
 .prob:hover{border-color:rgba(225,98,61,.5);transform:translateY(-4px)}
 .prob:hover::before{opacity:1}
 .prob:hover::after{width:100%}
-.prob .pn{display:block;font-family:var(--disp);font-weight:700;font-size:1.9rem;color:rgba(225,98,61,.32);line-height:1;letter-spacing:-.03em}
+.prob .pn{font-family:var(--disp);font-weight:700;font-size:1.9rem;color:rgba(225,98,61,.32);line-height:1;letter-spacing:-.03em}
 .prob h3{margin:.7rem 0 .5rem;font-size:1.18rem}
 .prob p{color:var(--ink-soft);font-size:.95rem;line-height:1.55}
 @media(hover:none){.prob,.prob:hover{transform:none;border-color:rgba(225,98,61,.5)}.prob::after,.prob:hover::after{width:100%}.prob::before,.prob:hover::before{opacity:0}}
@@ -471,8 +471,9 @@ h1,h2,h3{overflow-wrap:break-word}
 /* 9  Aufklapp-Zeilen
       ----------------------------------------------------------------
       Betrifft die Ergebnis-Abschnitte ("Was Sie von uns erhalten",
-      "Was Sie am Ende in der Hand halten") und die Stolpersteine auf
-      der Umnutzungsseite. Alle drei sind <details> mit der Klasse .akk.
+      "Was Sie am Ende in der Hand halten"). Beide sind <details> mit
+      der Klasse .akk. Die Stolpersteine und die Gruende benutzen die
+      andere Bauart, siehe Abschnitt 11 weiter unten.
 
       Bis 560 px stehen sie als Zeilen untereinander: links das Symbol
       im 28er Quadrat, daneben die Ueberschrift, rechts das Pluszeichen.
@@ -536,6 +537,54 @@ h1,h2,h3{overflow-wrap:break-word}
 @media (max-width:375px){
   .akk h3{font-size:.88rem}
 }
+
+/* 11  Aufklapp-Liste (.acc-liste)
+       ----------------------------------------------------------
+       Bis 700 px werden aus den Karten aufklappbare Punkte: Nummer,
+       Titel und ein Pluszeichen, das sich beim Oeffnen zum Minus
+       dreht. Der Text faehrt ueber Rasterzeilen sanft aus. Darueber
+       bleibt der Kopf ein normaler Block, also alles wie bisher.
+       Verwendet von "Warum sich eine Aufteilung lohnt" und
+       "Woran Umnutzungen scheitern". Bedient wird sie von
+       js/jmr-faq.js. */
+.acc-plus{display:none}
+.acc-liste .m-only-i{display:none}
+@media(max-width:700px){
+  .prob-grid.acc-liste{grid-template-columns:1fr;gap:.7rem}
+  .acc-liste .m-only-i{display:inline}
+  .acc-liste .prob{padding:0}
+  /* Rahmen und Akzentlinie hier ruhiger als bei den uebrigen Karten */
+  .acc-liste .prob,.acc-liste .prob:hover{border-color:var(--line)}
+  .acc-liste .prob::after,.acc-liste .prob:hover::after{width:0}
+  .acc-liste .acc-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.9rem;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+  .acc-liste .acc-head:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:var(--r)}
+  .acc-liste .prob .pn{font-size:1.3rem;margin:0;line-height:1}
+  /* Zwei Zeilen fest reserviert, damit alle zugeklappten Koepfe gleich hoch sind.
+     Punkt 02 passt als einziger in eine Zeile und wuerde sonst herausfallen. */
+  .acc-liste .prob h3{margin:0;font-size:1.02rem;line-height:1.28;min-height:2.56em;display:flex;align-items:center}
+  /* Plus, das sich beim Aufklappen zum Minus dreht */
+  .acc-liste .acc-plus{display:block;position:relative;width:22px;height:22px}
+  .acc-liste .acc-plus::before,.acc-liste .acc-plus::after{content:'';position:absolute;left:50%;top:50%;background:var(--accent);border-radius:2px;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
+  .acc-liste .acc-plus::before{width:14px;height:2px;transform:translate(-50%,-50%)}
+  .acc-liste .acc-plus::after{width:2px;height:14px;transform:translate(-50%,-50%)}
+  .acc-liste .prob.auf .acc-plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+  /* Aufklappen ueber Rasterzeilen: laeuft in allen aktuellen Browsern fluessig */
+  .acc-liste .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1)}
+  .acc-liste .prob.auf .acc-body{grid-template-rows:1fr}
+  /* Der innere Rahmen traegt kein eigenes Innenabstandsmass, sonst bliebe im
+     zugeklappten Zustand die Hoehe des Abstands stehen. */
+  .acc-liste .acc-inner{overflow:hidden;min-height:0}
+  .acc-liste .acc-inner p{margin:0;padding:0 1.25rem 1.25rem}
+  @media(prefers-reduced-motion:reduce){.acc-liste .acc-body,.acc-liste .acc-plus::before,.acc-liste .acc-plus::after{transition:none}}
+}
+/* 12  Auf sehr schmalen Geraeten enger setzen, damit auch der laengste
+       Titel in zwei Zeilen passt und alle Koepfe gleich hoch bleiben. */
+@media(max-width:365px){
+  .acc-liste .acc-head{padding:1rem;gap:.7rem}
+  .acc-liste .prob h3{font-size:.94rem}
+  .acc-liste .prob .pn{font-size:1.15rem}
+  .acc-liste .acc-inner p{padding:0 1rem 1rem}
+}
 /* <<< mobil-feinschliff */
 </style>
 </head>
@@ -584,31 +633,13 @@ h1,h2,h3{overflow-wrap:break-word}
 <section id="huerden">
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Die typischen Stolpersteine</span><h2>Woran Umnutzungen scheitern.</h2><p>Die folgenden Punkte sind die größten Stolpersteine. Wir lösen sie, bevor sie zum Problem werden.</p></div>
-    <div class="prob-grid akk-liste">
-      <details class="prob fade akk" open>
-        <summary><span class="pn">01</span><h3>Ist die Nutzung überhaupt erlaubt?</h3><span class="akk-x" aria-hidden="true">+</span></summary>
-        <div class="akk-b"><p>Ob die Umnutzung erlaubt ist, hängt vom Bebauungsplan und vom Umfeld ab. Ohne Klärung droht eine Nutzungsuntersagung samt Bußgeld.</p></div>
-      </details>
-      <details class="prob fade d1 akk" open>
-        <summary><span class="pn">02</span><h3>Altbau ohne Genehmigung</h3><span class="akk-x" aria-hidden="true">+</span></summary>
-        <div class="akk-b"><p>Oftmals wurde manch alter Bestand nie offiziell genehmigt. Übersieht man das, scheitert die Umnutzung. Wir prüfen dies vorab.</p></div>
-      </details>
-      <details class="prob fade d2 akk" open>
-        <summary><span class="pn">03</span><h3>Genehmigungspflicht ohne Umbau</h3><span class="akk-x" aria-hidden="true">+</span></summary>
-        <div class="akk-b"><p>Selbst ohne bauliche Änderung, etwa von Wohnung zu Ferienwohnung, ist die neue Nutzung in aller Regel genehmigungspflichtig. Sonst kann das Amt sie untersagen.</p></div>
-      </details>
-      <details class="prob fade akk" open>
-        <summary><span class="pn">04</span><h3>Stellplätze und Brandschutz</h3><span class="akk-x" aria-hidden="true">+</span></summary>
-        <div class="akk-b"><p>Die neue Nutzung verlangt oft mehr Stellplätze und erhöhte Brandschutzanforderungen. Wer dies nicht beachtet, zahlt drauf.</p></div>
-      </details>
-      <details class="prob fade d1 akk" open>
-        <summary><span class="pn">05</span><h3>Mehrere Stellen beteiligt</h3><span class="akk-x" aria-hidden="true">+</span></summary>
-        <div class="akk-b"><p>Oft reden Bauamt, Gemeinde und Feuerwehr mit, alle mit eigenen Anforderungen. Wir koordinieren das für Sie aus einer Hand.</p></div>
-      </details>
-      <details class="prob fade d2 akk" open>
-        <summary><span class="pn">06</span><h3>Unnötige Verzögerungen</h3><span class="akk-x" aria-hidden="true">+</span></summary>
-        <div class="akk-b"><p>Fehlen dem Amt Unterlagen, kommen Nachforderungen, und das kostet jedes Mal Wochen. Wir reichen gleich alles vollständig ein.</p></div>
-      </details>
+    <div class="prob-grid acc-liste">
+      <div class="prob fade"><div class="acc-head"><div class="pn">01</div><h3>Ist die Nutzung überhaupt erlaubt?</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Ob die Umnutzung erlaubt ist, hängt vom Bebauungsplan und vom Umfeld ab. Ohne Klärung droht eine Nutzungsuntersagung samt Bußgeld.</p></div></div></div>
+      <div class="prob fade d1"><div class="acc-head"><div class="pn">02</div><h3><span>Altbau ohne <br class="m-only-i">Genehmigung</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Oftmals wurde manch alter Bestand nie offiziell genehmigt. Übersieht man das, scheitert die Umnutzung. Wir prüfen dies vorab.</p></div></div></div>
+      <div class="prob fade d2"><div class="acc-head"><div class="pn">03</div><h3>Genehmigungspflicht ohne Umbau</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Selbst ohne bauliche Änderung, etwa von Wohnung zu Ferienwohnung, ist die neue Nutzung in aller Regel genehmigungspflichtig. Sonst kann das Amt sie untersagen.</p></div></div></div>
+      <div class="prob fade"><div class="acc-head"><div class="pn">04</div><h3><span>Stellplätze und <br class="m-only-i">Brandschutz</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Die neue Nutzung verlangt oft mehr Stellplätze und erhöhte Brandschutzanforderungen. Wer dies nicht beachtet, zahlt drauf.</p></div></div></div>
+      <div class="prob fade d1"><div class="acc-head"><div class="pn">05</div><h3><span>Mehrere Stellen <br class="m-only-i">beteiligt</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Oft reden Bauamt, Gemeinde und Feuerwehr mit, alle mit eigenen Anforderungen. Wir koordinieren das für Sie aus einer Hand.</p></div></div></div>
+      <div class="prob fade d2"><div class="acc-head"><div class="pn">06</div><h3><span>Unnötige <br class="m-only-i">Verzögerungen</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Fehlen dem Amt Unterlagen, kommen Nachforderungen, und das kostet jedes Mal Wochen. Wir reichen gleich alles vollständig ein.</p></div></div></div>
     </div>
   </div>
 </section>

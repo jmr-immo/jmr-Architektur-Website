@@ -1,22 +1,27 @@
 /* ------------------------------------------------------------------
    Aufklapplisten
    ------------------------------------------------------------------
-   Zwei Sorten, beide aus <details> gebaut:
+   Drei Sorten:
 
-   1. Die Fragen im Abschnitt "Gut zu wissen" (.faq). Dort ist immer
-      nur eine Frage offen.
-   2. Die Zeilen in den Ergebnis-Abschnitten und bei den Stolpersteinen
-      (.akk). Die gibt es nur bis 560 px Breite. Darueber stehen sie
-      dauerhaft offen und sind gar kein Bedienelement mehr, dort sieht
-      man wieder die gewohnten Karten. Mehrere duerfen offen sein.
+   1. Die Fragen im Abschnitt "Gut zu wissen" (.faq), aus <details>.
+      Dort ist immer nur eine Frage offen.
+   2. Die Zeilen in den Ergebnis-Abschnitten (.akk), aus <details>.
+      Die gibt es nur bis 560 px Breite. Darueber stehen sie dauerhaft
+      offen und sind gar kein Bedienelement mehr, dort sieht man wieder
+      die gewohnten Karten. Mehrere duerfen offen sein.
+   3. Die Aufklapp-Listen (.acc-liste) bei "Warum sich eine Aufteilung
+      lohnt" und "Woran Umnutzungen scheitern". Aeltere Bauart ohne
+      <details>: aufgeklappt wird ueber eine Klasse, den Uebergang macht
+      das Stilblatt. Bis 700 px, immer nur ein Punkt offen.
 
    Browser klappen <details> hart auf und zu, eine reine CSS-Loesung
-   gibt es dafuer nicht zuverlaessig. Wir steuern die Hoehe deshalb
-   selbst und verwenden ueberall dieselbe Dauer und dieselbe Kurve.
+   gibt es dafuer nicht zuverlaessig. Wir steuern die Hoehe bei den
+   ersten beiden Sorten deshalb selbst und verwenden ueberall dieselbe
+   Dauer und dieselbe Kurve.
 
    Ohne JavaScript bleibt alles benutzbar: Die Fragen oeffnen sich
-   weiterhin, nur eben ohne Uebergang, und die Zeilen stehen offen da,
-   dann steht schlicht der ganze Text untereinander.
+   weiterhin, nur eben ohne Uebergang, die Zeilen stehen offen da, und
+   die Listen bleiben die Karten, die sie auf dem Schirm ohnehin sind.
    ------------------------------------------------------------------ */
 (function () {
   var TEMPO_AUF = 380;
@@ -147,4 +152,50 @@
     else if (eng.addListener) eng.addListener(stellen);
     stellen();
   })();
+
+  /* --- 3  Aufklapp-Liste (.acc-liste) ----------------------------
+     Aeltere Bauart ohne <details>: der Kopf ist ein Knopf, der Text
+     faehrt ueber Rasterzeilen aus. Bis 700 px ist immer nur ein Punkt
+     offen, darueber sind es wieder ganz normale Karten. */
+  Array.prototype.forEach.call(document.querySelectorAll('.acc-liste'), function (liste) {
+    var karten = Array.prototype.slice.call(liste.querySelectorAll('.prob'));
+    if (!karten.length) return;
+    var eng = window.matchMedia('(max-width:700px)');
+
+    function zu() { karten.forEach(function (k) { k.classList.remove('auf'); }); }
+    function melden() {
+      karten.forEach(function (k) {
+        k.querySelector('.acc-head')
+         .setAttribute('aria-expanded', k.classList.contains('auf') ? 'true' : 'false');
+      });
+    }
+
+    karten.forEach(function (k) {
+      var kopf = k.querySelector('.acc-head');
+      if (!kopf) return;
+      kopf.setAttribute('role', 'button');
+      kopf.setAttribute('tabindex', '0');
+      function um() {
+        if (!eng.matches) return;
+        var war = k.classList.contains('auf');
+        zu();
+        if (!war) k.classList.add('auf');
+        melden();
+      }
+      kopf.addEventListener('click', um);
+      kopf.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); um(); }
+      });
+    });
+
+    function stellen() {
+      if (!eng.matches) {
+        zu();
+        karten.forEach(function (k) { k.querySelector('.acc-head').removeAttribute('aria-expanded'); });
+      } else melden();
+    }
+    if (eng.addEventListener) eng.addEventListener('change', stellen);
+    else if (eng.addListener) eng.addListener(stellen);
+    stellen();
+  });
 })();

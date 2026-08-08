@@ -655,8 +655,9 @@ h1,h2,h3{overflow-wrap:break-word}
 /* 9  Aufklapp-Zeilen
       ----------------------------------------------------------------
       Betrifft die Ergebnis-Abschnitte ("Was Sie von uns erhalten",
-      "Was Sie am Ende in der Hand halten") und die Stolpersteine auf
-      der Umnutzungsseite. Alle drei sind <details> mit der Klasse .akk.
+      "Was Sie am Ende in der Hand halten"). Beide sind <details> mit
+      der Klasse .akk. Die Stolpersteine und die Gruende benutzen die
+      andere Bauart, siehe Abschnitt 11 weiter unten.
 
       Bis 560 px stehen sie als Zeilen untereinander: links das Symbol
       im 28er Quadrat, daneben die Ueberschrift, rechts das Pluszeichen.
@@ -719,6 +720,54 @@ h1,h2,h3{overflow-wrap:break-word}
        bis hinunter zu 360 px in einer Zeile. */
 @media (max-width:375px){
   .akk h3{font-size:.88rem}
+}
+
+/* 11  Aufklapp-Liste (.acc-liste)
+       ----------------------------------------------------------
+       Bis 700 px werden aus den Karten aufklappbare Punkte: Nummer,
+       Titel und ein Pluszeichen, das sich beim Oeffnen zum Minus
+       dreht. Der Text faehrt ueber Rasterzeilen sanft aus. Darueber
+       bleibt der Kopf ein normaler Block, also alles wie bisher.
+       Verwendet von "Warum sich eine Aufteilung lohnt" und
+       "Woran Umnutzungen scheitern". Bedient wird sie von
+       js/jmr-faq.js. */
+.acc-plus{display:none}
+.acc-liste .m-only-i{display:none}
+@media(max-width:700px){
+  .prob-grid.acc-liste{grid-template-columns:1fr;gap:.7rem}
+  .acc-liste .m-only-i{display:inline}
+  .acc-liste .prob{padding:0}
+  /* Rahmen und Akzentlinie hier ruhiger als bei den uebrigen Karten */
+  .acc-liste .prob,.acc-liste .prob:hover{border-color:var(--line)}
+  .acc-liste .prob::after,.acc-liste .prob:hover::after{width:0}
+  .acc-liste .acc-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.9rem;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+  .acc-liste .acc-head:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:var(--r)}
+  .acc-liste .prob .pn{font-size:1.3rem;margin:0;line-height:1}
+  /* Zwei Zeilen fest reserviert, damit alle zugeklappten Koepfe gleich hoch sind.
+     Punkt 02 passt als einziger in eine Zeile und wuerde sonst herausfallen. */
+  .acc-liste .prob h3{margin:0;font-size:1.02rem;line-height:1.28;min-height:2.56em;display:flex;align-items:center}
+  /* Plus, das sich beim Aufklappen zum Minus dreht */
+  .acc-liste .acc-plus{display:block;position:relative;width:22px;height:22px}
+  .acc-liste .acc-plus::before,.acc-liste .acc-plus::after{content:'';position:absolute;left:50%;top:50%;background:var(--accent);border-radius:2px;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
+  .acc-liste .acc-plus::before{width:14px;height:2px;transform:translate(-50%,-50%)}
+  .acc-liste .acc-plus::after{width:2px;height:14px;transform:translate(-50%,-50%)}
+  .acc-liste .prob.auf .acc-plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+  /* Aufklappen ueber Rasterzeilen: laeuft in allen aktuellen Browsern fluessig */
+  .acc-liste .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1)}
+  .acc-liste .prob.auf .acc-body{grid-template-rows:1fr}
+  /* Der innere Rahmen traegt kein eigenes Innenabstandsmass, sonst bliebe im
+     zugeklappten Zustand die Hoehe des Abstands stehen. */
+  .acc-liste .acc-inner{overflow:hidden;min-height:0}
+  .acc-liste .acc-inner p{margin:0;padding:0 1.25rem 1.25rem}
+  @media(prefers-reduced-motion:reduce){.acc-liste .acc-body,.acc-liste .acc-plus::before,.acc-liste .acc-plus::after{transition:none}}
+}
+/* 12  Auf sehr schmalen Geraeten enger setzen, damit auch der laengste
+       Titel in zwei Zeilen passt und alle Koepfe gleich hoch bleiben. */
+@media(max-width:365px){
+  .acc-liste .acc-head{padding:1rem;gap:.7rem}
+  .acc-liste .prob h3{font-size:.94rem}
+  .acc-liste .prob .pn{font-size:1.15rem}
+  .acc-liste .acc-inner p{padding:0 1rem 1rem}
 }
 
 /* <<< mobil-feinschliff */
