@@ -451,6 +451,12 @@ p{text-wrap:pretty}
 @media(prefers-reduced-motion:reduce){.res-ic,.res:hover .res-ic{transform:none}}
 .res h3{font-size:1.08rem;margin-bottom:.55rem;line-height:1.25;min-height:2.5em}
 .res p{color:var(--ink-soft);font-size:.93rem;line-height:1.55}
+/* Ergebnis-Karten sind <details>. Ab 561 px stehen sie offen und sehen aus
+   wie zuvor, deshalb hier nur das Aufklapp-Zubehoer unsichtbar machen. */
+.res>summary{display:block;list-style:none;cursor:default}
+.res>summary::-webkit-details-marker{display:none}
+.res>summary::marker{content:''}
+.res-x{display:none}
 .res-note{max-width:780px;margin:2.6rem auto 0;text-align:center;font-size:1rem;color:var(--ink-soft);line-height:1.65}
 .res-note b{color:var(--white);font-weight:600}
 
@@ -603,7 +609,6 @@ h1,h2,h3{overflow-wrap:break-word}
   /* 7  Schriftgroessen unter 10 px anheben */
   .footer .bn small{font-size:.7rem;line-height:1.5}
   .ba-lbl{font-size:.66rem}
-  .res>.res-opt{font-size:.68rem}
   .pak-tag{font-size:.68rem}
   .utag{font-size:.68rem}
   .sf-when{font-size:.68rem}
@@ -620,6 +625,51 @@ h1,h2,h3{overflow-wrap:break-word}
 @media (max-width:640px){
   .hero-act{flex-wrap:wrap}
   .hero-act .btn{min-width:8.6rem}
+}
+
+/* 9  Ergebnis-Karten werden auf schmalen Schirmen zu aufklappbaren Zeilen,
+      wie im Frage-und-Antwort-Teil: kleines Symbol, Ueberschrift in einer
+      Zeile, Text erscheint erst beim Antippen. Offen oder zu steuert das
+      Skript am Seitenende ueber dieselbe 560-px-Grenze. */
+@media (max-width:560px){
+  .res-grid{gap:0;border-top:1px solid var(--line)}
+  .res{--zeile:58px;display:block;background:none;border:0;
+       border-bottom:1px solid var(--line);border-radius:0;padding:0}
+  .res::before,.res:hover::before{opacity:0}
+  .res>summary{display:flex;align-items:center;gap:.6rem;padding:.5rem .1rem;
+               min-height:var(--zeile);cursor:pointer}
+  .res-ic{width:28px;height:28px;border-radius:9px;margin:0;box-shadow:none}
+  .res-ic svg{width:15px;height:15px}
+  .res:hover .res-ic{transform:none}
+  /* Die Ueberschrift soll in eine Zeile passen. Reicht der Platz auf sehr
+     schmalen Geraeten dafuer nicht, bricht sie in die zweite Zeile; die
+     Mindesthoehe der Zeile haelt alle Eintraege trotzdem gleich hoch. */
+  .res h3{flex:1;min-width:0;margin:0;min-height:0;font-size:.95rem;line-height:1.25;
+          display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+          overflow:hidden}
+  .res-x{display:flex;flex-shrink:0;width:24px;height:24px;border-radius:50%;
+         border:1.5px solid var(--line);align-items:center;justify-content:center;
+         color:var(--accent);font-size:1.05rem;line-height:1;transition:.25s}
+  .res[open]>summary .res-x{background:var(--accent);color:#fff;
+                            border-color:var(--accent);transform:rotate(45deg)}
+  .res-b{padding:0 .1rem 1.1rem calc(28px + .6rem)}
+  .res-b p{font-size:.9rem}
+  /* Der Marker gehoert unter die Zeile, an den Anfang des Textes. Er bleibt
+     absolut gesetzt, weil <details> seinen Inhalt in eine eigene Box legt und
+     die Reihenfolge im Kasten deshalb nicht steuerbar ist. Bezugspunkt ist die
+     Karte, die Hoehe der Zeile steht in --zeile. Zugeklappt bleibt er weg,
+     sonst waere genau diese eine Zeile hoeher als alle anderen. */
+  .res>.res-opt{top:var(--zeile);left:calc(28px + .6rem);right:auto;font-size:.62rem}
+  .res:not([open])>.res-opt{display:none}
+  .res-mark[open]>.res-b{padding-top:1.95rem}
+}
+
+/* 10  Unter 376 px reicht der Platz fuer die langen Fachwoerter nicht mehr,
+       deshalb dort eine Stufe kleiner. Damit stehen auch
+       "Abgeschlossenheitsbescheinigung" und "Bauantrag oder
+       Nutzungsaenderung" bis hinunter zu 360 px in einer Zeile. */
+@media (max-width:375px){
+  .res h3{font-size:.88rem}
 }
 
 /* <<< mobil-feinschliff */
@@ -870,26 +920,34 @@ h1,h2,h3{overflow-wrap:break-word}
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Das Ergebnis</span><h2>Was Sie von uns erhalten.</h2><p>Vom ersten belastbaren Ja oder Nein bis zur Genehmigung. Sie buchen nur die Schritte, die Sie brauchen.</p></div>
     <div class="res-grid">
-      <article class="res fade">
-        <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9z"/><path d="M13 3v7h7"/><path d="M8.5 15.5l2 2 4-4.5"/></svg></span>
-        <h3>Schriftliche Einordnung</h3>
-        <p>Was auf Ihrem Grundstück zulässig ist: Bebauungs&shy;plan oder §&nbsp;34, Abstands&shy;flächen, Grenzbebauung, brandschutzrelevante Punkte. Schwarz auf weiß, nicht nur mündlich.</p>
-      </article>
-      <article class="res fade d1">
-        <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M14 21v-6h5v6"/><path d="M8 12h3v3H8z"/></svg></span>
-        <h3>Entwurf des Anbaus</h3>
-        <p>Grundrisse, Ansichten und Schnitte des Anbaus im Zusammenhang mit dem Bestand, abgestimmt auf das, was baurechtlich geht.</p>
-      </article>
-      <article class="res fade d2">
-        <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="17" height="18" rx="2"/><path d="M7.5 8h9M7.5 12h9M7.5 16h5"/><circle cx="17" cy="17" r="3.6"/></svg></span>
-        <h3>Bauantrag komplett</h3>
-        <p>Alle Bauvorlagen, Berechnungen und Formulare, eingereicht bei der Bauaufsicht. Rückfragen der Behörde bearbeiten wir direkt.</p>
-      </article>
-      <article class="res fade">
-        <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="7" r="2.6"/><circle cx="12" cy="18" r="2.6"/><path d="M7.6 9.2l3 6.4M16.4 9.2l-3 6.4M8.6 7h6.8"/></svg></span>
-        <h3>Abstimmung der Fachplaner</h3>
-        <p>Statik, Energie und, wo nötig, Brandschutz. Wir holen die Beteiligten dazu und halten die Planung zusammen, damit nichts zweimal gerechnet wird.</p>
-      </article>
+      <details class="res fade" open>
+        <summary>
+          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9z"/><path d="M13 3v7h7"/><path d="M8.5 15.5l2 2 4-4.5"/></svg></span>
+          <h3>Schriftliche Einordnung</h3><span class="res-x" aria-hidden="true">+</span>
+        </summary>
+        <div class="res-b"><p>Was auf Ihrem Grundstück zulässig ist: Bebauungs&shy;plan oder §&nbsp;34, Abstands&shy;flächen, Grenzbebauung, brandschutzrelevante Punkte. Schwarz auf weiß, nicht nur mündlich.</p></div>
+      </details>
+      <details class="res fade d1" open>
+        <summary>
+          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M14 21v-6h5v6"/><path d="M8 12h3v3H8z"/></svg></span>
+          <h3>Entwurf des Anbaus</h3><span class="res-x" aria-hidden="true">+</span>
+        </summary>
+        <div class="res-b"><p>Grundrisse, Ansichten und Schnitte des Anbaus im Zusammenhang mit dem Bestand, abgestimmt auf das, was baurechtlich geht.</p></div>
+      </details>
+      <details class="res fade d2" open>
+        <summary>
+          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="17" height="18" rx="2"/><path d="M7.5 8h9M7.5 12h9M7.5 16h5"/><circle cx="17" cy="17" r="3.6"/></svg></span>
+          <h3>Bauantrag komplett</h3><span class="res-x" aria-hidden="true">+</span>
+        </summary>
+        <div class="res-b"><p>Alle Bauvorlagen, Berechnungen und Formulare, eingereicht bei der Bauaufsicht. Rückfragen der Behörde bearbeiten wir direkt.</p></div>
+      </details>
+      <details class="res fade" open>
+        <summary>
+          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="7" r="2.6"/><circle cx="12" cy="18" r="2.6"/><path d="M7.6 9.2l3 6.4M16.4 9.2l-3 6.4M8.6 7h6.8"/></svg></span>
+          <h3>Abstimmung der Fachplaner</h3><span class="res-x" aria-hidden="true">+</span>
+        </summary>
+        <div class="res-b"><p>Statik, Energie und, wo nötig, Brandschutz. Wir holen die Beteiligten dazu und halten die Planung zusammen, damit nichts zweimal gerechnet wird.</p></div>
+      </details>
     </div>
     <p class="res-note fade">Die Vorprüfung können Sie einzeln beauftragen. <b>Planen Sie danach mit uns weiter, rechnen wir sie an.</b></p>
   </div>
@@ -1120,6 +1178,28 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targe
 document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 document.querySelectorAll('.footer').forEach(s=>s.addEventListener('mousemove',e=>{const r=s.getBoundingClientRect();s.style.setProperty('--mx',(e.clientX-r.left)+'px');s.style.setProperty('--my',(e.clientY-r.top)+'px')}));
 document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+/* Ergebnis-Karten: bis 560 px aufklappbare Zeilen, darueber dauerhaft offene
+   Karten. Ohne Skript bleiben sie offen, dann steht einfach alles da. */
+(function(){
+  var eng=window.matchMedia('(max-width:560px)'),
+      k=[].slice.call(document.querySelectorAll('details.res'));
+  if(!k.length)return;
+  function stellen(){
+    k.forEach(function(d){
+      var s=d.querySelector('summary');
+      if(eng.matches){ d.open=false; s.removeAttribute('tabindex'); }
+      else           { d.open=true;  s.setAttribute('tabindex','-1'); }
+    });
+  }
+  k.forEach(function(d){
+    /* auf breiten Schirmen soll ein Klick die Karte nicht zuklappen */
+    d.querySelector('summary').addEventListener('click',function(e){
+      if(!eng.matches)e.preventDefault();
+    });
+  });
+  eng.addEventListener?eng.addEventListener('change',stellen):eng.addListener(stellen);
+  stellen();
+})();
 /* Laufband: siehe Erlaeuterung auf den uebrigen Unterseiten. Der Grundsatz an
    Begriffen wird so oft wiederholt, dass die Spur breiter ist als das Fenster,
    und exakt um die Breite eines Durchlaufs verschoben. */
