@@ -402,16 +402,13 @@ p{text-wrap:pretty}
 .dq{font-family:var(--disp);font-weight:600;font-size:clamp(1.02rem,1.5vw,1.2rem);letter-spacing:-.015em;line-height:1.3;color:var(--c);margin-bottom:.6rem}
 .dhint{display:flex;gap:.6rem;align-items:flex-start;font-size:.94rem;color:var(--ink-soft);line-height:1.55;margin-bottom:1.4rem}
 .dhint .dar{color:var(--c);font-weight:700;flex-shrink:0}
-.dlist{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem}
-.dlist li{position:relative;padding-left:1.4rem;font-size:.93rem;color:var(--ink-soft);line-height:1.5}
-.dlist li::before{content:'';position:absolute;left:.1rem;top:.55em;width:7px;height:7px;border-radius:2px;background:var(--c);opacity:.8}
 .dout{margin-top:auto;border-top:1px solid var(--line);padding-top:1.05rem;font-size:.93rem;color:var(--white);line-height:1.55}
 .dout strong{color:var(--c)}
 @supports (grid-template-rows:subgrid){
   @media(min-width:1001px){
-    .dual3{grid-template-rows:auto auto auto auto auto 1fr auto;column-gap:1.3rem;row-gap:0}
-    .dcard{display:grid;grid-template-rows:subgrid;grid-row:span 7}
-    .dcard .dlist{margin-bottom:0}
+    .dual3{grid-template-rows:repeat(6,auto);column-gap:1.3rem;row-gap:0}
+    .dcard{display:grid;grid-template-rows:subgrid;grid-row:span 6}
+    .dcard .dhint{margin-bottom:0}
     .dcard .dout{margin-top:1.4rem}
   }
 }
@@ -720,12 +717,12 @@ h1,h2,h3{overflow-wrap:break-word}
       <div class="abx-steuer">
         <div class="abx-reg">
           <span class="abx-lab">Wandhöhe <b>H</b></span>
-          <output class="abx-wert" id="abHw" for="abH">6,20 m</output>
+          <output class="abx-wert" id="abHw" for="abH">6,20&nbsp;m</output>
           <input type="range" id="abH" min="2.5" max="12" step="0.1" value="6.2" aria-label="Wandhöhe des Anbaus in Metern">
         </div>
         <div class="abx-reg">
           <span class="abx-lab">Abstand zur Grenze</span>
-          <output class="abx-wert" id="abAw" for="abA">2,80 m</output>
+          <output class="abx-wert" id="abAw" for="abA">2,80&nbsp;m</output>
           <input type="range" id="abA" min="0" max="8" step="0.1" value="2.8" aria-label="Geplanter Abstand der Außenwand zur Grundstücksgrenze in Metern">
         </div>
       </div>
@@ -750,20 +747,20 @@ h1,h2,h3{overflow-wrap:break-word}
           <line x1="104" y1="250" x2="120" y2="250" stroke="#BE4A2A" stroke-width="1.8"/>
           <text id="abHtx" x="124" y="208" fill="#BE4A2A">H</text>
           <rect id="abBand" class="ab-band eng" x="172" y="260" width="90" height="30" rx="4"/>
-          <text id="abBandT" class="ab-tm" x="217" y="281" text-anchor="middle">3,00 m</text>
+          <text id="abBandT" class="ab-tm" x="217" y="281" text-anchor="middle">3,00&nbsp;m</text>
           <line id="abGl" x1="256" y1="50" x2="256" y2="344" stroke="#0B1C2B" stroke-width="2.2" stroke-dasharray="8 6"/>
           <text id="abGt" x="256" y="364" text-anchor="middle">Grenze</text>
           <line id="abMl" x1="172" y1="332" x2="256" y2="332" stroke="#0B1C2B" stroke-opacity=".5" stroke-width="1.6"/>
           <line x1="172" y1="324" x2="172" y2="340" stroke="#0B1C2B" stroke-opacity=".5" stroke-width="1.6"/>
           <line id="abMt2" x1="256" y1="324" x2="256" y2="340" stroke="#0B1C2B" stroke-opacity=".5" stroke-width="1.6"/>
-          <text id="abMtx" x="214" y="320" text-anchor="middle">2,80 m</text>
+          <text id="abMtx" x="214" y="320" text-anchor="middle">2,80&nbsp;m</text>
         </svg>
       </div>
 
       <div class="abx-erg">
         <span class="abx-status eng" id="abStatus">zu wenig</span>
-        <p class="abx-satz" id="abSatz">Bei einer Wandhöhe von 6,20 m sind 3,00 m Abstands&shy;fläche nötig. Geplant sind 2,80 m, es fehlen <b>0,20 m</b>.</p>
-        <p class="abx-formel" id="abFormel">0,4 × 6,20 m = 2,48 m · Mindestmaß 3,00 m · maßgeblich 3,00 m (§ 8 Abs. 6 LBauO Rheinland-Pfalz)</p>
+        <p class="abx-satz" id="abSatz">Bei einer Wandhöhe von 6,20&nbsp;m sind 3,00&nbsp;m Abstands&shy;fläche nötig. Geplant sind 2,80&nbsp;m, es fehlen <b>0,20&nbsp;m</b>.</p>
+        <p class="abx-formel" id="abFormel">0,4 × 6,20&nbsp;m = 2,48&nbsp;m · Mindestmaß 3,00&nbsp;m · maßgeblich 3,00&nbsp;m (§&nbsp;8 Abs. 6 LBauO Rheinland-Pfalz)</p>
       </div>
 
       <div class="abx-wege" id="abWege" hidden>
@@ -775,19 +772,19 @@ h1,h2,h3{overflow-wrap:break-word}
     <div class="abx-hinw">
       <div class="abx-h fade">
         <h4>Was als Wandhöhe zählt</h4>
-        <p>Gemessen wird von der Gelände&shy;oberfläche bis zur Schnittlinie der Wand mit der Dachhaut oder bis zum oberen Abschluss der Wand. Der Abstand zur Grundstücks&shy;grenze bemisst sich anhand 0,4 H der Wandhöhe, mindestens jedoch 3 m.</p>
+        <p>Gemessen wird von der Gelände&shy;oberfläche bis zur Schnittlinie der Wand mit der Dachhaut oder bis zum oberen Abschluss der Wand. Der Abstand zur Grundstücks&shy;grenze bemisst sich anhand 0,4 H der Wandhöhe, mindestens jedoch 3&nbsp;m.</p>
       </div>
       <div class="abx-h fade d1">
         <h4>Wann an der Grenze gebaut werden darf</h4>
-        <p>Garagen und Gebäude ohne Aufenthalts&shy;räume dürfen ohne eigene Abstands&shy;fläche an die Grenze, bis 12 m Länge je Grenze. Die mittlere Wandhöhe liegt in Rheinland-Pfalz bei 3,20 m, im Saarland bei 3,00 m. Für Wohnraum gilt das nicht.</p>
+        <p>Garagen und Gebäude ohne Aufenthalts&shy;räume und ohne Feuerstätten dürfen ohne eigene Abstands&shy;fläche an die Grenze, bis 12&nbsp;m Länge je Grundstücks&shy;grenze. Die mittlere Wandhöhe darf in Rheinland-Pfalz 3,20&nbsp;m nicht überschreiten, im Saarland 3,00&nbsp;m. Zusammengerechnet sind an allen Grenzen eines Grundstücks 18&nbsp;m erlaubt, im Saarland 15&nbsp;m. Für Wohnraum gilt das nicht.</p>
       </div>
       <div class="abx-h fade d2">
         <h4>Wenn das Haus schon zu nah steht</h4>
-        <p>An rechtmäßig bestehenden Gebäuden ohne ausreichende Abstands&shy;flächen sind in Rheinland-Pfalz unter Voraussetzungen auch Vor- und Anbauten möglich. Im Saarland gilt das nur für Änderungen, die die Außenmaße nicht verändern.</p>
+        <p>Ein rechtmäßig errichtetes Haus hat Bestandsschutz. Der deckt aber den Bestand, nicht die Erweiterung. Rheinland-Pfalz erlaubt an solchen Wänden ausdrücklich Vor- und Anbauten, die für sich genommen die Abstands&shy;fläche einhalten. Im Saarland fehlt eine vergleichbare Regelung, dort sind nur Änderungen ohne neue Außenmaße vorgesehen.</p>
         <span class="abx-neu">Neu 2025/26 · nur Rheinland-Pfalz</span>
       </div>
     </div>
-    <p class="fnote fnote-center">Schematische Darstellung nach § 8 der Landes&shy;bauordnung Rheinland-Pfalz und § 7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
+    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
   </div>
 </section>
 
@@ -799,40 +796,25 @@ h1,h2,h3{overflow-wrap:break-word}
       <article class="dcard a fade">
         <span class="dlvl">Fall 1 · Mit Plan</span>
         <h3>Bebauungs&shy;plan</h3>
-        <p class="dsub">§ 30 BauGB</p>
+        <p class="dsub">§&nbsp;30 BauGB</p>
         <p class="dq">Passt der Anbau in den Plan?</p>
         <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Für Ihr Viertel gibt es einen Plan der Gemeinde. Der sagt ziemlich genau, was erlaubt ist. Wir lesen ihn aus und halten Ihr Vorhaben daneben.</span></p>
-        <ul class="dlist">
-          <li>Wo auf dem Grundstück gebaut werden darf</li>
-          <li>Wie viel Fläche bebaut sein darf</li>
-          <li>Wie hoch und in welcher Form</li>
-        </ul>
         <p class="dout"><strong>Passt es nicht:</strong> Eine Ausnahme ist möglich, solange der Plan im Kern unberührt bleibt und der Nachbar nicht unzumutbar betroffen ist.</p>
       </article>
       <article class="dcard b fade d1">
         <span class="dlvl">Fall 2 · Ohne Plan</span>
         <h3>Bebauter Ortsteil</h3>
-        <p class="dsub">§ 34 BauGB</p>
+        <p class="dsub">§&nbsp;34 BauGB</p>
         <p class="dq">Passt der Anbau zur Nachbarschaft?</p>
         <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Es gibt keinen Plan. Dann zählt, was ringsum schon steht. Ihr Anbau muss sich in dieses Bild einfügen, und das schaut sich die Behörde genau an.</span></p>
-        <ul class="dlist">
-          <li>Wie die Häuser ringsum genutzt werden</li>
-          <li>Wie groß und wie hoch sie sind</li>
-          <li>Wie weit sie auf dem Grundstück nach hinten reichen</li>
-        </ul>
-        <p class="dout"><strong>Passt es knapp nicht:</strong> Wer zusätzlichen Wohnraum schafft, bekommt nach dem Gesetz etwas mehr Spielraum als sonst.</p>
+        <p class="dout"><strong>Passt es nicht:</strong> Wer zusätzlichen Wohnraum schafft, bekommt nach dem Gesetz etwas mehr Spielraum als sonst.</p>
       </article>
       <article class="dcard c fade d2">
         <span class="dlvl">Fall 3 · Draußen</span>
         <h3>Außenbereich</h3>
-        <p class="dsub">§ 35 BauGB</p>
+        <p class="dsub">§&nbsp;35 BauGB</p>
         <p class="dq">Ist hier überhaupt etwas möglich?</p>
         <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Ihr Grundstück liegt außerhalb der bebauten Ortslage. Dort soll grundsätzlich nicht gebaut werden, entsprechend eng sind die Möglichkeiten.</span></p>
-        <ul class="dlist">
-          <li>Erlaubt ist nur, was hier wirklich hingehört</li>
-          <li>Für Wohnhäuser gibt es eng gefasste Ausnahmen</li>
-          <li>Auch kleine Anbauten brauchen hier meist einen Antrag</li>
-        </ul>
         <p class="dout"><strong>Unser Rat:</strong> Hier zuerst prüfen lassen, dann planen. Sonst zahlen Sie einen Entwurf, der so nicht genehmigt wird.</p>
       </article>
     </div>
@@ -847,14 +829,14 @@ h1,h2,h3{overflow-wrap:break-word}
       <article class="typ fade">
         <span class="typ-bild" aria-hidden="true"><svg viewBox="0 0 220 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 92V40l32-18 32 18v52"/><path d="M84 54l68 14v24"/><path d="M84 92h68"/><path d="M106 58.5V92M128 63V92"/><path d="M84 74h68"/></svg></span>
         <h3>Wintergarten</h3>
-        <p>Verglaste Erweiterung am Haus. Unbeheizt ist sie ein Wetterschutz und ein Raum für die halbe Jahreszeit, beheizt wird sie zum vollwertigen Wohnraum und rechtlich zu etwas anderem.</p>
-        <span class="typ-tag frei">unbeheizt oft ohne Antrag</span>
+        <p>Verglaste Erweiterung am Haus. Ebenerdig, unbeheizt und bis 50&nbsp;Kubikmeter umbauter Raum braucht sie in Rheinland-Pfalz keinen Bauantrag. Mit Heizung ist sie Aufenthalts&shy;raum, zählt voll zur Wohnfläche und muss genehmigt werden.</p>
+        <span class="typ-tag frei">unbeheizt bis 50&nbsp;m³</span>
       </article>
       <article class="typ fade d1">
         <span class="typ-bild" aria-hidden="true"><svg viewBox="0 0 220 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 92V40l32-18 32 18v52"/><path d="M84 52l86 10"/><path d="M170 62v30M128 57v35"/><path d="M84 92h96"/></svg></span>
         <h3>Terrassen&shy;über&shy;dachung</h3>
-        <p>Dach über der Terrasse, an den Seiten offen. Der kleinste Eingriff mit dem größten Alltagseffekt, weil die Terrasse damit auch bei Regen nutzbar bleibt.</p>
-        <span class="typ-tag frei">oft ohne Antrag</span>
+        <p>Dach über der Terrasse, an den Seiten offen. Die Grenze ist nicht die Dachfläche, sondern der umbaute Raum: bis 50&nbsp;Kubikmeter ohne Bauantrag. Abstands&shy;flächen und Bebauungs&shy;plan gelten trotzdem.</p>
+        <span class="typ-tag frei">unbeheizt bis 50&nbsp;m³</span>
       </article>
       <article class="typ fade d2">
         <span class="typ-bild" aria-hidden="true"><svg viewBox="0 0 220 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 92V40l32-18 32 18v52"/><path d="M84 58l38-18 38 18v34H84"/><path d="M100 70h18v22h-18z"/><path d="M136 70h14v12h-14z"/></svg></span>
@@ -865,7 +847,7 @@ h1,h2,h3{overflow-wrap:break-word}
       <article class="typ fade">
         <span class="typ-bild" aria-hidden="true"><svg viewBox="0 0 220 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M56 92V62h108v30" stroke-dasharray="6 5"/><path d="M56 62V36l54-24 54 24v26"/><path d="M92 44h18v18H92z"/><path d="M126 44h18v18h-18z"/></svg></span>
         <h3>Aufstockung</h3>
-        <p>Erweiterung nach oben statt zur Seite. Sinnvoll, wenn das Grundstück eng ist, verlangt aber immer eine Prüfung des Tragwerks und berührt Abstands&shy;flächen und Brandschutz.</p>
+        <p>Erweiterung nach oben statt zur Seite. Sinnvoll bei engem Grundstück. Sie verlangt immer eine Prüfung der Statik und berührt Abstands&shy;flächen und Brandschutz.</p>
         <span class="typ-tag antrag">mit Bauantrag</span>
       </article>
       <article class="typ fade d1">
@@ -892,7 +874,7 @@ h1,h2,h3{overflow-wrap:break-word}
       <article class="res fade">
         <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9z"/><path d="M13 3v7h7"/><path d="M8.5 15.5l2 2 4-4.5"/></svg></span>
         <h3>Schriftliche Einordnung</h3>
-        <p>Was auf Ihrem Grundstück zulässig ist: Bebauungs&shy;plan oder § 34, Abstands&shy;flächen, Grenzbebauung, brandschutzrelevante Punkte. Schwarz auf weiß, nicht nur mündlich.</p>
+        <p>Was auf Ihrem Grundstück zulässig ist: Bebauungs&shy;plan oder §&nbsp;34, Abstands&shy;flächen, Grenzbebauung, brandschutzrelevante Punkte. Schwarz auf weiß, nicht nur mündlich.</p>
       </article>
       <article class="res fade d1">
         <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M14 21v-6h5v6"/><path d="M8 12h3v3H8z"/></svg></span>
@@ -946,8 +928,8 @@ h1,h2,h3{overflow-wrap:break-word}
         <span class="pdlg-tag"><span class="pdlg-dot" aria-hidden="true"></span> Der Irrtum</span>
         <div class="pdlg-no">01</div>
         <h4 id="irr-01-t">Genehmigungsfrei ist nicht regelfrei</h4>
-        <p>In Rheinland-Pfalz sind zu ebener Erde liegende, unbeheizte Anbauten wie Wintergärten und Terrassen&shy;über&shy;dachungen bis 50 Kubikmeter umbauten Raums bei Wohngebäuden der Gebäudeklassen 1 bis 3 vom Genehmigungsverfahren freigestellt, außerhalb des Außenbereichs.</p>
-        <p>Freigestellt ist damit nur das Verfahren. Abstands&shy;flächen, die Festsetzungen des Bebauungs&shy;plans und der Brandschutz gelten unverändert weiter. Wer ohne Prüfung baut, hat im Zweifel eine Anlage stehen, die materiell rechtswidrig ist. Die Bauaufsicht kann sie dann zurückbauen lassen, und zwar auch Jahre später.</p>
+        <p>In Rheinland-Pfalz sind zu ebener Erde liegende, unbeheizte Anbauten wie Wintergärten und Terrassen&shy;über&shy;dachungen bis 50&nbsp;Kubikmeter umbauten Raums bei Wohngebäuden der Gebäudeklassen 1 bis 3 vom Genehmigungsverfahren freigestellt, außerhalb des Außenbereichs.</p>
+        <p>Frei ist damit nur das Verfahren. Abstands&shy;flächen, die Festsetzungen des Bebauungs&shy;plans und der Brandschutz gelten unverändert weiter, und die Verantwortung dafür liegt allein bei Ihnen, weil niemand mehr prüft. Wer ohne eigene Prüfung baut, hat im Zweifel eine Anlage stehen, die materiell rechtswidrig ist. Die Bauaufsicht kann dann die Beseitigung verlangen, auch Jahre nach dem Bau.</p>
       </div>
     </dialog>
     <dialog class="pdlg" id="irr-02" aria-labelledby="irr-02-t">
@@ -957,7 +939,8 @@ h1,h2,h3{overflow-wrap:break-word}
         <div class="pdlg-no">02</div>
         <h4 id="irr-02-t">Zustimmung ersetzt keine Genehmigung</h4>
         <p>Hält Ihr Anbau alle Vorschriften ein, brauchen Sie die Zustimmung des Nachbarn nicht. Hält er sie nicht ein, hilft ein freundliches Wort über den Zaun ebenfalls nicht weiter.</p>
-        <p>Wichtig wird die Zustimmung dort, wo abgewichen werden soll: bei einer Abweichung von den Abstands&shy;flächen, bei einer Befreiung von den Festsetzungen des Bebauungs&shy;plans oder wenn eine Abstands&shy;fläche auf dem Nachbar&shy;grundstück liegen müsste. Dann braucht es je nach Fall eine Baulast, also eine Eintragung, die auch für spätere Eigentümer gilt. Ein mündliches Einverständnis bindet den nächsten Eigentümer nicht.</p>
+        <p>Wichtig wird die Zustimmung dort, wo von einer Vorschrift abgewichen werden soll, die auch dem Schutz des Nachbarn dient. In Rheinland-Pfalz sind ihm Lageplan und Bauzeichnungen dann zur Unterschrift vorzulegen, und die Zustimmung ist der Bauaufsicht nachzuweisen.</p>
+        <p>Verweigert er sie, ist das noch kein Aus. Die Bauaufsicht teilt ihm die geplante Abweichung mit, er kann binnen zwei Wochen Einwendungen erheben, danach entscheidet die Behörde. Soll dagegen dauerhaft eine Fläche des Nachbar&shy;grundstücks in Anspruch genommen werden, braucht es eine Baulast. Die wird eingetragen und gilt auch für spätere Eigentümer. Ein mündliches Einverständnis tut das nicht.</p>
       </div>
     </dialog>
     <dialog class="pdlg" id="irr-03" aria-labelledby="irr-03-t">
@@ -967,7 +950,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <div class="pdlg-no">03</div>
         <h4 id="irr-03-t">Der Plan regelt mehr als die Baugrenze</h4>
         <p>Neben Baugrenzen und Baulinien setzt ein Bebauungs&shy;plan regelmäßig auch das Maß der Nutzung fest, etwa über die Grund&shy;flächen&shy;zahl. Ein Anbau vergrößert die überbaute Fläche und kann diese Zahl reißen, obwohl er innerhalb des Baufensters bleibt. Dazu kommen Festsetzungen zu Bauweise, Dachform und teils zur First&shy;richtung.</p>
-        <p>Und selbst wenn der Bebauungs&shy;plan alles erlaubt: Die Abstands&shy;flächen der Landes&shy;bauordnung gelten daneben weiter. Beide Ebenen müssen zusammen aufgehen, nicht nur eine.</p>
+        <p>Und selbst wenn der Bebauungs&shy;plan alles erlaubt: Die Abstands&shy;flächen der Landes&shy;bauordnung gelten daneben weiter. Sie entfallen nur an den Wänden, die nach den Festsetzungen des Plans ohne Grenzabstand gebaut werden müssen oder unter den dort genannten Voraussetzungen gebaut werden dürfen, etwa in geschlossener Bauweise. Sonst müssen beide Ebenen zusammen aufgehen, nicht nur eine.</p>
       </div>
     </dialog>
     <dialog class="pdlg" id="irr-04" aria-labelledby="irr-04-t">
@@ -977,7 +960,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <div class="pdlg-no">04</div>
         <h4 id="irr-04-t">Beheizt ist etwas anderes als unbeheizt</h4>
         <p>Die Verfahrensfreiheit für Wintergärten knüpft ausdrücklich daran an, dass der Anbau unbeheizt ist. Sobald eine Heizung eingebaut oder die vorhandene Anlage erweitert wird, greift sie nicht mehr.</p>
-        <p>Ein beheizter Wintergarten ist Aufenthalts&shy;raum und damit Wohnraum. Damit kommen die Anforderungen an Wärmeschutz und Energieeinsparung dazu, die Fläche zählt bei der Wohnfläche mit, und die Abstands&shy;flächen bemessen sich nach seiner Wandhöhe. Wer das erst nach dem Bau merkt, steht vor einem nachträglichen Antrag mit ungewissem Ausgang.</p>
+        <p>Ein beheizter Wintergarten ist Aufenthalts&shy;raum und damit Wohnraum. Damit kommen die Anforderungen an Wärmeschutz und Energieeinsparung dazu, und die Abstands&shy;flächen bemessen sich nach seiner Wandhöhe. Auch die Wohnfläche ändert sich: Nach der Wohn&shy;flächen&shy;verordnung zählt ein unbeheizbarer Wintergarten zur Hälfte, ein beheizbarer voll. Wer das erst nach dem Bau merkt, steht vor einem nachträglichen Antrag mit ungewissem Ausgang.</p>
       </div>
     </dialog>
     <p class="fnote fnote-center">Die Angaben geben den allgemeinen Rahmen der Landes&shy;bauordnung Rheinland-Pfalz und des Baugesetzbuchs wieder, Stand August 2026. Sie ersetzen keine Prüfung des Einzelfalls und keine Rechtsberatung.</p>
@@ -991,7 +974,7 @@ h1,h2,h3{overflow-wrap:break-word}
     <div class="flow" id="flow">
       <div class="flow-rail"></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">01</span><span class="stitle">Erstgespräch</span></div><p>Sie schildern uns Ihr Vorhaben, wir sehen uns Lage und Bestand an. Am Telefon geben wir eine erste Einschätzung, für eine belastbare Aussage schauen wir uns das Grundstück an.</p></div>
-      <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Baurecht prüfen</span></div><p>Wir holen den Bebauungs&shy;plan oder werten die nähere Umgebung nach § 34 aus, rechnen die Abstands&shy;flächen und ordnen die brandschutzrelevanten Punkte ein. Am Ende steht schriftlich, was geht.</p></div>
+      <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Baurecht prüfen</span></div><p>Wir holen den Bebauungs&shy;plan oder werten die nähere Umgebung nach §&nbsp;34 aus, rechnen die Abstands&shy;flächen und ordnen die brandschutzrelevanten Punkte ein. Am Ende steht schriftlich, was geht.</p></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">03</span><span class="stitle">Entwurf</span></div><p>Wir entwerfen den Anbau im Rahmen dessen, was zulässig ist. Grundrisse, Ansichten und Schnitte, abgestimmt mit Ihnen, bis die Lösung sitzt.</p></div>
       <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Bauantrag</span></div><p>Wir stellen die Bauvorlagen zusammen, holen die nötigen Nachweise von Fachplanern ein und reichen den Antrag bei der Bauaufsicht ein.</p></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">05</span><span class="stitle">Genehmigung</span></div><p>Wir kümmern uns um Rückfragen des Amtes und behalten die Fristen im Blick. Auf Wunsch begleiten wir danach auch die Ausführung.</p></div>
@@ -1052,11 +1035,11 @@ h1,h2,h3{overflow-wrap:break-word}
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Häufige Fragen</span><h2>Gut zu wissen.</h2></div>
     <div class="faq-wrap">
-      <details class="faq fade" name="faq"><summary>Brauche ich für einen Wintergarten eine Baugenehmigung?<span class="fq-i">+</span></summary><div class="fq-a"><p>In Rheinland-Pfalz sind zu ebener Erde liegende, unbeheizte Anbauten wie Wintergärten und Terrassen&shy;über&shy;dachungen bis zu 50 Kubikmeter umbauten Raums bei Wohngebäuden der Gebäudeklassen 1 bis 3 genehmigungsfrei, außerhalb des Außenbereichs.</p><p>Entscheidend ist das Wort unbeheizt. Sobald der Wintergarten beheizt wird, an die Heizung angeschlossen ist oder als Aufenthalts&shy;raum gilt, greift diese Regel nicht mehr.</p><p>Genehmigungsfrei heißt außerdem nicht regelfrei: Abstands&shy;flächen, Bebauungs&shy;plan und Brandschutz gelten weiter.</p></div></details>
-      <details class="faq fade" name="faq"><summary>Wie nah darf ich mit dem Anbau an die Grundstücks&shy;grenze?<span class="fq-i">+</span></summary><div class="fq-a"><p>Vor den Außenwänden muss eine Abstands&shy;fläche liegen, und zwar auf dem eigenen Grundstück. In Rheinland-Pfalz beträgt ihre Tiefe 0,4 der Wandhöhe, mindestens jedoch 3 Meter. Ein Anbau mit 6 Metern Wandhöhe braucht also nicht 2,40 Meter, sondern 3 Meter Abstand.</p><p>Im Saarland gilt eine Erleichterung: Bei Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen genügen 3 Meter, unabhängig von der Wandhöhe.</p><p>Bestimmte Gebäude ohne Aufenthalts&shy;räume und ohne Feuerstätten, etwa Garagen oder Geräteräume, dürfen unter Bedingungen direkt an der Grenze stehen. Für Wohnraum gilt das nicht.</p></div></details>
+      <details class="faq fade" name="faq"><summary>Brauche ich für einen Wintergarten eine Baugenehmigung?<span class="fq-i">+</span></summary><div class="fq-a"><p>In Rheinland-Pfalz sind zu ebener Erde liegende, unbeheizte Anbauten wie Wintergärten und Terrassen&shy;über&shy;dachungen bis zu 50&nbsp;Kubikmeter umbauten Raums bei Wohngebäuden der Gebäudeklassen 1 bis 3 genehmigungsfrei, außerhalb des Außenbereichs.</p><p>Entscheidend ist das Wort unbeheizt. Sobald der Wintergarten beheizt wird, an die Heizung angeschlossen ist oder als Aufenthalts&shy;raum gilt, greift diese Regel nicht mehr.</p><p>Genehmigungsfrei heißt außerdem nicht regelfrei: Abstands&shy;flächen, Bebauungs&shy;plan und Brandschutz gelten weiter.</p></div></details>
+      <details class="faq fade" name="faq"><summary>Wie nah darf ich mit dem Anbau an die Grundstücks&shy;grenze?<span class="fq-i">+</span></summary><div class="fq-a"><p>Vor den Außenwänden muss eine Abstands&shy;fläche liegen, und zwar auf dem eigenen Grundstück. In Rheinland-Pfalz beträgt ihre Tiefe 0,4 der Wandhöhe, mindestens jedoch 3&nbsp;Meter. Ein Anbau mit 6 Metern Wandhöhe braucht also nicht 2,40&nbsp;Meter, sondern 3&nbsp;Meter Abstand.</p><p>Im Saarland gilt eine Erleichterung: Bei Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen genügen 3&nbsp;Meter, unabhängig von der Wandhöhe.</p><p>Bestimmte Gebäude ohne Aufenthalts&shy;räume und ohne Feuerstätten, etwa Garagen oder Geräteräume, dürfen unter Bedingungen direkt an der Grenze stehen. Für Wohnraum gilt das nicht.</p></div></details>
       <details class="faq fade" name="faq"><summary>Muss mein Nachbar dem Anbau zustimmen?<span class="fq-i">+</span></summary><div class="fq-a"><p>Grundsätzlich nicht. Wenn das Vorhaben die Vorschriften einhält, ist die Zustimmung des Nachbarn nicht erforderlich.</p><p>Sie wird aber dort wichtig, wo abgewichen werden soll: bei einer Abweichung von den Abstands&shy;flächen, bei einer Befreiung von den Festsetzungen des Bebauungs&shy;plans oder wenn eine Abstands&shy;fläche auf dem Nachbar&shy;grundstück gesichert werden muss. Dafür braucht es je nach Fall eine Baulast. Ohne Zustimmung kann der Nachbar gegen die Genehmigung vorgehen, wenn eine nachbarschützende Vorschrift betroffen ist.</p></div></details>
       <details class="faq fade" name="faq"><summary>Mein Haus steht heute schon zu nah an der Grenze. Ist ein Anbau dann ausgeschlossen?<span class="fq-i">+</span></summary><div class="fq-a"><p>Nicht zwingend. Die Landes&shy;bauordnung Rheinland-Pfalz wurde geändert, die Neuregelungen sind zum 1. November 2025 und zum 1. Januar 2026 in Kraft getreten.</p><p>An rechtmäßig bestehenden Gebäuden, die die heutigen Abstands&shy;flächen nicht einhalten, sind seither unter bestimmten Voraussetzungen unter anderem Vor- und Anbauten sowie Aufstockungen möglich. Ob das für Ihr Gebäude greift, hängt vom Einzelfall ab und gehört in die Vorprüfung.</p></div></details>
-      <details class="faq fade" name="faq"><summary>Übernehmen Sie auch den Brandschutznachweis?<span class="fq-i">+</span></summary><div class="fq-a"><p>Wir sind keine Brand&shy;schutz&shy;sach&shy;verständigen und erstellen keine Brand&shy;schutz&shy;nachweise.</p><p>Was wir tun: Wir sagen Ihnen früh, ob Ihr Anbau die Grenze zum Brandschutz überhaupt berührt. Das ist regelmäßig dann der Fall, wenn eine Abschlusswand näher als 2,50 Meter an der Nachbargrenze steht, denn dann verlangt die Landes&shy;bauordnung eine Gebäude&shy;abschluss&shy;wand.</p><p>Wird ein Nachweis nötig, binden wir einen Sachverständigen ein und stimmen die Planung mit ihm ab.</p></div></details>
+      <details class="faq fade" name="faq"><summary>Übernehmen Sie auch den Brandschutznachweis?<span class="fq-i">+</span></summary><div class="fq-a"><p>Wir sind keine Brand&shy;schutz&shy;sach&shy;verständigen und erstellen keine Brand&shy;schutz&shy;nachweise.</p><p>Was wir tun: Wir sagen Ihnen früh, ob Ihr Anbau die Grenze zum Brandschutz überhaupt berührt. Das ist regelmäßig dann der Fall, wenn eine Abschlusswand näher als 2,50&nbsp;Meter an der Nachbargrenze steht, denn dann verlangt die Landes&shy;bauordnung eine Gebäude&shy;abschluss&shy;wand.</p><p>Wird ein Nachweis nötig, binden wir einen Sachverständigen ein und stimmen die Planung mit ihm ab.</p></div></details>
       <details class="faq fade" name="faq"><summary>Was kostet die Planung eines Anbaus?<span class="fq-i">+</span></summary><div class="fq-a"><p>Das hängt von Größe und Art des Anbaus ab und davon, wie weit wir Sie begleiten sollen. Eine überdachte Terrasse ist anders zu bewerten als ein zweigeschossiger Anbau mit Eingriff in das Tragwerk.</p><p>Wer erst wissen will, ob überhaupt etwas geht, startet mit dem Standort-Check. Dessen Kosten rechnen wir an, wenn Sie danach mit uns weiterplanen.</p></div></details>
     </div>
   </div>
