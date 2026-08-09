@@ -1503,7 +1503,7 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       }
       else punkte.push('<b>Flacher planen hilft hier nicht:</b> unter 3 m greift das Mindestmaß, unabhängig von der Höhe.');
       punkte.push('<b>Abstandsfläche auf dem Nachbargrundstück ('+LAND[l].baulast+'):</b> Der Nachbar sichert den fehlenden Teil durch eine Baulast. Er darf die Fläche dann weder überbauen noch auf seine eigenen Abstandsflächen anrechnen.');
-      punkte.push('<b>Abweichung beantragen ('+LAND[l].abweichung+'):</b> Die Bauaufsicht soll sie zulassen, wenn nachbarliche Interessen gewahrt bleiben. Vorhaben im Bestand nennt das Gesetz dabei ausdrücklich.');
+      punkte.push('<b>Abweichung beantragen ('+LAND[l].abweichung+'):</b> Bleibt der Zweck der Vorschrift gewahrt und sind die Interessen des Nachbarn berücksichtigt, ist die Zulassung der Regelfall, nicht die Ausnahme. Vorhaben im Bestand nennt das Gesetz dabei ausdrücklich.');
     }
     wliste.innerHTML=punkte.slice(0,4).map(function(t){return '<li>'+t+'</li>'}).join('');
     wege.hidden=false;
