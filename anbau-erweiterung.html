@@ -319,6 +319,9 @@ p{text-wrap:pretty}
    Tastatur und Vorlesesoftware ohne Zusatzarbeit funktionieren. */
 .abx-wahl{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2.4rem;margin-bottom:1.4rem}
 .abx-gruppe{border:none;padding:0;margin:0;min-width:0}
+.abx-gruppe[hidden]{display:none}
+/* Die Hoehenfrage steht in der zweiten Zeile unter dem Bundesland, in
+   derselben Spaltenbreite wie die beiden Umschalter darueber. */
 .abx-wahl-hint{font-size:.74rem;line-height:1.55;color:var(--ink-soft);margin:-.4rem 0 1.3rem}
 .abx-glab{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:.45rem;padding:0}
 .abx-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:4px}
@@ -831,6 +834,13 @@ h1,h2,h3{overflow-wrap:break-word}
             <input type="radio" name="abArt" id="abArtG" value="gross"><label for="abArtG">Mehrfamilienhaus</label>
           </div>
         </fieldset>
+        <fieldset class="abx-gruppe abx-weit" id="abHoehGr" hidden>
+          <legend class="abx-glab">Oberster Fußboden über Gelände</legend>
+          <div class="abx-seg">
+            <input type="radio" name="abHoeh" id="abHoehN" value="nein" checked><label for="abHoehN">Bis 7&nbsp;m</label>
+            <input type="radio" name="abHoeh" id="abHoehJ" value="ja"><label for="abHoehJ">Über 7&nbsp;m</label>
+          </div>
+        </fieldset>
       </div>
       <p class="abx-wahl-hint" id="abWahlHint">In Rheinland-Pfalz ändert die Gebäude-Auswahl nichts: Für alle Wohngebäude gilt 0,4&nbsp;H der Wandhöhe, mindestens 3&nbsp;m.</p>
 
@@ -904,7 +914,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <span class="abx-neu">Neu 2025/26 · nur Rheinland-Pfalz</span>
       </div>
     </div>
-    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2, also mit höchstens zwei Nutzungseinheiten von zusammen nicht mehr als 400&nbsp;m², und höchstens drei oberirdischen Geschossen; der Rechner wendet sie bis 9,5&nbsp;m Wandhöhe an, darüber ist ein Wohngebäude praktisch keine Klasse 1 oder 2 mehr. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
+    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2, also mit höchstens zwei Nutzungseinheiten von zusammen nicht mehr als 400&nbsp;m² und einer Höhe bis 7&nbsp;m, gemessen bis Oberkante Fußboden des höchstgelegenen Geschosses mit Aufenthalts&shy;raum über der Gelände&shy;oberfläche im Mittel, und höchstens drei oberirdischen Geschossen; der Rechner wendet sie bis 9,5&nbsp;m Wandhöhe an, darüber ist ein Wohngebäude praktisch keine Klasse 1 oder 2 mehr. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
   </div>
 </section>
 
@@ -996,7 +1006,7 @@ h1,h2,h3{overflow-wrap:break-word}
           <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9z"/><path d="M13 3v7h7"/><path d="M8.5 15.5l2 2 4-4.5"/></svg></span>
           <h3>Schriftliche Einordnung</h3><span class="akk-x" aria-hidden="true">+</span>
         </summary>
-        <div class="akk-b"><p>Was auf Ihrem Grundstück zulässig ist: Bebauungs&shy;plan oder §&nbsp;34, Abstands&shy;flächen, Grenzbebauung, brandschutzrelevante Punkte. Schwarz auf weiß, nicht nur mündlich.</p></div>
+        <div class="akk-b"><p>Was auf Ihrem Grundstück zulässig ist: Bebauungs&shy;plan oder §\u00a034, Abstands&shy;flächen, Grenzbebauung, brandschutzrelevante Punkte. Schwarz auf weiß, nicht nur mündlich.</p></div>
       </details>
       <details class="res fade d1 akk" open>
         <summary>
@@ -1403,12 +1413,13 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
      unabhaengig von der Wandhoehe. Das ist der einzige Unterschied,
      der sich hier auswirkt.
      Gebaeudeklasse 1 und 2 setzt nach § 2 Abs. 3 LBO eine Hoehe bis 7 m
-     voraus, gemessen bis zum Fussboden des obersten Geschosses mit
-     Aufenthaltsraeumen. Mit ueblichen Geschosshoehen entspricht das
-     Wandhoehen bis etwa 9 bis 10 m. Der Rechner wendet die Erleichterung
-     deshalb nur bis KLEINMAX = 9,5 m Wandhoehe an und rechnet darueber
-     mit 0,4 H, damit fuer hohe Gebaeude kein zu kleiner Abstand
-     angezeigt wird.
+     voraus. Hoehe heisst dort das Mass der Fussbodenoberkante des
+     hoechstgelegenen Geschosses mit Aufenthaltsraum ueber der
+     Gelaendeoberflaeche im Mittel, also nicht die Wandhoehe. Danach
+     fragt der Rechner deshalb gesondert. Frueher schaetzte er das aus
+     der Wandhoehe (Grenze 9,5 m); das war zu grob, weil ein Haus mit
+     hohem Drempel oder steilem Dach 10 m Wandhoehe haben kann und
+     trotzdem in die Klasse faellt.
    Alles rechnet im Browser, es werden keine Angaben uebertragen.
    ------------------------------------------------------------------ */
 (function(){
@@ -1419,37 +1430,43 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
   var wand=e('abWand'),dach=e('abDach'),hl=e('abHl'),ht1=e('abHt1'),htx=e('abHtx'),
       band=e('abBand'),bandT=e('abBandT'),gl=e('abGl'),gt=e('abGt'),nach=e('abNach'),
       ml=e('abMl'),mt2=e('abMt2'),mtx=e('abMtx'),
-      hw=e('abHw'),aw=e('abAw'),status=e('abStatus'),satz=e('abSatz'),formel=e('abFormel'),
+      hoehGr=e('abHoehGr'),hw=e('abHw'),aw=e('abAw'),status=e('abStatus'),satz=e('abSatz'),formel=e('abFormel'),
       wege=e('abWege'),wliste=e('abWliste'),wlab=e('abWlab'),wahlHint=e('abWahlHint');
   var WAHLTEXT={
     rp:'In Rheinland-Pfalz ändert die Gebäude-Auswahl nichts: Für alle Wohngebäude gilt 0,4 H der Wandhöhe, mindestens 3 m.',
-    sl:'Im Saarland zählt die Gebäude-Auswahl: Bei kleinen Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen genügen pauschal 3 m, sonst gilt 0,4 H. Ab 9,5 m Wandhöhe rechnet der Rechner vorsichtshalber mit 0,4 H, weil diese Klassen dann praktisch ausgeschlossen sind.'
+    sl:'Im Saarland zählt die Gebäude-Auswahl: Bei kleinen Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen genügen pauschal 3 m, sonst gilt 0,4 H. Für die Klasse zählt neben der Zahl der Wohnungen die Höhe des obersten Fußbodens, gemessen bis Oberkante Fertigfußboden des höchsten Geschosses mit Aufenthaltsraum über dem Gelände im Mittel.'
   };
 
   var LAND={
-    rp:{name:'Rheinland-Pfalz', ort:'in Rheinland-Pfalz', tiefe:'§ 8 Abs. 6 LBauO Rheinland-Pfalz',
-        abweichung:'§ 69 LBauO', baulast:'§ 9 LBauO', klein:false},
-    sl:{name:'Saarland', ort:'im Saarland', tiefe:'§ 7 Abs. 5 LBO Saarland',
-        abweichung:'§ 68 LBO', baulast:'§ 8 Abs. 5 LBO', klein:true}
+    rp:{name:'Rheinland-Pfalz', ort:'in Rheinland-Pfalz', tiefe:'§\u00a08 Abs. 6 LBauO Rheinland-Pfalz',
+        abweichung:'§\u00a069 LBauO', baulast:'§\u00a09 LBauO', klein:false},
+    sl:{name:'Saarland', ort:'im Saarland', tiefe:'§\u00a07 Abs. 5 LBO Saarland',
+        abweichung:'§\u00a068 LBO', baulast:'§\u00a08 Abs. 5 LBO', klein:true}
   };
   function land(){return document.querySelector('input[name=abLand]:checked').value}
   function art(){return document.querySelector('input[name=abArt]:checked').value}
   function z(n){return n.toFixed(2).replace('.',',')}
 
-  /* Erforderliche Tiefe je Bundesland und Gebaeudeart.
+  /* Erforderliche Tiefe je Bundesland, Gebaeudeart und Gebaeudehoehe.
      Die 3-m-Erleichterung gilt nur fuer Gebaeudeklasse 1 und 2, siehe
-     Rechengrundlage oben; ab KLEINMAX Wandhoehe gilt wieder 0,4 H. */
-  var KLEINMAX=9.5;
-  function kleinGilt(l,ar,h){return LAND[l].klein && ar==='klein' && h<=KLEINMAX}
-  function noetig(l,ar,h){
-    if(kleinGilt(l,ar,h)) return 3;                  /* Saarland: 3 m genuegen */
+     Rechengrundlage oben. Liegt der oberste Fussboden ueber 7 m, ist die
+     Klasse ausgeschlossen und es gilt wieder 0,4 H. */
+  function hochGebaut(){return document.querySelector('input[name=abHoeh]:checked').value==='ja'}
+  function kleinGilt(l,ar,hoch){return LAND[l].klein && ar==='klein' && !hoch}
+  function noetig(l,ar,h,hoch){
+    if(kleinGilt(l,ar,hoch)) return 3;               /* Saarland: 3 m genuegen */
     return Math.max(0.4*h,3);
   }
 
   function zeichnen(){
     var h=parseFloat(rH.value), a=parseFloat(rA.value), l=land(), ar=art();
+    /* Die Hoehenfrage wirkt sich nur dort aus, wo es die Erleichterung gibt.
+       Sonst bleibt sie weg, statt eine Auswahl ohne Folgen anzubieten. */
+    var zaehlt=LAND[l].klein && ar==='klein';
+    hoehGr.hidden=!zaehlt;
+    var hoch=hochGebaut();
     wahlHint.textContent=WAHLTEXT[l];
-    var erf=noetig(l,ar,h);
+    var erf=noetig(l,ar,h,hoch);
     var oben=BODEN-h*PY, gx=WAND+a*PX, bw=erf*PX;
     wand.setAttribute('y',oben.toFixed(1)); wand.setAttribute('height',(BODEN-oben).toFixed(1));
     dach.setAttribute('d','M0 '+oben.toFixed(1)+'L92 '+(oben-30).toFixed(1)+'L184 '+oben.toFixed(1)+'Z');
@@ -1457,32 +1474,33 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
     htx.setAttribute('y',((oben+BODEN)/2+5).toFixed(1));
     band.setAttribute('width',bw.toFixed(1));
     bandT.setAttribute('x',(WAND+bw/2).toFixed(1));
-    bandT.textContent=z(erf)+' m';
+    bandT.textContent=z(erf)+'\u00a0m';
     gl.setAttribute('x1',gx.toFixed(1)); gl.setAttribute('x2',gx.toFixed(1));
     gt.setAttribute('x',gx.toFixed(1));
     nach.setAttribute('x',gx.toFixed(1)); nach.setAttribute('width',Math.max(0,RAND-gx).toFixed(1));
     ml.setAttribute('x2',gx.toFixed(1)); mt2.setAttribute('x1',gx.toFixed(1)); mt2.setAttribute('x2',gx.toFixed(1));
     mtx.setAttribute('x',((WAND+gx)/2).toFixed(1));
-    mtx.textContent = a<0.05 ? 'an der Grenze' : z(a)+' m';
+    mtx.textContent = a<0.05 ? 'an der Grenze' : z(a)+'\u00a0m';
 
     var passt=a+0.0001>=erf, diff=Math.abs(a-erf);
     band.setAttribute('class','ab-band '+(passt?'gut':'eng'));
-    hw.textContent=z(h)+' m'; aw.textContent=z(a)+' m';
+    hw.textContent=z(h)+'\u00a0m'; aw.textContent=z(a)+'\u00a0m';
     status.className='abx-status '+(passt?'gut':'eng');
     status.textContent=passt?'passt':'zu wenig';
 
-    satz.innerHTML='Bei einer Wandhöhe von '+z(h)+' m sind '+LAND[l].ort+' <b>'+z(erf)+' m</b> Abstandsfläche nötig. '+
-      (!passt ? 'Geplant sind '+z(a)+' m, es fehlen <b>'+z(diff)+' m</b>.'
-              : diff<0.005 ? 'Geplant sind '+z(a)+' m, das reicht genau aus.'
-                           : 'Geplant sind '+z(a)+' m, also '+z(diff)+' m mehr als verlangt.');
+    satz.innerHTML='Bei einer Wandhöhe von '+z(h)+'\u00a0m sind '+LAND[l].ort+' <b>'+z(erf)+'\u00a0m</b> Abstandsfläche nötig. '+
+      (!passt ? 'Geplant sind '+z(a)+'\u00a0m, es fehlen <b>'+z(diff)+'\u00a0m</b>.'
+              : diff<0.005 ? 'Geplant sind '+z(a)+'\u00a0m, das reicht genau aus.'
+                           : 'Geplant sind '+z(a)+'\u00a0m, also '+z(diff)+'\u00a0m mehr als verlangt.');
 
     /* Rechenweg mit Verweis auf die Vorschrift */
-    var sonder = kleinGilt(l,ar,h);
-    var kleinAus = (LAND[l].klein && ar==='klein' && !sonder);
+    var sonder = kleinGilt(l,ar,hoch);
+    var kleinAus = (zaehlt && !sonder);   /* Klasse allein an der Hoehe gescheitert */
     formel.textContent = sonder
-      ? 'Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen: 3,00 m genügen, unabhängig von der Wandhöhe ('+LAND[l].tiefe+')'
-      : '0,4 × '+z(h)+' m = '+z(0.4*h)+' m · Mindestmaß 3,00 m · maßgeblich '+z(erf)+' m ('+LAND[l].tiefe+')'
-        +(kleinAus?' · bei dieser Wandhöhe ist ein Wohngebäude in der Regel keine Gebäudeklasse 1 oder 2 mehr, die 3-m-Erleichterung gilt deshalb nicht':'');
+      ? 'Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen: 3,00\u00a0m genügen, unabhängig von der Wandhöhe ('+LAND[l].tiefe+')'
+        +(h>9.5?' · bei dieser Wandhöhe kommt der oberste Fußboden nur mit hohem Drempel oder steilem Dach unter 7\u00a0m, prüfen Sie das Maß':'')
+      : '0,4\u00a0× '+z(h)+'\u00a0m = '+z(0.4*h)+'\u00a0m · Mindestmaß 3,00 m · maßgeblich '+z(erf)+'\u00a0m ('+LAND[l].tiefe+')'
+        +(kleinAus?' · der oberste Fußboden liegt über 7\u00a0m, damit ist das Gebäude keine Gebäudeklasse 1 oder 2 und die 3-m-Erleichterung gilt nicht':'');
 
     /* Konkrete Wege, je nach Lage hoechstens drei */
     var punkte=[], HMAX=parseFloat(rH.max);
@@ -1490,18 +1508,17 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       wlab.textContent='Gut zu wissen';
       punkte.push(diff<0.005
         ? '<b>Es reicht genau aus.</b> Schon wenige Zentimeter weniger wären zu wenig, planen Sie eine kleine Reserve ein.'
-        : '<b>Reserve '+z(diff)+' m.</b> Prüfen Sie zusätzlich den Bebauungsplan, er kann eigene Baugrenzen festsetzen.');
-      if(sonder) punkte.push('<b>Nur für kleine Wohngebäude.</b> Gebäudeklasse 1 und 2 heißt: höchstens zwei Nutzungseinheiten mit zusammen 400 m². Bei mehr Einheiten, mehr als drei Geschossen oder größerer Höhe gelten wieder 0,4 H.');
-      else if(erf>3.0001 && a/0.4>h+0.3) punkte.push('<b>Luft nach oben.</b> Bis '+z(Math.min(HMAX,a/0.4))+' m Wandhöhe bliebe dieser Abstand ausreichend.');
+        : '<b>Reserve '+z(diff)+'\u00a0m.</b> Prüfen Sie zusätzlich den Bebauungsplan, er kann eigene Baugrenzen festsetzen.');
+      if(sonder) punkte.push('<b>Nur für kleine Wohngebäude.</b> Gebäudeklasse 1 und 2 heißt: höchstens zwei Nutzungseinheiten mit zusammen 400\u00a0m², oberster Fußboden bis 7\u00a0m über dem Gelände. Bei mehr Einheiten, mehr Fläche oder mehr als drei Geschossen gelten wieder 0,4 H.');
+      else if(erf>3.0001 && a/0.4>h+0.3) punkte.push('<b>Luft nach oben.</b> Bis '+z(Math.min(HMAX,a/0.4))+'\u00a0m Wandhöhe bliebe dieser Abstand ausreichend.');
     } else {
       wlab.textContent='Daraus resultiert';
-      punkte.push('<b>Abstand vergrößern:</b> '+z(diff)+' m mehr.');
+      punkte.push('<b>Abstand vergrößern:</b> '+z(diff)+'\u00a0m mehr.');
       if(erf>3.0001 && a>=3){
-        /* Im Saarland reicht bei kleinen Wohngebaeuden 3 m bis KLEINMAX Wandhoehe */
-        var hOk=(LAND[l].klein && ar==='klein') ? Math.max(a/0.4,KLEINMAX) : a/0.4;
-        punkte.push('<b>Flacher planen:</b> bis '+z(hOk)+' m Wandhöhe reicht der geplante Abstand, etwa eingeschossig oder mit flacherem Dach.');
+        punkte.push('<b>Flacher planen:</b> bis '+z(a/0.4)+'\u00a0m Wandhöhe reicht der geplante Abstand, etwa eingeschossig oder mit flacherem Dach.'
+          +(kleinAus?' Kommt der oberste Fußboden dabei unter 7\u00a0m, genügen im Saarland ohnehin 3 m.':''));
       }
-      else punkte.push('<b>Flacher planen hilft hier nicht:</b> unter 3 m greift das Mindestmaß, unabhängig von der Höhe.');
+      else punkte.push('<b>Flacher planen hilft hier nicht:</b> unter 3\u00a0m greift das Mindestmaß, unabhängig von der Höhe.');
       punkte.push('<b>Abstandsfläche auf dem Nachbargrundstück ('+LAND[l].baulast+'):</b> Der Nachbar sichert den fehlenden Teil durch eine Baulast. Er darf die Fläche dann weder überbauen noch auf seine eigenen Abstandsflächen anrechnen.');
       punkte.push('<b>Abweichung beantragen ('+LAND[l].abweichung+'):</b> Bleibt der Zweck der Vorschrift gewahrt und sind die Interessen des Nachbarn berücksichtigt, ist die Zulassung der Regelfall, nicht die Ausnahme. Vorhaben im Bestand nennt das Gesetz dabei ausdrücklich.');
     }
@@ -1510,7 +1527,7 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
   }
   rH.addEventListener('input',zeichnen);
   rA.addEventListener('input',zeichnen);
-  document.querySelectorAll('input[name=abLand],input[name=abArt]').forEach(function(r){
+  document.querySelectorAll('input[name=abLand],input[name=abArt],input[name=abHoeh]').forEach(function(r){
     r.addEventListener('change',zeichnen);
   });
   zeichnen();
