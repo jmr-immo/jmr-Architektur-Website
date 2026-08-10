@@ -324,8 +324,9 @@ p{text-wrap:pretty}
    Auf breiten Schirmen steht sie in einer Zeile, sonst bricht sie um. */
 .abx-frage{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .9rem;margin:-.5rem 0 1.15rem}
 .abx-frage[hidden]{display:none}
-.abx-frage-t{flex:1 1 17rem;min-width:0;font-size:.78rem;line-height:1.5;color:var(--ink-soft)}
-.abx-frage-t i{font-style:normal;opacity:.75}
+.abx-frage-t{flex:1 1 17rem;min-width:0;font-size:.8rem;line-height:1.5;font-weight:600;color:var(--white)}
+/* Die Klammer bleibt leicht, damit die Frage selbst traegt. */
+.abx-frage-t i{font-style:normal;font-weight:400;color:var(--ink-soft)}
 .abx-jn{display:inline-flex;flex-shrink:0;gap:3px;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:3px}
 .abx-jn input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .abx-jn label{display:flex;align-items:center;justify-content:center;min-width:48px;min-height:30px;padding:.2rem .6rem;border-radius:6px;font-family:var(--sans);font-weight:600;font-size:.79rem;line-height:1;color:var(--ink-soft);cursor:pointer;transition:background .2s,color .2s}
@@ -381,6 +382,12 @@ p{text-wrap:pretty}
 .abx-wege[hidden]{display:none}
 .abx-wlab{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:.7rem}
 .abx-wege ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0}
+.abx-wege ul[hidden]{display:none}
+/* Einladung statt Loesungsliste, wenn der Abstand nicht reicht */
+.abx-cta[hidden]{display:none}
+.abx-cta p{max-width:46rem;margin:0 0 1.05rem;font-size:.95rem;line-height:1.58;color:var(--ink-soft)}
+.abx-cta p b{color:var(--white);font-weight:600}
+.abx-cta .btn{padding:.8rem 1.45rem;font-size:.9rem}
 .abx-wege li{position:relative;padding-left:1.4rem;font-size:.95rem;line-height:1.58;color:var(--ink-soft)}
 .abx-wege li::before{content:'';position:absolute;left:.15rem;top:.6em;width:7px;height:7px;border-radius:2px;background:var(--accent);opacity:.75}
 .abx-wege li b{color:var(--white);font-weight:600}
@@ -908,8 +915,12 @@ h1,h2,h3{overflow-wrap:break-word}
       </div>
 
       <div class="abx-wege" id="abWege" hidden>
-        <span class="abx-wlab" id="abWlab">Daraus resultiert</span>
+        <span class="abx-wlab" id="abWlab">Gut zu wissen</span>
         <ul id="abWliste"></ul>
+        <div class="abx-cta" id="abCta" hidden>
+          <p><b>Ein zu knapper Abstand ist selten das Ende.</b> Ob und wie sich Ihr Anbau trotzdem umsetzen lässt, hängt von Grundstück, Bestand und Nachbarschaft ab. Wir sehen uns Ihren Fall an und sagen Ihnen, welcher Weg hier trägt.</p>
+          <a href="#kontakt" class="btn btn-accent">Erstgespräch vereinbaren <span class="ar">→</span></a>
+        </div>
       </div>
     </div>
 
@@ -1445,7 +1456,8 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       band=e('abBand'),bandT=e('abBandT'),gl=e('abGl'),gt=e('abGt'),nach=e('abNach'),
       ml=e('abMl'),mt2=e('abMt2'),mtx=e('abMtx'),
       hoehGr=e('abHoehGr'),hw=e('abHw'),aw=e('abAw'),status=e('abStatus'),satz=e('abSatz'),formel=e('abFormel'),
-      wege=e('abWege'),wliste=e('abWliste'),wlab=e('abWlab'),wahlHint=e('abWahlHint');
+      wege=e('abWege'),wliste=e('abWliste'),wlab=e('abWlab'),cta=e('abCta'),
+      wahlHint=e('abWahlHint');
   var WAHLTEXT={
     rp:'In Rheinland-Pfalz ändert die Gebäude-Auswahl nichts: Für alle Wohngebäude gilt 0,4 H der Wandhöhe, mindestens 3\u00a0m, unabhängig von Gebäudeklasse und Höhe. Eine Erleichterung für kleine Wohngebäude wie im Saarland gibt es hier nicht.',
     sl:'Im Saarland zählt die Gebäude-Auswahl: Bei kleinen Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen genügen pauschal 3\u00a0m, sonst gilt 0,4 H.'
@@ -1526,16 +1538,13 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       if(sonder) punkte.push('<b>Nur für kleine Wohngebäude.</b> Gebäudeklasse 1 und 2 heißt: höchstens zwei Nutzungseinheiten mit zusammen 400\u00a0m², oberster Fußboden bis 7\u00a0m über dem Gelände. Bei mehr Einheiten, mehr Fläche oder mehr als drei Geschossen gelten wieder 0,4 H.');
       else if(erf>3.0001 && a/0.4>h+0.3) punkte.push('<b>Luft nach oben.</b> Bis '+z(Math.min(HMAX,a/0.4))+'\u00a0m Wandhöhe bliebe dieser Abstand ausreichend.');
     } else {
-      wlab.textContent='Daraus resultiert';
-      punkte.push('<b>Abstand vergrößern:</b> '+z(diff)+'\u00a0m mehr.');
-      if(erf>3.0001 && a>=3){
-        punkte.push('<b>Flacher planen:</b> bis '+z(a/0.4)+'\u00a0m Wandhöhe reicht der geplante Abstand, etwa eingeschossig oder mit flacherem Dach.'
-          +(kleinAus?' Kommt der oberste Fußboden dabei unter 7\u00a0m, genügen im Saarland ohnehin 3 m.':''));
-      }
-      else punkte.push('<b>Flacher planen hilft hier nicht:</b> unter 3\u00a0m greift das Mindestmaß, unabhängig von der Höhe.');
-      punkte.push('<b>Abstandsfläche auf dem Nachbargrundstück ('+LAND[l].baulast+'):</b> Der Nachbar sichert den fehlenden Teil durch eine Baulast. Er darf die Fläche dann weder überbauen noch auf seine eigenen Abstandsflächen anrechnen.');
-      punkte.push('<b>Abweichung beantragen ('+LAND[l].abweichung+'):</b> Bleibt der Zweck der Vorschrift gewahrt und sind die Interessen des Nachbarn berücksichtigt, ist die Zulassung der Regelfall, nicht die Ausnahme. Vorhaben im Bestand nennt das Gesetz dabei ausdrücklich.');
+      /* Welcher Weg aus einem zu knappen Abstand herausfuehrt, entscheidet der
+         Einzelfall. Statt einer Liste steht hier deshalb die Einladung zum
+         Gespraech; die rechtlichen Einzelheiten stehen in den haeufigen Fragen. */
+      wlab.textContent='Wie es weitergeht';
     }
+    wliste.hidden=!passt;
+    cta.hidden=passt;
     wliste.innerHTML=punkte.slice(0,4).map(function(t){return '<li>'+t+'</li>'}).join('');
     wege.hidden=false;
   }
