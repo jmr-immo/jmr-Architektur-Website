@@ -319,9 +319,23 @@ p{text-wrap:pretty}
    Tastatur und Vorlesesoftware ohne Zusatzarbeit funktionieren. */
 .abx-wahl{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2.4rem;margin-bottom:1.4rem}
 .abx-gruppe{border:none;padding:0;margin:0;min-width:0}
-.abx-gruppe[hidden]{display:none}
-/* Die Hoehenfrage steht in der zweiten Zeile unter dem Bundesland, in
-   derselben Spaltenbreite wie die beiden Umschalter darueber. */
+/* Rueckfrage zur Gebaeudeklasse. Bewusst klein gehalten: sie erscheint nur
+   im Saarland bei kleinen Wohngebaeuden und soll den Rechner nicht aufblaehen.
+   Auf breiten Schirmen steht sie in einer Zeile, sonst bricht sie um. */
+.abx-frage{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .9rem;margin:-.5rem 0 1.15rem}
+.abx-frage[hidden]{display:none}
+.abx-frage-t{flex:1 1 17rem;min-width:0;font-size:.78rem;line-height:1.5;color:var(--ink-soft)}
+.abx-frage-t i{font-style:normal;opacity:.75}
+.abx-jn{display:inline-flex;flex-shrink:0;gap:3px;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:3px}
+.abx-jn input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.abx-jn label{display:flex;align-items:center;justify-content:center;min-width:48px;min-height:30px;padding:.2rem .6rem;border-radius:6px;font-family:var(--sans);font-weight:600;font-size:.79rem;line-height:1;color:var(--ink-soft);cursor:pointer;transition:background .2s,color .2s}
+.abx-jn label:hover{color:var(--white)}
+.abx-jn input:checked+label{background:var(--panel);color:var(--white);box-shadow:0 2px 8px -3px rgba(11,28,43,.35)}
+.abx-jn input:focus-visible+label{outline:2px solid var(--accent);outline-offset:2px}
+/* Auf Geraeten ohne Maus die Tippflaeche vergroessern, ohne den Knopf
+   optisch wachsen zu lassen. */
+@media(hover:none){.abx-jn label{min-height:38px}}
+@media(prefers-reduced-motion:reduce){.abx-jn label{transition:none}}
 .abx-wahl-hint{font-size:.74rem;line-height:1.55;color:var(--ink-soft);margin:-.4rem 0 1.3rem}
 .abx-glab{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:.45rem;padding:0}
 .abx-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:4px}
@@ -834,13 +848,13 @@ h1,h2,h3{overflow-wrap:break-word}
             <input type="radio" name="abArt" id="abArtG" value="gross"><label for="abArtG">Mehrfamilienhaus</label>
           </div>
         </fieldset>
-        <fieldset class="abx-gruppe abx-weit" id="abHoehGr" hidden>
-          <legend class="abx-glab">Oberster Fußboden über Gelände</legend>
-          <div class="abx-seg">
-            <input type="radio" name="abHoeh" id="abHoehN" value="nein" checked><label for="abHoehN">Bis 7&nbsp;m</label>
-            <input type="radio" name="abHoeh" id="abHoehJ" value="ja"><label for="abHoehJ">Über 7&nbsp;m</label>
-          </div>
-        </fieldset>
+      </div>
+      <div class="abx-frage" id="abHoehGr" role="radiogroup" aria-labelledby="abHoehT" hidden>
+        <span class="abx-frage-t" id="abHoehT">Oberkante Fußboden des obersten Geschosses mit Aufenthalts&shy;räumen über 7 m? <i>(gemessen ab Gelände&shy;oberfläche im Mittel)</i></span>
+        <span class="abx-jn">
+          <input type="radio" name="abHoeh" id="abHoehJ" value="ja"><label for="abHoehJ">Ja</label>
+          <input type="radio" name="abHoeh" id="abHoehN" value="nein" checked><label for="abHoehN">Nein</label>
+        </span>
       </div>
       <p class="abx-wahl-hint" id="abWahlHint">In Rheinland-Pfalz ändert die Gebäude-Auswahl nichts: Für alle Wohngebäude gilt 0,4&nbsp;H der Wandhöhe, mindestens 3&nbsp;m.</p>
 
@@ -1433,8 +1447,8 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
       hoehGr=e('abHoehGr'),hw=e('abHw'),aw=e('abAw'),status=e('abStatus'),satz=e('abSatz'),formel=e('abFormel'),
       wege=e('abWege'),wliste=e('abWliste'),wlab=e('abWlab'),wahlHint=e('abWahlHint');
   var WAHLTEXT={
-    rp:'In Rheinland-Pfalz ändert die Gebäude-Auswahl nichts: Für alle Wohngebäude gilt 0,4 H der Wandhöhe, mindestens 3 m.',
-    sl:'Im Saarland zählt die Gebäude-Auswahl: Bei kleinen Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen genügen pauschal 3 m, sonst gilt 0,4 H. Für die Klasse zählt neben der Zahl der Wohnungen die Höhe des obersten Fußbodens, gemessen bis Oberkante Fertigfußboden des höchsten Geschosses mit Aufenthaltsraum über dem Gelände im Mittel.'
+    rp:'In Rheinland-Pfalz ändert die Gebäude-Auswahl nichts: Für alle Wohngebäude gilt 0,4 H der Wandhöhe, mindestens 3\u00a0m, unabhängig von Gebäudeklasse und Höhe. Eine Erleichterung für kleine Wohngebäude wie im Saarland gibt es hier nicht.',
+    sl:'Im Saarland zählt die Gebäude-Auswahl: Bei kleinen Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen genügen pauschal 3\u00a0m, sonst gilt 0,4 H.'
   };
 
   var LAND={
