@@ -461,22 +461,51 @@ p{text-wrap:pretty}
 /* ===================================================================
    ERGEBNIS-KACHELN
    =================================================================== */
-.res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
-@media(max-width:1080px){.res-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.res-grid{grid-template-columns:1fr}}
-.res{position:relative;display:flex;flex-direction:column;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1.8rem 1.6rem;overflow:hidden;isolation:isolate}
-.res::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(225,98,61,.16),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-.res>*{position:relative;z-index:1}
-.res:hover::before{opacity:1}
-@media(hover:none){.res::before,.res:hover::before{opacity:0}}
-.res-ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(150deg,var(--terra),var(--terra-d));box-shadow:0 12px 26px -12px rgba(225,98,61,.55);margin-bottom:1.1rem;flex-shrink:0;transition:transform .3s}
-.res-ic svg{width:23px;height:23px}
-.res:hover .res-ic{transform:scale(1.06) rotate(-3deg)}
-@media(prefers-reduced-motion:reduce){.res-ic,.res:hover .res-ic{transform:none}}
-.res h3{font-size:1.08rem;margin-bottom:.55rem;line-height:1.25;min-height:2.5em}
-.res p{color:var(--ink-soft);font-size:.93rem;line-height:1.55}
-.res-note{max-width:780px;margin:2.6rem auto 0;text-align:center;font-size:1rem;color:var(--ink-soft);line-height:1.65}
-.res-note b{color:var(--white);font-weight:600}
+/* Sechs Kacheln: die beiden Gruppen stehen immer untereinander, sonst
+   wuerden sechs Spalten nebeneinander zu schmal. */
+.erg{display:grid;grid-template-columns:1fr;gap:1.3rem;align-items:stretch}
+.erg-grp{--g:var(--accent-d);display:flex;flex-direction:column;gap:.85rem;border:1px solid transparent;border-radius:var(--r);padding:1rem}
+.erg-opt{--g:var(--steel-d);background:rgba(46,134,199,.07);border-color:rgba(46,134,199,.32)}
+.erg-lab{font-family:var(--mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--g);padding-left:.2rem}
+.erg-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;flex:1}
+.erg-c{position:relative;display:flex;flex-direction:column;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1.5rem 1.4rem;overflow:hidden;isolation:isolate}
+/* Technische Handskizze im Hintergrund, passend zum jeweiligen Ergebnis.
+   Sie wird nach unten hin ausgeblendet, damit sie den Text nicht stoert. */
+/* Hoehere Spezifitaet als .erg-c>* weiter unten, sonst holt die Regel dort
+   die Skizze zurueck in den Textfluss und die Kachel wird doppelt so hoch. */
+.erg-c>.erg-sk{position:absolute;right:-6px;bottom:-10px;width:190px;height:190px;z-index:0;color:var(--g);opacity:.15;pointer-events:none;
+  -webkit-mask-image:radial-gradient(150px 150px at 72% 74%,#000 0%,rgba(0,0,0,.55) 58%,transparent 88%);
+  mask-image:radial-gradient(150px 150px at 72% 74%,#000 0%,rgba(0,0,0,.55) 58%,transparent 88%);transition:opacity .4s,transform .5s cubic-bezier(.16,1,.3,1)}
+.erg-sk svg{width:100%;height:100%;display:block}
+.erg-sk text{font-family:var(--disp);font-weight:700;font-size:37px;letter-spacing:1.5px;fill:currentColor;stroke:none}
+.erg-c:hover .erg-sk{opacity:.2;transform:translate(-6px,-4px) scale(1.04)}
+@media(hover:none){.erg-c:hover .erg-sk{opacity:.15;transform:none}}
+@media(prefers-reduced-motion:reduce){.erg-sk,.erg-c:hover .erg-sk{transition:none;transform:none}}
+.erg-c>*{position:relative;z-index:1}
+.erg-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:1.05rem;flex-shrink:0;
+  background:linear-gradient(150deg,var(--terra),var(--terra-d));box-shadow:0 12px 26px -12px rgba(225,98,61,.55)}
+.erg-opt .erg-ic{background:linear-gradient(150deg,var(--steel),var(--steel-d));box-shadow:0 12px 26px -12px rgba(31,111,165,.55)}
+.erg-ic svg{width:22px;height:22px}
+.erg-c h3{font-size:1.06rem;line-height:1.28;margin-bottom:.5rem}
+/* Solange mehrere Kacheln nebeneinander stehen, zwei Zeilen fuer die
+   Ueberschrift reservieren, damit die Fliesstexte auf gleicher Hoehe
+   beginnen. "Genehmigungsplanung und Bauantrag" braucht beide Zeilen. */
+@media(min-width:661px){.erg-c h3{min-height:2.56em}}
+.erg-c p{color:var(--ink-soft);font-size:.92rem;line-height:1.55}
+.erg-note{max-width:780px;margin:2.6rem auto 0;text-align:center;font-size:1rem;color:var(--ink-soft);line-height:1.65}
+.erg-note b{color:var(--white);font-weight:600}
+/* Ab hier wird es fuer drei Spalten zu eng, dann zwei. */
+@media(max-width:1080px){
+  .erg-cols{grid-template-columns:1fr 1fr}
+  .erg{max-width:760px;margin:0 auto;gap:1.1rem}
+}
+/* Darunter steht jede Kachel fuer sich, wie auf der Aufmass-Seite. */
+@media(max-width:660px){
+  .erg-cols{grid-template-columns:1fr}
+  .erg-grp{padding:.85rem}
+  .erg-c{padding:1.3rem 1.25rem}
+  .erg-c>.erg-sk{width:168px;height:168px;right:-6px;bottom:-10px}
+}
 
 /* GRUENDE-KARTEN als Aufklappliste auf schmalen Displays */
 .prob-grid.g2{grid-template-columns:1fr 1fr}
@@ -815,13 +844,13 @@ h1,h2,h3{overflow-wrap:break-word}
 <!-- WANN EIN ANBAU PASST -->
 <section id="gruende">
   <div class="container">
-    <div class="sh c fade"><span class="kicker c">Typische Ausgangslagen</span><h2>Wann ein Anbau der richtige Weg ist.</h2><p>Ein Anbau ist oftmals die elegante Lösung, den eigenen Wohnraum ohne immense Kosten zu erweitern und zu verbessern. Diese sechs Ausgangslagen sehen wir am häufigsten.</p></div>
+    <div class="sh c fade"><span class="kicker c">Typische Ausgangslagen</span><h2>Wann ein Anbau der richtige Weg ist.</h2><p>Ein Anbau bringt zusätzliche Fläche, ohne Umzug und ohne Neubau. Diese sechs Ausgangslagen sehen wir am häufigsten.</p></div>
     <div class="prob-grid">
       <div class="prob fade"><div class="acc-head"><div class="pn">01</div><h3>Ein Zimmer fehlt</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Die Familie wächst, das Haus nicht. Ein Anbau schafft den zusätzlichen Raum dort, wo er gebraucht wird, ohne dass Sie Lage, Garten und Nachbarschaft aufgeben.</p></div></div></div>
       <div class="prob fade d1"><div class="acc-head"><div class="pn">02</div><h3>Küche und Wohnen verbinden</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Ältere Grundrisse trennen streng. Ein Anbau nach hinten öffnet den Wohnbereich zum Garten und macht aus zwei kleinen Räumen einen, in dem sich das Leben abspielt.</p></div></div></div>
-      <div class="prob fade d2"><div class="acc-head"><div class="pn">03</div><h3>Ein Raum zum Arbeiten</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Homeoffice am Esstisch geht eine Weile gut. Ein erweitertes Arbeitszimmer mit eigenem Zugang trennt Arbeiten und Wohnen und erhöht die Flexibilität Ihres Zuhauses.</p></div></div></div>
+      <div class="prob fade d2"><div class="acc-head"><div class="pn">03</div><h3>Ein Raum zum Arbeiten</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Homeoffice am Esstisch geht eine Weile gut. Ein angebautes Arbeitszimmer mit eigenem Zugang trennt Arbeiten und Wohnen und lässt sich später auch anders nutzen.</p></div></div></div>
       <div class="prob fade"><div class="acc-head"><div class="pn">04</div><h3>Ebenerdig wohnen</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Ein Anbau im Erdgeschoss mit Bad und Schlafzimmer macht das Haus altersgerecht, ohne dass die vorhandenen Geschosse umgebaut werden müssen.</p></div></div></div>
-      <div class="prob fade d1"><div class="acc-head"><div class="pn">05</div><h3>Mehr Licht ins Haus</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Ein Wintergarten oder ein verglaster Anbau bringt mehr Licht in Ihre Räumlichkeiten und erhöht so die Lebensqualität.</p></div></div></div>
+      <div class="prob fade d1"><div class="acc-head"><div class="pn">05</div><h3>Mehr Licht ins Haus</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Ein Wintergarten oder ein verglaster Anbau bringt Tageslicht in dunkle Räume und verbindet Wohnbereich und Garten.</p></div></div></div>
       <div class="prob fade d2"><div class="acc-head"><div class="pn">06</div><h3>Platz für eine zweite Einheit</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Ein Anbau kann die Grundlage für eine Einlieger&shy;wohnung sein, für Angehörige oder zur Vermietung. Dann greifen zusätzlich die Regeln zu Stellplätzen und zur Aufteilung.</p></div></div></div>
     </div>
   </div>
@@ -927,7 +956,7 @@ h1,h2,h3{overflow-wrap:break-word}
     <div class="abx-hinw">
       <div class="abx-h fade">
         <h4>Was als Wandhöhe zählt</h4>
-        <p>Gemessen wird von der Gelände&shy;oberfläche bis zur Schnittlinie der Wand mit der Dachhaut oder bis zum oberen Abschluss der Wand. Steile Dächer zählen mit: über 70 Grad Neigung voll, über 45 Grad zu einem Drittel. Der Abstand zur Grenze beträgt 0,4&nbsp;H, mindestens 3&nbsp;m.</p>
+        <p>Gemessen wird von der Gelände&shy;oberfläche bis zur Schnittlinie der Wand mit der Dachhaut oder bis zum oberen Abschluss der Wand. Steile Dächer zählen mit: über 70 Grad Neigung voll, über 45 Grad zu einem Drittel. Das Ergebnis ist H. In beiden Bundesländern beträgt die Tiefe der Abstands&shy;fläche 0,4&nbsp;H, mindestens 3&nbsp;m. Nur im Saarland genügen bei Wohngebäuden der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen pauschal 3&nbsp;m.</p>
       </div>
       <div class="abx-h fade d1">
         <h4>Wann an der Grenze gebaut werden darf</h4>
@@ -939,7 +968,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <span class="abx-neu">Neu 2025/26 · nur Rheinland-Pfalz</span>
       </div>
     </div>
-    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt für Wohngebäude der Gebäudeklassen 1 und 2, also mit höchstens zwei Nutzungseinheiten von zusammen nicht mehr als 400&nbsp;m² und einer Höhe bis 7&nbsp;m, gemessen bis Oberkante Fußboden des höchstgelegenen Geschosses mit Aufenthalts&shy;raum über der Gelände&shy;oberfläche im Mittel, und höchstens drei oberirdischen Geschossen; der Rechner wendet sie bis 9,5&nbsp;m Wandhöhe an, darüber ist ein Wohngebäude praktisch keine Klasse 1 oder 2 mehr. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
+    <p class="fnote fnote-center">Schematische Darstellung nach §&nbsp;8 der Landes&shy;bauordnung Rheinland-Pfalz und §&nbsp;7 der Landes&shy;bauordnung Saarland, Stand August 2026. Die saarländische Erleichterung gilt nach §&nbsp;7 Abs. 5 Satz 2 LBO für Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei oberirdischen Geschossen. Zu diesen Klassen gehört neben der Höhe, nach der oben gefragt wird, dass das Gebäude höchstens zwei Nutzungseinheiten von zusammen nicht mehr als 400&nbsp;m² hat; diese Fläche fragt der Rechner nicht ab. Abgebildet ist der Regelfall im Wohnbau; Gewerbe- und Industriegebiete, Grenzbebauung, Vorbauten, Baulasten und abweichende Festsetzungen eines Bebauungs&shy;plans sind nicht berücksichtigt. Angaben ohne Gewähr, maßgeblich ist die Prüfung im Einzelfall.</p>
   </div>
 </section>
 
@@ -954,7 +983,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <p class="dsub">§&nbsp;30 BauGB</p>
         <p class="dq">Passt der Anbau in den Plan?</p>
         <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Für Ihr Viertel gibt es einen Plan der Gemeinde. Der sagt ziemlich genau, was erlaubt ist. Wir lesen ihn aus und halten Ihr Vorhaben daneben.</span></p>
-        <p class="dout"><strong>Passt es nicht:</strong> Eine Ausnahme ist möglich, solange der Plan im Kern unberührt bleibt und der Nachbar nicht unzumutbar betroffen ist.</p>
+        <p class="dout"><strong>Passt es nicht:</strong> Sieht der Plan selbst eine Ausnahme vor, kann sie zugelassen werden. Sonst kommt eine Befreiung nach §&nbsp;31 Abs. 2 BauGB in Betracht, wenn die Grundzüge der Planung unberührt bleiben.</p>
       </article>
       <article class="dcard b fade d1">
         <span class="dlvl">Fall 2</span>
@@ -1024,38 +1053,56 @@ h1,h2,h3{overflow-wrap:break-word}
 <!-- ERGEBNIS -->
 <section id="leistung" style="background:var(--bg-2)">
   <div class="container">
-    <div class="sh c fade"><span class="kicker c">Das Ergebnis</span><h2>Was Sie von uns erhalten.</h2><p>Vom ersten belastbaren Ja oder Nein bis zur Genehmigung. Sie buchen nur die Schritte, die Sie brauchen.</p></div>
-    <div class="res-grid akk-liste">
-      <details class="res fade akk" open>
-        <summary>
-          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9z"/><path d="M13 3v7h7"/><path d="M8.5 15.5l2 2 4-4.5"/></svg></span>
-          <h3>Schriftliche Einordnung</h3><span class="akk-x" aria-hidden="true">+</span>
-        </summary>
-        <div class="akk-b"><p>Was auf Ihrem Grundstück zulässig ist: Bebauungs&shy;plan oder §\u00a034, Abstands&shy;flächen, Grenzbebauung, brandschutzrelevante Punkte. Schwarz auf weiß, nicht nur mündlich.</p></div>
-      </details>
-      <details class="res fade d1 akk" open>
-        <summary>
-          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M14 21v-6h5v6"/><path d="M8 12h3v3H8z"/></svg></span>
-          <h3>Entwurf des Anbaus</h3><span class="akk-x" aria-hidden="true">+</span>
-        </summary>
-        <div class="akk-b"><p>Grundrisse, Ansichten und Schnitte des Anbaus im Zusammenhang mit dem Bestand, abgestimmt auf das, was baurechtlich geht.</p></div>
-      </details>
-      <details class="res fade d2 akk" open>
-        <summary>
-          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="17" height="18" rx="2"/><path d="M7.5 8h9M7.5 12h9M7.5 16h5"/><circle cx="17" cy="17" r="3.6"/></svg></span>
-          <h3>Bauantrag komplett</h3><span class="akk-x" aria-hidden="true">+</span>
-        </summary>
-        <div class="akk-b"><p>Alle Bauvorlagen, Berechnungen und Formulare, eingereicht bei der Bauaufsicht. Rückfragen der Behörde bearbeiten wir direkt.</p></div>
-      </details>
-      <details class="res fade akk" open>
-        <summary>
-          <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="7" r="2.6"/><circle cx="12" cy="18" r="2.6"/><path d="M7.6 9.2l3 6.4M16.4 9.2l-3 6.4M8.6 7h6.8"/></svg></span>
-          <h3>Abstimmung der Fachplaner</h3><span class="akk-x" aria-hidden="true">+</span>
-        </summary>
-        <div class="akk-b"><p>Statik, Energie und, wo nötig, Brandschutz. Wir holen die Beteiligten dazu und halten die Planung zusammen, damit nichts zweimal gerechnet wird.</p></div>
-      </details>
+    <div class="sh c fade"><span class="kicker c">Das Ergebnis</span><h2>Was Sie von uns erhalten.</h2><p>Vom ersten belastbaren Ja oder Nein bis zum eingereichten Bauantrag. Sie buchen nur die Schritte, die Sie brauchen.</p></div>
+    <div class="erg">
+      <div class="erg-grp">
+        <span class="erg-lab">Immer enthalten</span>
+        <div class="erg-cols">
+          <article class="erg-c fade">
+            <span class="erg-sk" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M26 34h150v132H26z"/><path d="M54 72h62v58H54z"/><path d="M144 34v132" stroke-dasharray="7 6"/><path d="M116 84h28M116 118h28"/><path d="M120 80l-4 4 4 4M140 80l4 4-4 4"/><path d="M54 130h62"/></svg></span>
+            <span class="erg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9z"/><path d="M13 3v7h7"/><path d="M8.5 15.5l2 2 4-4.5"/></svg></span>
+            <h3>Auswertung Ihres Grundstücks</h3>
+            <p>Bebauungs&shy;plan oder §&nbsp;34, Abstands&shy;flächen zu allen Grenzen, Bestand und Brandschutz. Wir sagen Ihnen, was machbar ist und was nicht.</p>
+          </article>
+          <article class="erg-c fade d1">
+            <span class="erg-sk" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M22 158h164"/><path d="M34 158V96l44-32 44 32v62"/><path d="M122 158v-40h46v40" stroke-dasharray="7 5"/><path d="M118 118l24-16 30 16"/><path d="M62 158v-30h22v30"/><path d="M96 104h16v16H96z"/></svg></span>
+            <span class="erg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M14 21v-6h5v6"/><path d="M8 12h3v3H8z"/></svg></span>
+            <h3>Entwurf des Anbaus</h3>
+            <p>Grundrisse, Ansichten und Schnitte im Zusammenhang mit dem Bestand, abgestimmt auf das, was baurechtlich zulässig ist.</p>
+          </article>
+          <article class="erg-c fade d2">
+            <span class="erg-sk" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M50 28h58l38 38v100a6 6 0 0 1-6 6H50a6 6 0 0 1-6-6V34a6 6 0 0 1 6-6z"/><path d="M108 28v38h38"/><path d="M64 86h72M64 104h72M64 122h44"/><circle cx="132" cy="142" r="22" stroke-dasharray="6 5"/><path d="M123 142l6 7 13-14"/></svg></span>
+            <span class="erg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="17" height="18" rx="2"/><path d="M7.5 8h9M7.5 12h9M7.5 16h5"/><circle cx="17" cy="17" r="3.6"/></svg></span>
+            <h3>Genehmigungs&shy;planung und Bauantrag</h3>
+            <p>Wir arbeiten Ihren Entwurf zum Bauantrag aus und reichen alle erforderlichen Unterlagen beim Bauamt ein. Externe Nachweise koordinieren wir auf Wunsch mit, Rückfragen der Bauaufsicht beantworten wir direkt.</p>
+          </article>
+        </div>
+      </div>
+      <div class="erg-grp erg-opt">
+        <span class="erg-lab">Optional dazu</span>
+        <div class="erg-cols">
+          <article class="erg-c fade">
+            <span class="erg-sk" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M46 172h140"/><path d="M84 172v-40l30-22 30 22v40z"/><path d="M114 172v-62l30-22 30 22v62" stroke-dasharray="7 6"/><path d="M100 172v-20h18v20"/></svg></span>
+            <span class="erg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.8 8.6 4.7-8.6 4.7-8.6-4.7z"/><path d="m3.4 12 8.6 4.7 8.6-4.7"/><path d="m3.4 16.5 8.6 4.7 8.6-4.7"/></svg></span>
+            <h3>Variantenuntersuchung</h3>
+            <p>Mehrere Entwurfsvarianten im Vergleich, jeweils mit ihren Vor- und Nachteilen. So entscheiden Sie, welcher Entwurf am besten zu Ihnen passt.</p>
+          </article>
+          <article class="erg-c fade d1">
+            <span class="erg-sk" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M38 82l62-32 62 32v58l-62 32-62-32z"/><path d="M38 82l62 32 62-32"/><path d="M100 114v58"/><path d="M62 96v40M138 96v40" stroke-dasharray="6 6"/></svg></span>
+            <span class="erg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.6 8.4 4.8v9.2L12 21.4 3.6 16.6V7.4z"/><path d="m3.6 7.4 8.4 4.8 8.4-4.8"/><path d="M12 12.2v9.2"/></svg></span>
+            <h3>Visualisierungen</h3>
+            <p>Wir erstellen eine hochwertige Visualisierung Ihres Entwurfs. So sehen Sie vor der Entscheidung, wie sich der Anbau in Haus und Umgebung einfügt.</p>
+          </article>
+          <article class="erg-c fade d2">
+            <span class="erg-sk" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M34 172h150"/><path d="M52 172v-34h22v34zM90 172v-58h22v58zM128 172v-44h22v44z"/><path d="M166 172v-26h18v26"/><text x="150" y="104" text-anchor="middle">€</text></svg></span>
+            <span class="erg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.6a4.6 4.6 0 1 0 0 6.8"/><path d="M7.4 11h5.4M7.4 13.4h5.4"/></svg></span>
+            <h3>Grobe Kostenschätzung</h3>
+            <p>Eine erste Einordnung der Baukosten auf Grundlage des Entwurfs. Das hilft bei der Entscheidung und macht Ihr Vorhaben planbarer.</p>
+          </article>
+        </div>
+      </div>
     </div>
-    <p class="res-note fade">Die Vorprüfung können Sie einzeln beauftragen. <b>Planen Sie danach mit uns weiter, rechnen wir sie an.</b></p>
+    <p class="erg-note fade">Den Standort-Check können Sie einzeln beauftragen. <b>Planen Sie danach mit uns weiter, rechnen wir ihn an.</b></p>
   </div>
 </section>
 
@@ -1525,7 +1572,7 @@ document.querySelectorAll('.prob,.res,.typ,.dcard').forEach(c=>c.addEventListene
     var kleinAus = (zaehlt && !sonder);   /* Klasse allein an der Hoehe gescheitert */
     formel.textContent = sonder
       ? 'Wohngebäude der Gebäudeklassen 1 und 2 mit höchstens drei Geschossen: 3,00\u00a0m genügen, unabhängig von der Wandhöhe ('+LAND[l].tiefe+')'
-        +(h>9.5?' · bei dieser Wandhöhe kommt der oberste Fußboden nur mit hohem Drempel oder steilem Dach unter 7\u00a0m, prüfen Sie das Maß':'')
+        +(h>9.5?' · bei dieser Wandhöhe liegt der oberste Fußboden meist über 7\u00a0m, prüfen Sie das Maß vor der Planung':'')
       : '0,4\u00a0× '+z(h)+'\u00a0m = '+z(0.4*h)+'\u00a0m · Mindestmaß 3,00 m · maßgeblich '+z(erf)+'\u00a0m ('+LAND[l].tiefe+')'
         +(kleinAus?' · der oberste Fußboden liegt über 7\u00a0m, damit ist das Gebäude keine Gebäudeklasse 1 oder 2 und die 3-m-Erleichterung gilt nicht':'');
 
