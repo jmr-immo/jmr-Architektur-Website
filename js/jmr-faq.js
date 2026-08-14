@@ -198,4 +198,20 @@
     else if (eng.addListener) eng.addListener(stellen);
     stellen();
   });
+
+  /* --- 4  Hinweiszeilen unter dem Abstandsflaechenrechner ---------
+     Anders als die Sorten 2 und 3 sind diese auf jeder Bildschirm-
+     breite ein Bedienelement, auch am Schreibtisch. Zugeklappt sind
+     alle drei gleich hoch; die Texte darunter sind sehr verschieden
+     lang, und genau das soll nicht auffallen. Mehrere duerfen offen
+     sein, damit sich zwei Hinweise nebeneinander lesen lassen. */
+  Array.prototype.forEach.call(document.querySelectorAll('details.abx-h'), function (d) {
+    var kopf = beweglich(d, d.querySelector('.abx-hb'));
+    if (!kopf) return;
+    kopf.addEventListener('click', function (e) {
+      if (!sanft) return;               // ohne Bewegung macht der Browser das selbst
+      e.preventDefault();
+      if (d.open) d.jmrZuklappen(); else d.jmrAufklappen();
+    });
+  });
 })();
