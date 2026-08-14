@@ -6,6 +6,7 @@
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 <script src="js/jmr-consent.js" defer></script>
 <script src="js/jmr-faq.js" defer></script>
+<script src="js/jmr-laufband.js" defer></script>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
@@ -103,11 +104,14 @@ section{padding:var(--pad) 0;position:relative}
 .hero-act{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center}
 /* Lauftext-Band: sitzt direkt an der Hero-Unterkante */
 .marq{position:absolute;left:0;right:0;bottom:0;z-index:3;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.05rem 0;background:rgba(244,242,236,.55)}
-.marq .track{display:flex;white-space:nowrap;width:max-content;font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--ink-soft);animation:scrollx 30s linear infinite both}
+.marq .track{display:flex;white-space:nowrap;width:max-content;font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--ink-soft);animation:marqlauf var(--dauer,30s) linear infinite both;will-change:transform;backface-visibility:hidden}
 .marq .track span{display:inline-flex;align-items:center;padding:0 2.2rem;position:relative}
 .marq .track span::after{content:'';position:absolute;right:-2.5px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.55}
 .marq .track b{color:var(--white);font-weight:600;margin-left:.35em}
-@keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Verschoben wird um die gemessene Breite eines Satzes (--satz, gesetzt
+   von js/jmr-laufband.js). Ohne Javascript greift der Rueckfallwert 50%,
+   der die im Quelltext doppelt angelegte Spur meint. */
+@keyframes marqlauf{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-1 * var(--satz,50%)),0,0)}}
 /* STAT-BAND */
 .stats{background:var(--bg-2);border-bottom:1px solid var(--line)}
 .stats .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.4rem 1rem;padding-top:2.2rem;padding-bottom:2.2rem}
@@ -682,7 +686,7 @@ h1,h2,h3{overflow-wrap:break-word}
     </div>
   </div>
   <div class="marq fade d3" aria-hidden="true">
-    <div class="track" id="marq">
+    <div class="track" id="marq" data-satz="6">
       <span>Mehrfamilienhaus zu <b>Eigentumswohnungen</b></span><span>Zweifamilienhaus <b>teilen</b></span><span>Dachgeschoss als <b>eigene Einheit</b></span><span>Laden als <b>Teileigentum</b></span><span>Stellplatz als <b>Sondereigentum</b></span><span>Einheiten <b>einzeln verkaufen</b></span>
       <span>Mehrfamilienhaus zu <b>Eigentumswohnungen</b></span><span>Zweifamilienhaus <b>teilen</b></span><span>Dachgeschoss als <b>eigene Einheit</b></span><span>Laden als <b>Teileigentum</b></span><span>Stellplatz als <b>Sondereigentum</b></span><span>Einheiten <b>einzeln verkaufen</b></span>
     </div>
