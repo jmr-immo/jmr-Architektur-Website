@@ -673,8 +673,8 @@ h1,h2,h3{overflow-wrap:break-word}
         </div>
         <div class="fcase-vis">
           <div class="ba" style="--split:50%">
-            <img class="ba-img" src="img/gewerbe-vorher.svg" alt="Gewerbe, Bestand">
-            <img class="ba-img ba-after" src="img/gewerbe-nachher.svg" alt="Wohnungen, Neuplanung">
+            <img class="ba-img" src="img/gewerbe-vorher.webp" width="1044" height="745" alt="Gewerbe, Bestand">
+            <img class="ba-img ba-after" src="img/gewerbe-nachher.webp" width="1044" height="745" alt="Wohnungen, Neuplanung">
             <span class="ba-lbl ba-lbl-v">Bestand</span>
             <span class="ba-lbl ba-lbl-n">Neuplanung</span>
             <div class="ba-handle" role="slider" aria-label="Vorher-Nachher-Regler" tabindex="0"><span class="ba-grip"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg></span></div>
@@ -691,8 +691,8 @@ h1,h2,h3{overflow-wrap:break-word}
         </div>
         <div class="fcase-vis">
           <div class="ba" style="--split:50%">
-            <img class="ba-img" src="img/dachboden-vorher.svg" alt="Dachboden, Bestand">
-            <img class="ba-img ba-after" src="img/dachboden-nachher.svg" alt="Dachgeschoss, Neuplanung">
+            <img class="ba-img" src="img/dachboden-vorher.webp" width="1044" height="745" alt="Dachboden, Bestand">
+            <img class="ba-img ba-after" src="img/dachboden-nachher.webp" width="1044" height="745" alt="Dachgeschoss, Neuplanung">
             <span class="ba-lbl ba-lbl-v">Bestand</span>
             <span class="ba-lbl ba-lbl-n">Neuplanung</span>
             <div class="ba-handle" role="slider" aria-label="Vorher-Nachher-Regler" tabindex="0"><span class="ba-grip"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg></span></div>
@@ -709,8 +709,8 @@ h1,h2,h3{overflow-wrap:break-word}
         </div>
         <div class="fcase-vis">
           <div class="ba" style="--split:50%">
-            <img class="ba-img" src="img/garage-vorher.svg" alt="Garagen, Bestand">
-            <img class="ba-img ba-after" src="img/garage-nachher.svg" alt="Wohnraum, Neuplanung">
+            <img class="ba-img" src="img/garage-vorher.webp" width="1044" height="745" alt="Garagen, Bestand">
+            <img class="ba-img ba-after" src="img/garage-nachher.webp" width="1044" height="745" alt="Wohnraum, Neuplanung">
             <span class="ba-lbl ba-lbl-v">Bestand</span>
             <span class="ba-lbl ba-lbl-n">Neuplanung</span>
             <div class="ba-handle" role="slider" aria-label="Vorher-Nachher-Regler" tabindex="0"><span class="ba-grip"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg></span></div>
@@ -727,8 +727,8 @@ h1,h2,h3{overflow-wrap:break-word}
         </div>
         <div class="fcase-vis">
           <div class="ba" style="--split:50%">
-            <img class="ba-img" src="img/wohneinheiten-vorher.svg" alt="Wohnung, Bestand">
-            <img class="ba-img ba-after" src="img/wohneinheiten-nachher.svg" alt="Zwei Wohneinheiten, Neuplanung">
+            <img class="ba-img" src="img/wohneinheiten-vorher.webp" width="1044" height="745" alt="Wohnung, Bestand">
+            <img class="ba-img ba-after" src="img/wohneinheiten-nachher.webp" width="1044" height="745" alt="Zwei Wohneinheiten, Neuplanung">
             <span class="ba-lbl ba-lbl-v">Bestand</span>
             <span class="ba-lbl ba-lbl-n">Neuplanung</span>
             <div class="ba-handle" role="slider" aria-label="Vorher-Nachher-Regler" tabindex="0"><span class="ba-grip"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg></span></div>
@@ -1002,55 +1002,91 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
    if(r.ok){f.reset();document.dispatchEvent(new Event('jmr:gesendet'));st.className='kf-status ok';st.textContent='Vielen Dank, Ihre Anfrage ist eingegangen. Wir melden uns zeitnah.';}
    else{st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}}
   catch(err){st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}});})();
-/* Anwendungsfaelle: Vorher-Nachher-Schieberegler (mit Sway-Animation + Label-Ausblenden) */
+/* Anwendungsfaelle: Vorher-Nachher-Schieberegler.
+
+   Der Griff schwingt sanft um die Mitte, aber nur auf der Karte, die gerade zu
+   sehen ist. Alle anderen stehen in der Ausgangsstellung. Das loest drei Dinge
+   auf einmal:
+
+   - Waehrend das Karussell weiterschiebt, laeuft nur eine Bewegung statt zweier.
+     Auf schwachen Geraeten ist das der Unterschied zwischen fluessig und rucklig.
+   - Die Kopien, die das Karussell fuer den endlosen Durchlauf anhaengt, stehen
+     damit zwangslaeufig genauso da wie ihre Originale. Frueher stand die Kopie
+     starr auf der Mitte, waehrend das Original weiterschwang: erst hing der
+     Griff den ganzen Uebergang lang, dann sprang er beim lautlosen Umsetzen.
+   - Kehrt man zu einer Karte zurueck, faengt sie wieder in der Ausgangsstellung
+     an, auch wenn der Regler vorher von Hand verschoben wurde.
+
+   Beim Weiterschieben faehrt der Griff der abziehenden Karte weich in die Mitte
+   zurueck, statt dorthin zu springen. */
 (function(){
   const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const MITTE=50, AUSSCHLAG=4, PERIODE=4200;
+  const MINP=7, MAXP=93;      /* Regler nicht ganz an den Rand ziehbar */
+
   document.querySelectorAll('.ba').forEach(ba=>{
     const handle=ba.querySelector('.ba-handle');
     const lblV=ba.querySelector('.ba-lbl-v');
     const lblN=ba.querySelector('.ba-lbl-n');
-    let nudged=false;
-    const MINP=7, MAXP=93;   // Regler nicht ganz an den Rand ziehbar (vgl. Energieberatung)
+    let lauf=0, ziehen=false, vonHand=false, stand=MITTE;
+
     function setSplit(pct){
       pct=Math.max(MINP,Math.min(MAXP,pct));
+      stand=pct;
       ba.style.setProperty('--split',pct+'%');
       if(handle)handle.setAttribute('aria-valuenow',Math.round(pct));
-      // Label ausblenden, sobald der Regler in seine Naehe kommt
+      /* Beschriftung ausblenden, sobald der Regler in ihre Naehe kommt */
       if(lblV)lblV.style.opacity = pct<20?0:1;
       if(lblN)lblN.style.opacity = pct>80?0:1;
     }
-    function fromClientX(cx){const r=ba.getBoundingClientRect();return (cx-r.left)/r.width*100;}
-    let drag=false;
-    function start(e){drag=true;nudged=true;move(e);e.preventDefault();}
-    function move(e){if(!drag)return;const cx=e.touches?e.touches[0].clientX:e.clientX;setSplit(fromClientX(cx));}
-    function end(){drag=false;}
+    function anhalten(){ if(lauf){cancelAnimationFrame(lauf);lauf=0;} }
+
+    /* Schwingen, immer bei der Mitte beginnend. */
+    function schwingen(){
+      anhalten(); vonHand=false; setSplit(MITTE);
+      if(RM)return;
+      const t0=performance.now();
+      (function tick(t){
+        if(vonHand||ziehen){lauf=0;return;}      /* die Hand hat Vorrang */
+        setSplit(MITTE+AUSSCHLAG*Math.sin((t-t0)/PERIODE*Math.PI*2));
+        lauf=requestAnimationFrame(tick);
+      })(performance.now());
+    }
+    /* Anhalten und stehen bleiben, wo der Griff gerade steht. Das ist der
+       Zustand fuer eine Karte, die gerade aus dem Bild geschoben wird. */
+    function ruhen(){ anhalten(); }
+    /* Zurueck in die Ausgangsstellung. Wird erst gerufen, wenn die Karte
+       ausserhalb des Bildes steht, deshalb darf es ohne Uebergang geschehen. */
+    function zuruecksetzen(){ anhalten(); vonHand=false; setSplit(MITTE); }
+
+    function ausX(cx){const r=ba.getBoundingClientRect();return (cx-r.left)/r.width*100;}
+    function start(e){ziehen=true;vonHand=true;anhalten();bewegen(e);e.preventDefault();}
+    function bewegen(e){if(!ziehen)return;const cx=e.touches?e.touches[0].clientX:e.clientX;setSplit(ausX(cx));}
+    function ende(){ziehen=false;}
     ba.addEventListener('mousedown',start);
     ba.addEventListener('touchstart',start,{passive:false});
-    window.addEventListener('mousemove',move);
-    window.addEventListener('touchmove',move,{passive:false});
-    window.addEventListener('mouseup',end);
-    window.addEventListener('touchend',end);
+    window.addEventListener('mousemove',bewegen);
+    window.addEventListener('touchmove',bewegen,{passive:false});
+    window.addEventListener('mouseup',ende);
+    window.addEventListener('touchend',ende);
     if(handle){handle.addEventListener('keydown',e=>{
-      const cur=parseFloat(ba.style.getPropertyValue('--split'))||50;
-      if(e.key==='ArrowLeft'){nudged=true;setSplit(cur-4);e.preventDefault();}
-      else if(e.key==='ArrowRight'){nudged=true;setSplit(cur+4);e.preventDefault();}
+      if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
+        vonHand=true;anhalten();
+        setSplit(stand+(e.key==='ArrowLeft'?-4:4));e.preventDefault();
+      }
     });}
-    // Sanfte Dauer-Schwingung um die Mitte, bis der Regler erstmals bedient wird
-    setSplit(50);
-    function sway(){
-      if(nudged||RM)return;
-      const home=50, amp=4, period=4200, t0=performance.now();
-      (function tick(t){
-        if(nudged){setSplit(home);return;}
-        const e=Math.sin(((t-t0)%period)/period*Math.PI*2);
-        setSplit(home+amp*e);
-        requestAnimationFrame(tick);
-      })(t0);
+
+    setSplit(MITTE);
+    /* Das Karussell steuert seine Regler selbst, es weiss als Einziges, welche
+       Karte gerade zu sehen ist. Ein Regler ausserhalb faengt selbst an. */
+    ba.__jmrRegler={schwingen,ruhen,zuruecksetzen};
+    if(!ba.closest('#fcarousel')){
+      if('IntersectionObserver' in window){
+        const io=new IntersectionObserver(es=>es.forEach(en=>{
+          if(en.isIntersecting){schwingen();io.disconnect();}}),{threshold:.35});
+        io.observe(ba);
+      } else schwingen();
     }
-    if('IntersectionObserver' in window){
-      const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){sway();io.disconnect();}})},{threshold:.35});
-      io.observe(ba);
-    } else { sway(); }
   });
 })();
 /* Anwendungsfaelle: Karussell mit endlosem Durchlauf.
@@ -1058,7 +1094,12 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
    Jetzt haengt hinter der letzten Karte eine Kopie der ersten und vor der ersten
    eine Kopie der letzten. Landet die Bewegung auf einer Kopie, wird nach dem
    Uebergang lautlos auf das Original gesetzt. Fuer den Betrachter laeuft es in
-   derselben Richtung weiter, in beide Richtungen und beliebig oft. */
+   derselben Richtung weiter, in beide Richtungen und beliebig oft.
+
+   Die Vorher-Nachher-Regler steuert dieses Skript mit, weil nur es weiss, welche
+   Karte gerade zu sehen ist: Die sichtbare schwingt, alle anderen stehen in der
+   Ausgangsstellung. Damit stimmen die Kopien immer mit ihren Originalen ueberein,
+   und waehrend des Schiebens laeuft nur eine Bewegung. */
 (function(){
   const car=document.getElementById('fcarousel');if(!car)return;
   const track=car.querySelector('.fcases');
@@ -1066,13 +1107,14 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
   const N=echte.length; if(!N)return;
   const dots=[...car.querySelectorAll('.fcar-dot')];
 
-  /* Der Vorher-Nachher-Regler der Kopien haette keine Funktion, weil die
-     Steuerung nur an den Originalen haengt. Deshalb steht er dort fest auf der
-     Haelfte und ist von der Bedienung und vom Vorlesen ausgenommen. */
+  /* Die Kopie ist nur Kulisse: nicht bedienbar, nicht vorlesbar, und ihr Regler
+     steht fest in der Ausgangsstellung. Genau dort steht auch das Original,
+     wenn es hereingeschoben wird. */
   function kopie(el){
     const k=el.cloneNode(true);
     k.setAttribute('aria-hidden','true');
     k.querySelectorAll('.ba').forEach(b=>b.style.setProperty('--split','50%'));
+    k.querySelectorAll('.ba-lbl').forEach(l=>l.style.opacity=1);
     k.querySelectorAll('.ba-handle').forEach(h=>{h.setAttribute('tabindex','-1');h.style.pointerEvents='none';});
     k.querySelectorAll('a,button,[tabindex]').forEach(e=>e.setAttribute('tabindex','-1'));
     return k;
@@ -1082,8 +1124,33 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
     track.insertBefore(kopie(echte[N-1]),echte[0]);
   }
 
-  let pos=N>1?1:0;              /* 0 = Kopie der letzten, 1..N = Originale, N+1 = Kopie der ersten */
-  let nachlauf=0, sperre=0;
+  let pos=N>1?1:0;        /* 0 = Kopie der letzten, 1..N = Originale, N+1 = Kopie der ersten */
+  let nachlauf=0, sperre=0, imBild=false;
+
+  /* Die Bilder einmal vorab entschluesseln lassen. Sonst faellt genau dann ein
+     langes Bild an, wenn eine Karte zum ersten Mal gezeigt wird, und der
+     Uebergang ruckelt. Am deutlichsten war das beim Umbruch rueckwaerts: Dort
+     kommt die Kopie des letzten Falls ins Bild, die vorher nie zu sehen war.
+     Nacheinander und mit einem Bild Abstand, damit die Arbeit sich verteilt und
+     nicht selbst zum Ruckler wird. */
+  let vorbereitet=false;
+  function vorbereiten(){
+    if(vorbereitet)return; vorbereitet=true;
+    const bilder=[...track.querySelectorAll('img')];
+    (function naechstes(i){
+      if(i>=bilder.length)return;
+      const weiter=()=>requestAnimationFrame(()=>naechstes(i+1));
+      const b=bilder[i];
+      if(b.decode){ b.decode().then(weiter,weiter); } else weiter();
+    })(0);
+  }
+
+  function reglerVon(karte){ return karte?karte.querySelector('.ba'):null; }
+  function aktivesOriginal(){ return echte[N>1?((pos-1+N)%N):0]; }
+  function anRegler(karte,was){
+    const ba=reglerVon(karte);
+    if(ba&&ba.__jmrRegler&&ba.__jmrRegler[was])ba.__jmrRegler[was]();
+  }
 
   function setzen(mitUebergang){
     if(!mitUebergang){track.style.transition='none';}
@@ -1093,17 +1160,31 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
     dots.forEach((d,n)=>d.classList.toggle('on',n===echt));
   }
   function aufraeumen(){
-    if(N<2)return;
-    if(pos===N+1){pos=1;setzen(false);}
-    else if(pos===0){pos=N;setzen(false);}
+    if(N>1){
+      if(pos===N+1){pos=1;setzen(false);}
+      else if(pos===0){pos=N;setzen(false);}
+    }
+    /* Jetzt, wo alle anderen Karten ausserhalb des Bildes stehen, gehen ihre
+       Regler zurueck in die Ausgangsstellung - auch der, den jemand von Hand
+       verschoben hat. Beim naechsten Besuch faengt die Karte damit wieder so
+       an, wie man sie zuerst gesehen hat. Sichtbar ist davon nichts. */
+    const aktiv=aktivesOriginal();
+    echte.forEach(k=>{ if(k!==aktiv)anRegler(k,'zuruecksetzen'); });
+    if(imBild)anRegler(aktiv,'schwingen');
   }
   function go(ziel){
+    if(ziel===pos)return;
+    /* Der Griff der abziehenden Karte haelt an, wo er steht. Waehrend die Spur
+       schiebt, laeuft damit nur eine Bewegung. Jedes Bild waehrend des Schiebens
+       muesste sonst zusaetzlich den Beschnitt eines grossen Bildes neu zeichnen,
+       und genau das kostete am Schreibtisch hin und wieder ein Bild. */
+    anRegler(aktivesOriginal(),'ruhen');
     pos=ziel;setzen(true);
     clearTimeout(nachlauf);
     nachlauf=setTimeout(aufraeumen,640);   /* falls kein Uebergang laeuft */
   }
   track.addEventListener('transitionend',e=>{
-    if(e.propertyName!=='transform')return;
+    if(e.propertyName!=='transform'||e.target!==track)return;
     clearTimeout(nachlauf);aufraeumen();
   });
   car.querySelectorAll('.fcar-arrow').forEach(b=>b.addEventListener('click',()=>{
@@ -1119,8 +1200,18 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
     go(N>1?n+1:n);
   }));
   setzen(false);
-})();
 
+  /* Ausserhalb des Bildausschnitts ruhen alle Regler. Das Karussell steht die
+     meiste Zeit weit oben auf der Seite; eine Bildfolge, die dort weiterlaeuft,
+     kostet nur Rechenzeit und Akku. */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>es.forEach(en=>{
+      imBild=en.isIntersecting;
+      if(imBild){vorbereiten();anRegler(aktivesOriginal(),'schwingen');}
+      else echte.forEach(k=>anRegler(k,'ruhen'));
+    }),{rootMargin:'400px',threshold:.25}).observe(car);
+  } else { imBild=true; vorbereiten(); anRegler(aktivesOriginal(),'schwingen'); }
+})();
 /* Die Regel "immer nur eine Frage offen" liegt jetzt in js/jmr-faq.js.
    Dort wird sie zusammen mit dem weichen Auf- und Zuklappen gesteuert.
    Zwei Stellen wuerden sich gegenseitig stoeren: die vorherige Frage
