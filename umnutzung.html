@@ -7,6 +7,7 @@
 <script src="js/jmr-consent.js" defer></script>
 <script src="js/jmr-faq.js" defer></script>
 <script src="js/jmr-laufband.js" defer></script>
+<script src="js/jmr-formular.js" defer></script>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
@@ -994,14 +995,9 @@ document.querySelectorAll('.prob,.use').forEach(c=>c.addEventListener('mousemove
   if(weg)weg.addEventListener('click',function(){setzen('');});
   document.addEventListener('jmr:gesendet',function(){setzen('');});
 })();
-/* Kontaktformular */
-(function(){const f=document.getElementById('kform'),st=document.getElementById('kfStatus');if(!f)return;
- f.addEventListener('submit',async(e)=>{e.preventDefault();
-  st.style.display='block';st.className='kf-status';st.textContent='Wird gesendet …';
-  try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}});
-   if(r.ok){f.reset();document.dispatchEvent(new Event('jmr:gesendet'));st.className='kf-status ok';st.textContent='Vielen Dank, Ihre Anfrage ist eingegangen. Wir melden uns zeitnah.';}
-   else{st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}}
-  catch(err){st.className='kf-status err';st.textContent='Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';}});})();
+/* Das Kontaktformular steuert js/jmr-formular.js, gemeinsam fuer alle
+   fuenf Seiten. Dort liegt auch das Bestaetigungsfenster, das sich nach
+   erfolgreichem Absenden oeffnet. Fehler bleiben im Kasten stehen. */
 /* Anwendungsfaelle: Vorher-Nachher-Schieberegler.
 
    Der Griff schwingt sanft um die Mitte, aber nur auf der Karte, die gerade zu
