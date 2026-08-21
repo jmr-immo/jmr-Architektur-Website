@@ -476,7 +476,13 @@ min-height:42px;padding:.25rem .5rem;border-radius:7px;font-family:var(--sans);f
    Gleiche Kartenform wie die Ebenen-Gegenueberstellung der Teilungsseite.
    =================================================================== */
 .dual3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;align-items:stretch}
-@media(max-width:1000px){.dual3{grid-template-columns:1fr}}
+/* Untereinander bleiben die drei Faelle gleich hoch. Oberhalb von 1000 px
+   erledigt das subgrid weiter unten - dort liegen sogar die einzelnen
+   Zeilen der drei Karten auf einer Linie. Darunter gibt es nur eine
+   Spalte, also bekommt jede Zeile die Hoehe der hoechsten Karte. Der
+   Zugewinn landet ueber dem Abschlussblock, den margin-top:auto ohnehin
+   nach unten schiebt. */
+@media(max-width:1000px){.dual3{grid-template-columns:1fr;grid-auto-rows:1fr}.dcard{height:100%}}
 .dcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r-lg);padding:2rem 1.8rem 1.8rem;overflow:hidden;isolation:isolate;background:linear-gradient(160deg,var(--tint),rgba(255,255,255,0) 55%),var(--panel)}
 .dcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c);z-index:2}
 .dcard::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),var(--glow),transparent 62%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
@@ -1060,7 +1066,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <h3>Bebauungs&shy;plan</h3>
         <p class="dsub">§&nbsp;30 BauGB</p>
         <p class="dq">Passt der Anbau in den Plan?</p>
-        <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Für Ihr Viertel gibt es einen Plan der Gemeinde. Der sagt ziemlich genau, was erlaubt ist. Wir lesen ihn aus und halten Ihr Vorhaben daneben.</span></p>
+        <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Für Ihr Viertel gibt es einen B-Plan der Gemeinde. Dort steht, welche Rahmenbedingungen für Ihren Standort gelten. Wir prüfen und schauen, was möglich ist.</span></p>
         <p class="dout"><strong>Passt es nicht:</strong> Sieht der Plan selbst eine Ausnahme vor, kann sie zugelassen werden. Sonst kommt eine Befreiung nach §&nbsp;31 Abs. 2 BauGB in Betracht, wenn die Grundzüge der Planung unberührt bleiben.</p>
       </article>
       <article class="dcard b fade d1">
@@ -1068,7 +1074,7 @@ h1,h2,h3{overflow-wrap:break-word}
         <h3>Bebauter Ortsteil</h3>
         <p class="dsub">§&nbsp;34 BauGB</p>
         <p class="dq">Passt der Anbau zur Nachbarschaft?</p>
-        <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Es gibt keinen Plan. Dann zählt, was ringsum schon steht. Ihr Anbau muss sich in dieses Bild einfügen, und das schaut sich die Behörde genau an.</span></p>
+        <p class="dhint"><span class="dar" aria-hidden="true">→</span> <span>Es gibt keinen B-Plan. Dann zählt die umliegende Bebauung. Ihr Anbau muss sich in die nähere Umgebung einfügen. Das prüft die Baubehörde.</span></p>
         <p class="dout"><strong>Passt es nicht:</strong> Wer zusätzlichen Wohnraum schafft, bekommt nach dem Gesetz etwas mehr Spielraum als sonst.</p>
       </article>
       <article class="dcard c fade d2">
@@ -1269,7 +1275,7 @@ h1,h2,h3{overflow-wrap:break-word}
 <!-- ANGEBOTE -->
 <section id="pakete">
   <div class="container">
-    <div class="sh c fade"><span class="kicker c">Unsere Angebote</span><h2>Zwei Wege, mit uns zu starten.</h2><p>Der komplette Anbau von der Prüfung über den Entwurf bis zur Genehmigung, oder vorab der Standort-Check, wenn Sie erst wissen wollen, ob auf Ihrem Grundstück überhaupt etwas geht.</p></div>
+    <div class="sh c fade"><span class="kicker c">Unsere Angebote</span><h2>Zwei Wege, mit uns zu starten.</h2><p>Der komplette Anbau von der Prüfung über den Entwurf bis zur Genehmigung oder vorab der Standort-Check, wenn Sie erst wissen möchten, was auf Ihrem Grundstück möglich ist.</p></div>
     <div class="pak-grid pak-grid-2">
       <div class="pak pak-glow pak-terra fade">
         <span class="pak-tag">Komplettpaket</span>
