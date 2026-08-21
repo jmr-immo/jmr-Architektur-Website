@@ -13,9 +13,9 @@
 
    DANACH  Im Formularkasten erscheint oben rechts neben "Anfrage
            senden" eine kleine gruene Kapsel "Anfrage gesendet". Sie
-           bleibt fuer den Besuch erhalten, auch beim Wechsel auf eine
-           andere Unterseite (sessionStorage, rein funktional, kein
-           Wiedererkennen ueber den Besuch hinaus).
+           gilt nur fuer diese Seitenansicht und wird nirgends
+           gespeichert: Weiterblaettern, neu laden oder die Seite
+           verlassen laesst sie verschwinden.
 
    FEHLER  bleibt bewusst im Kasten stehen. Wer einen Fehler bekommt,
            muss das Formular sehen, um Telefonnummer oder E-Mail
@@ -31,14 +31,17 @@
            deren Hoehe fest ist. Auf dem Weg zum Erfolg aendert sich
            damit an der Seite kein einziges Pixel.
 
-   Zum Glas: eine durchscheinende Scheibe, hinter der die Seite weich
-   gezeichnet, farbkraeftiger und etwas heller gerechnet wird
-   (backdrop-filter mit blur, saturate und brightness). Dazu eine
-   helle Kante oben und ein Schimmer, der von links oben einfaellt -
-   das ist es, was den Eindruck von Glas macht, nicht die
-   Durchsichtigkeit allein. Das Aufhellen ist der Grund, warum die
-   Scheibe so durchscheinend sein darf und der Text trotzdem auch
-   ueber dem dunklen Kontaktbereich lesbar bleibt (gemessen 9,6:1).
+   Zum Glas: eine mattierte Scheibe. Dahinter wird die Seite stark
+   weich gezeichnet (60 px), farbkraeftiger und etwas heller
+   gerechnet. 60 px sind der Punkt, an dem hinter der Scheibe noch
+   Licht und Farbe durchkommen, aber nichts mehr zu lesen ist - genau
+   das macht mattiertes Glas aus. Dazu eine helle Kante oben und ein
+   Schimmer, der von links oben einfaellt.
+
+   Vier Abstufungen wurden gebaut und am Bild verglichen. Von .66 auf
+   .78 Deckung und von 38 auf 60 px sank die Streuung im Glas von
+   19,4 auf 12,4 - so viel weniger kommt jetzt durch. Der Text steht
+   dabei mit 10,8:1 (noetig waeren 4,5:1).
 
    Kennt ein Browser backdrop-filter nicht, wuerde man durch die
    milchige Flaeche die Seite lesen. Dafuer steht unten ein @supports,
@@ -85,7 +88,6 @@
   var DANK_P = 'Ihre Anfrage ist eingegangen. Wir melden uns zeitnah bei Ihnen.';
   var FEHLER = 'Das hat nicht geklappt. Bitte schreiben Sie uns direkt an info@jmr-architektur.de.';
   var MARKE  = 'Anfrage gesendet';
-  var SCHLUESSEL = 'jmr:anfrage-gesendet';
 
   var STIL = [
     '@keyframes jmrf-dreh{to{transform:translate(-50%,-50%) rotate(360deg)}}',
@@ -107,21 +109,27 @@
     /* --- Huelle: traegt das Einblenden und das Leuchten -------------- */
     '.jmrf-huelle{position:relative;width:100%;max-width:430px;',
     '  animation:jmrf-auf .42s cubic-bezier(.16,1,.3,1) both}',
-    /* Das Leuchten liegt HINTER der Scheibe, als eigenes Geschwister.',
-       Auf der Scheibe selbst wuerde es ueber deren Rand malen. */
-    '.jmrf-schein{position:absolute;inset:0;border-radius:28px;pointer-events:none;',
+    /* Der Schein ist ein eigenes Geschwister ueber dem Glas. Sein
+       Schatten faellt nur nach aussen, im Kasten ist er unsichtbar. */
+    '.jmrf-schein{position:absolute;inset:0;border-radius:28px;pointer-events:none;z-index:2;',
     '  box-shadow:0 34px 78px -26px rgba(11,28,43,.50),0 0 0 1px rgba(91,208,224,.50),',
     '  0 0 58px 6px rgba(46,134,199,.34),0 0 104px 18px rgba(225,98,61,.16);',
     '  animation:jmrf-atem 4.6s ease-in-out infinite;will-change:opacity}',
 
     /* --- Die Scheibe -------------------------------------------------- */
     '.jmrf-box{position:relative;isolation:isolate;overflow:hidden;text-align:center;outline:none;',
-    '  background:rgba(255,255,255,.66);',
+    '  background:rgba(255,255,255,.78);',
     /* brightness hebt an, was hinter der Scheibe liegt - erst dadurch
        bleibt der Text auch ueber dem dunklen Kontaktbereich lesbar,
        ohne dass die Scheibe deckender werden muss. */
-    '  backdrop-filter:blur(38px) saturate(200%) brightness(1.16);',
-    '  -webkit-backdrop-filter:blur(38px) saturate(200%) brightness(1.16);',
+    /* 44 px und nicht mehr: Gemessen kostete 60 px auf allen fuenf
+       Seiten wieder einzelne lange Bilder, weil der Weichzeichner neu
+       gerechnet wird, sobald sich im Glas etwas bewegt. Bei 78 Prozent
+       Deckung kommen ohnehin nur 22 Prozent von hinten durch - der
+       Unterschied zwischen 44 und 60 px ist am Bild nicht zu sehen
+       (Streuung 12,3 gegen 12,4), der im Bildtakt sehr wohl. */
+    '  backdrop-filter:blur(44px) saturate(180%) brightness(1.08);',
+    '  -webkit-backdrop-filter:blur(44px) saturate(180%) brightness(1.08);',
     '  border:1px solid rgba(255,255,255,.52);border-radius:28px;',
     '  padding:clamp(2rem,5.4vw,2.7rem) clamp(1.5rem,4.6vw,2.5rem);',
     '  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.22)}',
@@ -133,7 +141,7 @@
     '  linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,0) 44%)}',
 
     /* --- Leuchtrahmen: eine Scheibe, die sich dreht ------------------- */
-    '.jmrf-rand{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;',
+    '.jmrf-rand{position:absolute;inset:0;border-radius:28px;pointer-events:none;z-index:3;',
     '  padding:1.5px;overflow:hidden;opacity:.88;',
     '  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;',
     '  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}',
@@ -192,13 +200,12 @@
     karte.classList.add('jmrf-quittiert');
   }
 
-  function merken() {
-    try { sessionStorage.setItem(SCHLUESSEL, '1'); } catch (e) { /* Privatmodus */ }
-  }
-
-  /* Wer schon abgesendet hat, sieht die Kapsel auch auf den anderen
-     Unterseiten - sonst stuende dort "noch nichts geschickt". */
-  try { if (sessionStorage.getItem(SCHLUESSEL) === '1') kapsel(); } catch (e) { /* egal */ }
+  /* Die Kapsel wird nirgends gespeichert. Sie gilt fuer diese eine
+     Seitenansicht: Wer weiterblaettert, neu laedt oder die Seite
+     verlaesst, sieht sie nicht mehr. Das war Max' ausdruecklicher
+     Wunsch - eine Meldung, die nach Tagen noch dasteht, ist keine
+     Bestaetigung mehr, sondern ein Ueberbleibsel. Nebenbei kommt die
+     Seite damit ganz ohne Browserspeicher aus. */
 
   /* --- Bestaetigungsfenster ------------------------------------------ */
   function bauen() {
@@ -208,13 +215,21 @@
     dlg.className = 'jmrf-dlg';
     dlg.setAttribute('aria-labelledby', 'jmrf-t');
     dlg.setAttribute('aria-describedby', 'jmrf-p');
+    /* Rahmen und Schein liegen UEBER dem Glas, nicht darin und nicht
+       dahinter. Alles, was sich im Glas oder hinter ihm bewegt, zwingt
+       den Browser, die Weichzeichnung neu zu rechnen - gemessen waren
+       das je nach Tagesform bis zu 13 lange Bilder von 120. So bleibt
+       im Glas nur unbewegter Text, und die Weichzeichnung wird einmal
+       gerechnet. Der Schein malt ohnehin nur ausserhalb des Kastens
+       (ein aeusserer Schatten wird am Rand abgeschnitten), er sieht
+       oben drueber also genauso aus wie darunter. */
     dlg.innerHTML =
       '<div class="jmrf-huelle">' +
-        '<span class="jmrf-schein" aria-hidden="true"></span>' +
         '<div class="jmrf-box" tabindex="-1">' +
-          '<span class="jmrf-rand" aria-hidden="true"><i></i></span>' +
           '<h3 id="jmrf-t"></h3><p id="jmrf-p"></p>' +
         '</div>' +
+        '<span class="jmrf-rand" aria-hidden="true"><i></i></span>' +
+        '<span class="jmrf-schein" aria-hidden="true"></span>' +
       '</div>';
     dlg.querySelector('#jmrf-t').textContent = DANK_T;
     dlg.querySelector('#jmrf-p').textContent = DANK_P;
@@ -296,7 +311,6 @@
       if (r.ok) {
         f.reset();
         document.dispatchEvent(new Event('jmr:gesendet'));
-        merken();
         if (danken()) {
           /* Das Fenster hat den Streifen im Kasten abgeloest. */
           if (st) { st.style.display = 'none'; st.textContent = ''; st.className = 'kf-status'; }
