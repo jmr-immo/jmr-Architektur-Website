@@ -7,7 +7,7 @@
 <script src="js/jmr-consent.js" defer></script>
 <script src="js/jmr-faq.js" defer></script>
 <script src="js/jmr-laufband.js" defer></script>
-<script src="js/jmr-formular.js" defer></script>
+<script src="js/jmr-formular.js?v=3" defer></script>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
@@ -151,6 +151,11 @@ section{padding:var(--pad) 0;position:relative}
 .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
 @media(max-width:900px){.prob-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.prob-grid{grid-template-columns:1fr}}
+/* Alle sechs Karten exakt gleich hoch: jede Zeile bekommt die Hoehe der
+   hoechsten. Nur oberhalb von 700 px, denn darunter ist #huerden eine
+   Aufklappliste - dort wuerde 1fr jede Zeile auf die Hoehe der geoeffneten
+   Karte aufblasen. */
+@media(min-width:701px){#huerden .prob-grid{grid-auto-rows:1fr}#huerden .prob{height:100%}}
 .prob{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:2rem 1.8rem;transition:box-shadow .3s,border-color .25s,transform .2s;overflow:hidden;isolation:isolate}
 .prob::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(225,98,61,.16),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
 .prob::after{content:'';position:absolute;left:0;top:0;height:3px;width:0;background:var(--accent);transition:width .4s;z-index:1}
@@ -355,6 +360,14 @@ section{padding:var(--pad) 0;position:relative}
 .fld input,.fld select,.fld textarea{width:100%;padding:.9rem 1.05rem;border:1px solid var(--line);border-radius:12px;font-family:var(--sans);font-size:.95rem;background:#FFFFFF;transition:.2s;color:var(--white)}
 .fld input::placeholder,.fld textarea::placeholder{color:#94a3ad}
 .fld select{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding-right:2.6rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%235b6b78' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.1rem center}
+/* Feste Zeilenhoehe fuer die Auswahlfelder. Mit "normal" richtet sich die
+   Hoehe nach den Zeichen des gerade gewaehlten Eintrags: "Bitte auswählen …"
+   war 2 px hoeher als "Umnutzung (Nutzungsänderung)". Nach dem Absenden setzt
+   das Formular zurueck, das Feld wurde 2 px hoeher, der Kasten wuchs mit und
+   das Foto daneben sprang. 1.12 entspricht dem bisherigen Wert von Inter, das
+   Feld sieht also aus wie vorher.  */
+.fld select,.fld input{line-height:1.12}
+
 .fld select option{background:#FFFFFF;color:var(--white)}
 .fld textarea{resize:vertical;min-height:88px;line-height:1.5}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--accent);background:#FFFFFF;box-shadow:0 0 0 3px rgba(225,98,61,.15)}
@@ -640,11 +653,11 @@ h1,h2,h3{overflow-wrap:break-word}
     <div class="sh c fade"><span class="kicker c">Die typischen Stolpersteine</span><h2>Woran Umnutzungen scheitern.</h2><p>Die folgenden Punkte sind die größten Stolpersteine. Wir lösen sie, bevor sie zum Problem werden.</p></div>
     <div class="prob-grid acc-liste">
       <div class="prob fade"><div class="acc-head"><div class="pn">01</div><h3>Ist die Nutzung überhaupt erlaubt?</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Ob die Umnutzung erlaubt ist, hängt vom Bebauungsplan und vom Umfeld ab. Ohne Klärung droht eine Nutzungsuntersagung samt Bußgeld.</p></div></div></div>
-      <div class="prob fade d1"><div class="acc-head"><div class="pn">02</div><h3><span>Altbau ohne <br class="m-only-i">Genehmigung</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Nicht jeder Altbau ist so genehmigt, wie er heute dasteht. Übersieht man das, scheitert die Umnutzung. Wir prüfen das vorab.</p></div></div></div>
+      <div class="prob fade d1"><div class="acc-head"><div class="pn">02</div><h3><span>Altbau ohne <br class="m-only-i">Genehmigung</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Nicht jeder Altbau ist so genehmigt, wie er heute dasteht. Übersieht man einen alten Anbau oder Ausbau, scheitert die Umnutzung daran. Wir prüfen die Bauakte vorab.</p></div></div></div>
       <div class="prob fade d2"><div class="acc-head"><div class="pn">03</div><h3>Genehmigungspflicht ohne Umbau</h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Selbst ohne bauliche Änderung, etwa von Wohnung zu Ferienwohnung, ist die neue Nutzung in aller Regel genehmigungspflichtig. Sonst kann das Amt sie untersagen.</p></div></div></div>
-      <div class="prob fade"><div class="acc-head"><div class="pn">04</div><h3><span>Stellplätze und <br class="m-only-i">Brandschutz</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Wird aus Gewerbe Wohnraum, verlangt das Saarland dafür keine Stellplätze (§ 47 Abs. 1 Satz 5 LBO), solange die Gemeinde nichts anderes bestimmt. Bei anderen Nutzungen, etwa einer Ferienwohnung, kann sehr wohl Mehrbedarf entstehen. Dazu kommen oft höhere Anforderungen an den Brandschutz. Beides rechnen wir vorher durch.</p></div></div></div>
-      <div class="prob fade d1"><div class="acc-head"><div class="pn">05</div><h3><span>Mehrere Stellen <br class="m-only-i">beteiligt</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Oft reden Bauamt, Gemeinde und Feuerwehr mit, alle mit eigenen Anforderungen. Wir koordinieren das für Sie aus einer Hand.</p></div></div></div>
-      <div class="prob fade d2"><div class="acc-head"><div class="pn">06</div><h3><span>Unnötige <br class="m-only-i">Verzögerungen</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Fehlen dem Amt Unterlagen, kommen Nachforderungen, und das kostet jedes Mal Wochen. Wir reichen gleich alles vollständig ein.</p></div></div></div>
+      <div class="prob fade"><div class="acc-head"><div class="pn">04</div><h3><span>Stellplätze und <br class="m-only-i">Brandschutz</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Wird aus Gewerbe Wohnraum, verlangt das Saarland dafür keine Stellplätze (§ 47 Abs. 1 Satz 5 LBO), außer die Gemeinde bestimmt es anders. Bei Ferienwohnungen und beim Brandschutz gilt das nicht.</p></div></div></div>
+      <div class="prob fade d1"><div class="acc-head"><div class="pn">05</div><h3><span>Mehrere Stellen <br class="m-only-i">beteiligt</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Oft reden Bauamt, Gemeinde, Feuerwehr und mitunter der Denkmalschutz mit, jeder mit eigenen Anforderungen. Wir koordinieren das für Sie aus einer Hand.</p></div></div></div>
+      <div class="prob fade d2"><div class="acc-head"><div class="pn">06</div><h3><span>Unnötige <br class="m-only-i">Verzögerungen</span></h3><span class="acc-plus" aria-hidden="true"></span></div><div class="acc-body"><div class="acc-inner"><p>Fehlen dem Amt Unterlagen, kommen Nachforderungen, und jede davon kostet Wochen. Wir reichen deshalb von Anfang an vollständig ein, mit Bestandsplänen.</p></div></div></div>
     </div>
   </div>
 </section>

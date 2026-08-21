@@ -22,6 +22,15 @@
            nachzutragen. Ein Fenster darueber wuerde genau das
            verdecken.
 
+   NICHTS RUCKT
+           "Wird gesendet ..." stand frueher als eigene Zeile unter
+           dem Formular. Die machte den Kasten hoeher, und weil das
+           Foto links in derselben Rasterzeile haengt (.cgrid, zweite
+           Zeile 1fr), wuchs es mit - und sprang danach zurueck.
+           Jetzt steht der Zwischenstand in der Schaltflaeche selbst,
+           deren Hoehe fest ist. Auf dem Weg zum Erfolg aendert sich
+           damit an der Seite kein einziges Pixel.
+
    Zum Glas: milchige Flaeche statt weisser Kasten, dahinter wird die
    Seite unscharf und farbkraeftiger gerechnet (backdrop-filter mit
    blur und saturate). Dazu eine helle Kante oben und ein schwacher
@@ -197,6 +206,34 @@
     } catch (e) { return false; }
   }
 
+  /* Zwischenstand in der Schaltflaeche statt in einer eigenen Zeile:
+     Ihre Hoehe steht fest, also ruckt nichts. */
+  var knopf = document.getElementById('kfSubmit') || f.querySelector('[type=submit]');
+  var knopfInhalt = knopf ? knopf.innerHTML : '';
+
+  function knopfLaeuft(ja) {
+    if (!knopf) return;
+    if (ja) {
+      /* Hoehe festnageln, nicht nur einen Mindestwert setzen: Gemessen
+         wuchs die Schaltflaeche sonst um 2 bis 3 px, weil der
+         Auslassungspunkt eine andere Zeilenhoehe hat als der Pfeil.
+         Deshalb bleibt der Pfeil jetzt auch stehen - nur das Wort
+         davor wechselt. */
+      var h = knopf.getBoundingClientRect().height;
+      knopf.style.height = h + 'px';
+      knopf.style.minHeight = h + 'px';
+      knopf.disabled = true;
+      knopf.setAttribute('aria-busy', 'true');
+      knopf.innerHTML = 'Wird gesendet <span class="ar">→</span>';
+    } else {
+      knopf.disabled = false;
+      knopf.removeAttribute('aria-busy');
+      knopf.innerHTML = knopfInhalt;
+      knopf.style.height = '';
+      knopf.style.minHeight = '';
+    }
+  }
+
   function melden(art, text) {
     if (!st) return;
     st.style.display = 'block';
@@ -206,7 +243,7 @@
 
   f.addEventListener('submit', async function (e) {
     e.preventDefault();
-    melden('', 'Wird gesendet …');
+    knopfLaeuft(true);
     try {
       var r = await fetch(f.action, {
         method: 'POST',
@@ -231,5 +268,6 @@
     } catch (err) {
       melden('err', FEHLER);
     }
+    knopfLaeuft(false);
   });
 })();
