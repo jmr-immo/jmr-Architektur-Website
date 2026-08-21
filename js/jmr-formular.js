@@ -31,17 +31,23 @@
            deren Hoehe fest ist. Auf dem Weg zum Erfolg aendert sich
            damit an der Seite kein einziges Pixel.
 
-   Zum Glas: eine mattierte Scheibe. Dahinter wird die Seite stark
-   weich gezeichnet (60 px), farbkraeftiger und etwas heller
-   gerechnet. 60 px sind der Punkt, an dem hinter der Scheibe noch
-   Licht und Farbe durchkommen, aber nichts mehr zu lesen ist - genau
-   das macht mattiertes Glas aus. Dazu eine helle Kante oben und ein
-   Schimmer, der von links oben einfaellt.
+   ZUM GLAS
+   Die Scheibe ist nur leicht durchscheinend (86 Prozent deckend) und
+   zeichnet weich, was hinter ihr liegt (44 px). Das allein ergibt
+   aber eine weisse Flaeche mit unscharfem Hintergrund, kein Glas.
+   Was sie mattiert wirken laesst, sind drei unbewegte Lagen darueber:
 
-   Vier Abstufungen wurden gebaut und am Bild verglichen. Von .66 auf
-   .78 Deckung und von 38 auf 60 px sank die Streuung im Glas von
-   19,4 auf 12,4 - so viel weniger kommt jetzt durch. Der Text steht
-   dabei mit 10,8:1 (noetig waeren 4,5:1).
+   1. Schimmer von links oben und eine helle Kante - das Licht.
+   2. Zwei weiche Farbflecken, kuehl unten links, warm unten rechts.
+      Echtes Glas ist nie gleichmaessig grau.
+   3. Ein sehr feines Korn (feTurbulence als Hintergrundbild, 17
+      Prozent Deckung). Mattierung streut das Licht, und das sieht man
+      als Griesel. Gemessen bringt es +3 Punkte Feinstruktur und nimmt
+      der Flaeche dabei nur drei Helligkeitsstufen. Mit dem Mischmodus
+      overlay waere es auf einer fast weissen Flaeche unsichtbar
+      geblieben (+0,2), deshalb steht es ohne Mischmodus da.
+
+   Der Text steht mit 11,2:1 (noetig waeren 4,5:1).
 
    Kennt ein Browser backdrop-filter nicht, wuerde man durch die
    milchige Flaeche die Seite lesen. Dafuer steht unten ein @supports,
@@ -118,7 +124,7 @@
 
     /* --- Die Scheibe -------------------------------------------------- */
     '.jmrf-box{position:relative;isolation:isolate;overflow:hidden;text-align:center;outline:none;',
-    '  background:rgba(255,255,255,.78);',
+    '  background:rgba(255,255,255,.86);',
     /* brightness hebt an, was hinter der Scheibe liegt - erst dadurch
        bleibt der Text auch ueber dem dunklen Kontaktbereich lesbar,
        ohne dass die Scheibe deckender werden muss. */
@@ -135,10 +141,26 @@
     '  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.22)}',
     '@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){',
     '  .jmrf-box{background:rgba(255,255,255,.94)}}',
-    /* Schimmer von links oben - macht aus milchig erst Glas */
+    /* Die Fuellung selbst. Drei Lagen uebereinander, alle unbewegt:
+       1. Schimmer von links oben und eine helle Kante - das Licht.
+       2. Zwei weiche Farbflecken, kuehl oben links, warm unten
+          rechts. Echtes Glas ist nie gleichmaessig grau.
+       3. Ein sehr feines Korn. Das ist der eigentliche Unterschied
+          zwischen "weisse Flaeche mit Weichzeichner dahinter" und
+          mattiertem Glas: Mattierung streut das Licht, und das
+          sieht man als Griesel, nicht als Flaeche. */
     '.jmrf-box::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;',
-    '  background:radial-gradient(120% 92% at 12% -14%,rgba(255,255,255,.9) 0%,rgba(255,255,255,.3) 34%,rgba(255,255,255,0) 68%),',
-    '  linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,0) 44%)}',
+    '  background:radial-gradient(120% 92% at 12% -14%,rgba(255,255,255,.92) 0%,rgba(255,255,255,.32) 34%,rgba(255,255,255,0) 68%),',
+    '  radial-gradient(78% 70% at 88% 108%,rgba(225,98,61,.10) 0%,rgba(225,98,61,0) 62%),',
+    '  radial-gradient(70% 64% at 6% 96%,rgba(46,134,199,.09) 0%,rgba(46,134,199,0) 60%),',
+    '  linear-gradient(180deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 46%)}',
+    '.jmrf-korn{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;',
+    '  background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMTYwIj48ZmlsdGVyIGlkPSJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgZmlsdGVyPSJ1cmwoI24pIi8+PC9zdmc+);',
+    /* Ohne Mischmodus und mit 0,17: Gemessen bringt overlay auf einer
+       fast weissen Flaeche so gut wie nichts (+0,2 Griesel), normal
+       bringt +3 und nimmt der Flaeche dabei nur drei Helligkeitsstufen
+       - genau das laesst sie mattiert statt weiss wirken. */
+    '  background-size:160px 160px;opacity:.17}',
 
     /* --- Leuchtrahmen: eine Scheibe, die sich dreht ------------------- */
     '.jmrf-rand{position:absolute;inset:0;border-radius:28px;pointer-events:none;z-index:3;',
@@ -151,12 +173,12 @@
     '  animation:jmrf-dreh 7s linear infinite}',
 
     /* --- Inhalt ------------------------------------------------------ */
-    '.jmrf-box h3{position:relative;z-index:1;font-family:var(--disp,inherit);font-weight:600;',
+    '.jmrf-box h3{position:relative;z-index:2;font-family:var(--disp,inherit);font-weight:600;',
     '  letter-spacing:-.03em;line-height:1.08;font-size:clamp(1.85rem,6vw,2.45rem);margin:0 0 .6rem;',
     '  background:linear-gradient(96deg,#2E86C7 0%,#5BD0E0 30%,#E1623D 55%,#5BD0E0 78%,#2E86C7 100%);',
     '  background-size:220% auto;-webkit-background-clip:text;background-clip:text;',
     '  -webkit-text-fill-color:transparent;color:transparent;animation:jmrf-flow 8s ease-in-out infinite}',
-    '.jmrf-box p{position:relative;z-index:1;margin:0;font-size:.97rem;line-height:1.6;',
+    '.jmrf-box p{position:relative;z-index:2;margin:0;font-size:.97rem;line-height:1.6;',
     '  color:#26313b;text-shadow:0 1px 0 rgba(255,255,255,.7)}',
 
     /* --- Kapsel im Formularkasten ------------------------------------ */
@@ -226,6 +248,7 @@
     dlg.innerHTML =
       '<div class="jmrf-huelle">' +
         '<div class="jmrf-box" tabindex="-1">' +
+          '<span class="jmrf-korn" aria-hidden="true"></span>' +
           '<h3 id="jmrf-t"></h3><p id="jmrf-p"></p>' +
         '</div>' +
         '<span class="jmrf-rand" aria-hidden="true"><i></i></span>' +
