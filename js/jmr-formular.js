@@ -31,30 +31,48 @@
            deren Hoehe fest ist. Auf dem Weg zum Erfolg aendert sich
            damit an der Seite kein einziges Pixel.
 
-   Zum Glas: milchige Flaeche statt weisser Kasten, dahinter wird die
-   Seite unscharf und farbkraeftiger gerechnet (backdrop-filter mit
-   blur und saturate). Dazu eine helle Kante oben und ein schwacher
-   Schimmer, der von links oben einfaellt - das ist es, was den
-   Eindruck von Glas macht, nicht die Durchsichtigkeit allein.
+   Zum Glas: eine durchscheinende Scheibe, hinter der die Seite weich
+   gezeichnet, farbkraeftiger und etwas heller gerechnet wird
+   (backdrop-filter mit blur, saturate und brightness). Dazu eine
+   helle Kante oben und ein Schimmer, der von links oben einfaellt -
+   das ist es, was den Eindruck von Glas macht, nicht die
+   Durchsichtigkeit allein. Das Aufhellen ist der Grund, warum die
+   Scheibe so durchscheinend sein darf und der Text trotzdem auch
+   ueber dem dunklen Kontaktbereich lesbar bleibt (gemessen 9,6:1).
 
    Kennt ein Browser backdrop-filter nicht, wuerde man durch die
    milchige Flaeche die Seite lesen. Dafuer steht unten ein @supports,
    das die Flaeche dann fast deckend macht.
 
-   Zum Leuchten: Der Schatten atmet (jmrf-atem, 4,2 s) und ein
-   Farbverlauf dreht sich als schmaler Rahmen einmal in 6 s herum
-   (jmrf-dreh). Dasselbe Prinzip wie beim KFW-Kasten auf der
-   Startseite, aber ruhiger eingestellt.
+   Zum Leuchten: Ein Schein hinter der Scheibe blendet auf und ab
+   (jmrf-atem, 4,6 s) und ein Farbverlauf dreht sich als schmaler
+   Rahmen einmal in 7 s herum (jmrf-dreh).
+
+   WARUM ES JETZT FLUESSIG LAEUFT
+   Die erste Fassung stockte. Gemessen wurde jedes Bild einzeln, und
+   die Ursache war eindeutig: der Weichzeichner auf ::backdrop, also
+   ueber das ganze Fenster. Mit ihm 55 ms je Bild, ohne ihn 17 - und
+   das bei jeder der fuenf Seiten. Weggelassen. Das Glas ist die
+   Scheibe selbst; die zeichnet weich, was hinter IHR liegt, und das
+   kostet fast nichts. Der Rest wird nur abgedunkelt.
+
+   Ausserdem bewegen sich jetzt nur noch Eigenschaften, die der
+   Browser auf der Grafikkarte rechnen kann:
+   - Der Schein aendert seine Deckung (opacity), nicht seinen
+     Schatten. box-shadow zu bewegen heisst neu malen, jedes Bild.
+   - Der Rahmen dreht eine Scheibe (transform:rotate) hinter einer
+     festen Maske, statt einen Kegelverlauf Bild fuer Bild neu
+     aufzubauen. Damit faellt auch @property weg, und der Rahmen
+     dreht sich jetzt ueberall - auch in Safari vor 16.4.
+   - Der Schein ist ein eigenes Geschwister HINTER der Scheibe. Auf
+     der Scheibe selbst wuerde sein Schatten ueber deren Rand malen.
 
    Zu den Farben: --cyan und --green sind nur auf der Startseite
    erklaert, die vier Unterseiten kennen sie nicht. Die Werte stehen
    hier deshalb ausgeschrieben, sonst saehe das Fenster auf den
    Unterseiten anders aus als auf der Startseite.
 
-   Zum Rahmen: Er braucht @property. Aeltere Safari-Versionen (vor
-   16.4) kennen das nicht; dort steht der Verlauf still, statt sich
-   zu drehen, und das Atmen bleibt. Fuer "Bewegung reduzieren" ist
-   beides abgeschaltet.
+   Fuer "Bewegung reduzieren" ist alles abgeschaltet.
    ------------------------------------------------------------------ */
 (function () {
   'use strict';
@@ -70,11 +88,8 @@
   var SCHLUESSEL = 'jmr:anfrage-gesendet';
 
   var STIL = [
-    '@property --jmrf-a{syntax:"<angle>";inherits:false;initial-value:0deg}',
-    '@keyframes jmrf-dreh{to{--jmrf-a:360deg}}',
-    '@keyframes jmrf-atem{',
-    '  0%,100%{box-shadow:0 32px 74px -28px rgba(11,28,43,.42),0 0 0 1px rgba(46,134,199,.18),0 0 26px 0 rgba(91,208,224,.16),inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.28)}',
-    '  50%{box-shadow:0 32px 74px -28px rgba(11,28,43,.42),0 0 0 1px rgba(91,208,224,.38),0 0 52px 5px rgba(46,134,199,.24),0 0 86px 13px rgba(225,98,61,.12),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.34)}}',
+    '@keyframes jmrf-dreh{to{transform:translate(-50%,-50%) rotate(360deg)}}',
+    '@keyframes jmrf-atem{0%,100%{opacity:.40}50%{opacity:1}}',
     '@keyframes jmrf-flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}',
     '@keyframes jmrf-auf{from{opacity:0;transform:translateY(18px) scale(.955)}to{opacity:1;transform:none}}',
     '@keyframes jmrf-kapsel{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}',
@@ -83,28 +98,49 @@
     '.jmrf-dlg{position:fixed;inset:0;margin:0;width:100%;height:100%;max-width:100%;max-height:100%;',
     '  border:0;padding:0;background:transparent;overflow:auto;overscroll-behavior:contain}',
     '.jmrf-dlg[open]{display:grid;place-items:center;padding:1.25rem;cursor:pointer}',
-    '.jmrf-dlg::backdrop{background:rgba(11,28,43,.44);backdrop-filter:blur(6px) saturate(120%);',
-    '  -webkit-backdrop-filter:blur(6px) saturate(120%)}',
+    /* Bewusst OHNE backdrop-filter: Ein Weichzeichner ueber das ganze
+       Fenster kostete gemessen 55 ms je Bild statt 17. Das Glas ist die
+       Scheibe selbst - die zeichnet weich, was hinter IHR liegt. Der
+       Rest wird nur abgedunkelt. */
+    '.jmrf-dlg::backdrop{background:rgba(11,28,43,.46)}',
 
-    /* --- Glaskasten -------------------------------------------------- */
-    '.jmrf-box{position:relative;isolation:isolate;width:100%;max-width:430px;text-align:center;outline:none;',
-    '  background:rgba(255,255,255,.80);',
-    '  backdrop-filter:blur(34px) saturate(185%);-webkit-backdrop-filter:blur(34px) saturate(185%);',
-    '  border:1px solid rgba(255,255,255,.58);border-radius:28px;',
+    /* --- Huelle: traegt das Einblenden und das Leuchten -------------- */
+    '.jmrf-huelle{position:relative;width:100%;max-width:430px;',
+    '  animation:jmrf-auf .42s cubic-bezier(.16,1,.3,1) both}',
+    /* Das Leuchten liegt HINTER der Scheibe, als eigenes Geschwister.',
+       Auf der Scheibe selbst wuerde es ueber deren Rand malen. */
+    '.jmrf-schein{position:absolute;inset:0;border-radius:28px;pointer-events:none;',
+    '  box-shadow:0 34px 78px -26px rgba(11,28,43,.50),0 0 0 1px rgba(91,208,224,.50),',
+    '  0 0 58px 6px rgba(46,134,199,.34),0 0 104px 18px rgba(225,98,61,.16);',
+    '  animation:jmrf-atem 4.6s ease-in-out infinite;will-change:opacity}',
+
+    /* --- Die Scheibe -------------------------------------------------- */
+    '.jmrf-box{position:relative;isolation:isolate;overflow:hidden;text-align:center;outline:none;',
+    '  background:rgba(255,255,255,.66);',
+    /* brightness hebt an, was hinter der Scheibe liegt - erst dadurch
+       bleibt der Text auch ueber dem dunklen Kontaktbereich lesbar,
+       ohne dass die Scheibe deckender werden muss. */
+    '  backdrop-filter:blur(38px) saturate(200%) brightness(1.16);',
+    '  -webkit-backdrop-filter:blur(38px) saturate(200%) brightness(1.16);',
+    '  border:1px solid rgba(255,255,255,.52);border-radius:28px;',
     '  padding:clamp(2rem,5.4vw,2.7rem) clamp(1.5rem,4.6vw,2.5rem);',
-    '  animation:jmrf-atem 4.2s ease-in-out infinite,jmrf-auf .42s cubic-bezier(.16,1,.3,1) both}',
+    '  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.22)}',
     '@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){',
-    '  .jmrf-box{background:rgba(255,255,255,.95)}}',
+    '  .jmrf-box{background:rgba(255,255,255,.94)}}',
     /* Schimmer von links oben - macht aus milchig erst Glas */
     '.jmrf-box::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;',
-    '  background:radial-gradient(120% 92% at 12% -14%,rgba(255,255,255,.92) 0%,rgba(255,255,255,.34) 34%,rgba(255,255,255,0) 68%),',
-    '  linear-gradient(180deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,0) 42%)}',
-    /* Leuchtrahmen */
-    '.jmrf-box::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.6px;--jmrf-a:0deg;',
-    '  background:conic-gradient(from var(--jmrf-a),transparent 0 8%,#2E86C7 24%,#5BD0E0 40%,#E1623D 56%,#5BD0E0 72%,transparent 88% 100%);',
+    '  background:radial-gradient(120% 92% at 12% -14%,rgba(255,255,255,.9) 0%,rgba(255,255,255,.3) 34%,rgba(255,255,255,0) 68%),',
+    '  linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,0) 44%)}',
+
+    /* --- Leuchtrahmen: eine Scheibe, die sich dreht ------------------- */
+    '.jmrf-rand{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;',
+    '  padding:1.5px;overflow:hidden;opacity:.88;',
     '  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;',
-    '  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;',
-    '  animation:jmrf-dreh 6s linear infinite;pointer-events:none;z-index:2;opacity:.85}',
+    '  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}',
+    '.jmrf-rand i{position:absolute;left:50%;top:50%;width:170%;aspect-ratio:1;',
+    '  transform:translate(-50%,-50%);will-change:transform;',
+    '  background:conic-gradient(transparent 0 8%,#2E86C7 24%,#5BD0E0 40%,#E1623D 56%,#5BD0E0 72%,transparent 88% 100%);',
+    '  animation:jmrf-dreh 7s linear infinite}',
 
     /* --- Inhalt ------------------------------------------------------ */
     '.jmrf-box h3{position:relative;z-index:1;font-family:var(--disp,inherit);font-weight:600;',
@@ -113,7 +149,7 @@
     '  background-size:220% auto;-webkit-background-clip:text;background-clip:text;',
     '  -webkit-text-fill-color:transparent;color:transparent;animation:jmrf-flow 8s ease-in-out infinite}',
     '.jmrf-box p{position:relative;z-index:1;margin:0;font-size:.97rem;line-height:1.6;',
-    '  color:#2b3742;text-shadow:0 1px 0 rgba(255,255,255,.6)}',
+    '  color:#26313b;text-shadow:0 1px 0 rgba(255,255,255,.7)}',
 
     /* --- Kapsel im Formularkasten ------------------------------------ */
     '.ccard.jmrf-quittiert h3{display:flex;align-items:center;justify-content:space-between;',
@@ -128,8 +164,8 @@
 
     /* --- Bewegung reduzieren ----------------------------------------- */
     '@media(prefers-reduced-motion:reduce){',
-    '  .jmrf-box,.jmrf-box::after,.jmrf-box h3,.jmrf-marke{animation:none}',
-    '  .jmrf-box{box-shadow:0 32px 74px -28px rgba(11,28,43,.42),0 0 0 1px rgba(91,208,224,.38),inset 0 1px 0 rgba(255,255,255,.9)}',
+    '  .jmrf-huelle,.jmrf-schein,.jmrf-rand i,.jmrf-box h3,.jmrf-marke{animation:none}',
+    '  .jmrf-schein{opacity:1}',
     '  .jmrf-box h3{-webkit-text-fill-color:currentColor;color:#0B1C2B;background:none}}'
   ].join('\n');
 
@@ -172,7 +208,14 @@
     dlg.className = 'jmrf-dlg';
     dlg.setAttribute('aria-labelledby', 'jmrf-t');
     dlg.setAttribute('aria-describedby', 'jmrf-p');
-    dlg.innerHTML = '<div class="jmrf-box" tabindex="-1"><h3 id="jmrf-t"></h3><p id="jmrf-p"></p></div>';
+    dlg.innerHTML =
+      '<div class="jmrf-huelle">' +
+        '<span class="jmrf-schein" aria-hidden="true"></span>' +
+        '<div class="jmrf-box" tabindex="-1">' +
+          '<span class="jmrf-rand" aria-hidden="true"><i></i></span>' +
+          '<h3 id="jmrf-t"></h3><p id="jmrf-p"></p>' +
+        '</div>' +
+      '</div>';
     dlg.querySelector('#jmrf-t').textContent = DANK_T;
     dlg.querySelector('#jmrf-p').textContent = DANK_P;
 
