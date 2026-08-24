@@ -14,10 +14,10 @@
  *
  * Conversion-Ausloeser fuers Kontaktformular: window.jmrTrackConversion()
  *
- * Meta-Pixel (Facebook/Instagram): liegt in CONFIG.metaPixelId, laeuft aber nur auf
- * Seiten, die im <head> vor diesem Skript window.jmrMetaPixel = true setzen, und erst
- * nach Einwilligung in die Kategorie "Marketing". Bewusst KEIN <noscript>-Zaehlpixel,
- * denn das wuerde ohne Einwilligung feuern.
+ * Meta-Pixel (Facebook/Instagram): liegt in CONFIG.metaPixelId, laeuft auf allen Seiten
+ * dieser Website und erst nach Einwilligung in die Kategorie "Marketing". Einzelne
+ * Seiten koennen ihn abschalten mit window.jmrMetaPixel = false im <head> vor diesem
+ * Skript. Bewusst KEIN <noscript>-Zaehlpixel, denn das wuerde ohne Einwilligung feuern.
  */
 (function () {
   'use strict';
@@ -50,9 +50,10 @@
     conversionSendTo: '',   // z. B. 'AW-XXXXXXXXXX/xxxxxxxxxxxxxxxx'
     ga4Id: 'G-QBT976RCEC',  // GA4 jmr Architektur
     clarityId: 'xke0kr03ej', // Clarity jmr Architektur
-    // Meta-Pixel (Facebook/Instagram). Laeuft NICHT automatisch auf allen Seiten:
-    // eine Seite schaltet ihn frei, indem sie im <head> VOR diesem Skript
-    // <script>window.jmrMetaPixel = true;</script> setzt. Aktuell nur aufteilung.html.
+    // Meta-Pixel (Facebook/Instagram), ein Dataset fuer die gesamte Website. Die
+    // Trennung einzelner Kampagnen passiert nicht hier, sondern im Werbekonto ueber
+    // URL-Regeln (Custom Audience / Custom Conversion). Eine einzelne Seite kann den
+    // Pixel abschalten mit <script>window.jmrMetaPixel = false;</script> im <head>.
     metaPixelId: '1080170527794612'
   };
 
@@ -107,10 +108,12 @@
   }
 
   // ===== Meta-Pixel (Facebook/Instagram) – Kategorie "marketing" =====
-  // Wird nur auf Seiten geladen, die window.jmrMetaPixel = true gesetzt haben,
-  // und erst nach ausdruecklicher Einwilligung in die Kategorie "marketing".
+  // Laeuft auf allen Seiten, aber erst nach ausdruecklicher Einwilligung in die
+  // Kategorie "marketing". window.jmrMetaPixel === false schaltet ihn seitenweise ab.
   var metaLoaded = false;
-  function metaAktiv() { return !!(window.jmrMetaPixel && CONFIG.metaPixelId); }
+  function metaAktiv() {
+    return !!CONFIG.metaPixelId && window.jmrMetaPixel !== false;
+  }
   function loadMetaPixel() {
     if (metaLoaded || !metaAktiv()) { return; }
     metaLoaded = true;
