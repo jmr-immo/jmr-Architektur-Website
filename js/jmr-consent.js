@@ -13,6 +13,11 @@
  *     geladen – das Banner funktioniert trotzdem vollstaendig. <<<
  *
  * Conversion-Ausloeser fuers Kontaktformular: window.jmrTrackConversion()
+ *
+ * Meta-Pixel (Facebook/Instagram): liegt in CONFIG.metaPixelId, laeuft aber nur auf
+ * Seiten, die im <head> vor diesem Skript window.jmrMetaPixel = true setzen, und erst
+ * nach Einwilligung in die Kategorie "Marketing". Bewusst KEIN <noscript>-Zaehlpixel,
+ * denn das wuerde ohne Einwilligung feuern.
  */
 (function () {
   'use strict';
@@ -37,14 +42,18 @@
         id: 'marketing',
         name: 'Marketing',
         required: false,
-        desc: 'Misst, wie gut unsere Werbeanzeigen funktionieren (z. B. Google Ads), und kann für weitere Werbedienste genutzt werden. Dabei werden Cookies gesetzt und Daten an die jeweiligen Anbieter übertragen.'
+        desc: 'Misst, wie gut unsere Werbeanzeigen funktionieren (z. B. Google Ads und der Meta-Pixel für Anzeigen auf Facebook und Instagram), und ermöglicht es, Ihnen passende Anzeigen auszuspielen. Dabei werden Cookies gesetzt und Daten an die jeweiligen Anbieter übertragen, auch in die USA.'
       }
     ],
     // === Beim Go-live eintragen (solange leer, wird nichts geladen) ===
     googleAdsId: '',        // z. B. 'AW-XXXXXXXXXX'
     conversionSendTo: '',   // z. B. 'AW-XXXXXXXXXX/xxxxxxxxxxxxxxxx'
     ga4Id: 'G-QBT976RCEC',  // GA4 jmr Architektur
-    clarityId: 'xke0kr03ej' // Clarity jmr Architektur
+    clarityId: 'xke0kr03ej', // Clarity jmr Architektur
+    // Meta-Pixel (Facebook/Instagram). Laeuft NICHT automatisch auf allen Seiten:
+    // eine Seite schaltet ihn frei, indem sie im <head> VOR diesem Skript
+    // <script>window.jmrMetaPixel = true;</script> setzt. Aktuell nur aufteilung.html.
+    metaPixelId: '1080170527794612'
   };
 
   // ===== gtag-Grundgerüst + Consent Mode v2 (Standard: alles abgelehnt) =====
@@ -97,6 +106,40 @@
     })(window, document, 'clarity', 'script', CONFIG.clarityId);
   }
 
+  // ===== Meta-Pixel (Facebook/Instagram) – Kategorie "marketing" =====
+  // Wird nur auf Seiten geladen, die window.jmrMetaPixel = true gesetzt haben,
+  // und erst nach ausdruecklicher Einwilligung in die Kategorie "marketing".
+  var metaLoaded = false;
+  function metaAktiv() { return !!(window.jmrMetaPixel && CONFIG.metaPixelId); }
+  function loadMetaPixel() {
+    if (metaLoaded || !metaAktiv()) { return; }
+    metaLoaded = true;
+    /* Original-Ladecode von Meta, unveraendert bis auf die Formatierung. */
+    (function (f, b, e, v, n, t, s) {
+      if (f.fbq) { return; }
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) { f._fbq = n; }
+      n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+      t = b.createElement(e); t.async = !0; t.src = v;
+      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('consent', 'grant');
+    window.fbq('init', CONFIG.metaPixelId);
+    window.fbq('track', 'PageView');
+  }
+  function stopMetaPixel() {
+    /* Widerruf: Meta darf ab sofort nichts mehr senden, gesetzte Pixel-Cookies loeschen. */
+    if (typeof window.fbq === 'function') {
+      try { window.fbq('consent', 'revoke'); } catch (e) {}
+    }
+    ['_fbp', '_fbc'].forEach(function (name) {
+      document.cookie = name + '=; Max-Age=0; path=/';
+      document.cookie = name + '=; Max-Age=0; path=/; domain=.' + location.hostname;
+    });
+  }
+
   // ===== Einwilligung anwenden =====
   function applyConsent(state) {
     var marketing = !!state.marketing;
@@ -108,7 +151,8 @@
       analytics_storage: statistics ? 'granted' : 'denied'
     });
     if (statistics) { loadGA4(); loadClarity(); }
-    if (marketing) { loadGoogleAds(); }
+    if (marketing) { loadGoogleAds(); loadMetaPixel(); }
+    else { stopMetaPixel(); }
   }
 
   // ===== Auswahl lesen/speichern =====
@@ -162,6 +206,15 @@
       window.gtag('event', name, params || {});
     }
   };
+  /* Meta-Pixel: "Lead" bei erfolgreich abgeschicktem Kontaktformular.
+     Es werden keine Formularinhalte uebergeben, nur die Tatsache der Anfrage. */
+  window.jmrTrackLead = function () {
+    var st = readState();
+    if (st && st.marketing && metaAktiv() && typeof window.fbq === 'function') {
+      window.fbq('track', 'Lead');
+    }
+  };
+  document.addEventListener('jmr:gesendet', function () { window.jmrTrackLead(); });
 
   // ===== UI: Ebene 1 – vollbreite Leiste unten =====
   var bannerEl = null;
