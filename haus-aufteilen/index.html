@@ -121,8 +121,15 @@ section{padding:var(--pad) 0;position:relative}
 @media(max-width:560px){.ccard{padding:1.6rem 1.3rem}}
 .qbar{display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
 .qbar .qline{flex:1;height:4px;border-radius:999px;background:rgba(11,28,43,.1);overflow:hidden}
-.qbar .qfill{display:block;height:100%;width:25%;border-radius:999px;background:linear-gradient(90deg,var(--steel-d),var(--accent));transition:width .45s cubic-bezier(.16,1,.3,1)}
+.qbar .qfill{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--steel-d),var(--accent));transition:width .45s cubic-bezier(.16,1,.3,1)}
 .qbar .qnum{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);white-space:nowrap}
+/* Die drei Fragen sind unterschiedlich lang, und nur zwei von ihnen haben
+   einen Zurueck-Knopf. Ohne Gegenmassnahme wuerde der Kasten bei jedem
+   Schritt springen. Das Skript misst deshalb die hoechste der drei Fragen
+   und setzt sie hier als Mindesthoehe. Der letzte Schritt mit dem Formular
+   darf darueber hinauswachsen. */
+.qsteps{transition:min-height .3s cubic-bezier(.16,1,.3,1)}
+@media(prefers-reduced-motion:reduce){.qsteps{transition:none}}
 .qstep[hidden]{display:none}
 .qfrage{font-family:var(--disp);font-weight:600;font-size:1.06rem;letter-spacing:-.02em;color:var(--white);margin-bottom:.9rem;line-height:1.3}
 .qopts{display:flex;flex-direction:column;gap:.55rem}
@@ -341,8 +348,8 @@ p{text-wrap:pretty}
           <li>Baurechtliche Prüfung vorab, damit das Grundbuch später zur Wirklichkeit passt</li>
         </ul>
         <div class="ltrust">
-          <span class="tp"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.2c0 4.5-3.1 8.4-7.5 9.8-4.4-1.4-7.5-5.3-7.5-9.8V6z"/><path d="m9 12 2 2 4-4"/></svg> Architektenkammer RLP Nr. 110467</span>
-          <span class="tp"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg> Bauvorlage&shy;berechtigt</span>
+          <span class="tp"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.2c0 4.5-3.1 8.4-7.5 9.8-4.4-1.4-7.5-5.3-7.5-9.8V6z"/><path d="m9 12 2 2 4-4"/></svg> Bauvorlage&shy;berechtigt</span>
+          <span class="tp"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Vor Ort im Saarland und in der Pfalz</span>
         </div>
         <a class="ltel" href="tel:+491789428464">
           <span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span>
@@ -367,12 +374,13 @@ p{text-wrap:pretty}
             <input type="hidden" name="Unterlagen" id="qa2" value="">
             <input type="hidden" name="Vorhaben" id="qa3" value="">
 
+            <div class="qsteps" id="qsteps">
             <!-- Schritt 1 -->
             <div class="qstep" data-step="1">
               <p class="qfrage">Um welches Gebäude geht es?</p>
               <div class="qopts">
                 <button class="qopt" type="button" data-frage="1" data-wert="Zweifamilienhaus, 2 Einheiten" data-code="klein">
-                  <span><span class="qo-t">Zweifamilienhaus</span><span class="qo-s">Zwei Einheiten, oft bei Erbfolge oder Teilverkauf.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                  <span><span class="qo-t">Zweifamilienhaus</span><span class="qo-s">Zwei Wohneinheiten im Haus, kleiner Umfang.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
                 <button class="qopt" type="button" data-frage="1" data-wert="Mehrfamilienhaus, 3 bis 8 Einheiten" data-code="mittel">
                   <span><span class="qo-t">Mehrfamilienhaus, 3 bis 8 Einheiten</span><span class="qo-s">Der häufigste Fall bei einer Aufteilung.</span></span><span class="qo-ar" aria-hidden="true">→</span>
@@ -448,6 +456,7 @@ p{text-wrap:pretty}
               <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="../datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel)">Datenschutzerklärung</a>.</p>
               <button class="qzur" type="button" data-zurueck="3">← Zurück</button>
               <div id="kfStatus" class="kf-status" style="display:none"></div>
+            </div>
             </div>
           </form>
 
@@ -667,6 +676,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var form=document.getElementById('kform'); if(!form) return;
   var steps=[].slice.call(form.querySelectorAll('.qstep'));
   var fill=document.getElementById('qfill'), num=document.getElementById('qnum');
+  var kasten=document.getElementById('qsteps');
   var sum=document.getElementById('qsum');
   var felder={1:document.getElementById('qa1'),2:document.getElementById('qa2'),3:document.getElementById('qa3')};
   var codes={}, texte={}, jetzt=1;
@@ -674,7 +684,9 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   function zeige(n,fokus){
     jetzt=n;
     steps.forEach(function(s){ s.hidden = (+s.dataset.step !== n); });
-    if(fill) fill.style.width=(n*25)+'%';
+    /* Der Balken zeigt, wie viel schon hinter einem liegt: beim Einstieg
+       also nichts, im letzten Schritt sind alle drei Fragen beantwortet. */
+    if(fill) fill.style.width=Math.round((n-1)/3*100)+'%';
     if(num) num.textContent='Schritt '+n+' von 4';
     if(n===4) bauSumme();
     /* Beim Weiterschalten wandert der Fokus auf die neue Frage. Sonst
@@ -685,6 +697,27 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
       var ziel=f&&f.querySelector('.qfrage');
       if(ziel){ ziel.setAttribute('tabindex','-1'); ziel.focus({preventScroll:true}); }
     }
+  }
+
+  /* Misst die drei Fragen nacheinander und haelt den Kasten auf der Hoehe
+     der laengsten. Ohne das wandert der Rand des Kastens bei jedem Schritt,
+     weil die Antworten verschieden lang sind und der Zurueck-Knopf erst ab
+     Schritt zwei dazukommt. Der vierte Schritt bleibt aussen vor, das
+     Formular darf hoeher sein. Nach dem Absenden wird die Hoehe wieder
+     freigegeben, damit die Einordnung nicht in einem zu grossen Kasten
+     steht. */
+  function hoeheAngleichen(){
+    if(!kasten) return;
+    var merk=steps.map(function(s){ return s.hidden; });
+    var max=0;
+    kasten.style.minHeight='';
+    steps.forEach(function(s){
+      if(+s.dataset.step===4) return;
+      steps.forEach(function(a){ a.hidden = (a!==s); });
+      max=Math.max(max,s.offsetHeight);
+    });
+    steps.forEach(function(s,i){ s.hidden=merk[i]; });
+    if(max) kasten.style.minHeight=max+'px';
   }
 
   function bauSumme(){
@@ -762,11 +795,22 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     /* Das Formular ist beantwortet, die Fragen brauchen wir nicht mehr. */
     steps.forEach(function(s){ s.hidden=true; });
     var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';
+    if(kasten) kasten.style.minHeight='';
     var kopf=document.querySelector('.ccard .ds');
     if(kopf) kopf.textContent='Wir melden uns zusätzlich persönlich bei Ihnen.';
   });
 
   zeige(1);
+  hoeheAngleichen();
+  /* Noch einmal messen, sobald die Schriften geladen sind: mit der
+     Ersatzschrift fallen die Zeilen anders um als mit Switzer und Inter.
+     Und noch einmal, wenn sich die Fensterbreite aendert. */
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(hoeheAngleichen); }
+  var warte=0;
+  addEventListener('resize',function(){
+    clearTimeout(warte);
+    warte=setTimeout(function(){ if(jetzt<4) hoeheAngleichen(); },180);
+  },{passive:true});
 })();
 </script>
 </body>
