@@ -210,12 +210,22 @@
     }
   };
   /* Meta-Pixel: "Lead" bei erfolgreich abgeschicktem Kontaktformular.
-     Es werden keine Formularinhalte uebergeben, nur die Tatsache der Anfrage. */
-  window.jmrTrackLead = function () {
+     Es werden keine Formularinhalte uebergeben, nur die Tatsache der Anfrage.
+
+     jmrTrackMeta nimmt den Namen des Ereignisses entgegen. Damit kann eine
+     einzelne Seite zusaetzlich ein eigenes Ereignis melden, ohne dass im
+     Werbekonto ueber die Adresse der Seite gefiltert werden muss. Die
+     Landingpage /haus-aufteilen/ meldet auf diesem Weg "CompleteRegistration".
+     Geprueft wird in jedem Fall dasselbe: Einwilligung in "Marketing",
+     Pixel aktiv, fbq vorhanden. */
+  window.jmrTrackMeta = function (ereignis) {
     var st = readState();
     if (st && st.marketing && metaAktiv() && typeof window.fbq === 'function') {
-      window.fbq('track', 'Lead');
+      window.fbq('track', ereignis || 'Lead');
     }
+  };
+  window.jmrTrackLead = function () {
+    window.jmrTrackMeta('Lead');
   };
   document.addEventListener('jmr:gesendet', function () { window.jmrTrackLead(); });
 
