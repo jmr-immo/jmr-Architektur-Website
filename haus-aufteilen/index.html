@@ -764,7 +764,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     'misch':'Wohnen und Gewerbe nebeneinander heißt Wohnungseigentum und Teileigentum in einem Gebäude. Beides entsteht im selben Verfahren, jede Einheit bekommt aber ihre eigene Zweckbestimmung, und die entscheidet später darüber, was in den Räumen zulässig ist.'
   };
   var UNTERLAGEN={
-    'plan-gut':'Wenn die Pläne den heutigen Zustand wirklich abbilden, sparen Sie den größten Posten. Wir gleichen sie trotzdem mit dem Bestand ab, denn für die Grenze des Sondereigentums ist der Aufteilungsplan maßgeblich, nicht die Wand, die tatsächlich steht.',
+    'plan-gut':'Damit können wir direkt zeichnen. Ihre Pläne sind die Grundlage für den Aufteilungsplan, ein Aufmaß vor Ort entfällt. Wichtig ist nur, dass die Pläne den heutigen Zustand vollständig abbilden: Für die Grenze des Sondereigentums gilt später der Aufteilungsplan, nicht die Wand, die tatsächlich steht.',
     'plan-alt':'Alte Genehmigungspläne plus spätere Umbauten sind der klassische Fall. Wir sehen im Bauarchiv nach, was genehmigt ist, und messen die Abweichungen vor Ort auf. Dabei zeigt sich meist auch, ob der Umbau damals angezeigt wurde.',
     'plan-keine':'Ohne Pläne beginnt die Arbeit mit der Akteneinsicht im Bauarchiv. Erst was dort fehlt, nehmen wir vor Ort auf. Das ist im Bestand der Normalfall und kein Hindernis, es gehört nur von Anfang an eingeplant.',
     'plan-unklar':'Was an Unterlagen existiert, finden wir im Erstgespräch und über eine Akteneinsicht im Bauarchiv heraus. Erst danach lässt sich sagen, ob ein Aufmaß nötig wird.'
@@ -777,7 +777,8 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   };
   var EMPFEHLUNG={
     'check':'<b>Unser Vorschlag:</b> zuerst der Teilbarkeits-Check. Wir sichten die Unterlagen, gleichen genehmigten und tatsächlichen Zustand ab und sagen Ihnen schriftlich, was der Aufteilung im Weg steht. Erst danach entscheiden Sie über die vollständige Aufteilung.',
-    'komplett':'<b>Unser Vorschlag:</b> die Aufteilung im Komplettpaket, von der Bestandsaufnahme über den Aufteilungsplan bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft dabei mit.'
+    'komplett':'<b>Unser Vorschlag:</b> die Aufteilung im Komplettpaket, von der Bestandsaufnahme über den Aufteilungsplan bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft dabei mit.',
+    'direkt':'<b>Unser Vorschlag:</b> die Aufteilungspläne direkt aus Ihren Unterlagen, ohne Aufmaß. Wir zeichnen den Aufteilungsplan, berechnen die Flächen und beantragen die Abgeschlossen&shy;heits&shy;bescheinigung. Damit entfällt der aufwendigste Schritt, und Sie können früher zum Notar.'
   };
 
   function einordnung(){
@@ -787,10 +788,16 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(UMFANG[codes[1]]) teile.push(UMFANG[codes[1]]);
     if(UNTERLAGEN[codes[2]]) teile.push(UNTERLAGEN[codes[2]]);
     if(VORHABEN[codes[3]]) teile.push(VORHABEN[codes[3]]);
-    /* Vorab-Analyse empfehlen, wenn die Ausgangslage unklar ist oder
-       baurechtlich etwas dazukommt. Sonst direkt das Komplettpaket. */
+    /* Drei Wege, in dieser Reihenfolge geprueft:
+       - Passen die Plaene zum Bestand und bleibt baulich alles, wie es ist,
+         braucht es weder Aufmass noch Vorab-Analyse. Dann geht es direkt in
+         die Planerstellung. Genau dafuer wird nach den Plaenen gefragt.
+       - Ist die Ausgangslage unklar oder kommt baurechtlich etwas dazu,
+         zuerst der Teilbarkeits-Check.
+       - Sonst die Aufteilung im Komplettpaket. */
+    var direkt   = (codes[2]==='plan-gut' && codes[3]==='rein-recht');
     var unsicher = (codes[2]==='plan-keine'||codes[2]==='plan-unklar'||codes[2]==='plan-alt'||codes[3]==='nutzung'||codes[3]==='offen');
-    teile.push(EMPFEHLUNG[unsicher?'check':'komplett']);
+    teile.push(EMPFEHLUNG[direkt?'direkt':(unsicher?'check':'komplett')]);
     body.innerHTML=teile.map(function(t){return '<p class="qe-p">'+t+'</p>';}).join('');
     box.classList.add('da');
   }
@@ -808,7 +815,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';
     if(kasten) kasten.style.minHeight='';
     var kopf=document.querySelector('.ccard .ds');
-    if(kopf) kopf.textContent='Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen mit Ihnen zu besprechen.';
+    if(kopf) kopf.textContent='Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen mit Ihnen persönlich zu besprechen.';
   });
 
   zeige(1);
