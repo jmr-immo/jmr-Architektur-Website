@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
 <title>Haus aufteilen &amp; einzeln verkaufen · jmr Architektur</title>
-<meta name="description" content="Mehrfamilienhaus in Eigentumswohnungen aufteilen: Aufteilungsplan, Wohnflächen und Abgeschlossenheitsbescheinigung vom Architekten. Erste Einordnung in einer Minute.">
+<meta name="description" content="Mehrfamilienhaus in Eigentumswohnungen aufteilen: Aufteilungsplan, Wohnflächen und Abgeschlossenheitsbescheinigung vom Architekten. Erste Einschätzung in einer Minute.">
 <link rel="canonical" href="https://jmr-architektur.de/haus-aufteilen/">
 <meta name="robots" content="noindex, follow">
 <meta name="geo.region" content="DE-RP">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://jmr-architektur.de/haus-aufteilen/">
 <meta property="og:site_name" content="jmr Architektur">
 <meta property="og:title" content="Haus aufteilen und einzeln verkaufen">
-<meta property="og:description" content="Aufteilungsplan, Wohnflächen und Abgeschlossenheitsbescheinigung vom Architekten. Erste Einordnung in einer Minute.">
+<meta property="og:description" content="Aufteilungsplan, Wohnflächen und Abgeschlossenheitsbescheinigung vom Architekten. Erste Einschätzung in einer Minute.">
 <meta property="og:image" content="https://jmr-architektur.de/img/og-bild.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -172,11 +172,13 @@ section{padding:var(--pad) 0;position:relative}
    Terrakotta, Grossbuchstaben, gesperrt. */
 .qerg h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent-d);margin:0 0 .8rem;line-height:1.4}
 /* Die Kapsel "Anfrage gesendet" setzt js/jmr-formular.js in die Ueberschrift
-   des Kastens. Auf den Unterseiten steht sie am rechten Rand; hier ist die
-   Ueberschrift kurz, deshalb sitzt sie direkt daneben. Der Selektor ist
-   bewusst eine Stufe genauer als der im Skript, denn dessen Stilblatt wird
-   spaeter in den Kopf gehaengt und wuerde sonst gewinnen. */
-.lcol-form .ccard.jmrf-quittiert h3{justify-content:flex-start}
+   des Kastens. Sie steht rechtsbuendig in der Flucht des Kastens, waehrend
+   die Ueberschrift links bleibt. Der Selektor ist bewusst eine Stufe genauer
+   als der im Skript, denn dessen Stilblatt wird spaeter in den Kopf gehaengt.
+   Das margin-left haelt die Kapsel auch dann rechts, wenn die Zeile auf
+   schmalen Geraeten umbricht. */
+.lcol-form .ccard.jmrf-quittiert h3{justify-content:space-between}
+.lcol-form .ccard.jmrf-quittiert h3 .jmrf-marke{margin-left:auto}
 .qerg .qe-p{font-size:.93rem;line-height:1.6;color:var(--ink-soft)}
 .qerg .qe-p+.qe-p{margin-top:.7rem}
 .qerg .qe-p b{color:var(--white);font-weight:600}
@@ -371,7 +373,7 @@ p{text-wrap:pretty}
 
       <div class="lcol-form fade d1">
         <div class="ccard">
-          <h3>Ihre erste Einordnung</h3>
+          <h3>Ihre erste Einschätzung</h3>
           <p class="ds">Drei kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
 
           <div class="qbar">
@@ -449,7 +451,7 @@ p{text-wrap:pretty}
             <!-- Schritt 4: Kontakt -->
             <div class="qstep" data-step="4" hidden>
               <div class="qsum" id="qsum"></div>
-              <p class="qfrage">Fast geschafft. Wohin dürfen wir die Einordnung schicken?</p>
+              <p class="qfrage">Fast geschafft. Wohin dürfen wir die Einschätzung schicken?</p>
               <div class="fld-row">
                 <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" name="Vorname" type="text" placeholder="Vorname" autocomplete="given-name" required></div>
                 <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" autocomplete="family-name" required></div>
@@ -460,7 +462,7 @@ p{text-wrap:pretty}
               </div>
               <div class="fld"><label for="kf-ort">Ort des Objekts</label><input id="kf-ort" name="Ort" type="text" placeholder="Ort oder Postleitzahl (optional)"></div>
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Einordnung anfordern <span class="ar">→</span></button>
+              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Einschätzung anfordern <span class="ar">→</span></button>
               <div class="qvor">
                 <span>Antwort innerhalb von 24 Stunden</span>
                 <span>Kostenlos &amp; unverbindlich</span>
@@ -472,7 +474,7 @@ p{text-wrap:pretty}
             </div>
           </form>
 
-          <!-- Einordnung, erscheint nach dem Absenden -->
+          <!-- Einschätzung, erscheint nach dem Absenden -->
           <div class="qerg" id="qerg" role="status" aria-live="polite">
             <h4 id="qerg-t">Ihre geplante Aufteilung</h4>
             <div id="qerg-b"></div>
@@ -595,7 +597,7 @@ p{text-wrap:pretty}
   <div class="container">
     <span class="kicker c fade">Nächster Schritt</span>
     <h2 class="fade">Klären wir, ob und wie sich Ihr Gebäude teilen lässt.</h2>
-    <p class="fade d1">Drei Fragen zum Objekt, danach erhalten Sie unsere Einordnung. Oder rufen Sie direkt an, das geht meistens schneller.</p>
+    <p class="fade d1">Drei Fragen zum Objekt, danach erhalten Sie unsere Einschätzung. Oder rufen Sie direkt an, das geht meistens schneller.</p>
     <div class="eact fade d2">
       <a href="#top" class="btn btn-accent">Vorhaben prüfen lassen <span class="ar">→</span></a>
       <a href="tel:+491789428464" class="btn btn-ghost">0178 9428464</a>
@@ -681,7 +683,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
    Postfach schon steht, worum es geht. Abgeschickt wird das Formular
    von js/jmr-formular.js, dort haengt auch das Dankfenster dran.
    Nach dem erfolgreichen Absenden (Ereignis "jmr:gesendet") bauen wir
-   aus den Antworten die Einordnung im Kasten.
+   aus den Antworten die Einschätzung im Kasten.
    ------------------------------------------------------------------ */
 (function(){
   var form=document.getElementById('kform'); if(!form) return;
@@ -715,7 +717,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
      weil die Antworten verschieden lang sind und der Zurueck-Knopf erst ab
      Schritt zwei dazukommt. Der vierte Schritt bleibt aussen vor, das
      Formular darf hoeher sein. Nach dem Absenden wird die Hoehe wieder
-     freigegeben, damit die Einordnung nicht in einem zu grossen Kasten
+     freigegeben, damit die Einschätzung nicht in einem zu grossen Kasten
      steht. */
   function hoeheAngleichen(){
     if(!kasten) return;
@@ -756,7 +758,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(zur){ zeige(+zur.dataset.zurueck,true); }
   });
 
-  /* --- Einordnung aus den drei Antworten ---------------------------- */
+  /* --- Einschätzung aus den drei Antworten ---------------------------- */
   var UMFANG={
     'klein':'Bei zwei Einheiten ist die Aufteilung überschaubar: Grundrisse, Schnitte und Ansichten für beide Einheiten, dazu die Wohnflächen und ein Vorschlag für die Miteigentums&shy;anteile.',
     'mittel':'Bei drei bis acht Einheiten kommt es vor allem auf die saubere Trennung an: Jede Einheit, jedes Kellerabteil und jeder Stellplatz muss eindeutig zugeordnet sein, und Technikräume müssen über Gemeinschaftsflächen erreichbar bleiben.',
