@@ -168,7 +168,9 @@ section{padding:var(--pad) 0;position:relative}
 .qerg{display:none;margin-top:1.2rem;background:#fff;border:1px solid rgba(225,98,61,.3);border-radius:14px;padding:1.4rem 1.35rem}
 .qerg.da{display:block;animation:qauf .5s cubic-bezier(.16,1,.3,1) both}
 @keyframes qauf{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.qerg h4{font-family:var(--disp);font-weight:600;font-size:1.15rem;letter-spacing:-.02em;color:var(--white);margin:0 0 .8rem;line-height:1.25}
+/* Die Ueberschrift traegt die Optik des frueheren Kennzeichens darueber:
+   Terrakotta, Grossbuchstaben, gesperrt. */
+.qerg h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent-d);margin:0 0 .8rem;line-height:1.4}
 /* Die Kapsel "Anfrage gesendet" setzt js/jmr-formular.js in die Ueberschrift
    des Kastens. Auf den Unterseiten steht sie am rechten Rand; hier ist die
    Ueberschrift kurz, deshalb sitzt sie direkt daneben. Der Selektor ist
@@ -472,7 +474,7 @@ p{text-wrap:pretty}
 
           <!-- Einordnung, erscheint nach dem Absenden -->
           <div class="qerg" id="qerg" role="status" aria-live="polite">
-            <h4 id="qerg-t">Ihre Aufteilung</h4>
+            <h4 id="qerg-t">Ihre geplante Aufteilung</h4>
             <div id="qerg-b"></div>
             <p class="qe-note">Grobe Orientierung anhand Ihrer Angaben, keine verbindliche Aussage und keine Rechtsberatung. Was in Ihrem Fall gilt, klären wir anhand der Unterlagen und mit der zuständigen Bauaufsicht.</p>
           </div>
@@ -806,7 +808,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';
     if(kasten) kasten.style.minHeight='';
     var kopf=document.querySelector('.ccard .ds');
-    if(kopf) kopf.textContent='Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen zu besprechen.';
+    if(kopf) kopf.textContent='Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen mit Ihnen zu besprechen.';
   });
 
   zeige(1);
