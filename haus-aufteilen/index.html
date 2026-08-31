@@ -406,9 +406,13 @@ p{text-wrap:pretty}
   .endcta{order:6}
   .footer{order:7}
 
-  /* 5  Ueber das Buero: Bild, zwei Saetze, Telefonnummer. Mehr nicht. */
+  /* 5  Ueber das Buero: Bild, zwei Saetze, Telefonnummer. Mehr nicht.
+        Kicker und Ueberschrift stehen mittig wie im Kopfbereich, der
+        Strich vor dem Kicker faellt dabei weg. */
   #ueber{padding-top:2.6rem}
-  #ueber .sh{margin-bottom:1.4rem}
+  #ueber .sh{margin-bottom:1.4rem;text-align:center}
+  #ueber .sh .kicker{justify-content:center}
+  #ueber .sh .kicker::before{display:none}
   .team-hero{gap:1.2rem;margin-top:0}
   .team-photo{max-width:340px}
   .team-story{text-align:center}
