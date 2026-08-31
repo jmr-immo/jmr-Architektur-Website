@@ -415,6 +415,21 @@ p{text-wrap:pretty}
         an den Notar-Teil und ist auf dem Handy nur ein langer Block. */
   #leistung .res-note{display:none}
   .warnband{margin-top:1.8rem}
+
+  /* 7  Letzter Schritt: die gewaehlten Antworten und die Zeile darueber
+        stehen mittig, damit der Kasten von oben bis unten eine Achse hat. */
+  .qsum{justify-content:center}
+  .qstep[data-step="4"] .qfrage{text-align:center}
+
+  /* 8  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
+        Handy wirkt der weisse Block darin wie ein zweites Fenster, und
+        die Ueberschrift daueber sagt nichts, was der Kopf des Kastens
+        nicht schon sagt. Die gruene Kapsel entfaellt aus demselben
+        Grund: Das Dankfenster hat die Bestaetigung bereits gegeben. */
+  .qerg{background:none;border:0;padding:0;margin-top:.8rem}
+  .qerg h4{display:none}
+  .qerg .qe-p{font-size:.95rem}
+  .ccard .jmrf-marke{display:none}
 }
 </style>
 </head>
