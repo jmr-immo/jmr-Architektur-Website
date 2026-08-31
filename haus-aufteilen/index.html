@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
 <title>Haus aufteilen &amp; einzeln verkaufen · jmr Architektur</title>
-<meta name="description" content="Mehrfamilienhaus in Eigentumswohnungen aufteilen: Aufteilungsplan, Wohnflächen und Abgeschlossenheitsbescheinigung vom Architekten. Erste Einschätzung in einer Minute.">
+<meta name="description" content="Haus in Eigentumswohnungen aufteilen: Aufteilungsplan, Wohnflächen und Abgeschlossenheitsbescheinigung vom Architekten. Erste Einschätzung in einer Minute.">
 <link rel="canonical" href="https://jmr-architektur.de/haus-aufteilen/">
 <meta name="robots" content="noindex, follow">
 <meta name="geo.region" content="DE-RP">
@@ -136,6 +136,10 @@ section{padding:var(--pad) 0;position:relative}
 .qsteps{transition:min-height .3s cubic-bezier(.16,1,.3,1)}
 @media(prefers-reduced-motion:reduce){.qsteps{transition:none}}
 .qstep[hidden]{display:none}
+/* Ohne JavaScript bleibt der Fragenteil stehen, wo er ist. Dann zumindest
+   die beiden Wege nennen, die auch ohne Skript funktionieren. */
+.qnoscript{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;font-size:.92rem;line-height:1.55;color:var(--ink-text)}
+.qnoscript a{color:var(--accent-d);font-weight:600}
 .qfrage{font-family:var(--disp);font-weight:600;font-size:1.06rem;letter-spacing:-.02em;color:var(--white);margin-bottom:.9rem;line-height:1.3}
 .qopts{display:flex;flex-direction:column;gap:.55rem}
 .qopt{display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;cursor:pointer;font-family:var(--sans);transition:border-color .2s,box-shadow .2s,transform .2s}
@@ -380,6 +384,9 @@ p{text-wrap:pretty}
           <h3>Ihre erste Einschätzung</h3>
           <p class="ds">Drei kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
 
+          <noscript>
+            <p class="qnoscript">Für die Fragen braucht dieser Kasten JavaScript. Rufen Sie uns gern direkt an: <a href="tel:+491789428464">0178 9428464</a> oder schreiben Sie an <a href="mailto:info@jmr-architektur.de">info@jmr-architektur.de</a>.</p>
+          </noscript>
           <div class="qbar">
             <span class="qnum" id="qnum">Schritt 1 von 4</span>
             <span class="qline" aria-hidden="true"><span class="qfill" id="qfill"></span></span>
@@ -468,7 +475,7 @@ p{text-wrap:pretty}
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
               <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Einschätzung anfordern <span class="ar">→</span></button>
               <div class="qvor">
-                <span>Antwort innerhalb von 24 Stunden</span>
+                <span>Antwort werktags binnen 24 Stunden</span>
                 <span>Kostenlos &amp; unverbindlich</span>
               </div>
               <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="../datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel)">Datenschutzerklärung</a>.</p>
@@ -528,7 +535,7 @@ p{text-wrap:pretty}
           <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.2c0 4.5-3.1 8.4-7.5 9.8-4.4-1.4-7.5-5.3-7.5-9.8V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
           <h3>Baurechtliche Einschätzung</h3><span class="akk-x" aria-hidden="true">+</span>
         </summary>
-        <div class="akk-b"><p>Ob die geplanten Einheiten baurechtlich tragen, und welche Punkte noch offen sind: Brandschutz, Rettungswege, Schallschutz.</p></div>
+        <div class="akk-b"><p>Ob die geplanten Einheiten baurechtlich zulässig sind, und welche Punkte noch offen sind: Brandschutz, Rettungswege, Schallschutz.</p></div>
       </details>
       <details class="res fade d2 akk akk-mark" open>
         <span class="res-opt">optional</span>
@@ -779,11 +786,16 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     'rein-recht':'Wenn baulich nichts verändert wird, ist die Aufteilung in aller Regel keine genehmigungs&shy;pflichtige Maßnahme. Zu klären bleibt, ob die Einheiten so genehmigt sind, wie sie heute genutzt werden. Genau das prüfen wir mit.',
     'umbau':'Sobald sich die Zahl der Wohnungen ändert oder Räume dafür umgebaut werden, kommt neben die Aufteilung in aller Regel ein Bauantrag. Beide Ebenen laufen getrennt, sollten aber zusammen gedacht werden, sonst passt am Ende das Grundbuch nicht zur Genehmigung.',
     'nutzung':'Dachgeschoss, Keller oder Gewerbe zu Wohnraum ist eine Nutzungsänderung und damit in aller Regel genehmigungs&shy;pflichtig. Dabei geht es um Rettungswege, Brandschutz, Schallschutz und die Anforderungen an Aufenthaltsräume. Das gehört vor die Teilungserklärung, nicht danach.',
-    'offen':'Solange der Zuschnitt offen ist, lohnt sich der Blick auf die Möglichkeiten zuerst: Was lässt der Bestand zu, was das Baurecht, und welche Aufteilung ergibt wirtschaftlich Sinn.'
+    'offen':'Solange der Zuschnitt noch offen ist, klären wir zuerst die Möglichkeiten: was der Bestand hergibt, was das Baurecht zulässt und welche Aufteilung wirtschaftlich sinnvoll ist. Erst danach entsteht die erste Zeichnung.'
   };
   var EMPFEHLUNG={
-    'check':'<b>Unser Vorschlag:</b> zuerst der Teilbarkeits-Check. Wir sichten die Unterlagen, gleichen genehmigten und tatsächlichen Zustand ab und sagen Ihnen schriftlich, was der Aufteilung im Weg steht. Erst danach entscheiden Sie über die vollständige Aufteilung.',
-    'komplett':'<b>Unser Vorschlag:</b> die Aufteilung im Komplettpaket, von der Bestandsaufnahme über den Aufteilungsplan bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft dabei mit.',
+    /* Der Check ist als erster Schritt der Aufteilung formuliert, nicht als
+       Alternative dazu: fachlich dasselbe, aber der Kunde sieht einen Weg
+       statt einer Weggabelung. "Bauakte einsehen" statt "abgleichen", damit
+       niemand einen Ortstermin daraus liest. */
+    'check':'<b>Unser Vorschlag:</b> als erster Schritt der Teilbarkeits-Check. Wir sehen die Bauakte ein, prüfen, ob der genehmigte Zustand zum tatsächlichen passt, und sagen Ihnen schriftlich, was der Aufteilung im Weg steht. Zeigt sich nichts Grundsätzliches, gehen wir direkt in die Planung.',
+    'komplett':'<b>Unser Vorschlag:</b> die Aufteilung im Komplettpaket. Wir nehmen den Bestand auf, erstellen den Aufteilungsplan mit Flächen und Anteilen und begleiten Sie bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft mit; wird ein Bauantrag nötig, stimmen wir ihn vorher mit Ihnen ab.',
+    'umbau':'<b>Unser Vorschlag:</b> Aufteilung und Bauantrag zusammen, auf Grundlage Ihrer vorhandenen Pläne. Wir planen den neuen Zuschnitt, bereiten den Bauantrag vor und erstellen parallel die Aufteilungspläne für die Abgeschlossen&shy;heits&shy;bescheinigung. Ein Aufmaß ist dafür nicht nötig.',
     'direkt':'<b>Unser Vorschlag:</b> die Aufteilungspläne direkt aus Ihren Unterlagen, ohne Aufmaß. Wir zeichnen den Aufteilungsplan, berechnen die Flächen und beantragen die Abgeschlossen&shy;heits&shy;bescheinigung. Damit entfällt der aufwendigste Schritt, und Sie können früher zum Notar.'
   };
 
@@ -802,8 +814,19 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
          zuerst der Teilbarkeits-Check.
        - Sonst die Aufteilung im Komplettpaket. */
     var direkt   = (codes[2]==='plan-gut' && codes[3]==='rein-recht');
-    var unsicher = (codes[2]==='plan-keine'||codes[2]==='plan-unklar'||codes[2]==='plan-alt'||codes[3]==='nutzung'||codes[3]==='offen');
-    teile.push(EMPFEHLUNG[direkt?'direkt':(unsicher?'check':'komplett')]);
+    /* Aktuelle Plaene und trotzdem ein Umbau: dann braucht es kein Aufmass,
+       aber einen Bauantrag. Ohne diesen eigenen Fall stuende hier das
+       Komplettpaket "von der Bestandsaufnahme an" und wuerde dem Satz
+       darueber widersprechen, dass das Aufmass entfaellt. */
+    var umbau    = (codes[2]==='plan-gut' && codes[3]==='umbau');
+    /* Der Teilbarkeits-Check kommt nur dort, wo noch offen ist, OB etwas geht
+       oder WAS gewollt ist: Bei einer Nutzungsaenderung entscheidet das
+       Baurecht ueber das ganze Vorhaben, und wer den Zuschnitt noch nicht
+       festgelegt hat, braucht zuerst die Moeglichkeiten. Fehlende oder alte
+       Plaene sind dagegen kein Grund fuer eine Vorabpruefung: Bestandsaufnahme
+       und Akteneinsicht stecken bereits im Komplettpaket. */
+    var check    = (codes[3]==='nutzung' || codes[3]==='offen');
+    teile.push(EMPFEHLUNG[direkt?'direkt':(umbau?'umbau':(check?'check':'komplett'))]);
     body.innerHTML=teile.map(function(t){return '<p class="qe-p">'+t+'</p>';}).join('');
     box.classList.add('da');
   }
