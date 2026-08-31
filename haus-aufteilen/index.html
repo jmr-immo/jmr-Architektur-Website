@@ -187,9 +187,13 @@ section{padding:var(--pad) 0;position:relative}
    schmalen Geraeten umbricht. */
 .lcol-form .ccard.jmrf-quittiert h3{justify-content:space-between}
 .lcol-form .ccard.jmrf-quittiert h3 .jmrf-marke{margin-left:auto}
-.qerg .qe-p{font-size:.93rem;line-height:1.6;color:var(--ink-soft)}
+/* Blocksatz mit Silbentrennung: ohne Trennung reisst der deutsche
+   Wortschatz in schmalen Spalten zu grosse Luecken. */
+.qerg .qe-p{font-size:.93rem;line-height:1.6;color:var(--ink-soft);text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .qerg .qe-p+.qe-p{margin-top:.7rem}
 .qerg .qe-p b{color:var(--white);font-weight:600}
+/* "Unser Vorschlag:" steht als eigene Zeile ueber dem Absatz. */
+.qerg .qe-h{display:block;margin-bottom:.15rem;color:var(--white);font-weight:600;text-align:left}
 .qerg .qe-note{font-family:var(--mono);font-size:.64rem;color:var(--ink-soft);line-height:1.55;margin-top:1rem;padding-top:.9rem;border-top:1px solid var(--line)}
 /* ABSCHNITTSKOPF */
 .sh{max-width:760px;margin-bottom:2.8rem}
@@ -477,7 +481,7 @@ p{text-wrap:pretty}
 
       <div class="lcol-form fade d1">
         <div class="ccard">
-          <h3><span class="d-only-i">Ihre erste Einschätzung</span><span class="m-only-i">Kostenloser Kurz-Check</span></h3>
+          <h3><span class="d-only-i">Ihre Ersteinschätzung</span><span class="m-only-i">Kostenloser Kurz-Check</span></h3>
           <p class="ds d-only">Drei kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
           <p class="qmini">3 Fragen · 1 Minute · unverbindlich</p>
 
@@ -909,10 +913,10 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        Alternative dazu: fachlich dasselbe, aber der Kunde sieht einen Weg
        statt einer Weggabelung. "Bauakte einsehen" statt "abgleichen", damit
        niemand einen Ortstermin daraus liest. */
-    'check':'<b>Unser Vorschlag:</b> als erster Schritt der Teilbarkeits-Check. Wir sehen die Bauakte ein, prüfen, ob der genehmigte Zustand zum tatsächlichen passt, und sagen Ihnen schriftlich, was der Aufteilung im Weg steht. Zeigt sich nichts Grundsätzliches, gehen wir direkt in die Planung.',
-    'komplett':'<b>Unser Vorschlag:</b> die Aufteilung im Komplettpaket. Wir nehmen den Bestand auf, erstellen den Aufteilungsplan mit Flächen und Anteilen und begleiten Sie bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft mit; wird ein Bauantrag nötig, stimmen wir ihn vorher mit Ihnen ab.',
-    'umbau':'<b>Unser Vorschlag:</b> Aufteilung und Bauantrag zusammen, auf Grundlage Ihrer vorhandenen Pläne. Wir planen den neuen Zuschnitt, bereiten den Bauantrag vor und erstellen parallel die Aufteilungspläne für die Abgeschlossen&shy;heits&shy;bescheinigung. Ein Aufmaß ist dafür nicht nötig.',
-    'direkt':'<b>Unser Vorschlag:</b> die Aufteilungspläne direkt aus Ihren Unterlagen, ohne Aufmaß. Wir zeichnen den Aufteilungsplan, berechnen die Flächen und beantragen die Abgeschlossen&shy;heits&shy;bescheinigung. Damit entfällt der aufwendigste Schritt, und Sie können früher zum Notar.'
+    'check':'<b class="qe-h">Unser Vorschlag:</b>Als erster Schritt der Teilbarkeits-Check. Wir sehen die Bauakte ein, prüfen, ob der genehmigte Zustand zum tatsächlichen passt, und sagen Ihnen schriftlich, was der Aufteilung im Weg steht. Zeigt sich nichts Grundsätzliches, gehen wir direkt in die Planung.',
+    'komplett':'<b class="qe-h">Unser Vorschlag:</b>Die Aufteilung im Komplettpaket. Wir nehmen den Bestand auf, erstellen den Aufteilungsplan mit Flächen und Anteilen und begleiten Sie bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft mit; wird ein Bauantrag nötig, stimmen wir ihn vorher mit Ihnen ab.',
+    'umbau':'<b class="qe-h">Unser Vorschlag:</b>Aufteilung und Bauantrag zusammen, auf Grundlage Ihrer vorhandenen Pläne. Wir planen den neuen Zuschnitt, bereiten den Bauantrag vor und erstellen parallel die Aufteilungspläne für die Abgeschlossen&shy;heits&shy;bescheinigung. Ein Aufmaß ist dafür nicht nötig.',
+    'direkt':'<b class="qe-h">Unser Vorschlag:</b>Die Aufteilungspläne direkt aus Ihren Unterlagen, ohne Aufmaß. Wir zeichnen den Aufteilungsplan, berechnen die Flächen und beantragen die Abgeschlossen&shy;heits&shy;bescheinigung. Damit entfällt der aufwendigste Schritt, und Sie können früher zum Notar.'
   };
 
   function einordnung(){
@@ -929,6 +933,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        - Ist die Ausgangslage unklar oder kommt baurechtlich etwas dazu,
          zuerst der Teilbarkeits-Check.
        - Sonst die Aufteilung im Komplettpaket. */
+    var NACHSATZ=' Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen mit Ihnen persönlich zu besprechen.';
     var direkt   = (codes[2]==='plan-gut' && codes[3]==='rein-recht');
     /* Aktuelle Plaene und trotzdem ein Umbau: dann braucht es kein Aufmass,
        aber einen Bauantrag. Ohne diesen eigenen Fall stuende hier das
@@ -942,7 +947,10 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        Plaene sind dagegen kein Grund fuer eine Vorabpruefung: Bestandsaufnahme
        und Akteneinsicht stecken bereits im Komplettpaket. */
     var check    = (codes[3]==='nutzung' || codes[3]==='offen');
-    teile.push(EMPFEHLUNG[direkt?'direkt':(umbau?'umbau':(check?'check':'komplett'))]);
+    /* Der Rueckruf-Satz steht am Ende des Vorschlags, nicht mehr oben im
+       Kopf des Kastens: Dort schliesst er den Gedanken ab, statt die
+       Einschaetzung anzukuendigen. */
+    teile.push(EMPFEHLUNG[direkt?'direkt':(umbau?'umbau':(check?'check':'komplett'))] + NACHSATZ);
     body.innerHTML=teile.map(function(t){return '<p class="qe-p">'+t+'</p>';}).join('');
     box.classList.add('da');
   }
@@ -959,13 +967,10 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     steps.forEach(function(s){ s.hidden=true; });
     var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';
     if(kasten) kasten.style.minHeight='';
-    var kopf=document.querySelector('.ccard .ds');
-    if(kopf){
-      kopf.textContent='Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen mit Ihnen persönlich zu besprechen.';
-      /* Auf dem Handy ist diese Zeile ausgeblendet, damit oben wenig Text
-         steht. Jetzt tritt sie an die Stelle der Kurz-Check-Zeile. */
-      kopf.classList.remove('d-only');
-    }
+    /* Die Zeile unter der Ueberschrift kuendigt die Fragen an. Sind sie
+       beantwortet, hat sie sich erledigt: Der Hinweis auf den Rueckruf
+       steht jetzt am Ende des Vorschlags. */
+    var kopf=document.querySelector('.ccard .ds'); if(kopf) kopf.style.display='none';
     var mini=document.querySelector('.qmini'); if(mini) mini.style.display='none';
     /* Die Ueberschrift heisst auf dem Handy "Kostenloser Kurz-Check". Ist
        der Check erledigt, stimmt das nicht mehr: dann steht dort auf allen
