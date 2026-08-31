@@ -420,14 +420,24 @@ p{text-wrap:pretty}
   #leistung .res-note{display:none}
   .warnband{margin-top:1.8rem}
 
-  /* 7  Letzter Schritt: die gewaehlten Antworten und die Zeile darueber
+  /* 7  Beschriftungen ueber den Feldern entfallen, der Platzhalter im Feld
+        genuegt. Ausgeblendet wird nur fuer das Auge: Die Beschriftung
+        bleibt im Quelltext stehen, damit Vorlesesoftware und die
+        automatische Ausfuellhilfe des Browsers weiter wissen, welches
+        Feld welches ist. Dieselbe Technik nutzt aufteilung.html bereits
+        fuer die schmalen Feldpaare. */
+  .ccard .fld label{position:absolute;width:1px;height:1px;padding:0;margin:0;
+                    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .ccard .fld{margin-bottom:.6rem}
+
+  /* 8  Letzter Schritt: die gewaehlten Antworten und die Zeile darueber
         stehen mittig, damit der Kasten von oben bis unten eine Achse hat. */
   .qsum{justify-content:center}
   /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
   .qchip{white-space:nowrap}
   .qstep[data-step="4"] .qfrage{text-align:center}
 
-  /* 8  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
+  /* 9  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
         Handy wirkt der weisse Block darin wie ein zweites Fenster, und
         die Ueberschrift daueber sagt nichts, was der Kopf des Kastens
         nicht schon sagt. Die gruene Kapsel entfaellt aus demselben
@@ -569,10 +579,10 @@ p{text-wrap:pretty}
                 <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" autocomplete="family-name" required></div>
               </div>
               <div class="fld-row">
-                <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Für den Rückruf" autocomplete="tel" required></div>
-                <div class="fld"><label for="kf-plz">PLZ des Objekts</label><input id="kf-plz" name="PLZ" type="text" placeholder="z. B. 66482" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" title="Bitte fünf Ziffern eingeben" required></div>
+                <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Telefonnummer" autocomplete="tel" required></div>
+                <div class="fld"><label for="kf-plz">PLZ des Objekts</label><input id="kf-plz" name="PLZ" type="text" placeholder="PLZ des Objekts" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" title="Bitte fünf Ziffern eingeben" required></div>
               </div>
-              <div class="fld"><label for="kf-mail">E-Mail <span class="opt">optional</span></label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" autocomplete="email"></div>
+              <div class="fld"><label for="kf-mail">E-Mail <span class="opt">optional</span></label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail (optional)" autocomplete="email"></div>
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
               <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Einschätzung anfordern <span class="ar">→</span></button>
               <div class="qvor">
