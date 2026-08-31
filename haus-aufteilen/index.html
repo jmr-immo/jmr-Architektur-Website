@@ -353,21 +353,27 @@ p{text-wrap:pretty}
 
 @media(max-width:700px){
   /* 1  Der Fragenkasten rueckt nach oben: weniger Luft ueber der
-        Ueberschrift, kein Einleitungssatz, kleinere Zeile. */
+        Ueberschrift, kein Einleitungssatz, kleinere Zeile. Ueberschrift
+        und Kicker stehen mittig, und die Ueberschrift ist als Frage
+        formuliert, damit sie den Leser direkt anspricht. */
   .lhero{padding:84px 0 2rem}
   .lhero .hero-lead{display:none}
-  .lhero h1{font-size:clamp(1.95rem,7.6vw,2.35rem);margin-top:.9rem}
-  .lhero .kicker{font-size:.64rem;letter-spacing:.18em}
+  .lcol-text{text-align:center}
+  .lhero h1{font-size:clamp(1.85rem,7.2vw,2.25rem);margin-top:.9rem}
+  .lhero .kicker{font-size:.64rem;letter-spacing:.18em;justify-content:center}
+  .lhero .kicker::before{display:none}
   .lgrid{row-gap:1.6rem}
 
-  /* 2  Statt der Beschreibung eine Zeile, die sagt, was einen erwartet. */
+  /* 2  Im Kasten steht oben, worum es geht, darunter als Kapsel der
+        Umfang. Beides in einer Zeile wurde auf 360 px zu gedraengt. */
   .ccard{padding:1.35rem 1.15rem}
-  .ccard h3{font-size:1.16rem}
+  .ccard h3{font-size:1.16rem;text-align:center}
   .qmini{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem;
+         width:max-content;max-width:100%;margin:.55rem auto 1.1rem;
          font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;
          text-transform:uppercase;font-weight:700;color:var(--accent-d);
          background:rgba(225,98,61,.1);border:1px solid rgba(225,98,61,.28);
-         border-radius:999px;padding:.42rem .8rem;margin:0 0 1rem}
+         border-radius:999px;padding:.42rem .85rem}
 
   /* 3  Antwortfelder: ohne Beschreibungstext, dafuer groessere Tippflaeche
         und ein weicher Schein im Terracotta-Ton. So passen alle vier
@@ -432,7 +438,7 @@ p{text-wrap:pretty}
     <div class="lgrid">
       <div class="lcol-text fade">
         <span class="kicker">Aufteilung in Wohnungs- und Teileigentum</span>
-        <h1>Ihr Haus in einzelne Einheiten aufteilen.</h1>
+        <h1><span class="d-only-i">Ihr Haus in einzelne Einheiten aufteilen.</span><span class="m-only-i">Sie möchten Ihr Haus in einzelne Einheiten aufteilen?</span></h1>
         <p class="hero-lead">Wir erstellen die Aufteilungspläne, begleiten die Abgeschlossen&shy;heits&shy;bescheinigung und prüfen, was baurechtlich dazugehört.</p>
       </div>
 
@@ -454,9 +460,9 @@ p{text-wrap:pretty}
 
       <div class="lcol-form fade d1">
         <div class="ccard">
-          <h3>Ihre erste Einschätzung</h3>
+          <h3><span class="d-only-i">Ihre erste Einschätzung</span><span class="m-only-i">Kostenloser Kurz-Check</span></h3>
           <p class="ds d-only">Drei kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
-          <p class="qmini">Kostenloser Kurz-Check · 3 Fragen · 1 Minute</p>
+          <p class="qmini">3 Fragen · 1 Minute · unverbindlich</p>
 
           <noscript>
             <p class="qnoscript">Für die Fragen braucht dieser Kasten JavaScript. Rufen Sie uns gern direkt an: <a href="tel:+491789428464">0178 9428464</a> oder schreiben Sie an <a href="mailto:info@jmr-architektur.de">info@jmr-architektur.de</a>.</p>
@@ -811,9 +817,15 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
      steht. */
   function hoeheAngleichen(){
     if(!kasten) return;
+    kasten.style.minHeight='';
+    /* Auf dem Handy steht der Kasten allein, es gibt also nichts daneben,
+       das durch eine wechselnde Hoehe verrutschen koennte. Dort schliesst
+       er direkt unter der letzten Antwort ab und waechst nur, wenn ab
+       Schritt zwei der Zurueck-Knopf dazukommt. Die feste Mindesthoehe
+       wuerde unter der ersten Frage nur Leerraum stehen lassen. */
+    if(window.matchMedia && window.matchMedia('(max-width:700px)').matches) return;
     var merk=steps.map(function(s){ return s.hidden; });
     var max=0;
-    kasten.style.minHeight='';
     steps.forEach(function(s){
       if(+s.dataset.step===4) return;
       steps.forEach(function(a){ a.hidden = (a!==s); });
@@ -930,6 +942,13 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
       kopf.classList.remove('d-only');
     }
     var mini=document.querySelector('.qmini'); if(mini) mini.style.display='none';
+    /* Die Ueberschrift heisst auf dem Handy "Kostenloser Kurz-Check". Ist
+       der Check erledigt, stimmt das nicht mehr: dann steht dort auf allen
+       Geraeten "Ihre erste Einschätzung". */
+    var h3m=document.querySelector('.ccard h3 .m-only-i');
+    var h3d=document.querySelector('.ccard h3 .d-only-i');
+    if(h3m) h3m.style.display='none';
+    if(h3d) h3d.classList.remove('d-only-i');
   });
 
   zeige(1);
