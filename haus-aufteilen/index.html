@@ -337,6 +337,79 @@ p{text-wrap:pretty}
   .akk-mark[open]>.akk-b{padding-top:1.95rem}
 }
 @media (max-width:375px){.akk h3{font-size:.88rem}}
+
+/* ===================================================================
+   HANDY-FASSUNG  ·  28.08.2026
+   Alles in diesem Block gilt nur bis 700 px. Am Bild auf dem Rechner
+   aendert sich dadurch nichts.
+
+   Leitgedanke, wie auf der Landingpage der Energieberatung: Auf dem
+   Handy zaehlt nur der Weg ins Formular. Deshalb steht oben so wenig
+   Text wie moeglich, der Fragenkasten beginnt fast am oberen Rand,
+   und direkt darunter folgt das Gesicht zum Angebot.
+   =================================================================== */
+.qmini{display:none}
+.ltel-m{display:none}
+
+@media(max-width:700px){
+  /* 1  Der Fragenkasten rueckt nach oben: weniger Luft ueber der
+        Ueberschrift, kein Einleitungssatz, kleinere Zeile. */
+  .lhero{padding:84px 0 2rem}
+  .lhero .hero-lead{display:none}
+  .lhero h1{font-size:clamp(1.95rem,7.6vw,2.35rem);margin-top:.9rem}
+  .lhero .kicker{font-size:.64rem;letter-spacing:.18em}
+  .lgrid{row-gap:1.6rem}
+
+  /* 2  Statt der Beschreibung eine Zeile, die sagt, was einen erwartet. */
+  .ccard{padding:1.35rem 1.15rem}
+  .ccard h3{font-size:1.16rem}
+  .qmini{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem;
+         font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;
+         text-transform:uppercase;font-weight:700;color:var(--accent-d);
+         background:rgba(225,98,61,.1);border:1px solid rgba(225,98,61,.28);
+         border-radius:999px;padding:.42rem .8rem;margin:0 0 1rem}
+
+  /* 3  Antwortfelder: ohne Beschreibungstext, dafuer groessere Tippflaeche
+        und ein weicher Schein im Terracotta-Ton. So passen alle vier
+        Antworten ohne Scrollen auf den Schirm. */
+  .qopt .qo-s{display:none}
+  .qopt{padding:.92rem 1rem;border-color:rgba(225,98,61,.3);
+        box-shadow:0 0 0 3px rgba(225,98,61,.06),0 10px 22px -16px rgba(190,74,42,.75)}
+  .qopt .qo-t{font-size:.98rem}
+  .qopt .qo-ar{font-size:1.05rem}
+  .qopt:active{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.14)}
+  .qopt.aktiv{box-shadow:0 0 0 4px rgba(225,98,61,.16),0 10px 22px -16px rgba(190,74,42,.75)}
+  .qopts{gap:.5rem}
+  .qfrage{font-size:1.02rem;margin-bottom:.8rem}
+  .qbar{margin-bottom:1rem}
+
+  /* 4  Reihenfolge der Abschnitte: nach dem Fragenkasten kommt sofort,
+        wer dahintersteht. Erst danach die Erklaerungen. Moeglich ist das,
+        weil der Seitenkoerper hier zu einer Spalte wird und die
+        Abschnitte ihre Reihenfolge selbst bestimmen. */
+  body{display:flex;flex-direction:column}
+  .lhero{order:1}
+  #ueber{order:2;background:var(--bg) !important}
+  #leistung{order:3}
+  #ablauf{order:4}
+  #faq{order:5}
+  .endcta{order:6}
+  .footer{order:7}
+
+  /* 5  Ueber das Buero: Bild, zwei Saetze, Telefonnummer. Mehr nicht. */
+  #ueber{padding-top:2.6rem}
+  #ueber .sh{margin-bottom:1.4rem}
+  .team-hero{gap:1.2rem;margin-top:0}
+  .team-photo{max-width:340px}
+  .team-story{text-align:center}
+  .team-story p{font-size:.98rem}
+  .ltel-m{display:inline-flex;margin-top:1.2rem;text-align:left}
+
+  /* 6  Der Schlusssatz des Ergebnis-Abschnitts faellt weg. Er richtet sich
+        an den Notar-Teil und ist auf dem Handy nur ein langer Block. */
+  #leistung .res-note{display:none}
+  .warnband{margin-top:1.8rem}
+}
 </style>
 </head>
 <body>
@@ -366,7 +439,7 @@ p{text-wrap:pretty}
       <div class="lcol-arg fade d2">
         <ul class="lpoints">
           <li>Aufteilungsplan, Wohnflächen und Miteigentums&shy;anteile aus einer Hand</li>
-          <li>Antrag auf Abgeschlossen&shy;heits&shy;bescheinigung, von uns bei der Bauaufsicht eingereicht und begleitet</li>
+          <li>Antrag auf Abgeschlossen&shy;heits&shy;bescheinigung<span class="d-only-i">, von uns bei der Bauaufsicht eingereicht und begleitet</span></li>
           <li>Baurechtliche Prüfung vorab, damit das Grundbuch später zur Wirklichkeit passt</li>
         </ul>
         <div class="ltrust">
@@ -382,7 +455,8 @@ p{text-wrap:pretty}
       <div class="lcol-form fade d1">
         <div class="ccard">
           <h3>Ihre erste Einschätzung</h3>
-          <p class="ds">Drei kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
+          <p class="ds d-only">Drei kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
+          <p class="qmini">Kostenloser Kurz-Check · 3 Fragen · 1 Minute</p>
 
           <noscript>
             <p class="qnoscript">Für die Fragen braucht dieser Kasten JavaScript. Rufen Sie uns gern direkt an: <a href="tel:+491789428464">0178 9428464</a> oder schreiben Sie an <a href="mailto:info@jmr-architektur.de">info@jmr-architektur.de</a>.</p>
@@ -549,7 +623,7 @@ p{text-wrap:pretty}
     <div class="warnband fade">
       <span class="wi" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
       <div>
-        <p><b>Der häufigste Irrtum:</b> Die Abgeschlossen&shy;heits&shy;bescheinigung ist keine Baugenehmigung. Sie wird ungeachtet bauordnungs&shy;rechtlicher Vorschriften erteilt, ein baurechtlich nicht genehmigter Zustand wird durch sie also nicht legalisiert.<span class="d-only-i"> Eine Dachgeschoss&shy;wohnung kann bescheinigt, im Grundbuch eingetragen und verkauft sein und trotzdem baurechtlich keine genehmigte Wohnung darstellen.</span> Deshalb sehen wir uns beide Ebenen an, bevor die Teilungserklärung entsteht.</p>
+        <p><b>Der häufigste Irrtum:</b> Die Abgeschlossen&shy;heits&shy;bescheinigung ist keine Baugenehmigung.<span class="d-only-i"> Sie wird ungeachtet bauordnungs&shy;rechtlicher Vorschriften erteilt, ein baurechtlich nicht genehmigter Zustand wird durch sie also nicht legalisiert. Eine Dachgeschoss&shy;wohnung kann bescheinigt, im Grundbuch eingetragen und verkauft sein und trotzdem baurechtlich keine genehmigte Wohnung darstellen.</span><span class="m-only-i"> Ein baurechtlich nicht genehmigter Zustand wird durch sie nicht legalisiert.</span> Deshalb sehen wir uns beide Ebenen an, bevor die Teilungserklärung entsteht.</p>
       </div>
     </div>
     <p class="res-note fade">Alles zusammen geht an Sie und Ihren Notar. <b>Die Beurkundung der Teilungserklärung und die Eintragung im Grundbuch veranlassen Sie als Eigentümer</b>, Rückfragen des Notars zu den Plänen beantworten wir direkt.</p>
@@ -574,15 +648,20 @@ p{text-wrap:pretty}
 <!-- ÜBER DAS BÜRO -->
 <section id="ueber" style="background:var(--bg-2)">
   <div class="container">
-    <div class="sh fade"><span class="kicker">Über Maximilian Rudorf</span><h2>Planung mit Erfahrung im Bestand.</h2></div>
+    <div class="sh fade"><span class="kicker">Ihr Ansprechpartner</span><h2><span class="d-only-i">Planung mit Erfahrung im Bestand.</span><span class="m-only-i">Maximilian Rudorf.</span></h2></div>
     <div class="team-hero fade">
       <figure class="team-photo">
         <img class="team-img" src="../img/ueber-uns.jpg" alt="Maximilian Rudorf, Architekt in Zweibrücken" loading="lazy">
       </figure>
       <div class="team-story">
-        <p>Das Büro von Maximilian Rudorf ist auf das Bauen im Bestand spezialisiert: Umnutzung, Aufteilung, Umbau und Sanierung, von der ersten Bewertung bis zum genehmigten Plan.</p>
-        <p>Bei Aufteilungen zahlt sich das doppelt aus. Wer die Pläne zeichnet, muss auch beurteilen können, ob die Einheiten baurechtlich tragfähig sind. Beides kommt hier aus einer Hand, statt getrennt bearbeitet zu werden.</p>
-        <p>Gerade im Bestand steckt der Aufwand im Detail: Tragwerk, vorhandene Substanz und das geltende Baurecht müssen zusammenpassen. Wir nehmen den Bestand genau auf, denken die Lösung von Anfang an zu Ende und behalten Aufwand und Kosten realistisch im Blick.</p>
+        <p class="m-only">Bauen im Bestand ist unser Schwerpunkt: Umnutzung, Aufteilung, Umbau. Planung und baurechtliche Prüfung kommen bei uns aus einer Hand, statt getrennt bearbeitet zu werden.</p>
+        <p class="d-only">Das Büro von Maximilian Rudorf ist auf das Bauen im Bestand spezialisiert: Umnutzung, Aufteilung, Umbau und Sanierung, von der ersten Bewertung bis zum genehmigten Plan.</p>
+        <p class="d-only">Bei Aufteilungen zahlt sich das doppelt aus. Wer die Pläne zeichnet, muss auch beurteilen können, ob die Einheiten baurechtlich tragfähig sind. Beides kommt hier aus einer Hand, statt getrennt bearbeitet zu werden.</p>
+        <a class="ltel ltel-m" href="tel:+491789428464">
+          <span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span>
+          <span class="tx"><b>0178 9428464</b>Rufen Sie uns an, das geht am schnellsten.</span>
+        </a>
+        <p class="d-only">Gerade im Bestand steckt der Aufwand im Detail: Tragwerk, vorhandene Substanz und das geltende Baurecht müssen zusammenpassen. Wir nehmen den Bestand genau auf, denken die Lösung von Anfang an zu Ende und behalten Aufwand und Kosten realistisch im Blick.</p>
       </div>
     </div>
   </div>
@@ -844,7 +923,13 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';
     if(kasten) kasten.style.minHeight='';
     var kopf=document.querySelector('.ccard .ds');
-    if(kopf) kopf.textContent='Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen mit Ihnen persönlich zu besprechen.';
+    if(kopf){
+      kopf.textContent='Wir melden uns zeitnah bei Ihnen, um Ihr Anliegen mit Ihnen persönlich zu besprechen.';
+      /* Auf dem Handy ist diese Zeile ausgeblendet, damit oben wenig Text
+         steht. Jetzt tritt sie an die Stelle der Kurz-Check-Zeile. */
+      kopf.classList.remove('d-only');
+    }
+    var mini=document.querySelector('.qmini'); if(mini) mini.style.display='none';
   });
 
   zeige(1);
