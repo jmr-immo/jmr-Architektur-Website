@@ -419,6 +419,8 @@ p{text-wrap:pretty}
   /* 7  Letzter Schritt: die gewaehlten Antworten und die Zeile darueber
         stehen mittig, damit der Kasten von oben bis unten eine Achse hat. */
   .qsum{justify-content:center}
+  /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
+  .qchip{white-space:nowrap}
   .qstep[data-step="4"] .qfrage{text-align:center}
 
   /* 8  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
@@ -499,16 +501,16 @@ p{text-wrap:pretty}
             <div class="qstep" data-step="1">
               <p class="qfrage">Um welches Gebäude geht es?</p>
               <div class="qopts">
-                <button class="qopt" type="button" data-frage="1" data-wert="Zweifamilienhaus, 2 Einheiten" data-code="klein">
+                <button class="qopt" type="button" data-frage="1" data-wert="Zweifamilienhaus, 2 Einheiten" data-kurz="Zweifamilienhaus" data-code="klein">
                   <span><span class="qo-t">Zweifamilienhaus</span><span class="qo-s">Zwei Wohneinheiten im Haus, kleiner Umfang.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="1" data-wert="Mehrfamilienhaus, 3 bis 8 Einheiten" data-code="mittel">
+                <button class="qopt" type="button" data-frage="1" data-wert="Mehrfamilienhaus, 3 bis 8 Einheiten" data-kurz="3 bis 8 Einheiten" data-code="mittel">
                   <span><span class="qo-t">Mehrfamilienhaus, 3 bis 8 Einheiten</span><span class="qo-s">Der häufigste Fall bei einer Aufteilung.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="1" data-wert="Größeres Objekt, ab 9 Einheiten" data-code="gross">
+                <button class="qopt" type="button" data-frage="1" data-wert="Größeres Objekt, ab 9 Einheiten" data-kurz="Ab 9 Einheiten" data-code="gross">
                   <span><span class="qo-t">Größeres Objekt, ab 9 Einheiten</span><span class="qo-s">Mehrere Geschosse, Keller- und Nebenflächen.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="1" data-wert="Wohnen und Gewerbe gemischt" data-code="misch">
+                <button class="qopt" type="button" data-frage="1" data-wert="Wohnen und Gewerbe gemischt" data-kurz="Wohnen und Gewerbe" data-code="misch">
                   <span><span class="qo-t">Wohnen und Gewerbe gemischt</span><span class="qo-s">Laden, Büro oder Praxis im selben Gebäude.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
               </div>
@@ -518,16 +520,16 @@ p{text-wrap:pretty}
             <div class="qstep" data-step="2" hidden>
               <p class="qfrage">Welche Pläne liegen Ihnen vor?</p>
               <div class="qopts">
-                <button class="qopt" type="button" data-frage="2" data-wert="Aktuelle Pläne, passen zum Bestand" data-code="plan-gut">
+                <button class="qopt" type="button" data-frage="2" data-wert="Aktuelle Pläne, passen zum Bestand" data-kurz="Aktuelle Pläne" data-code="plan-gut">
                   <span><span class="qo-t">Aktuelle Pläne, die zum Bestand passen</span><span class="qo-s">Zum Beispiel aus einem Umbau der letzten Jahre.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="2" data-wert="Alte Pläne, seitdem wurde verändert" data-code="plan-alt">
+                <button class="qopt" type="button" data-frage="2" data-wert="Alte Pläne, seitdem wurde verändert" data-kurz="Alte Pläne" data-code="plan-alt">
                   <span><span class="qo-t">Alte Genehmigungspläne, seitdem wurde umgebaut</span><span class="qo-s">Wände versetzt, Dach ausgebaut, Grundriss geändert.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="2" data-wert="Keine brauchbaren Pläne" data-code="plan-keine">
+                <button class="qopt" type="button" data-frage="2" data-wert="Keine brauchbaren Pläne" data-kurz="Keine Pläne" data-code="plan-keine">
                   <span><span class="qo-t">Keine brauchbaren Pläne vorhanden</span><span class="qo-s">Im Bestand der Normalfall, kein Hindernis.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="2" data-wert="Planlage noch unklar" data-code="plan-unklar">
+                <button class="qopt" type="button" data-frage="2" data-wert="Planlage noch unklar" data-kurz="Planlage unklar" data-code="plan-unklar">
                   <span><span class="qo-t">Weiß ich noch nicht</span><span class="qo-s">Das klären wir im Erstgespräch.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
               </div>
@@ -538,16 +540,16 @@ p{text-wrap:pretty}
             <div class="qstep" data-step="3" hidden>
               <p class="qfrage">Was ist mit den Einheiten geplant?</p>
               <div class="qopts">
-                <button class="qopt" type="button" data-frage="3" data-wert="Baulich bleibt alles wie es ist" data-code="rein-recht">
+                <button class="qopt" type="button" data-frage="3" data-wert="Baulich bleibt alles wie es ist" data-kurz="Baulich unverändert" data-code="rein-recht">
                   <span><span class="qo-t">Baulich bleibt alles, wie es ist</span><span class="qo-s">Die Einheiten bestehen bereits, es geht nur um die Aufteilung.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="3" data-wert="Einheiten werden vorher umgebaut" data-code="umbau">
+                <button class="qopt" type="button" data-frage="3" data-wert="Einheiten werden vorher umgebaut" data-kurz="Umbau geplant" data-code="umbau">
                   <span><span class="qo-t">Die Einheiten werden vorher neu zugeschnitten</span><span class="qo-s">Aus zwei Wohnungen werden drei, Grundrisse ändern sich.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="3" data-wert="Dachgeschoss, Keller oder Gewerbe wird Wohnraum" data-code="nutzung">
+                <button class="qopt" type="button" data-frage="3" data-wert="Dachgeschoss, Keller oder Gewerbe wird Wohnraum" data-kurz="Nutzungsänderung" data-code="nutzung">
                   <span><span class="qo-t">Dachgeschoss, Keller oder Gewerbe soll Wohnraum werden</span><span class="qo-s">Eine Nutzungsänderung kommt dann meist dazu.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="3" data-wert="Steht noch nicht fest" data-code="offen">
+                <button class="qopt" type="button" data-frage="3" data-wert="Steht noch nicht fest" data-kurz="Noch offen" data-code="offen">
                   <span><span class="qo-t">Steht noch nicht fest</span><span class="qo-s">Wir klären zuerst, was überhaupt möglich ist.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
               </div>
@@ -803,7 +805,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var kasten=document.getElementById('qsteps');
   var sum=document.getElementById('qsum');
   var felder={1:document.getElementById('qa1'),2:document.getElementById('qa2'),3:document.getElementById('qa3')};
-  var codes={}, texte={}, jetzt=1;
+  var codes={}, texte={}, kurze={}, jetzt=1;
 
   function zeige(n,fokus){
     jetzt=n;
@@ -850,12 +852,20 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(max) kasten.style.minHeight=max+'px';
   }
 
+  /* Jede Pille traegt zwei Fassungen: die ausfuehrliche fuer den Rechner
+     und eine kurze fuer das Handy, wo "Dachgeschoss, Keller oder Gewerbe
+     wird Wohnraum" sonst zweizeilig umbricht. Welche zu sehen ist,
+     entscheidet das Stilblatt ueber d-only-i und m-only-i. An Formspree
+     geht in jedem Fall die ausfuehrliche Fassung. */
   function bauSumme(){
     if(!sum) return;
     sum.innerHTML='';
     [1,2,3].forEach(function(i){
       if(!texte[i]) return;
-      var c=document.createElement('span'); c.className='qchip'; c.textContent=texte[i]; sum.appendChild(c);
+      var c=document.createElement('span'); c.className='qchip';
+      var lang=document.createElement('span'); lang.className='d-only-i'; lang.textContent=texte[i];
+      var knapp=document.createElement('span'); knapp.className='m-only-i'; knapp.textContent=kurze[i]||texte[i];
+      c.appendChild(lang); c.appendChild(knapp); sum.appendChild(c);
     });
   }
 
@@ -863,7 +873,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     var opt=e.target.closest('.qopt');
     if(opt){
       var f=+opt.dataset.frage;
-      texte[f]=opt.dataset.wert; codes[f]=opt.dataset.code;
+      texte[f]=opt.dataset.wert; codes[f]=opt.dataset.code; kurze[f]=opt.dataset.kurz||opt.dataset.wert;
       if(felder[f]) felder[f].value=opt.dataset.wert;
       var geschwister=opt.parentNode.querySelectorAll('.qopt');
       [].forEach.call(geschwister,function(g){ g.classList.remove('aktiv'); });
