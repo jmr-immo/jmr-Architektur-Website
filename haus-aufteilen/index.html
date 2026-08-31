@@ -151,6 +151,10 @@ section{padding:var(--pad) 0;position:relative}
 .qsum{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
 .qchip{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent-d);background:rgba(225,98,61,.1);border:1px solid rgba(225,98,61,.3);border-radius:999px;padding:.28rem .7rem}
 .fld{margin-bottom:.85rem}.fld label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+/* Telefon und Postleitzahl sind Pflicht, damit ein Rueckruf moeglich ist und
+   klar ist, wo das Objekt steht. Gekennzeichnet wird deshalb das eine Feld,
+   das freiwillig ist, nicht die beiden anderen. */
+.fld label .opt{font-size:.92em;letter-spacing:.04em;text-transform:none;color:#94a3ad;font-style:italic}
 .fld input,.fld select,.fld textarea{width:100%;padding:.85rem 1.05rem;border:1px solid var(--line);border-radius:12px;font-family:var(--sans);font-size:.95rem;background:#FFFFFF;transition:.2s;color:var(--white);line-height:1.12}
 .fld input::placeholder{color:#94a3ad}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--accent);background:#FFFFFF;box-shadow:0 0 0 3px rgba(225,98,61,.15)}
@@ -457,10 +461,10 @@ p{text-wrap:pretty}
                 <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" autocomplete="family-name" required></div>
               </div>
               <div class="fld-row">
-                <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Telefonnummer" autocomplete="tel"></div>
-                <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" autocomplete="email" required></div>
+                <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Für den Rückruf" autocomplete="tel" required></div>
+                <div class="fld"><label for="kf-plz">PLZ des Objekts</label><input id="kf-plz" name="PLZ" type="text" placeholder="z. B. 66482" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" title="Bitte fünf Ziffern eingeben" required></div>
               </div>
-              <div class="fld"><label for="kf-ort">Ort des Objekts</label><input id="kf-ort" name="Ort" type="text" placeholder="Ort oder Postleitzahl (optional)"></div>
+              <div class="fld"><label for="kf-mail">E-Mail <span class="opt">optional</span></label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" autocomplete="email"></div>
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
               <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Einschätzung anfordern <span class="ar">→</span></button>
               <div class="qvor">
