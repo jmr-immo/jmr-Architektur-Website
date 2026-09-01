@@ -442,7 +442,9 @@ p{text-wrap:pretty}
 
   /* 8  Letzter Schritt: die gewaehlten Antworten und die Zeile darueber
         stehen mittig, damit der Kasten von oben bis unten eine Achse hat. */
-  .qsum{justify-content:center}
+  /* Die getroffene Auswahl steht auf dem Handy nicht noch einmal ueber
+     dem Formular: Sie wurde gerade angeklickt und kostet nur Hoehe. */
+  .qsum,.qsum-lab{display:none}
   /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
   .qchip{white-space:nowrap}
   .qstep[data-step="4"] .qfrage{text-align:center}
@@ -542,11 +544,11 @@ p{text-wrap:pretty}
             <div class="qstep" data-step="2" hidden>
               <p class="qfrage">Welche Pläne liegen Ihnen vor?</p>
               <div class="qopts">
-                <button class="qopt" type="button" data-frage="2" data-wert="Aktueller Planstand, stimmt mit dem Ist-Zustand überein" data-kurz="Planstand aktuell" data-code="plan-gut">
-                  <span><span class="qo-t">Aktueller Planstand: stimmt mit Ist-Zustand überein</span><span class="qo-s">Zum Beispiel aus einem Umbau der letzten Jahre.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" data-frage="2" data-wert="Pläne sind aktuell" data-kurz="Pläne aktuell" data-code="plan-gut">
+                  <span><span class="qo-t">Pläne sind aktuell</span><span class="qo-s">Sie bilden den heutigen Zustand ab.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
-                <button class="qopt" type="button" data-frage="2" data-wert="Alter Planstand, stimmt nicht mit dem Ist-Zustand überein" data-kurz="Planstand veraltet" data-code="plan-alt">
-                  <span><span class="qo-t">Alter Planstand: stimmt nicht mit Ist-Zustand überein</span><span class="qo-s">Wände versetzt, Dach ausgebaut, Grundriss geändert.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" data-frage="2" data-wert="Pläne sind veraltet" data-kurz="Pläne veraltet" data-code="plan-alt">
+                  <span><span class="qo-t">Pläne sind veraltet</span><span class="qo-s">Seitdem wurde umgebaut oder verändert.</span></span><span class="qo-ar" aria-hidden="true">→</span>
                 </button>
                 <button class="qopt" type="button" data-frage="2" data-wert="Unleserliche Pläne oder keine Pläne vorhanden" data-kurz="Keine Pläne" data-code="plan-keine">
                   <span><span class="qo-t">Unleserliche Pläne / Keine Pläne vorhanden</span><span class="qo-s">Im Bestand der Normalfall, kein Hindernis.</span></span><span class="qo-ar" aria-hidden="true">→</span>
