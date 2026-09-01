@@ -178,7 +178,9 @@ section{padding:var(--pad) 0;position:relative}
 .qvor span{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--ink-soft)}
 .qvor span::before{content:'';width:14px;height:14px;border-radius:50%;background:rgba(63,209,135,.2);border:1px solid rgba(63,209,135,.5);flex-shrink:0}
 /* EINORDNUNG nach dem Absenden */
-.qerg{display:none;margin-top:1.2rem;background:#fff;border:1px solid rgba(225,98,61,.3);border-radius:14px;padding:1.4rem 1.35rem}
+/* Die Einschaetzung steht ohne eigenen Rahmen im Formularkasten: ein Kasten
+   im Kasten wirkte wie ein zweites Fenster. */
+.qerg{display:none;margin-top:1.1rem}
 .qerg.da{display:block;animation:qauf .5s cubic-bezier(.16,1,.3,1) both}
 @keyframes qauf{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 /* Die Ueberschrift traegt die Optik des frueheren Kennzeichens darueber:
@@ -190,8 +192,11 @@ section{padding:var(--pad) 0;position:relative}
    als der im Skript, denn dessen Stilblatt wird spaeter in den Kopf gehaengt.
    Das margin-left haelt die Kapsel auch dann rechts, wenn die Zeile auf
    schmalen Geraeten umbricht. */
-.lcol-form .ccard.jmrf-quittiert h3{justify-content:space-between}
-.lcol-form .ccard.jmrf-quittiert h3 .jmrf-marke{margin-left:auto}
+/* Die Kapsel "Anfrage gesendet" aus js/jmr-formular.js wird hier nicht
+   gebraucht: Das Dankfenster hat bestaetigt, und darunter steht die
+   Einschaetzung. Der Selektor ist eine Stufe genauer als der im Skript,
+   dessen Stilblatt spaeter in den Kopf gehaengt wird. */
+.ccard .jmrf-marke{display:none}
 /* Blocksatz mit Silbentrennung: ohne Trennung reisst der deutsche
    Wortschatz in schmalen Spalten zu grosse Luecken. */
 .qerg .qe-p{font-size:.93rem;line-height:1.6;color:var(--ink-soft);text-align:justify;hyphens:auto;-webkit-hyphens:auto}
@@ -448,10 +453,7 @@ p{text-wrap:pretty}
         die Ueberschrift daueber sagt nichts, was der Kopf des Kastens
         nicht schon sagt. Die gruene Kapsel entfaellt aus demselben
         Grund: Das Dankfenster hat die Bestaetigung bereits gegeben. */
-  .qerg{background:none;border:0;padding:0;margin-top:.8rem}
-  .qerg h4{display:none}
   .qerg .qe-p{font-size:.95rem}
-  .ccard .jmrf-marke{display:none}
 }
 </style>
 </head>
@@ -915,7 +917,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var UMFANG={
     'klein':'Bei zwei Einheiten ist die Aufteilung überschaubar: Grundrisse, Schnitte und Ansichten für beide Einheiten, dazu die Wohnflächen und ein Vorschlag für die Miteigentums&shy;anteile.',
     'mittel':'Bei drei bis acht Einheiten kommt es vor allem auf die saubere Trennung an: Jede Einheit, jedes Kellerabteil und jeder Stellplatz muss eindeutig zugeordnet sein, und Technikräume müssen über Gemeinschaftsflächen erreichbar bleiben.',
-    'gross':'Ab neun Einheiten wird der Aufteilungsplan umfangreicher: mehrere Geschosse, Keller- und Nebenflächen, dazu die Zuordnung von Stellplätzen. Der Aufwand liegt weniger in der Zeichnung als in der eindeutigen Abgrenzung.',
+    'gross':'Ab neun Einheiten wird der Aufteilungsplan umfangreicher: mehrere Geschosse, Keller- und Nebenflächen, dazu die Zuordnung von Stellplätzen. Jedes Geschoss wird einzeln gezeichnet und jede Einheit eindeutig abgegrenzt, der Aufwand wächst also mit der Zahl der Einheiten.',
     'misch':'Wohnen und Gewerbe nebeneinander heißt Wohnungseigentum und Teileigentum in einem Gebäude. Beides entsteht im selben Verfahren, jede Einheit bekommt aber ihre eigene Zweckbestimmung, und die entscheidet später darüber, was in den Räumen zulässig ist.'
   };
   var UNTERLAGEN={
@@ -994,13 +996,10 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        steht jetzt am Ende des Vorschlags. */
     var kopf=document.querySelector('.ccard .ds'); if(kopf) kopf.style.display='none';
     var mini=document.querySelector('.qmini'); if(mini) mini.style.display='none';
-    /* Die Ueberschrift heisst auf dem Handy "Kostenloser Kurz-Check". Ist
-       der Check erledigt, stimmt das nicht mehr: dann steht dort auf allen
-       Geraeten "Ihre erste Einschätzung". */
-    var h3m=document.querySelector('.ccard h3 .m-only-i');
-    var h3d=document.querySelector('.ccard h3 .d-only-i');
-    if(h3m) h3m.style.display='none';
-    if(h3d) h3d.classList.remove('d-only-i');
+    /* Die Ueberschrift des Kastens kuendigt den Check an. Ist er erledigt,
+       traegt die Einschaetzung ihre eigene Ueberschrift, und zwei
+       Ueberschriften uebereinander waeren eine zu viel. */
+    var h3=document.querySelector('.ccard h3'); if(h3) h3.style.display='none';
   });
 
   zeige(1);
