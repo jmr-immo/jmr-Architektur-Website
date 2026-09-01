@@ -152,7 +152,12 @@ section{padding:var(--pad) 0;position:relative}
 .qopt:hover .qo-ar{transform:translateX(3px)}
 .qzur{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);padding:.3rem 0}
 .qzur:hover{color:var(--accent-d)}
+.qsum-lab{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:.45rem}
 .qsum{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
+/* Sagt vor dem Absenden, was danach passiert: Text sofort auf dem Schirm,
+   Anruf zusaetzlich. Vorher stand hier "Wohin duerfen wir die Einschaetzung
+   schicken?", was nach Versand per E-Mail klang. */
+.qhinweis{font-size:.9rem;color:var(--ink-soft);line-height:1.5;margin:-.3rem 0 1rem}
 .qchip{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent-d);background:rgba(225,98,61,.1);border:1px solid rgba(225,98,61,.3);border-radius:999px;padding:.28rem .7rem}
 .fld{margin-bottom:.85rem}.fld label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
 /* Telefon und Postleitzahl sind Pflicht, damit ein Rueckruf moeglich ist und
@@ -436,6 +441,7 @@ p{text-wrap:pretty}
   /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
   .qchip{white-space:nowrap}
   .qstep[data-step="4"] .qfrage{text-align:center}
+  .qsum-lab,.qhinweis{text-align:center}
 
   /* 9  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
         Handy wirkt der weisse Block darin wie ein zweites Fenster, und
@@ -572,8 +578,10 @@ p{text-wrap:pretty}
 
             <!-- Schritt 4: Kontakt -->
             <div class="qstep" data-step="4" hidden>
+              <p class="qsum-lab">Ihre Auswahl</p>
               <div class="qsum" id="qsum"></div>
-              <p class="qfrage">Fast geschafft. Wohin dürfen wir die Einschätzung schicken?</p>
+              <p class="qfrage">Fast geschafft.</p>
+              <p class="qhinweis">Ihre Ersteinschätzung sehen Sie direkt nach dem Absenden. Zusätzlich rufen wir Sie an, um Ihr Vorhaben persönlich und genauer zu besprechen.</p>
               <div class="fld-row">
                 <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" name="Vorname" type="text" placeholder="Vorname" autocomplete="given-name" required></div>
                 <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" autocomplete="family-name" required></div>
@@ -584,9 +592,9 @@ p{text-wrap:pretty}
               </div>
               <div class="fld"><label for="kf-mail">E-Mail <span class="opt">optional</span></label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail (optional)" autocomplete="email"></div>
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Einschätzung anfordern <span class="ar">→</span></button>
+              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Ersteinschätzung anzeigen <span class="ar">→</span></button>
               <div class="qvor">
-                <span>Antwort werktags binnen 24 Stunden</span>
+                <span>Anruf werktags binnen 24 Stunden</span>
                 <span>Kostenlos &amp; unverbindlich</span>
               </div>
               <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="../datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel)">Datenschutzerklärung</a>.</p>
