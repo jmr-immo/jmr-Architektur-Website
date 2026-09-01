@@ -448,7 +448,9 @@ p{text-wrap:pretty}
   /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
   .qchip{white-space:nowrap}
   .qstep[data-step="4"] .qfrage{text-align:center}
-  .qsum-lab,.qhinweis{text-align:center}
+  /* Der Erklaersatz unter "Fast geschafft" entfaellt: Was nach dem
+     Absenden passiert, steht darunter in der Haekchenzeile. */
+  .qhinweis{display:none}
 
   /* 9  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
         Handy wirkt der weisse Block darin wie ein zweites Fenster, und
@@ -596,9 +598,10 @@ p{text-wrap:pretty}
               </div>
               <div class="fld"><label for="kf-mail">E-Mail <span class="opt">optional</span></label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail (optional)" autocomplete="email"></div>
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Ersteinschätzung anzeigen <span class="ar">→</span></button>
+              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Ersteinschätzung erhalten <span class="ar">→</span></button>
               <div class="qvor">
-                <span>Anruf werktags binnen 24 Stunden</span>
+                <span>Wir rufen Sie an, um persönlich zu sprechen</span>
+                <span>Werktags binnen 24 Stunden</span>
                 <span>Kostenlos &amp; unverbindlich</span>
               </div>
               <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="../datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel)">Datenschutzerklärung</a>.</p>
