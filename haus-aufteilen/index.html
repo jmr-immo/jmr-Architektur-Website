@@ -73,6 +73,16 @@ section{padding:var(--pad) 0;position:relative}
 /* NAV: auf der Landingpage bewusst ohne Menue, nur Marke und Telefon */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.3rem,4vw,3rem);background:rgba(244,242,236,.75);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:.3s}
 .nav.scrolled{border-bottom-color:var(--line);background:rgba(244,242,236,.92)}
+/* Solange der dunkle Hero hinter der Kopfzeile liegt, steht sie selbst
+   dunkel und traegt das helle Zeichen. Danach wie auf allen Seiten. */
+.nav.dunkel{background:rgba(12,30,44,.6);border-bottom-color:transparent}
+.nav.dunkel .brand .nm{color:#F7F5F0}
+.nav.dunkel .nlinks .ntel{color:#F7F5F0}
+.nav.dunkel .nlinks .ntel:hover{background:rgba(255,255,255,.1)}
+.nav.dunkel .nlinks .ntel svg{color:#F0A58C}
+.nav .brand .mk-hell{display:none}
+.nav.dunkel .brand .mk-dunkel{display:none}
+.nav.dunkel .brand .mk-hell{display:block}
 .brand{display:flex;align-items:center;gap:.7rem}
 .brand .mk{height:30px;width:auto;display:block}
 .brand .nm{font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--white)}
@@ -82,9 +92,13 @@ section{padding:var(--pad) 0;position:relative}
 .nlinks .ntel svg{color:var(--accent);flex-shrink:0}
 @media(max-width:560px){.nlinks .ntel span{display:none}.brand .nm{font-size:.98rem}}
 /* HERO: links Argument, rechts das Formular */
-.lhero{position:relative;padding:112px 0 clamp(2.4rem,5vh,4rem);overflow:hidden}
+/* Der Hero steht dunkel, damit der helle Fragenkasten darauf herausspringt.
+   Farben nach Hausvorgabe: #0c1e2c als Grund, aufgehellte Terracotta
+   (#F0A58C) fuer Kicker und Symbole, weil das kraeftige #E1623D auf dem
+   dunklen Grund unter den noetigen Kontrast faellt. */
+.lhero{position:relative;padding:112px 0 clamp(2.4rem,5vh,4rem);overflow:hidden;background:#0c1e2c}
 #planbg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
-.lhero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(120% 95% at 82% 10%,rgba(225,98,61,.16) 0%,transparent 46%),radial-gradient(120% 120% at 0% 100%,rgba(46,134,199,.2) 0%,transparent 52%)}
+.lhero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(120% 95% at 82% 8%,rgba(225,98,61,.30) 0%,transparent 50%),radial-gradient(120% 120% at 0% 100%,rgba(31,111,165,.34) 0%,transparent 58%)}
 .lhero .container{position:relative;z-index:3}
 /* Zwei Spalten: links das Argument, rechts das Formular ueber beide Zeilen.
    Auf schmalen Geraeten wird daraus eine Spalte, und zwar in dieser
@@ -100,27 +114,67 @@ section{padding:var(--pad) 0;position:relative}
   .lcol-text,.lcol-arg,.lcol-form{grid-column:1;grid-row:auto;align-self:auto}
   .lcol-text{order:1}.lcol-form{order:2}.lcol-arg{order:3}
 }
-.lhero h1{margin:1.4rem 0 0}
-.lhero .hero-lead{font-size:clamp(1.05rem,1.6vw,1.24rem);color:var(--ink-text);max-width:560px;margin:1.3rem 0 0}
+.lhero h1{margin:1.4rem 0 0;color:#F7F5F0}
+.lhero .kicker{color:#F0A58C}
+.lhero .kicker::before{background:#F0A58C}
+.lhero .hero-lead{font-size:clamp(1.05rem,1.6vw,1.24rem);color:#c3d2dd;max-width:560px;margin:1.3rem 0 0}
 .lpoints{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.7rem}
-.lpoints li{position:relative;padding-left:2rem;font-size:1rem;color:var(--ink-text);line-height:1.5;max-width:560px}
+.lpoints li{position:relative;padding-left:2rem;font-size:1rem;color:#d5e0e8;line-height:1.5;max-width:560px}
 /* Kreis und Haken teilen sich denselben Mittelpunkt: 10 px von links,
    .32em plus den halben Kreis von oben. Der Haken wird ueber
    translate(-50%,-50%) mit seiner eigenen Mitte auf diesen Punkt gelegt
    und erst danach gedreht. Vorher war er ueber em-Werte gesetzt und sass
    dadurch rund drei Pixel zu hoch. */
-.lpoints li::before{content:'';position:absolute;left:0;top:.32em;width:20px;height:20px;border-radius:50%;background:rgba(225,98,61,.14);border:1px solid rgba(225,98,61,.4)}
-.lpoints li::after{content:'';position:absolute;left:10px;top:calc(.32em + 10px);width:9px;height:5px;border-left:2px solid var(--accent-d);border-bottom:2px solid var(--accent-d);border-bottom-left-radius:1px;transform:translate(-50%,-50%) rotate(-45deg)}
-.ltrust{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.1rem;padding-top:1.3rem;border-top:1px solid var(--line)}
-.ltrust .tp{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--ink-soft)}
-.ltrust .tp svg{color:var(--accent);flex-shrink:0}
+.lpoints li::before{content:'';position:absolute;left:0;top:.32em;width:20px;height:20px;border-radius:50%;background:rgba(225,98,61,.22);border:1px solid rgba(240,165,140,.55)}
+.lpoints li::after{content:'';position:absolute;left:10px;top:calc(.32em + 10px);width:9px;height:5px;border-left:2px solid #F0A58C;border-bottom:2px solid #F0A58C;border-bottom-left-radius:1px;transform:translate(-50%,-50%) rotate(-45deg)}
+.ltrust{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.1rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.16)}
+.ltrust .tp{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:#a8bcca}
+.ltrust .tp svg{color:#F0A58C;flex-shrink:0}
 .ltel{display:inline-flex;align-items:center;gap:.8rem;margin-top:1.4rem}
-.ltel .ic{color:var(--accent);border:1px solid rgba(11,28,43,.15);border-radius:11px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.5)}
-.ltel .tx{font-size:.9rem;color:var(--ink-soft);line-height:1.35}
-.ltel .tx b{display:block;font-family:var(--disp);font-size:1.22rem;font-weight:600;color:var(--white);letter-spacing:-.02em}
+.ltel .ic{color:#F0A58C;border:1px solid rgba(255,255,255,.2);border-radius:11px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.07)}
+.ltel .tx{font-size:.9rem;color:#a8bcca;line-height:1.35}
+.ltel .tx b{display:block;font-family:var(--disp);font-size:1.22rem;font-weight:600;color:#F7F5F0;letter-spacing:-.02em}
+/* Bei "Ueber uns" steht dieselbe Telefonzeile auf hellem Grund. */
+#ueber .ltel .ic{color:var(--accent);border-color:rgba(11,28,43,.15);background:rgba(255,255,255,.5)}
+#ueber .ltel .tx{color:var(--ink-soft)}
+#ueber .ltel .tx b{color:var(--white)}
 /* QUIZ-KASTEN */
-.ccard{position:relative;overflow:hidden;background:linear-gradient(135deg,#F0D9CD,#DCE6F2);border:1px solid rgba(225,98,61,.28);border-radius:var(--r-lg);padding:2.1rem 1.9rem;box-shadow:0 40px 90px -40px rgba(11,28,43,.28)}
+.ccard{position:relative;overflow:hidden;background:linear-gradient(135deg,#F5E4DA,#E3EBF5);border:1px solid rgba(255,255,255,.5);border-radius:var(--r-lg);padding:2.1rem 1.9rem;box-shadow:0 44px 100px -34px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.25)}
+.ccard{scroll-margin-top:82px}
 .ccard > *{position:relative;z-index:1}
+/* HANDY-LEISTE
+   Wer weiter unten liest, hat den Fragenkasten nicht mehr auf dem Schirm.
+   Dann steht am unteren Rand ein Streifen mit dem Weg zurueck zum Check
+   und der Telefonnummer. Auf dem Rechner gibt es ihn nicht. */
+.mcta{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;align-items:center;gap:.6rem;
+      padding:.6rem clamp(.8rem,4vw,1.2rem);padding-bottom:calc(.6rem + env(safe-area-inset-bottom,0px));
+      background:rgba(244,242,236,.95);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+      box-shadow:0 -14px 34px -20px rgba(11,28,43,.45);
+      transform:translateY(115%);visibility:hidden;
+      transition:transform .28s cubic-bezier(.16,1,.3,1),visibility .28s}
+.mcta.da{transform:none;visibility:visible}
+.mcta .mcta-b{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+      background:var(--accent-d);color:#fff;font-family:var(--sans);font-weight:600;font-size:.95rem;
+      border-radius:8px;padding:.88rem 1rem;box-shadow:0 12px 26px -14px rgba(190,74,42,.85)}
+.mcta .mcta-t{flex:none;width:50px;height:50px;display:inline-flex;align-items:center;justify-content:center;
+      border:1px solid rgba(11,28,43,.2);border-radius:8px;color:var(--accent-d);background:#fff}
+/* WHATSAPP
+   Runder Knopf unten rechts, auf allen Geraeten. Er sitzt ueber der
+   Handy-Leiste, sobald die auftaucht, und verschwindet, solange das
+   Datenschutz-Banner unten steht. Der Verweis laedt nichts von WhatsApp
+   nach: Erst der Druck darauf oeffnet die App. */
+.wa{position:fixed;right:clamp(.85rem,3vw,1.6rem);bottom:clamp(.85rem,3vw,1.6rem);z-index:95;
+    width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:#25D366;color:#fff;
+    box-shadow:0 16px 32px -12px rgba(37,211,102,.65),0 4px 12px rgba(11,28,43,.3);
+    transition:transform .22s,bottom .3s cubic-bezier(.16,1,.3,1),opacity .25s,visibility .25s}
+.wa:hover{transform:translateY(-3px) scale(1.05)}
+.wa:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.wa svg{width:31px;height:31px;display:block}
+.wa.weg{opacity:0;visibility:hidden;pointer-events:none}
+body.leiste-an .wa{bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+@media(prefers-reduced-motion:reduce){.wa{transition:none}.wa:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.mcta{transition:none}}
 .ccard h3{margin-bottom:.3rem;color:var(--white);font-size:1.32rem}
 .ccard .ds{color:var(--ink-soft);font-size:.9rem;margin-bottom:1.3rem}
 @media(max-width:560px){.ccard{padding:1.6rem 1.3rem}}
@@ -148,10 +202,46 @@ section{padding:var(--pad) 0;position:relative}
 .qopt.aktiv{border-color:var(--accent);box-shadow:0 0 0 3px rgba(225,98,61,.15)}
 .qopt .qo-t{display:block;font-weight:600;font-size:.95rem;color:var(--white);line-height:1.3}
 .qopt .qo-s{display:block;font-size:.83rem;color:var(--ink-soft);line-height:1.4;margin-top:.15rem}
-.qopt .qo-ar{margin-left:auto;color:var(--accent);font-weight:700;flex-shrink:0;transition:transform .2s}
-.qopt:hover .qo-ar{transform:translateX(3px)}
-.qzur{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);padding:.3rem 0}
-.qzur:hover{color:var(--accent-d)}
+/* ZURUECK steht oben links im Kasten, vor der Frage. Unten haette er neben
+   dem Weiter-Knopf um Aufmerksamkeit konkurriert. */
+.qzur{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .75rem;background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);padding:.3rem .6rem .3rem .4rem;border-radius:8px;transition:.18s}
+.qzur:hover{color:var(--accent-d);background:rgba(11,28,43,.06)}
+.qzur .zp{font-size:1.1em;line-height:1}
+/* FRAGENKOPF
+   Die Frage steht in einem eigenen weissen Feld mit Terracotta-Kante,
+   damit sie sich vom Rest des Kastens abhebt. Ziffernmarke und die Zeile
+   "Eine Antwort auswaehlen" sind wieder entfallen: Der Fortschritt steht
+   schon in der Zeile "Schritt x von 4", und die Kaestchen vor den
+   Antworten sagen von selbst, dass hier ausgewaehlt wird. */
+.qhead{background:#fff;border:1px solid rgba(225,98,61,.32);border-left:4px solid var(--accent);border-radius:12px;padding:.95rem 1.05rem;margin-bottom:.85rem}
+.qhead .qfrage{display:block;margin:0;font-size:1.16rem;line-height:1.28}
+.qhead .qfrage:focus{outline:none}
+/* AUSWAHLKAESTCHEN
+   Der Pfeil rechts hat gemeint: Antippen springt weiter. Weitergeschaltet
+   wird jetzt unten von Hand, deshalb steht links ein Kaestchen, das bei
+   der gewaehlten Antwort ein Haekchen zeigt. */
+.qopt .qo-box{flex:none;width:22px;height:22px;border-radius:6px;border:1.6px solid rgba(11,28,43,.3);background:#fff;position:relative;transition:background .18s,border-color .18s}
+.qopt .qo-box::after{content:'';position:absolute;left:50%;top:48%;width:10px;height:5px;border-left:2.2px solid #fff;border-bottom:2.2px solid #fff;border-bottom-left-radius:1px;transform:translate(-50%,-65%) rotate(-45deg) scale(.5);opacity:0;transition:opacity .16s,transform .16s}
+.qopt:hover .qo-box{border-color:rgba(225,98,61,.7)}
+.qopt.aktiv .qo-box{background:var(--accent);border-color:var(--accent)}
+.qopt.aktiv .qo-box::after{opacity:1;transform:translate(-50%,-65%) rotate(-45deg) scale(1)}
+.qopt .qo-tx{display:block}
+/* WEITER-KNOPF
+   Traegt die Leitfarbe und sitzt ueber die volle Breite unter den
+   Antworten. Solange nichts gewaehlt ist, steht er blass da und sagt beim
+   Antippen, was fehlt - abgeschaltet waere er auf dem Handy nicht als
+   Knopf zu erkennen. */
+.qnav{margin-top:1.05rem;display:flex;flex-direction:column;align-items:stretch}
+.qnext{width:100%;justify-content:center;padding:1rem 1.4rem}
+.qnext[aria-disabled="true"]{opacity:.42;box-shadow:none}
+.qnext[aria-disabled="true"]:hover{transform:none;background:var(--accent-d)}
+.qnext.bereit{animation:qpuls .45s cubic-bezier(.16,1,.3,1) 1}
+@keyframes qpuls{0%{transform:scale(.98)}55%{transform:scale(1.022)}100%{transform:scale(1)}}
+.qwarn{margin:.6rem 0 0;font-size:.84rem;font-weight:600;color:var(--accent-d);text-align:center}
+.qopts.fehlt{animation:qwackel .38s ease-in-out 1}
+@keyframes qwackel{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){.qnext.bereit,.qopts.fehlt{animation:none}}
+
 .qsum-lab{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:.45rem}
 .qsum{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
 /* Sagt vor dem Absenden, was danach passiert: Text sofort auf dem Schirm,
@@ -370,20 +460,23 @@ p{text-wrap:pretty}
         Ueberschrift, kein Einleitungssatz, kleinere Zeile. Ueberschrift
         und Kicker stehen mittig, und die Ueberschrift ist als Frage
         formuliert, damit sie den Leser direkt anspricht. */
-  .lhero{padding:84px 0 2rem}
+  .lhero{padding:78px 0 2rem}
   .lhero .hero-lead{display:none}
   .lcol-text{text-align:center}
-  .lhero h1{font-size:clamp(1.85rem,7.2vw,2.25rem);margin-top:.9rem}
+  .lhero h1{font-size:clamp(1.85rem,7.2vw,2.25rem);margin-top:.6rem}
   .lhero .kicker{font-size:.64rem;letter-spacing:.18em;justify-content:center}
   .lhero .kicker::before{display:none}
-  .lgrid{row-gap:1.6rem}
+  /* Enger als vorher: Frage, Antworten und der Weiter-Knopf sollen auf dem
+     Handy zusammen auf einen Schirm passen. Wer den Knopf erst nach dem
+     Rollen sieht, sieht den naechsten Schritt nicht. */
+  .lgrid{row-gap:1.1rem}
 
   /* 2  Im Kasten steht oben, worum es geht, darunter als Kapsel der
         Umfang. Beides in einer Zeile wurde auf 360 px zu gedraengt. */
   .ccard{padding:1.35rem 1.15rem}
   .ccard h3{font-size:1.16rem;text-align:center}
   .qmini{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem;
-         width:max-content;max-width:100%;margin:.55rem auto 1.1rem;
+         width:max-content;max-width:100%;margin:.45rem auto .85rem;
          font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;
          text-transform:uppercase;font-weight:700;color:var(--accent-d);
          background:rgba(225,98,61,.1);border:1px solid rgba(225,98,61,.28);
@@ -393,20 +486,35 @@ p{text-wrap:pretty}
         und ein weicher Schein im Terracotta-Ton. So passen alle vier
         Antworten ohne Scrollen auf den Schirm. */
   .qopt .qo-s{display:none}
-  .qopt{padding:.92rem 1rem;border-color:rgba(225,98,61,.3);
+  .qopt{padding:.85rem 1rem;border-color:rgba(225,98,61,.3);
         box-shadow:0 0 0 3px rgba(225,98,61,.06),0 10px 22px -16px rgba(190,74,42,.75)}
   .qopt .qo-t{font-size:.98rem}
-  .qopt .qo-ar{font-size:1.05rem}
   .qopt:active{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.14)}
-  .qopt.aktiv{box-shadow:0 0 0 4px rgba(225,98,61,.16),0 10px 22px -16px rgba(190,74,42,.75)}
-  .qopts{gap:.5rem}
+  .qopt.aktiv{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.16),0 10px 22px -16px rgba(190,74,42,.75)}
+  .qopts{gap:.45rem}
   .qfrage{font-size:1.02rem;margin-bottom:.8rem}
-  .qbar{margin-bottom:1rem}
+  .qbar{margin-bottom:.8rem}
+  .ccard{padding-top:1.2rem}
+
+  /* 3b Fragenkopf und Weiter-Knopf auf dem Handy: die Frage steht in einem
+        eigenen Feld, der Weiter-Knopf darunter ueber die volle Breite. */
+  .qhead{padding:.8rem .9rem;margin-bottom:.7rem}
+  .qhead .qfrage{font-size:1.08rem}
+  .qzur{margin-bottom:.6rem;font-size:.82rem}
+  .qnav{margin-top:.8rem}
+  .qnext{padding:.98rem 1.2rem;font-size:1rem}
 
   /* 4  Reihenfolge der Abschnitte: nach dem Fragenkasten kommt sofort,
         wer dahintersteht. Erst danach die Erklaerungen. Moeglich ist das,
         weil der Seitenkoerper hier zu einer Spalte wird und die
         Abschnitte ihre Reihenfolge selbst bestimmen. */
+  /* Die Argumentspalte (drei Haken, "Bauvorlageberechtigt", Telefonzeile)
+     stand auf dem Handy unter dem Fragenkasten und schob "Ueber uns" nach
+     unten. Auf dem Handy entfaellt sie deshalb; die Telefonnummer steht in
+     der Kopfzeile und noch einmal bei "Ueber uns". Auf dem Rechner bleibt
+     sie stehen, dort steht sie links neben dem Kasten. */
+  .lcol-arg{display:none}
+  .mcta{display:flex}
   body{display:flex;flex-direction:column}
   .lhero{order:1}
   #ueber{order:2;background:var(--bg) !important}
@@ -465,7 +573,7 @@ p{text-wrap:pretty}
 <div class="prog"><div class="prog-b" id="pb"></div></div>
 
 <nav class="nav" id="nav">
-  <a href="../index.html" class="brand"><img class="mk" src="../img/logo-blue-s.png" alt="jmr Architektur" width="115" height="90"><span class="nm">jmr Architektur</span></a>
+  <a href="../index.html" class="brand"><img class="mk mk-dunkel" src="../img/logo-blue-s.png" alt="jmr Architektur" width="115" height="90"><img class="mk mk-hell" src="../img/logo-white-s.png" alt="" aria-hidden="true" width="115" height="90"><span class="nm">jmr Architektur</span></a>
   <div class="nlinks">
     <a class="ntel" href="tel:+491789428464">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg>
@@ -502,10 +610,10 @@ p{text-wrap:pretty}
       </div>
 
       <div class="lcol-form fade d1">
-        <div class="ccard">
+        <div class="ccard" id="check">
           <h3><span class="d-only-i">Ihre Ersteinschätzung</span><span class="m-only-i">Kostenloser Kurz-Check</span></h3>
-          <p class="ds d-only">Drei kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
-          <p class="qmini">3 Fragen · 1 Minute · unverbindlich</p>
+          <p class="ds d-only">Vier kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
+          <p class="qmini">4 Fragen · 1 Minute · unverbindlich</p>
 
           <noscript>
             <p class="qnoscript">Für die Fragen braucht dieser Kasten JavaScript. Rufen Sie uns gern direkt an: <a href="tel:+491789428464">0178 9428464</a> oder schreiben Sie an <a href="mailto:info@jmr-architektur.de">info@jmr-architektur.de</a>.</p>
@@ -525,65 +633,84 @@ p{text-wrap:pretty}
             <div class="qsteps" id="qsteps">
             <!-- Schritt 1 -->
             <div class="qstep" data-step="1">
-              <p class="qfrage">Um welches Gebäude geht es?</p>
-              <div class="qopts">
-                <button class="qopt" type="button" data-frage="1" data-wert="Zweifamilienhaus, 2 Einheiten" data-kurz="Zweifamilienhaus" data-code="klein">
-                  <span><span class="qo-t">Zweifamilienhaus</span><span class="qo-s">Zwei Wohneinheiten im Haus, kleiner Umfang.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+              <div class="qhead">
+                <span class="qfrage" id="qf-1">Um welches Gebäude geht es?</span>
+              </div>
+              <div class="qopts" role="group" aria-labelledby="qf-1">
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Zweifamilienhaus, 2 Einheiten" data-kurz="Zweifamilienhaus" data-code="klein">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Zweifamilienhaus</span><span class="qo-s">Zwei Wohneinheiten im Haus, kleiner Umfang.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="1" data-wert="Mehrfamilienhaus, 3 bis 8 Einheiten" data-kurz="3 bis 8 Einheiten" data-code="mittel">
-                  <span><span class="qo-t">Mehrfamilienhaus, 3 bis 8 Einheiten</span><span class="qo-s">Der häufigste Fall bei einer Aufteilung.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Mehrfamilienhaus, 3 bis 8 Einheiten" data-kurz="3 bis 8 Einheiten" data-code="mittel">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Mehrfamilienhaus, 3 bis 8 Einheiten</span><span class="qo-s">Der häufigste Fall bei einer Aufteilung.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="1" data-wert="Größeres Objekt, ab 9 Einheiten" data-kurz="Ab 9 Einheiten" data-code="gross">
-                  <span><span class="qo-t">Größeres Objekt, ab 9 Einheiten</span><span class="qo-s">Mehrere Geschosse, Keller- und Nebenflächen.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Größeres Objekt, ab 9 Einheiten" data-kurz="Ab 9 Einheiten" data-code="gross">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Größeres Objekt, ab 9 Einheiten</span><span class="qo-s">Mehrere Geschosse, Keller- und Nebenflächen.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="1" data-wert="Wohnen und Gewerbe gemischt" data-kurz="Wohnen und Gewerbe" data-code="misch">
-                  <span><span class="qo-t">Wohnen und Gewerbe gemischt</span><span class="qo-s">Laden, Büro oder Praxis im selben Gebäude.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Wohnen und Gewerbe gemischt" data-kurz="Wohnen und Gewerbe" data-code="misch">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Wohnen und Gewerbe gemischt</span><span class="qo-s">Laden, Büro oder Praxis im selben Gebäude.</span></span>
                 </button>
+              </div>
+              <div class="qnav">
+                <button class="btn btn-accent qnext" type="button" data-weiter="2" aria-disabled="true">Nächster Schritt <span class="ar">→</span></button>
+                <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
               </div>
             </div>
 
             <!-- Schritt 2 -->
             <div class="qstep" data-step="2" hidden>
-              <p class="qfrage">Welche Pläne liegen Ihnen vor?</p>
-              <div class="qopts">
-                <button class="qopt" type="button" data-frage="2" data-wert="Pläne sind aktuell" data-kurz="Pläne aktuell" data-code="plan-gut">
-                  <span><span class="qo-t">Pläne sind aktuell</span><span class="qo-s">Sie bilden den heutigen Zustand ab.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+              <button class="qzur" type="button" data-zurueck="1"><span class="zp" aria-hidden="true">←</span> Zurück</button>
+              <div class="qhead">
+                <span class="qfrage" id="qf-2">Welche Pläne liegen Ihnen vor?</span>
+              </div>
+              <div class="qopts" role="group" aria-labelledby="qf-2">
+                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Pläne sind aktuell" data-kurz="Pläne aktuell" data-code="plan-gut">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Pläne sind aktuell</span><span class="qo-s">Sie bilden den heutigen Zustand ab.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="2" data-wert="Pläne sind veraltet" data-kurz="Pläne veraltet" data-code="plan-alt">
-                  <span><span class="qo-t">Pläne sind veraltet</span><span class="qo-s">Seitdem wurde umgebaut oder verändert.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Pläne sind veraltet" data-kurz="Pläne veraltet" data-code="plan-alt">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Pläne sind veraltet</span><span class="qo-s">Seitdem wurde umgebaut oder verändert.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="2" data-wert="Unleserliche Pläne oder keine Pläne vorhanden" data-kurz="Keine Pläne" data-code="plan-keine">
-                  <span><span class="qo-t">Unleserliche Pläne / Keine Pläne vorhanden</span><span class="qo-s">Im Bestand der Normalfall, kein Hindernis.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Unleserliche Pläne oder keine Pläne vorhanden" data-kurz="Keine Pläne" data-code="plan-keine">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Unleserliche Pläne / Keine Pläne vorhanden</span><span class="qo-s">Im Bestand der Normalfall, kein Hindernis.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="2" data-wert="Planlage noch unklar" data-kurz="Planlage unklar" data-code="plan-unklar">
-                  <span><span class="qo-t">Weiß ich noch nicht</span><span class="qo-s">Das klären wir im Erstgespräch.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Planlage noch unklar" data-kurz="Planlage unklar" data-code="plan-unklar">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Weiß ich noch nicht</span><span class="qo-s">Das klären wir im Erstgespräch.</span></span>
                 </button>
               </div>
-              <button class="qzur" type="button" data-zurueck="1">← Zurück</button>
+              <div class="qnav">
+                <button class="btn btn-accent qnext" type="button" data-weiter="3" aria-disabled="true">Nächster Schritt <span class="ar">→</span></button>
+                <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
+              </div>
             </div>
 
             <!-- Schritt 3 -->
             <div class="qstep" data-step="3" hidden>
-              <p class="qfrage">Was ist mit den Einheiten geplant?</p>
-              <div class="qopts">
-                <button class="qopt" type="button" data-frage="3" data-wert="Baulich bleibt alles wie es ist" data-kurz="Baulich unverändert" data-code="rein-recht">
-                  <span><span class="qo-t">Baulich bleibt alles, wie es ist</span><span class="qo-s">Die Einheiten bestehen bereits, es geht nur um die Aufteilung.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+              <button class="qzur" type="button" data-zurueck="2"><span class="zp" aria-hidden="true">←</span> Zurück</button>
+              <div class="qhead">
+                <span class="qfrage" id="qf-3">Was ist mit den Einheiten geplant?</span>
+              </div>
+              <div class="qopts" role="group" aria-labelledby="qf-3">
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Baulich bleibt alles wie es ist" data-kurz="Baulich unverändert" data-code="rein-recht">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Baulich bleibt alles, wie es ist</span><span class="qo-s">Die Einheiten bestehen bereits, es geht nur um die Aufteilung.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="3" data-wert="Einheiten werden vorher umgebaut" data-kurz="Umbau geplant" data-code="umbau">
-                  <span><span class="qo-t">Die Einheiten werden vorher neu zugeschnitten</span><span class="qo-s">Aus zwei Wohnungen werden drei, Grundrisse ändern sich.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Einheiten werden vorher umgebaut" data-kurz="Umbau geplant" data-code="umbau">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Die Einheiten werden vorher neu zugeschnitten</span><span class="qo-s">Aus zwei Wohnungen werden drei, Grundrisse ändern sich.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="3" data-wert="Dachgeschoss, Keller oder Gewerbe wird Wohnraum" data-kurz="Nutzungsänderung" data-code="nutzung">
-                  <span><span class="qo-t">Dachgeschoss, Keller oder Gewerbe soll Wohnraum werden</span><span class="qo-s">Eine Nutzungsänderung kommt dann meist dazu.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Dachgeschoss, Keller oder Gewerbe wird Wohnraum" data-kurz="Nutzungsänderung" data-code="nutzung">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Dachgeschoss, Keller oder Gewerbe soll Wohnraum werden</span><span class="qo-s">Eine Nutzungsänderung kommt dann meist dazu.</span></span>
                 </button>
-                <button class="qopt" type="button" data-frage="3" data-wert="Steht noch nicht fest" data-kurz="Noch offen" data-code="offen">
-                  <span><span class="qo-t">Steht noch nicht fest</span><span class="qo-s">Wir klären zuerst, was überhaupt möglich ist.</span></span><span class="qo-ar" aria-hidden="true">→</span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Steht noch nicht fest" data-kurz="Noch offen" data-code="offen">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Steht noch nicht fest</span><span class="qo-s">Wir klären zuerst, was überhaupt möglich ist.</span></span>
                 </button>
               </div>
-              <button class="qzur" type="button" data-zurueck="2">← Zurück</button>
+              <div class="qnav">
+                <button class="btn btn-accent qnext" type="button" data-weiter="4" aria-disabled="true">Nächster Schritt <span class="ar">→</span></button>
+                <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
+              </div>
             </div>
 
             <!-- Schritt 4: Kontakt -->
             <div class="qstep" data-step="4" hidden>
+              <button class="qzur" type="button" data-zurueck="3"><span class="zp" aria-hidden="true">←</span> Zurück</button>
               <p class="qsum-lab">Ihre Auswahl</p>
               <div class="qsum" id="qsum"></div>
               <p class="qfrage">Fast geschafft.</p>
@@ -593,19 +720,18 @@ p{text-wrap:pretty}
                 <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" autocomplete="family-name" required></div>
               </div>
               <div class="fld-row">
-                <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Telefonnummer" autocomplete="tel" required></div>
-                <div class="fld"><label for="kf-plz">PLZ des Objekts</label><input id="kf-plz" name="PLZ" type="text" placeholder="PLZ des Objekts" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" title="Bitte fünf Ziffern eingeben" required></div>
+                <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Telefon" autocomplete="tel" required></div>
+                <div class="fld"><label for="kf-plz">PLZ des Objekts</label><input id="kf-plz" name="PLZ" type="text" placeholder="PLZ Objekt" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" title="Bitte fünf Ziffern eingeben" required></div>
               </div>
               <div class="fld"><label for="kf-mail">E-Mail <span class="opt">optional</span></label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail (optional)" autocomplete="email"></div>
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Ersteinschätzung erhalten <span class="ar">→</span></button>
+              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Ersteinschätzung anzeigen <span class="ar">→</span></button>
               <div class="qvor">
                 <span>Wir rufen Sie an, um persönlich zu sprechen</span>
                 <span>Werktags binnen 24 Stunden</span>
                 <span>Kostenlos &amp; unverbindlich</span>
               </div>
               <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="../datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel)">Datenschutzerklärung</a>.</p>
-              <button class="qzur" type="button" data-zurueck="3">← Zurück</button>
               <div id="kfStatus" class="kf-status" style="display:none"></div>
             </div>
             </div>
@@ -647,7 +773,7 @@ p{text-wrap:pretty}
           <span class="res-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9h9"/><path d="M12 12 5.6 18.4"/></svg></span>
           <h3>Miteigentums&shy;anteile</h3><span class="akk-x" aria-hidden="true">+</span>
         </summary>
-        <div class="akk-b"><p>Unser Vorschlag, aus den Flächen abgeleitet und begründet. Die Anteile sind der gesetzliche Schlüssel für die Kosten des Gemeinschafts&shy;eigentums.</p></div>
+        <div class="akk-b"><p>Unser Vorschlag, aus den Flächen abgeleitet und begründet. Die Anteile sind der gesetzliche Schlüssel für die Kosten des Gemeinschafts&shy;eigentums, solange die Teilungserklärung nichts anderes regelt.</p></div>
       </details>
       <details class="res fade akk" open>
         <summary>
@@ -724,8 +850,8 @@ p{text-wrap:pretty}
   <div class="container">
     <div class="sh c fade"><span class="kicker c">Häufige Fragen</span><h2>Gut zu wissen.</h2></div>
     <div class="faq-wrap">
-      <details class="faq fade" name="faq"><summary>Reicht die Abgeschlossen&shy;heits&shy;bescheinigung, damit ich die Einheiten einzeln verkaufen darf?<span class="fq-i">+</span></summary><div class="fq-a"><p>Für den Verkauf ja. Die Bescheinigung ist die Voraussetzung dafür, dass das Grundbuchamt für jede Einheit ein eigenes Wohnungsgrundbuch anlegt, und danach lassen sich die Einheiten einzeln veräußern.</p><p>Über das Baurecht sagt sie dagegen nichts aus. Sie wird ungeachtet bauordnungs&shy;rechtlicher Vorschriften erteilt, und ein baurechtlich nicht genehmigter Zustand wird durch sie nicht legalisiert. Deshalb ist es ratsam, vor der Teilung zu prüfen, ob der Bestand so genehmigt ist, wie er dasteht.</p></div></details>
-      <details class="faq fade" name="faq"><summary>Brauche ich für die Aufteilung eine Baugenehmigung?<span class="fq-i">+</span></summary><div class="fq-a"><p>Für die Aufteilung als solche nicht. Bei der Bauaufsicht beantragen Sie keine Baugenehmigung, sondern die Abgeschlossen&shy;heits&shy;bescheinigung, zusammen mit den Aufteilungsplänen und den zugehörigen Formularen.</p><p>Sobald sich aber die Zahl der Wohnungen ändert, Räume dafür umgebaut werden oder sich die Nutzung ändert, ist das in aller Regel eine genehmigungs&shy;pflichtige Änderung oder Nutzungsänderung. Was in Ihrem Fall gilt, klären wir vor der Planung.</p></div></details>
+      <details class="faq fade" name="faq"><summary>Reicht die Abgeschlossen&shy;heits&shy;bescheinigung, damit ich die Einheiten einzeln verkaufen darf?<span class="fq-i">+</span></summary><div class="fq-a"><p>Sie ist die Voraussetzung dafür, allein genügt sie aber nicht. Erst mit der Teilungserklärung und deren Eintragung legt das Grundbuchamt für jede Einheit ein eigenes Wohnungsgrundbuch an, und danach lassen sich die Einheiten einzeln veräußern.</p><p>Über das Baurecht sagt sie dagegen nichts aus. Sie wird ungeachtet bauordnungs&shy;rechtlicher Vorschriften erteilt, und ein baurechtlich nicht genehmigter Zustand wird durch sie nicht legalisiert. Deshalb ist es ratsam, vor der Teilung zu prüfen, ob der Bestand so genehmigt ist, wie er dasteht.</p></div></details>
+      <details class="faq fade" name="faq"><summary>Brauche ich für die Aufteilung eine Baugenehmigung?<span class="fq-i">+</span></summary><div class="fq-a"><p>Für die Aufteilung als solche nicht. Bei der Bauaufsicht beantragen Sie keine Baugenehmigung, sondern die Abgeschlossen&shy;heits&shy;bescheinigung, zusammen mit den Aufteilungsplänen und den zugehörigen Formularen.</p><p>Sobald sich aber die Zahl der Wohnungen ändert, Räume dafür umgebaut werden oder sich die Nutzung ändert, ist das in aller Regel eine verfahrens&shy;pflichtige Änderung oder Nutzungsänderung. Ob dafür ein Bauantrag nötig ist oder die Genehmigungs&shy;freistellung genügt, hängt vom Einzelfall ab. Im Saarland ist die Nutzungsänderung von Dachgeschossen zu Wohnzwecken seit der LBO-Novelle 2025 ausdrücklich freigestellt. Was in Ihrem Fall gilt, klären wir vor der Planung.</p></div></details>
       <details class="faq fade" name="faq"><summary>Was ist, wenn keine aktuellen Pläne vorhanden sind?<span class="fq-i">+</span></summary><div class="fq-a"><p>Das ist im Bestand die Regel und kein Hindernis. Bevor alles neu aufgemessen wird, prüfen wir per Akteneinsicht im Bauarchiv, ob brauchbare Unterlagen vorliegen. Was fehlt, nehmen wir vor Ort auf.</p></div></details>
       <details class="faq fade" name="faq"><summary>Welche Unterlagen werden für die Abgeschlossen&shy;heits&shy;bescheinigung gebraucht?<span class="fq-i">+</span></summary><div class="fq-a"><p>In der Regel den Antrag auf Erteilung der Bescheinigung, die Bauzeichnung, also den Aufteilungsplan mit Lageplan, Grundrissen, Schnitten und Ansichten, den Eigentumsnachweis, üblicherweise einen aktuellen Grundbuchauszug, sowie einen aktuellen Auszug aus der amtlichen Liegenschaftskarte. Diese Unterlagen stellen wir für Sie zusammen.</p></div></details>
       <details class="faq fade" name="faq"><summary>Was passiert, wenn der Aufteilungsplan nicht zur tatsächlichen Bebauung passt?<span class="fq-i">+</span></summary><div class="fq-a"><p>Maßgeblich ist der Plan, nicht die Wand. Der Bundesgerichtshof hat 2015 bestätigt, dass Sondereigentum in den Grenzen entsteht, die der eingetragene Aufteilungsplan zieht, unabhängig davon, wie tatsächlich gebaut wurde.</p><p>Weicht die Ausführung davon ab, kann jeder Eigentümer verlangen, dass seine Räume plangerecht hergestellt werden, auf Kosten der Gemeinschaft und auch noch nach Jahrzehnten. Deshalb nehmen wir den Bestand vor der ersten Zeichnung auf.</p></div></details>
@@ -739,13 +865,26 @@ p{text-wrap:pretty}
   <div class="container">
     <span class="kicker c fade">Nächster Schritt</span>
     <h2 class="fade">Klären wir, ob und wie sich Ihr Gebäude teilen lässt.</h2>
-    <p class="fade d1">Drei Fragen zum Objekt, danach erhalten Sie unsere Einschätzung. Oder rufen Sie direkt an, das geht meistens schneller.</p>
+    <p class="fade d1">Vier Fragen zum Objekt, danach erhalten Sie unsere Einschätzung. Oder rufen Sie direkt an, das geht meistens schneller.</p>
     <div class="eact fade d2">
       <a href="#top" class="btn btn-accent">Vorhaben prüfen lassen <span class="ar">→</span></a>
       <a href="tel:+491789428464" class="btn btn-ghost">0178 9428464</a>
     </div>
   </div>
 </section>
+
+<!-- WhatsApp: runder Knopf unten rechts, siehe .wa im Stilblatt -->
+<a class="wa" id="wa" href="https://wa.me/491789428464?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20die%20Aufteilung%20meines%20Hauses." target="_blank" rel="noopener" aria-label="Uns über WhatsApp schreiben">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<!-- Handy: fester Streifen am unteren Rand, siehe .mcta im Stilblatt -->
+<div class="mcta" id="mcta" aria-hidden="true">
+  <a class="mcta-b" href="#check">Kurz-Check starten <span class="ar">→</span></a>
+  <a class="mcta-t" href="tel:+491789428464" aria-label="Anrufen unter 0178 9428464">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg>
+  </a>
+</div>
 
 <footer class="footer">
   <div class="spot"></div>
@@ -779,7 +918,9 @@ p{text-wrap:pretty}
 <script>
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const pb=document.getElementById('pb'),nav=document.getElementById('nav');
-function sc(){const h=document.documentElement.scrollHeight-innerHeight;pb.style.width=(scrollY/h*100)+'%';nav.classList.toggle('scrolled',scrollY>20)}
+const heroEl=document.getElementById('top');
+function sc(){const h=document.documentElement.scrollHeight-innerHeight;pb.style.width=(scrollY/h*100)+'%';nav.classList.toggle('scrolled',scrollY>20);
+ if(heroEl) nav.classList.toggle('dunkel',heroEl.getBoundingClientRect().bottom>70);}
 addEventListener('scroll',sc,{passive:true});sc();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.12});
 document.querySelectorAll('.fade').forEach(el=>io.observe(el));
@@ -792,9 +933,9 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
  function mk(n){const a=[];for(let i=0;i<n;i++){const b=(i+0.5)/n;a.push({base:b,p:b,t:b,spd:0.10+Math.random()*0.14,wait:Math.random()*4});}return a;}
  let V=mk(6),H=mk(4);let last=performance.now();
  function draw(now){x.clearRect(0,0,w,h);const t=now*0.00015;
-   V.forEach((l,i)=>{const X=l.p*w,a=0.05+0.04*Math.sin(t*7+i);x.strokeStyle='rgba(31,111,165,'+a.toFixed(3)+')';x.lineWidth=(i%2===0)?1.3:.8;x.beginPath();x.moveTo(X,0);x.lineTo(X,h);x.stroke();});
-   H.forEach((l,i)=>{const Y=l.p*h,a=0.05+0.04*Math.sin(t*6+i*1.7);x.strokeStyle='rgba(31,111,165,'+a.toFixed(3)+')';x.lineWidth=(i%2===0)?1.3:.8;x.beginPath();x.moveTo(0,Y);x.lineTo(w,Y);x.stroke();});
-   for(let vi=0;vi<V.length;vi+=2)for(let hi=0;hi<H.length;hi+=2){const X=V[vi].p*w,Y=H[hi].p*h,a=0.1+0.1*(0.5+0.5*Math.sin(t*9+vi*2+hi*3));x.fillStyle='rgba(225,98,61,'+a.toFixed(3)+')';x.fillRect(X-10,Y-1,20,2);x.fillRect(X-1,Y-10,2,20);}}
+   V.forEach((l,i)=>{const X=l.p*w,a=0.11+0.07*Math.sin(t*7+i);x.strokeStyle='rgba(126,183,224,'+a.toFixed(3)+')';x.lineWidth=(i%2===0)?1.3:.8;x.beginPath();x.moveTo(X,0);x.lineTo(X,h);x.stroke();});
+   H.forEach((l,i)=>{const Y=l.p*h,a=0.11+0.07*Math.sin(t*6+i*1.7);x.strokeStyle='rgba(126,183,224,'+a.toFixed(3)+')';x.lineWidth=(i%2===0)?1.3:.8;x.beginPath();x.moveTo(0,Y);x.lineTo(w,Y);x.stroke();});
+   for(let vi=0;vi<V.length;vi+=2)for(let hi=0;hi<H.length;hi+=2){const X=V[vi].p*w,Y=H[hi].p*h,a=0.18+0.16*(0.5+0.5*Math.sin(t*9+vi*2+hi*3));x.fillStyle='rgba(240,140,105,'+a.toFixed(3)+')';x.fillRect(X-10,Y-1,20,2);x.fillRect(X-1,Y-10,2,20);}}
  if(RM){draw(0);return;}
  function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;[...V,...H].forEach(l=>{l.wait-=dt;if(Math.abs(l.p-l.t)<0.004&&l.wait<=0){l.t=Math.max(0.06,Math.min(0.94,l.base+(Math.random()-0.5)*0.26));l.wait=1.5+Math.random()*3.5;}l.p+=(l.t-l.p)*Math.min(1,l.spd*dt*6);});draw(now);requestAnimationFrame(step);}
  requestAnimationFrame(step);})();
@@ -855,7 +996,21 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
       var f=steps.filter(function(s){return +s.dataset.step===n;})[0];
       var ziel=f&&f.querySelector('.qfrage');
       if(ziel){ ziel.setAttribute('tabindex','-1'); ziel.focus({preventScroll:true}); }
+      /* Weitergeschaltet wird jetzt unten am Knopf. Auf dem Handy steht die
+         neue Frage danach ausserhalb des Blickfelds, deshalb rollt der
+         Kasten wieder unter die Kopfzeile. */
+      inSicht();
     }
+  }
+
+  /* Rollt den Fragenkasten unter die feste Kopfzeile. Nur auf dem Handy:
+     auf dem Rechner steht der Kasten ohnehin im Blick. */
+  function inSicht(){
+    if(!(window.matchMedia && window.matchMedia('(max-width:700px)').matches)) return;
+    var karte=document.querySelector('.ccard'); if(!karte) return;
+    var y=karte.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop)-80;
+    if(y<0) y=0;
+    try{ window.scrollTo({top:y,behavior:RM?'auto':'smooth'}); }catch(e){ window.scrollTo(0,y); }
   }
 
   /* Misst die drei Fragen nacheinander und haelt den Kasten auf der Hoehe
@@ -902,16 +1057,47 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     });
   }
 
+  function schrittEl(n){
+    return steps.filter(function(s){ return +s.dataset.step===n; })[0];
+  }
+
+  /* Eine Antwort anwaehlen. Weitergeschaltet wird nicht mehr automatisch:
+     Wer sich vertippt, konnte vorher nur ueber "Zurueck" korrigieren, und
+     der Sprung nach dem Antippen wirkte wie ein Fehler. Jetzt bleibt die
+     Auswahl stehen, bis unten "Naechster Schritt" gedrueckt wird. */
+  function waehle(opt){
+    var f=+opt.dataset.frage;
+    texte[f]=opt.dataset.wert; codes[f]=opt.dataset.code; kurze[f]=opt.dataset.kurz||opt.dataset.wert;
+    if(felder[f]) felder[f].value=opt.dataset.wert;
+    var geschwister=opt.parentNode.querySelectorAll('.qopt');
+    [].forEach.call(geschwister,function(g){ g.classList.remove('aktiv'); g.setAttribute('aria-pressed','false'); });
+    opt.classList.add('aktiv'); opt.setAttribute('aria-pressed','true');
+    var st=schrittEl(f); if(!st) return;
+    var warn=st.querySelector('.qwarn'); if(warn) warn.hidden=true;
+    var knopf=st.querySelector('.qnext');
+    if(knopf && knopf.getAttribute('aria-disabled')==='true'){
+      knopf.removeAttribute('aria-disabled');
+      knopf.classList.add('bereit');
+      setTimeout(function(){ knopf.classList.remove('bereit'); },600);
+    }
+  }
+
+  /* Weiterdruecken ohne Auswahl sagt, was fehlt, statt nichts zu tun. */
+  function fehlt(n){
+    var st=schrittEl(n); if(!st) return;
+    var warn=st.querySelector('.qwarn'); if(warn) warn.hidden=false;
+    var liste=st.querySelector('.qopts');
+    if(liste){ liste.classList.remove('fehlt'); void liste.offsetWidth; liste.classList.add('fehlt'); }
+  }
+
   form.addEventListener('click',function(e){
     var opt=e.target.closest('.qopt');
-    if(opt){
-      var f=+opt.dataset.frage;
-      texte[f]=opt.dataset.wert; codes[f]=opt.dataset.code; kurze[f]=opt.dataset.kurz||opt.dataset.wert;
-      if(felder[f]) felder[f].value=opt.dataset.wert;
-      var geschwister=opt.parentNode.querySelectorAll('.qopt');
-      [].forEach.call(geschwister,function(g){ g.classList.remove('aktiv'); });
-      opt.classList.add('aktiv');
-      setTimeout(function(){ zeige(Math.min(4,f+1),true); },160);
+    if(opt){ waehle(opt); return; }
+    var weiter=e.target.closest('.qnext');
+    if(weiter){
+      var ziel=+weiter.dataset.weiter;
+      if(!texte[ziel-1]){ fehlt(ziel-1); return; }
+      zeige(Math.min(4,ziel),true);
       return;
     }
     var zur=e.target.closest('.qzur');
@@ -933,8 +1119,8 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   };
   var VORHABEN={
     'rein-recht':'Wenn baulich nichts verändert wird, ist die Aufteilung in aller Regel keine genehmigungs&shy;pflichtige Maßnahme. Zu klären bleibt, ob die Einheiten so genehmigt sind, wie sie heute genutzt werden. Genau das prüfen wir mit.',
-    'umbau':'Sobald sich die Zahl der Wohnungen ändert oder Räume dafür umgebaut werden, kommt neben die Aufteilung in aller Regel ein Bauantrag. Beide Ebenen laufen getrennt, sollten aber zusammen gedacht werden, sonst passt am Ende das Grundbuch nicht zur Genehmigung.',
-    'nutzung':'Dachgeschoss, Keller oder Gewerbe zu Wohnraum ist eine Nutzungsänderung und damit in aller Regel genehmigungs&shy;pflichtig. Dabei geht es um Rettungswege, Brandschutz, Schallschutz und die Anforderungen an Aufenthaltsräume. Das gehört vor die Teilungserklärung, nicht danach.',
+    'umbau':'Sobald sich die Zahl der Wohnungen ändert oder Räume dafür umgebaut werden, kommt neben die Aufteilung in aller Regel ein eigenes bauaufsichtliches Verfahren dazu: je nach Lage des Grundstücks ein Bauantrag oder die Genehmigungs&shy;freistellung. Beide Ebenen laufen getrennt, sollten aber zusammen gedacht werden, sonst passt am Ende das Grundbuch nicht zur Genehmigung.',
+    'nutzung':'Dachgeschoss, Keller oder Gewerbe zu Wohnraum ist eine Nutzungsänderung, und die läuft nur in engen Ausnahmen ganz ohne Verfahren. Im Saarland ist die Nutzungsänderung von Dachgeschossen zu Wohnzwecken seit der LBO-Novelle 2025 genehmigungs&shy;freigestellt: kein Bauantrag, aber Bauvorlagen bei der Gemeinde und eine Wartefrist. Bei Keller und Gewerbe entscheidet der Einzelfall zwischen Freistellung und Bauantrag. Inhaltlich geht es immer um dasselbe: Rettungswege, Brandschutz, Schallschutz und die Anforderungen an Aufenthaltsräume. Das gehört vor die Teilungserklärung, nicht danach.',
     'offen':'Solange der Zuschnitt noch offen ist, klären wir zuerst die Möglichkeiten: was der Bestand hergibt, was das Baurecht zulässt und welche Aufteilung wirtschaftlich sinnvoll ist. Erst danach entsteht die erste Zeichnung.'
   };
   var EMPFEHLUNG={
@@ -944,7 +1130,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        niemand einen Ortstermin daraus liest. */
     'check':'<b class="qe-h">Unser Vorschlag:</b>Als erster Schritt der Teilbarkeits-Check. Wir sehen die Bauakte ein, prüfen, ob der genehmigte Zustand zum tatsächlichen passt, und sagen Ihnen schriftlich, was der Aufteilung im Weg steht. Zeigt sich nichts Grundsätzliches, gehen wir direkt in die Planung.',
     'komplett':'<b class="qe-h">Unser Vorschlag:</b>Die Aufteilung im Komplettpaket. Wir nehmen den Bestand auf, erstellen den Aufteilungsplan mit Flächen und Anteilen und begleiten Sie bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft mit; wird ein Bauantrag nötig, stimmen wir ihn vorher mit Ihnen ab.',
-    'umbau':'<b class="qe-h">Unser Vorschlag:</b>Aufteilung und Bauantrag zusammen, auf Grundlage Ihrer vorhandenen Pläne. Wir planen den neuen Zuschnitt, bereiten den Bauantrag vor und erstellen parallel die Aufteilungspläne für die Abgeschlossen&shy;heits&shy;bescheinigung. Ein Aufmaß ist dafür nicht nötig.',
+    'umbau':'<b class="qe-h">Unser Vorschlag:</b>Aufteilung und Genehmigungsschritt zusammen, auf Grundlage Ihrer vorhandenen Pläne. Wir planen den neuen Zuschnitt, bereiten den Bauantrag oder die Freistellung vor und erstellen parallel die Aufteilungspläne für die Abgeschlossen&shy;heits&shy;bescheinigung. Ein Aufmaß ist dafür nicht nötig.',
     'direkt':'<b class="qe-h">Unser Vorschlag:</b>Die Aufteilungspläne direkt aus Ihren Unterlagen, ohne Aufmaß. Wir zeichnen den Aufteilungsplan, berechnen die Flächen und beantragen die Abgeschlossen&shy;heits&shy;bescheinigung. Damit entfällt der aufwendigste Schritt, und Sie können früher zum Notar.'
   };
 
@@ -1005,7 +1191,48 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        traegt die Einschaetzung ihre eigene Ueberschrift, und zwei
        Ueberschriften uebereinander waeren eine zu viel. */
     var h3=document.querySelector('.ccard h3'); if(h3) h3.style.display='none';
+    /* Das Dankfenster liegt ueber der Seite und wird mit einem Druck
+       geschlossen. Damit die Einschaetzung danach nicht irgendwo hinter
+       dem Fenster steht, rollt der Kasten schon jetzt in den Blick. */
+    setTimeout(inSicht,400);
   });
+
+  /* Fester Streifen am unteren Rand, nur auf dem Handy. Er kommt, sobald
+     der Fragenkasten aus dem Blick ist, und bleibt weg, solange das
+     Datenschutz-Banner unten steht oder die Anfrage schon draussen ist. */
+  (function(){
+    var leiste=document.getElementById('mcta');
+    var karte=document.getElementById('check');
+    if(!leiste||!karte) return;
+    var fertig=false, warteRaf=0;
+    function bannerOffen(){
+      var b=document.getElementById('jmr-consent');
+      if(!b) return false;
+      try{ return getComputedStyle(b).display!=='none'; }catch(e){ return false; }
+    }
+    function pruefe(){
+      warteRaf=0;
+      var handy=window.matchMedia && window.matchMedia('(max-width:700px)').matches;
+      var r=karte.getBoundingClientRect();
+      var imBlick=(r.bottom>96 && r.top<window.innerHeight-70);
+      var zeigen=handy && !fertig && !imBlick && !bannerOffen() &&
+                 (window.pageYOffset||document.documentElement.scrollTop||0)>200;
+      leiste.classList.toggle('da',zeigen);
+      leiste.setAttribute('aria-hidden',zeigen?'false':'true');
+      /* Der WhatsApp-Knopf rueckt ueber die Leiste und tritt hinter dem
+         Datenschutz-Banner ganz zurueck. */
+      document.body.classList.toggle('leiste-an',zeigen);
+      var wa=document.getElementById('wa');
+      if(wa) wa.classList.toggle('weg',bannerOffen());
+    }
+    function anstossen(){ if(!warteRaf) warteRaf=requestAnimationFrame(pruefe); }
+    addEventListener('scroll',anstossen,{passive:true});
+    addEventListener('resize',anstossen,{passive:true});
+    /* Nach einem Klick auf das Datenschutz-Banner neu urteilen. */
+    document.addEventListener('click',function(){ setTimeout(pruefe,80); },true);
+    document.addEventListener('jmr:gesendet',function(){ fertig=true; pruefe(); });
+    pruefe();
+  })();
 
   zeige(1);
   hoeheAngleichen();
