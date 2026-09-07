@@ -53,7 +53,7 @@ html{scroll-behavior:smooth}
 }
 body{font-family:var(--sans);color:var(--ink-text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 h1,h2,h3{font-family:var(--disp);font-weight:600;letter-spacing:-.03em;line-height:1.06;color:var(--white)}
-h1{font-size:clamp(2.4rem,4.4vw,3.7rem);letter-spacing:-.04em;line-height:1.05}
+h1{font-size:clamp(2.6rem,4.8vw,4rem);letter-spacing:-.04em;line-height:1.04}
 h2{font-size:clamp(1.9rem,3.8vw,3rem);letter-spacing:-.03em;line-height:1.07}
 h3{font-size:clamp(1.18rem,1.9vw,1.5rem);font-weight:600}
 a{color:inherit;text-decoration:none}
@@ -194,7 +194,13 @@ body.leiste-an .wa{bottom:calc(78px + env(safe-area-inset-bottom,0px))}
    die beiden Wege nennen, die auch ohne Skript funktionieren. */
 .qnoscript{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;font-size:.92rem;line-height:1.55;color:var(--ink-text)}
 .qnoscript a{color:var(--accent-d);font-weight:600}
-.qfrage{font-family:var(--disp);font-weight:600;font-size:1.06rem;letter-spacing:-.02em;color:var(--white);margin-bottom:.9rem;line-height:1.3}
+/* DIE LAUFENDE FRAGE
+   Sie steht oben im Kasten, wo vorher die Kapsel "4 Fragen · 1 Minute"
+   stand, und wechselt mit jedem Schritt. Ohne Rahmen und ohne Feld: Die
+   Kaestchen vor den Antworten sagen von selbst, dass ausgewaehlt wird,
+   und ein Kasten im Kasten hat nur Hoehe gekostet. */
+.qaktuell{font-family:var(--disp);font-weight:600;font-size:1.28rem;letter-spacing:-.025em;color:var(--white);line-height:1.24;margin:.15rem 0 1.1rem}
+.qaktuell:focus{outline:none}
 .qopts{display:flex;flex-direction:column;gap:.55rem}
 .qopt{display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;cursor:pointer;font-family:var(--sans);transition:border-color .2s,box-shadow .2s,transform .2s}
 .qopt:hover{border-color:rgba(225,98,61,.55);transform:translateY(-1px);box-shadow:0 12px 26px -18px rgba(11,28,43,.5)}
@@ -207,15 +213,6 @@ body.leiste-an .wa{bottom:calc(78px + env(safe-area-inset-bottom,0px))}
 .qzur{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .75rem;background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);padding:.3rem .6rem .3rem .4rem;border-radius:8px;transition:.18s}
 .qzur:hover{color:var(--accent-d);background:rgba(11,28,43,.06)}
 .qzur .zp{font-size:1.1em;line-height:1}
-/* FRAGENKOPF
-   Die Frage steht in einem eigenen weissen Feld mit Terracotta-Kante,
-   damit sie sich vom Rest des Kastens abhebt. Ziffernmarke und die Zeile
-   "Eine Antwort auswaehlen" sind wieder entfallen: Der Fortschritt steht
-   schon in der Zeile "Schritt x von 4", und die Kaestchen vor den
-   Antworten sagen von selbst, dass hier ausgewaehlt wird. */
-.qhead{background:#fff;border:1px solid rgba(225,98,61,.32);border-left:4px solid var(--accent);border-radius:12px;padding:.95rem 1.05rem;margin-bottom:.85rem}
-.qhead .qfrage{display:block;margin:0;font-size:1.16rem;line-height:1.28}
-.qhead .qfrage:focus{outline:none}
 /* AUSWAHLKAESTCHEN
    Der Pfeil rechts hat gemeint: Antippen springt weiter. Weitergeschaltet
    wird jetzt unten von Hand, deshalb steht links ein Kaestchen, das bei
@@ -395,7 +392,7 @@ body.leiste-an .wa{bottom:calc(78px + env(safe-area-inset-bottom,0px))}
 .footer .spot{position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(75,163,214,.16),transparent 62%);opacity:0;transition:opacity .5s}
 .footer:hover .spot{opacity:1}
 /* UMBRUCH LANGER KOMPOSITA */
-h1,h2,h3,.stitle,.qfrage{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+h1,h2,h3,.stitle,.qaktuell{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 h1,h2,h3{text-wrap:balance}
 p,li,summary{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 p{text-wrap:pretty}
@@ -452,7 +449,6 @@ p{text-wrap:pretty}
    Text wie moeglich, der Fragenkasten beginnt fast am oberen Rand,
    und direkt darunter folgt das Gesicht zum Angebot.
    =================================================================== */
-.qmini{display:none}
 .ltel-m{display:none}
 
 @media(max-width:700px){
@@ -460,10 +456,13 @@ p{text-wrap:pretty}
         Ueberschrift, kein Einleitungssatz, kleinere Zeile. Ueberschrift
         und Kicker stehen mittig, und die Ueberschrift ist als Frage
         formuliert, damit sie den Leser direkt anspricht. */
-  .lhero{padding:78px 0 2rem}
+  /* Unten mehr Luft, damit der dunkle Grund auf dem Handy ein Stueck
+     unter dem Fragenkasten weiterlaeuft und der Kasten nicht auf der
+     Kante zum naechsten Abschnitt sitzt. */
+  .lhero{padding:78px 0 4rem}
   .lhero .hero-lead{display:none}
   .lcol-text{text-align:center}
-  .lhero h1{font-size:clamp(1.85rem,7.2vw,2.25rem);margin-top:.6rem}
+  .lhero h1{font-size:clamp(2.1rem,8.4vw,2.7rem);margin-top:.55rem}
   .lhero .kicker{font-size:.64rem;letter-spacing:.18em;justify-content:center}
   .lhero .kicker::before{display:none}
   /* Enger als vorher: Frage, Antworten und der Weiter-Knopf sollen auf dem
@@ -474,13 +473,11 @@ p{text-wrap:pretty}
   /* 2  Im Kasten steht oben, worum es geht, darunter als Kapsel der
         Umfang. Beides in einer Zeile wurde auf 360 px zu gedraengt. */
   .ccard{padding:1.35rem 1.15rem}
-  .ccard h3{font-size:1.16rem;text-align:center}
-  .qmini{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem;
-         width:max-content;max-width:100%;margin:.45rem auto .85rem;
-         font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;
-         text-transform:uppercase;font-weight:700;color:var(--accent-d);
-         background:rgba(225,98,61,.1);border:1px solid rgba(225,98,61,.28);
-         border-radius:999px;padding:.42rem .85rem}
+  /* Die Ueberschrift im Kasten hiess auf dem Handy "Kostenloser
+     Kurz-Check". Genau das steht jetzt als Zeile ueber der grossen
+     Ueberschrift, also faellt sie hier weg. Am Rechner heisst sie
+     "Ihre Ersteinschaetzung" und bleibt stehen. */
+  .ccard h3{display:none}
 
   /* 3  Antwortfelder: ohne Beschreibungstext, dafuer groessere Tippflaeche
         und ein weicher Schein im Terracotta-Ton. So passen alle vier
@@ -492,14 +489,11 @@ p{text-wrap:pretty}
   .qopt:active{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.14)}
   .qopt.aktiv{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.16),0 10px 22px -16px rgba(190,74,42,.75)}
   .qopts{gap:.45rem}
-  .qfrage{font-size:1.02rem;margin-bottom:.8rem}
+  .qaktuell{font-size:1.2rem;margin:0 0 .85rem}
   .qbar{margin-bottom:.8rem}
   .ccard{padding-top:1.2rem}
 
-  /* 3b Fragenkopf und Weiter-Knopf auf dem Handy: die Frage steht in einem
-        eigenen Feld, der Weiter-Knopf darunter ueber die volle Breite. */
-  .qhead{padding:.8rem .9rem;margin-bottom:.7rem}
-  .qhead .qfrage{font-size:1.08rem}
+  /* 3b Weiter-Knopf auf dem Handy ueber die volle Breite. */
   .qzur{margin-bottom:.6rem;font-size:.82rem}
   .qnav{margin-top:.8rem}
   .qnext{padding:.98rem 1.2rem;font-size:1rem}
@@ -555,7 +549,6 @@ p{text-wrap:pretty}
   .qsum,.qsum-lab{display:none}
   /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
   .qchip{white-space:nowrap}
-  .qstep[data-step="4"] .qfrage{text-align:center}
   /* Der Erklaersatz unter "Fast geschafft" entfaellt: Was nach dem
      Absenden passiert, steht darunter in der Haekchenzeile. */
   .qhinweis{display:none}
@@ -588,7 +581,7 @@ p{text-wrap:pretty}
   <div class="container">
     <div class="lgrid">
       <div class="lcol-text fade">
-        <span class="kicker">Aufteilung in Wohnungs- und Teileigentum</span>
+        <span class="kicker">Kostenloser Kurz-Check</span>
         <h1><span class="d-only-i">Ihr Haus in einzelne Einheiten aufteilen.</span><span class="m-only-i">Sie möchten Ihr Haus in einzelne Einheiten aufteilen?</span></h1>
         <p class="hero-lead">Wir erstellen die Aufteilungspläne, begleiten die Abgeschlossen&shy;heits&shy;bescheinigung und prüfen, was baurechtlich dazugehört.</p>
       </div>
@@ -613,7 +606,7 @@ p{text-wrap:pretty}
         <div class="ccard" id="check">
           <h3><span class="d-only-i">Ihre Ersteinschätzung</span><span class="m-only-i">Kostenloser Kurz-Check</span></h3>
           <p class="ds d-only">Vier kurze Fragen zu Ihrem Objekt. Danach sagen wir Ihnen, worauf es in Ihrem Fall ankommt. Kostenlos und unverbindlich.</p>
-          <p class="qmini">4 Fragen · 1 Minute · unverbindlich</p>
+          <p class="qaktuell" id="qaktuell" tabindex="-1"></p>
 
           <noscript>
             <p class="qnoscript">Für die Fragen braucht dieser Kasten JavaScript. Rufen Sie uns gern direkt an: <a href="tel:+491789428464">0178 9428464</a> oder schreiben Sie an <a href="mailto:info@jmr-architektur.de">info@jmr-architektur.de</a>.</p>
@@ -632,11 +625,8 @@ p{text-wrap:pretty}
 
             <div class="qsteps" id="qsteps">
             <!-- Schritt 1 -->
-            <div class="qstep" data-step="1">
-              <div class="qhead">
-                <span class="qfrage" id="qf-1">Um welches Gebäude geht es?</span>
-              </div>
-              <div class="qopts" role="group" aria-labelledby="qf-1">
+            <div class="qstep" data-titel="Um welches Gebäude geht es?" data-step="1">
+              <div class="qopts" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Zweifamilienhaus, 2 Einheiten" data-kurz="Zweifamilienhaus" data-code="klein">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Zweifamilienhaus</span><span class="qo-s">Zwei Wohneinheiten im Haus, kleiner Umfang.</span></span>
                 </button>
@@ -657,12 +647,9 @@ p{text-wrap:pretty}
             </div>
 
             <!-- Schritt 2 -->
-            <div class="qstep" data-step="2" hidden>
+            <div class="qstep" data-titel="Welche Pläne liegen Ihnen vor?" data-step="2" hidden>
               <button class="qzur" type="button" data-zurueck="1"><span class="zp" aria-hidden="true">←</span> Zurück</button>
-              <div class="qhead">
-                <span class="qfrage" id="qf-2">Welche Pläne liegen Ihnen vor?</span>
-              </div>
-              <div class="qopts" role="group" aria-labelledby="qf-2">
+              <div class="qopts" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Pläne sind aktuell" data-kurz="Pläne aktuell" data-code="plan-gut">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Pläne sind aktuell</span><span class="qo-s">Sie bilden den heutigen Zustand ab.</span></span>
                 </button>
@@ -683,12 +670,9 @@ p{text-wrap:pretty}
             </div>
 
             <!-- Schritt 3 -->
-            <div class="qstep" data-step="3" hidden>
+            <div class="qstep" data-titel="Was ist mit den Einheiten geplant?" data-step="3" hidden>
               <button class="qzur" type="button" data-zurueck="2"><span class="zp" aria-hidden="true">←</span> Zurück</button>
-              <div class="qhead">
-                <span class="qfrage" id="qf-3">Was ist mit den Einheiten geplant?</span>
-              </div>
-              <div class="qopts" role="group" aria-labelledby="qf-3">
+              <div class="qopts" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Baulich bleibt alles wie es ist" data-kurz="Baulich unverändert" data-code="rein-recht">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Baulich bleibt alles, wie es ist</span><span class="qo-s">Die Einheiten bestehen bereits, es geht nur um die Aufteilung.</span></span>
                 </button>
@@ -709,11 +693,10 @@ p{text-wrap:pretty}
             </div>
 
             <!-- Schritt 4: Kontakt -->
-            <div class="qstep" data-step="4" hidden>
+            <div class="qstep" data-titel="Fast geschafft." data-step="4" hidden>
               <button class="qzur" type="button" data-zurueck="3"><span class="zp" aria-hidden="true">←</span> Zurück</button>
               <p class="qsum-lab">Ihre Auswahl</p>
               <div class="qsum" id="qsum"></div>
-              <p class="qfrage">Fast geschafft.</p>
               <p class="qhinweis">Ihre Ersteinschätzung sehen Sie direkt nach dem Absenden. Zusätzlich rufen wir Sie an, um Ihr Vorhaben persönlich und genauer zu besprechen.</p>
               <div class="fld-row">
                 <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" name="Vorname" type="text" placeholder="Vorname" autocomplete="given-name" required></div>
@@ -978,6 +961,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var fill=document.getElementById('qfill'), num=document.getElementById('qnum');
   var kasten=document.getElementById('qsteps');
   var sum=document.getElementById('qsum');
+  var aktuell=document.getElementById('qaktuell');
   var felder={1:document.getElementById('qa1'),2:document.getElementById('qa2'),3:document.getElementById('qa3')};
   var codes={}, texte={}, kurze={}, jetzt=1;
 
@@ -988,14 +972,16 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        also nichts, im letzten Schritt sind alle drei Fragen beantwortet. */
     if(fill) fill.style.width=Math.round((n-1)/3*100)+'%';
     if(num) num.textContent='Schritt '+n+' von 4';
+    /* Die Frage steht einmal oben im Kasten und wechselt mit dem Schritt.
+       Ihr Wortlaut haengt als data-titel am Schritt. */
+    var jetztEl=steps.filter(function(s){return +s.dataset.step===n;})[0];
+    if(aktuell&&jetztEl) aktuell.textContent=jetztEl.dataset.titel||'';
     if(n===4) bauSumme();
     /* Beim Weiterschalten wandert der Fokus auf die neue Frage. Sonst
        haengt er an einer Schaltflaeche, die es gerade nicht mehr gibt,
        und die Tastaturbedienung faengt wieder ganz oben an. */
     if(fokus){
-      var f=steps.filter(function(s){return +s.dataset.step===n;})[0];
-      var ziel=f&&f.querySelector('.qfrage');
-      if(ziel){ ziel.setAttribute('tabindex','-1'); ziel.focus({preventScroll:true}); }
+      if(aktuell){ aktuell.focus({preventScroll:true}); }
       /* Weitergeschaltet wird jetzt unten am Knopf. Auf dem Handy steht die
          neue Frage danach ausserhalb des Blickfelds, deshalb rollt der
          Kasten wieder unter die Kopfzeile. */
@@ -1186,7 +1172,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        beantwortet, hat sie sich erledigt: Der Hinweis auf den Rueckruf
        steht jetzt am Ende des Vorschlags. */
     var kopf=document.querySelector('.ccard .ds'); if(kopf) kopf.style.display='none';
-    var mini=document.querySelector('.qmini'); if(mini) mini.style.display='none';
+    if(aktuell) aktuell.style.display='none';
     /* Die Ueberschrift des Kastens kuendigt den Check an. Ist er erledigt,
        traegt die Einschaetzung ihre eigene Ueberschrift, und zwei
        Ueberschriften uebereinander waeren eine zu viel. */
