@@ -208,11 +208,19 @@ body.leiste-an .wa{bottom:calc(78px + env(safe-area-inset-bottom,0px))}
 .qopt.aktiv{border-color:var(--accent);box-shadow:0 0 0 3px rgba(225,98,61,.15)}
 .qopt .qo-t{display:block;font-weight:600;font-size:.95rem;color:var(--white);line-height:1.3}
 .qopt .qo-s{display:block;font-size:.83rem;color:var(--ink-soft);line-height:1.4;margin-top:.15rem}
-/* ZURUECK steht oben links im Kasten, vor der Frage. Unten haette er neben
-   dem Weiter-Knopf um Aufmerksamkeit konkurriert. */
-.qzur{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .75rem;background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);padding:.3rem .6rem .3rem .4rem;border-radius:8px;transition:.18s}
+/* ZURUECK steht oben rechts in der Zeile mit dem Fortschrittsbalken.
+   Vorher hatte er eine eigene Zeile unter dem Balken, und weil er im
+   ersten Schritt fehlt, ruckten die Antworten beim Weiterschalten um
+   seine Hoehe nach unten. Jetzt steht er ausserhalb der Schritte und
+   wird im ersten Schritt nur unsichtbar geschaltet, nicht entfernt:
+   Der Platz bleibt reserviert, es ruckt nichts. */
+.qzur{display:inline-flex;align-items:center;gap:.4rem;flex:none;margin:0;background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);padding:.3rem .55rem .3rem .4rem;border-radius:8px;transition:color .18s,background .18s}
 .qzur:hover{color:var(--accent-d);background:rgba(11,28,43,.06)}
 .qzur .zp{font-size:1.1em;line-height:1}
+.qzur.aus{visibility:hidden}
+/* Auf dem Handy bleibt der Zeigerzustand nach dem Tippen haengen. Dort
+   also kein Schwebe-Hintergrund. */
+@media(hover:none){.qzur:hover{color:var(--ink-soft);background:none}}
 /* AUSWAHLKAESTCHEN
    Der Pfeil rechts hat gemeint: Antippen springt weiter. Weitergeschaltet
    wird jetzt unten von Hand, deshalb steht links ein Kaestchen, das bei
@@ -494,7 +502,7 @@ p{text-wrap:pretty}
   .ccard{padding-top:1.2rem}
 
   /* 3b Weiter-Knopf auf dem Handy ueber die volle Breite. */
-  .qzur{margin-bottom:.6rem;font-size:.82rem}
+  .qzur{font-size:.82rem;padding-left:.3rem;padding-right:.35rem}
   .qnav{margin-top:.8rem}
   .qnext{padding:.98rem 1.2rem;font-size:1rem}
 
@@ -614,6 +622,7 @@ p{text-wrap:pretty}
           <div class="qbar">
             <span class="qnum" id="qnum">Schritt 1 von 4</span>
             <span class="qline" aria-hidden="true"><span class="qfill" id="qfill"></span></span>
+            <button class="qzur aus" type="button" id="qzurueck"><span class="zp" aria-hidden="true">←</span> Zurück</button>
           </div>
 
           <form id="kform" action="https://formspree.io/f/xrevynvy" method="POST">
@@ -648,7 +657,6 @@ p{text-wrap:pretty}
 
             <!-- Schritt 2 -->
             <div class="qstep" data-titel="Welche Pläne liegen Ihnen vor?" data-step="2" hidden>
-              <button class="qzur" type="button" data-zurueck="1"><span class="zp" aria-hidden="true">←</span> Zurück</button>
               <div class="qopts" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Pläne sind aktuell" data-kurz="Pläne aktuell" data-code="plan-gut">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Pläne sind aktuell</span><span class="qo-s">Sie bilden den heutigen Zustand ab.</span></span>
@@ -671,7 +679,6 @@ p{text-wrap:pretty}
 
             <!-- Schritt 3 -->
             <div class="qstep" data-titel="Was ist mit den Einheiten geplant?" data-step="3" hidden>
-              <button class="qzur" type="button" data-zurueck="2"><span class="zp" aria-hidden="true">←</span> Zurück</button>
               <div class="qopts" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Baulich bleibt alles wie es ist" data-kurz="Baulich unverändert" data-code="rein-recht">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Baulich bleibt alles, wie es ist</span><span class="qo-s">Die Einheiten bestehen bereits, es geht nur um die Aufteilung.</span></span>
@@ -694,7 +701,6 @@ p{text-wrap:pretty}
 
             <!-- Schritt 4: Kontakt -->
             <div class="qstep" data-titel="Fast geschafft." data-step="4" hidden>
-              <button class="qzur" type="button" data-zurueck="3"><span class="zp" aria-hidden="true">←</span> Zurück</button>
               <p class="qsum-lab">Ihre Auswahl</p>
               <div class="qsum" id="qsum"></div>
               <p class="qhinweis">Ihre Ersteinschätzung sehen Sie direkt nach dem Absenden. Zusätzlich rufen wir Sie an, um Ihr Vorhaben persönlich und genauer zu besprechen.</p>
@@ -962,6 +968,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var kasten=document.getElementById('qsteps');
   var sum=document.getElementById('qsum');
   var aktuell=document.getElementById('qaktuell');
+  var zurueck=document.getElementById('qzurueck');
   var felder={1:document.getElementById('qa1'),2:document.getElementById('qa2'),3:document.getElementById('qa3')};
   var codes={}, texte={}, kurze={}, jetzt=1;
 
@@ -976,6 +983,9 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        Ihr Wortlaut haengt als data-titel am Schritt. */
     var jetztEl=steps.filter(function(s){return +s.dataset.step===n;})[0];
     if(aktuell&&jetztEl) aktuell.textContent=jetztEl.dataset.titel||'';
+    /* Im ersten Schritt gibt es kein Zurueck. Der Knopf wird nur
+       unsichtbar, damit die Zeile ihre Breite behaelt. */
+    if(zurueck) zurueck.classList.toggle('aus',n<=1);
     if(n===4) bauSumme();
     /* Beim Weiterschalten wandert der Fokus auf die neue Frage. Sonst
        haengt er an einer Schaltflaeche, die es gerade nicht mehr gibt,
@@ -1009,16 +1019,16 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   function hoeheAngleichen(){
     if(!kasten) return;
     kasten.style.minHeight='';
-    /* Auf dem Handy steht der Kasten allein, es gibt also nichts daneben,
-       das durch eine wechselnde Hoehe verrutschen koennte. Dort schliesst
-       er direkt unter der letzten Antwort ab und waechst nur, wenn ab
-       Schritt zwei der Zurueck-Knopf dazukommt. Die feste Mindesthoehe
-       wuerde unter der ersten Frage nur Leerraum stehen lassen. */
-    if(window.matchMedia && window.matchMedia('(max-width:700px)').matches) return;
+    /* Auf dem Handy wird auch der Kontaktschritt mitgemessen: Die vier
+       Schritte liegen dort dicht beieinander, und mit ihm zusammen steht
+       der Kasten ueber den ganzen Weg still. Am Rechner bleibt er aussen
+       vor, das Formular ist dort deutlich hoeher und wuerde unter den
+       drei Fragen eine Bildschirmlaenge Leerraum lassen. */
+    var handy = !!(window.matchMedia && window.matchMedia('(max-width:700px)').matches);
     var merk=steps.map(function(s){ return s.hidden; });
     var max=0;
     steps.forEach(function(s){
-      if(+s.dataset.step===4) return;
+      if(!handy && +s.dataset.step===4) return;
       steps.forEach(function(a){ a.hidden = (a!==s); });
       max=Math.max(max,s.offsetHeight);
     });
@@ -1086,8 +1096,10 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
       zeige(Math.min(4,ziel),true);
       return;
     }
-    var zur=e.target.closest('.qzur');
-    if(zur){ zeige(+zur.dataset.zurueck,true); }
+  });
+
+  if(zurueck) zurueck.addEventListener('click',function(){
+    if(jetzt>1) zeige(jetzt-1,true);
   });
 
   /* --- Einschätzung aus den drei Antworten ---------------------------- */
