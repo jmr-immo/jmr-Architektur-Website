@@ -156,6 +156,21 @@
     if (statistics) { loadGA4(); loadClarity(); }
     if (marketing) { loadGoogleAds(); loadMetaPixel(); }
     else { stopMetaPixel(); }
+    /* Einzelne Seiten warten hierauf, um eigene Ereignisse nachzuholen,
+       die beim Laden noch nicht gemeldet werden durften. Das Ereignis
+       geht bei jeder Anwendung der Auswahl raus, auch bei Ablehnung;
+       ob tatsaechlich etwas gesendet wird, entscheidet jmrTrackMeta. */
+    try {
+      document.dispatchEvent(new CustomEvent('jmr:einwilligung', {
+        detail: { marketing: marketing, statistics: statistics }
+      }));
+    } catch (e) {
+      try {
+        var ev = document.createEvent('Event');
+        ev.initEvent('jmr:einwilligung', false, false);
+        document.dispatchEvent(ev);
+      } catch (e2) {}
+    }
   }
 
   // ===== Auswahl lesen/speichern =====
@@ -218,11 +233,25 @@
      Landingpage /haus-aufteilen/ meldet auf diesem Weg "CompleteRegistration".
      Geprueft wird in jedem Fall dasselbe: Einwilligung in "Marketing",
      Pixel aktiv, fbq vorhanden. */
+  /* Meta kennt eine feste Liste von Standardereignissen. Alles andere ist
+     ein eigenes Ereignis und muss mit "trackCustom" gemeldet werden, sonst
+     verwirft der Pixel-Helper es als unbekannt und es taucht im Werbekonto
+     nicht sauber auf. */
+  var META_STANDARD = ['AddPaymentInfo', 'AddToCart', 'AddToWishlist',
+    'CompleteRegistration', 'Contact', 'CustomizeProduct', 'Donate',
+    'FindLocation', 'InitiateCheckout', 'Lead', 'PageView', 'Purchase',
+    'Schedule', 'Search', 'StartTrial', 'SubmitApplication', 'Subscribe',
+    'ViewContent'];
+  /* Gibt zurueck, ob das Ereignis tatsaechlich rausgegangen ist. Seiten,
+     die ein Ereignis nachholen wollen, koennen sich daran orientieren. */
   window.jmrTrackMeta = function (ereignis) {
+    var name = ereignis || 'Lead';
     var st = readState();
     if (st && st.marketing && metaAktiv() && typeof window.fbq === 'function') {
-      window.fbq('track', ereignis || 'Lead');
+      window.fbq(META_STANDARD.indexOf(name) > -1 ? 'track' : 'trackCustom', name);
+      return true;
     }
+    return false;
   };
   window.jmrTrackLead = function () {
     window.jmrTrackMeta('Lead');

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-<script src="../js/jmr-consent.js" defer></script>
+<script src="../js/jmr-consent.js?v=2" defer></script>
 <script src="../js/jmr-faq.js" defer></script>
 <script src="../js/jmr-formular.js?v=6" defer></script>
 <link rel="icon" href="../favicon.ico" sizes="any">
@@ -976,6 +976,63 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
 </script>
 <script>
 /* ------------------------------------------------------------------
+   Ereignisse fuer das Werbekonto
+   ------------------------------------------------------------------
+   Alles laeuft ueber window.jmrTrackMeta aus js/jmr-consent.js. Damit
+   geht nichts raus, solange nicht in die Kategorie "Marketing"
+   eingewilligt wurde, und uebertragen wird ausschliesslich der Name des
+   Ereignisses, keine Eingaben und keine Telefonnummer.
+
+   ViewContent        Aufruf dieser Landingpage
+   Call               Druck auf eine Telefonnummer
+   Whatsapp           Druck auf einen WhatsApp-Knopf
+   Page2              erster Druck auf "Naechster Schritt"
+   Page3              zweiter Druck
+   InitiateCheckout   dritter Druck, also der Sprung zum Kontaktschritt
+   Lead               erfolgreich abgesendetes Formular. Das meldet
+                      bereits js/jmr-consent.js beim Ereignis
+                      "jmr:gesendet", hier wird es deshalb nicht noch
+                      einmal gemeldet: Zwei Meldungen je Anfrage wuerden
+                      die Zahlen im Werbekonto verdoppeln.
+   CompleteRegistration  ebenfalls beim Absenden, siehe weiter unten.
+   ------------------------------------------------------------------ */
+(function(){
+  function melde(name){
+    return (typeof window.jmrTrackMeta==='function') ? !!window.jmrTrackMeta(name) : false;
+  }
+  /* Die Trichterschritte zaehlen einmal je Seitenaufruf. Wer zurueck und
+     wieder vor geht, soll die Zahlen nicht aufblaehen. Gemerkt wird erst,
+     wenn die Meldung wirklich rausgegangen ist: Ohne Einwilligung bleibt
+     der Schritt offen und wird nachgeholt, sobald sie vorliegt. */
+  var schon={};
+  function einmal(name){
+    if(schon[name]) return true;
+    if(melde(name)){ schon[name]=true; return true; }
+    return false;
+  }
+  window.jmrLpEreignis=einmal;
+
+  /* ViewContent: beim Laden liegt die Einwilligung meist noch nicht vor,
+     denn js/jmr-consent.js wertet sie erst nach dem Seitenaufbau aus.
+     Der Versuch steht trotzdem hier, falls das Skript frueher dran war;
+     der Regelfall ist die Meldung "jmr:einwilligung" darunter. */
+  einmal('ViewContent');
+  document.addEventListener('jmr:einwilligung',function(){ einmal('ViewContent'); });
+
+  /* Telefon und WhatsApp: ein Zuhoerer fuer die ganze Seite, damit auch
+     Verweise erfasst werden, die erst spaeter dazukommen. In der
+     Erfassungsphase, weil der Druck die Seite verlaesst. Ohne Sperre:
+     Jeder Anrufversuch ist ein eigenes Signal. */
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a'):null;
+    if(!a) return;
+    var ziel=a.getAttribute('href')||'';
+    if(ziel.indexOf('tel:')===0){ melde('Call'); return; }
+    if(ziel.indexOf('wa.me')>-1||ziel.indexOf('api.whatsapp.com')>-1){ melde('Whatsapp'); }
+  },true);
+})();
+
+/* ------------------------------------------------------------------
    Quiz im Formularkasten
    ------------------------------------------------------------------
    Vier Schritte in einem einzigen <form>. Die drei Antworten landen in
@@ -995,6 +1052,8 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var zurueck=document.getElementById('qzurueck');
   var felder={1:document.getElementById('qa1'),2:document.getElementById('qa2'),3:document.getElementById('qa3')};
   var codes={}, texte={}, kurze={}, jetzt=1;
+  /* Benannt nach dem Schritt, auf dem der Druck landet. */
+  var TRICHTER={2:'Page2',3:'Page3',4:'InitiateCheckout'};
 
   function zeige(n,fokus){
     jetzt=n;
@@ -1120,6 +1179,12 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(weiter){
       var ziel=+weiter.dataset.weiter;
       if(!texte[ziel-1]){ fehlt(ziel-1); return; }
+      /* Trichterschritt melden, benannt nach dem Schritt, auf dem man
+         landet. Erst nach der Pruefung oben, damit ein Druck ohne
+         Auswahl nicht mitgezaehlt wird. */
+      if(TRICHTER[ziel] && typeof window.jmrLpEreignis==='function'){
+        window.jmrLpEreignis(TRICHTER[ziel]);
+      }
       zeige(Math.min(4,ziel),true);
       return;
     }
