@@ -304,7 +304,10 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 @keyframes qauf{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 /* Die Ueberschrift traegt die Optik des frueheren Kennzeichens darueber:
    Terrakotta, Grossbuchstaben, gesperrt. */
-.qerg h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent-d);margin:0 0 .8rem;line-height:1.4}
+/* Die Ueberschrift der Einschaetzung war eine kleine gesperrte Kapsel in
+   Terracotta und ging neben dem Text unter. Jetzt steht sie gross und
+   fett auf derselben Achse wie zuvor die Frage. */
+.qerg h4{font-family:var(--disp);font-size:1.5rem;letter-spacing:-.025em;text-transform:none;font-weight:700;color:var(--white);margin:.1rem 0 .9rem;line-height:1.2;text-align:center}
 /* Die Kapsel "Anfrage gesendet" setzt js/jmr-formular.js in die Ueberschrift
    des Kastens. Sie steht rechtsbuendig in der Flucht des Kastens, waehrend
    die Ueberschrift links bleibt. Der Selektor ist bewusst eine Stufe genauer
@@ -590,6 +593,7 @@ p{text-wrap:pretty}
         die Ueberschrift daueber sagt nichts, was der Kopf des Kastens
         nicht schon sagt. Die gruene Kapsel entfaellt aus demselben
         Grund: Das Dankfenster hat die Bestaetigung bereits gegeben. */
+  .qerg h4{font-size:1.34rem;margin-bottom:.8rem}
   .qerg .qe-p{font-size:.95rem}
 }
 </style>
@@ -752,7 +756,7 @@ p{text-wrap:pretty}
 
           <!-- Einschätzung, erscheint nach dem Absenden -->
           <div class="qerg" id="qerg" role="status" aria-live="polite">
-            <h4 id="qerg-t">Ihre geplante Aufteilung</h4>
+            <h4 id="qerg-t">Ihr Ergebnis:</h4>
             <div id="qerg-b"></div>
             <p class="qe-note">Grobe Orientierung anhand Ihrer Angaben, keine verbindliche Aussage und keine Rechtsberatung. Was in Ihrem Fall gilt, klären wir anhand der Unterlagen und mit der zuständigen Bauaufsicht.</p>
           </div>
@@ -1218,7 +1222,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        Alternative dazu: fachlich dasselbe, aber der Kunde sieht einen Weg
        statt einer Weggabelung. "Bauakte einsehen" statt "abgleichen", damit
        niemand einen Ortstermin daraus liest. */
-    'check':'<b class="qe-h">Unser Vorschlag:</b>Als erster Schritt der Teilbarkeits-Check. Wir sehen die Bauakte ein, prüfen, ob der genehmigte Zustand zum tatsächlichen passt, und sagen Ihnen schriftlich, was der Aufteilung im Weg steht. Zeigt sich nichts Grundsätzliches, gehen wir direkt in die Planung.',
+    'check':'<b class="qe-h">Unser Vorschlag:</b>Als erster Schritt der Teilbarkeits-Check. Wir sehen die Bauakte ein, prüfen, ob der genehmigte Zustand zum tatsächlichen passt und sagen Ihnen, was der Aufteilung noch im Weg steht. Wenn es keine baurechtlichen Problemstellen gibt, übernehmen wir gerne für Sie die Aufteilung und kümmern uns um alles weitere.',
     'komplett':'<b class="qe-h">Unser Vorschlag:</b>Die Aufteilung im Komplettpaket. Wir nehmen den Bestand auf, erstellen den Aufteilungsplan mit Flächen und Anteilen und begleiten Sie bis zur Abgeschlossen&shy;heits&shy;bescheinigung. Die baurechtliche Prüfung läuft mit; wird ein Bauantrag nötig, stimmen wir ihn vorher mit Ihnen ab.',
     'umbau':'<b class="qe-h">Unser Vorschlag:</b>Aufteilung und Genehmigungsschritt zusammen, auf Grundlage Ihrer vorhandenen Pläne. Wir planen den neuen Zuschnitt, bereiten den Bauantrag oder die Freistellung vor und erstellen parallel die Aufteilungspläne für die Abgeschlossen&shy;heits&shy;bescheinigung. Ein Aufmaß ist dafür nicht nötig.',
     'direkt':'<b class="qe-h">Unser Vorschlag:</b>Die Aufteilungspläne direkt aus Ihren Unterlagen, ohne Aufmaß. Wir zeichnen den Aufteilungsplan, berechnen die Flächen und beantragen die Abgeschlossen&shy;heits&shy;bescheinigung. Damit entfällt der aufwendigste Schritt, und Sie können früher zum Notar.'
