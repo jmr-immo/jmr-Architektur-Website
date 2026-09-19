@@ -343,9 +343,11 @@
           kapsel();
         }
       } else {
+        if (window.turnstile) turnstile.reset();
         melden('err', FEHLER);
       }
     } catch (err) {
+      if (window.turnstile) turnstile.reset();
       melden('err', FEHLER);
     }
     knopfLaeuft(false);

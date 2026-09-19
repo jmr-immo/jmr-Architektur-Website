@@ -597,6 +597,7 @@ p{text-wrap:pretty}
   .qerg .qe-p{font-size:.95rem}
 }
 </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <div class="prog"><div class="prog-b" id="pb"></div></div>
@@ -741,7 +742,8 @@ p{text-wrap:pretty}
                 <div class="fld"><label for="kf-plz">PLZ des Objekts</label><input id="kf-plz" name="PLZ" type="text" placeholder="PLZ Objekt" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" title="Bitte fünf Ziffern eingeben" required></div>
               </div>
               <div class="fld"><label for="kf-mail">E-Mail <span class="opt">optional</span></label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail (optional)" autocomplete="email"></div>
-              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" style="margin:12px 0"></div>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
               <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Ersteinschätzung anzeigen <span class="ar">→</span></button>
               <div class="qvor">
                 <span>Wir rufen Sie an, um persönlich zu sprechen</span>
