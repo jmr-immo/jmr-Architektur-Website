@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-<script src="js/jmr-consent.js?v=2" defer></script>
+<script src="js/jmr-consent.js?v=3" defer></script>
 <script src="js/jmr-faq.js" defer></script>
 <script src="js/jmr-laufband.js" defer></script>
 <script src="js/jmr-formular.js?v=6" defer></script>
@@ -88,6 +88,10 @@ section{padding:var(--pad) 0;position:relative}
 .nlinks a:not(.btn):hover{color:var(--white)}
 .nlinks .btn{margin-left:.6rem;padding:.6rem 1.3rem;font-size:.85rem}
 @media(max-width:1000px){.nlinks a:not(.btn){display:none}}
+/* Ratgeber bleibt auch mobil im Menü sichtbar */
+@media(max-width:1000px){.nlinks a.nl-r{display:inline-block}}
+@media(max-width:520px){.nlinks a.nl-r{padding:.45rem .55rem}.nlinks .btn{margin-left:.25rem;padding:.55rem .95rem}}
+@media(max-width:400px){.brand .nm{display:none}}
 /* HERO (kinetic) */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 90px;overflow:hidden}
 #planbg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
@@ -802,6 +806,7 @@ main:focus{outline:none}
     <a href="#ebenen">So arbeiten wir</a>
     <a href="#leistung">Ergebnis</a>
     <a href="#pakete">Pakete</a>
+    <a href="ratgeber/index.html" class="nl-r">Ratgeber</a>
     <a href="#kontakt" class="btn btn-accent">Erstgespräch</a>
   </div>
 </nav>
@@ -1146,6 +1151,7 @@ main:focus{outline:none}
           <a href="#ebenen">So arbeiten wir</a>
           <a href="#pakete">Pakete</a>
           <a href="#kontakt">Erstgespräch</a>
+          <a href="ratgeber/index.html">Ratgeber</a>
         </div>
       </div>
     </div>

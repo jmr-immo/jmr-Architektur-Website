@@ -22,6 +22,14 @@
 (function () {
   'use strict';
 
+  /* Link zur Datenschutzerklaerung relativ zu diesem Skript (js/ liegt im
+     Wurzelordner). So stimmt er auch auf Seiten in Unterordnern wie
+     ratgeber/ oder haus-aufteilen/. */
+  var DS_URL = (function () {
+    try { return new URL('../datenschutz.html', document.currentScript.src).href; }
+    catch (e) { return 'datenschutz.html'; }
+  })();
+
   // ===== Konfiguration =====
   var CONFIG = {
     storageKey: 'jmr-arch-consent-v1',
@@ -270,7 +278,7 @@
       '<div class="jmrc-bar">' +
         '<div class="jmrc-bar-text">' +
           '<span class="jmrc-lead">Datenschutz-Einstellungen</span>' +
-          '<p class="jmrc-text">Wir verwenden Cookies und ähnliche Technologien. Einige sind für den Betrieb der Website nötig, andere nutzen wir nur mit Ihrer Einwilligung, etwa um die Wirksamkeit unserer Werbung zu messen. Mehr dazu in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>' +
+          '<p class="jmrc-text">Wir verwenden Cookies und ähnliche Technologien. Einige sind für den Betrieb der Website nötig, andere nutzen wir nur mit Ihrer Einwilligung, etwa um die Wirksamkeit unserer Werbung zu messen. Mehr dazu in der <a href="' + DS_URL + '" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>' +
         '</div>' +
         '<div class="jmrc-actions">' +
           '<button type="button" id="jmrc-settings" class="jmrc-link">Einstellungen anpassen</button>' +
@@ -318,7 +326,7 @@
     ov.innerHTML =
       '<div class="jmrc-modal">' +
         '<div class="jmrc-title">Datenschutz-Einstellungen</div>' +
-        '<p class="jmrc-text">Entscheiden Sie, welche Kategorien Sie zulassen möchten. Sie können Ihre Auswahl jederzeit ändern. Details in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>' +
+        '<p class="jmrc-text">Entscheiden Sie, welche Kategorien Sie zulassen möchten. Sie können Ihre Auswahl jederzeit ändern. Details in der <a href="' + DS_URL + '" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>' +
         '<div class="jmrc-cats">' + catRowsHtml() + '</div>' +
         '<div class="jmrc-btns jmrc-btns-modal">' +
           '<button type="button" id="jmrc-m-deny" class="jmrc-btn jmrc-ghost">Nur notwendige</button>' +
