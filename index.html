@@ -155,9 +155,9 @@ section{padding:var(--pad) 0;position:relative}
 /* Ratgeber bleibt auch mobil im Menü sichtbar */
 @media(max-width:960px){.nlinks a.nl-r{display:inline-block}}
 @media(max-width:520px){.nlinks a.nl-r{padding:.45rem .55rem}.nlinks .btn{margin-left:.25rem;padding:.55rem .95rem}}
-/* Mobiles Menü: „Ratgeber“ als Terracotta-Kästchen, mehr Abstand zum Knopf (Max, 28.10.2026) */
-@media(max-width:960px){.nlinks a.nl-r{background:#E1623D;color:#fff;font-weight:600;padding:.5rem .9rem;border-radius:8px;box-shadow:none}.nlinks a.nl-r:hover{color:#fff;background:#BE4A2A}.nlinks .btn{margin-left:.7rem}}
-@media(max-width:520px){.nlinks a.nl-r{padding:.5rem .7rem}.nlinks .btn{margin-left:.6rem}}
+/* Mobiles Menü: „Ratgeber“ mit Terracotta-Rahmen (nicht ausgewählt), mehr Abstand zum Knopf (Max, 28.10.2026) */
+@media(max-width:960px){.nlinks a.nl-r{background:transparent;color:#BE4A2A;border:1.5px solid #E1623D;font-weight:600;padding:.5rem .9rem;border-radius:8px;box-shadow:none}.nlinks a.nl-r:hover{color:#fff;background:#E1623D}.nlinks .btn{margin-left:1rem}}
+@media(max-width:520px){.nlinks a.nl-r{padding:.5rem .7rem}.nlinks .btn{margin-left:.8rem}}
 @media(max-width:400px){.brand .nm{display:none}}
 
 /* HERO */
@@ -606,7 +606,7 @@ h1,h2,h3{overflow-wrap:break-word}
 .rg-karte:hover .rg-bild img{transform:scale(1.04)}
 .rg-karte h3{font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.25;letter-spacing:-.02em;padding:1rem 1.2rem 1.2rem;color:var(--text)}
 .rg-alle{margin-top:1.8rem}
-@media(max-width:900px){.rg-grid{grid-template-columns:1fr;gap:.7rem}.rg-karte{flex-direction:row;align-items:center;border-radius:12px}.rg-bild{flex:0 0 104px;width:104px;aspect-ratio:1/1;align-self:stretch}.rg-karte h3{font-size:1rem;padding:.85rem 1rem}}
+@media(max-width:900px){.rg-grid{grid-template-columns:1fr;gap:.7rem}.rg-karte{flex-direction:row;align-items:center;border-radius:12px}.rg-bild{flex:0 0 104px;width:104px;aspect-ratio:1/1;align-self:stretch}.rg-karte h3{font-size:1rem;padding:.85rem 1rem;text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto}}
 /* Sprunglink zum Inhalt: nur bei Tastatur-Fokus sichtbar */
 .skip-link{position:absolute;left:1rem;top:-120px;z-index:300;padding:.75rem 1.2rem;background:var(--steel);color:#fff;border-radius:var(--r);font-weight:600;text-decoration:none}
 .skip-link:focus{top:1rem;outline:2px solid #fff;outline-offset:2px}
