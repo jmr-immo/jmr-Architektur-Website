@@ -11,7 +11,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-<title>Architekturbüro Zweibrücken · Bauantrag, Umnutzung, Anbau</title>
+<title>Architekt für Saarbrücken &amp; Zweibrücken · Bauantrag, Umnutzung, Anbau</title>
 <meta name="description" content="Architekturbüro Maximilian Rudorf in Zweibrücken: Bauantrag, Umnutzung, Aufteilung und Anbau. Freischaffender Architekt mit Bauvorlageberechtigung.">
 <link rel="canonical" href="https://jmr-architektur.de/">
 <link rel="preload" as="image" href="img/header-foto.jpg" imagesrcset="img/header-foto-600.webp 600w, img/header-foto-900.webp 900w, img/header-foto.jpg 1400w" imagesizes="(max-width: 540px) calc(100vw - 42px), (max-width: 920px) 500px, 410px" fetchpriority="high">
@@ -59,6 +59,7 @@
   "areaServed": [
     {"@type": "State", "name": "Rheinland-Pfalz"},
     {"@type": "State", "name": "Saarland"},
+    {"@type": "City", "name": "Saarbrücken"},
     {"@type": "City", "name": "Zweibrücken"}
   ],
   "founder": {"@type": "Person", "name": "Maximilian Rudorf", "jobTitle": "Architekt (bauvorlageberechtigt)"},
@@ -588,10 +589,15 @@ h1,h2,h3{overflow-wrap:break-word}
   .acc-liste .acc-inner p{padding:0 1rem 1rem}
 }
 /* <<< mobil-feinschliff */
+/* Sprunglink zum Inhalt: nur bei Tastatur-Fokus sichtbar */
+.skip-link{position:absolute;left:1rem;top:-120px;z-index:300;padding:.75rem 1.2rem;background:var(--steel);color:#fff;border-radius:var(--r);font-weight:600;text-decoration:none}
+.skip-link:focus{top:1rem;outline:2px solid #fff;outline-offset:2px}
+main:focus{outline:none}
 </style>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
 
 <div class="prog"><div class="prog-b" id="pb"></div></div>
 
@@ -607,6 +613,7 @@ h1,h2,h3{overflow-wrap:break-word}
 </nav>
 
 <!-- HERO -->
+<main id="main" tabindex="-1">
 <header class="hero" id="top">
   <canvas id="planbg" aria-hidden="true"></canvas>
   <div class="container">
@@ -639,7 +646,7 @@ h1,h2,h3{overflow-wrap:break-word}
 <div class="trust">
   <div class="container">
     <div class="trust-row">
-      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span><span class="tt"><strong>Saarland &amp; Pfalz</strong><small>überwiegend hier aktiv</small></span></div>
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span><span class="tt"><strong>Raum Saarbrücken</strong><small>Büro in Zweibrücken</small></span></div>
       <span class="tfact-div" aria-hidden="true"></span>
       <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M15.5 20c0-2 .9-3.3 2.5-3.7"/></svg></span><span class="tt"><strong>Starkes Netzwerk</strong><small>aus Fachplanern</small></span></div>
       <span class="tfact-div" aria-hidden="true"></span>
@@ -821,7 +828,7 @@ h1,h2,h3{overflow-wrap:break-word}
       <details class="faq fade" name="faq"><summary>Was kostet eine Planung oder ein Bauantrag?<span class="fq-i">+</span></summary><div class="fq-a">Die Kosten richten sich nach Umfang und Komplexität des Vorhabens. Ein kleiner Umbau ist anders zu bewerten als eine Umnutzung mit mehreren Einheiten. Im Erstgespräch sehen wir uns Ihr Projekt an und nennen Ihnen die nächsten Schritte und eine Einschätzung.</div></details>
       <details class="faq fade" name="faq"><summary>Können Sie auch die Umsetzung begleiten?<span class="fq-i">+</span></summary><div class="fq-a">Ja. Auf Wunsch übernehmen wir auch die Bauleitung und begleiten die Umsetzung auf der Baustelle. Sie buchen aber nur die Schritte, die Sie wirklich brauchen.</div></details>
       <details class="faq fade" name="faq"><summary>Was ist, wenn keine aktuellen Pläne vorhanden sind?<span class="fq-i">+</span></summary><div class="fq-a">Das ist im Bestand oft so und kein Problem. Je nach Aktualität vorhandener Pläne nehmen wir den Bestand vor Ort auf. Bevor alles neu aufgemessen wird, prüfen wir per Akteneinsicht im Bauarchiv, ob brauchbare Unterlagen vorliegen. Daraus erstellen wir die Planunterlagen.</div></details>
-      <details class="faq fade" name="faq"><summary>In welchem Gebiet sind Sie tätig?<span class="fq-i">+</span></summary><div class="fq-a">Wir sind vor allem im Saarland und der angrenzenden Region tätig. Sprechen Sie uns bei Vorhaben außerhalb gern an.</div></details>
+      <details class="faq fade" name="faq"><summary>In welchem Gebiet sind Sie tätig?<span class="fq-i">+</span></summary><div class="fq-a">Unser Büro sitzt in Zweibrücken, die meisten Projekte betreuen wir im Raum Saarbrücken und im übrigen Saarland, dazu in der Südwestpfalz. Sprechen Sie uns bei Vorhaben außerhalb gern an.</div></details>
     </div>
   </div>
 </section>
@@ -848,17 +855,17 @@ h1,h2,h3{overflow-wrap:break-word}
           <form id="kform" action="https://jmr-lead-tool.pages.dev/api/lead?sec=architektur" method="POST">
             <input type="hidden" name="_subject" value="Neue Anfrage über jmr-architektur.de">
             <div class="fld-row">
-              <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" name="Vorname" type="text" placeholder="Vorname" required></div>
-              <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" required></div>
+              <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" aria-label="Vorname" name="Vorname" type="text" placeholder="Vorname" required></div>
+              <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" aria-label="Nachname" name="Nachname" type="text" placeholder="Nachname" required></div>
             </div>
             <div class="fld-row">
-              <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Telefonnummer"></div>
-              <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" required></div>
+              <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" aria-label="Telefon" name="Telefon" type="tel" placeholder="Telefonnummer"></div>
+              <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" aria-label="E-Mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" required></div>
             </div>
             <div class="fld"><label for="thema">Thema</label><select id="thema" name="Thema"><option value="" disabled selected>Bitte auswählen …</option><option>Umnutzung (Nutzungsänderung)</option><option>Aufteilung</option><option>Aufmaß &amp; Pläne</option><option>Anbau &amp; Erweiterung</option><option>Etwas anderes</option></select></div>
-            <div class="fld"><label for="kf-msg">Ihre Nachricht an uns</label><textarea id="kf-msg" name="Nachricht" rows="3" placeholder="Worum geht es konkret? (optional)"></textarea></div>
+            <div class="fld"><label for="kf-msg">Ihre Nachricht an uns</label><textarea id="kf-msg" aria-label="Ihre Nachricht an uns" name="Nachricht" rows="3" placeholder="Worum geht es konkret? (optional)"></textarea></div>
             <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" style="margin:12px 0"></div>
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-label="Bitte leer lassen" aria-hidden="true">
             <button type="submit" class="btn btn-steel" id="kfSubmit" style="width:100%;justify-content:center">Anfrage senden <span class="ar">→</span></button>
             <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel-d)">Datenschutzerklärung</a>.</p>
             <div id="kfStatus" class="kf-status" style="display:none"></div>
@@ -870,6 +877,7 @@ h1,h2,h3{overflow-wrap:break-word}
   </div>
 </section>
 
+</main>
 <!-- FOOTER -->
 <footer class="footer">
   <div class="spot"></div>

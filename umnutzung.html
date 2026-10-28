@@ -604,10 +604,15 @@ h1,h2,h3{overflow-wrap:break-word}
   .acc-liste .acc-inner p{padding:0 1rem 1rem}
 }
 /* <<< mobil-feinschliff */
+/* Sprunglink zum Inhalt: nur bei Tastatur-Fokus sichtbar */
+.skip-link{position:absolute;left:1rem;top:-120px;z-index:300;padding:.75rem 1.2rem;background:var(--steel);color:#fff;border-radius:var(--r);font-weight:600;text-decoration:none}
+.skip-link:focus{top:1rem;outline:2px solid #fff;outline-offset:2px}
+main:focus{outline:none}
 </style>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
 <div class="prog"><div class="prog-b" id="pb"></div></div>
 <nav class="nav" id="nav">
   <a href="index.html" class="brand"><img class="mk" src="img/logo-blue-s.png" alt="jmr Architektur" width="115" height="90"><span class="nm">jmr Architektur</span></a>
@@ -621,6 +626,7 @@ h1,h2,h3{overflow-wrap:break-word}
 </nav>
 
 <!-- HERO kinetic -->
+<main id="main" tabindex="-1">
 <header class="hero" id="top">
   <canvas id="planbg" aria-hidden="true"></canvas>
   <div class="container">
@@ -892,17 +898,17 @@ h1,h2,h3{overflow-wrap:break-word}
               <button class="pw-x" id="pakWahlWeg" type="button" aria-label="Auswahl entfernen">&times;</button>
             </div>
             <div class="fld-row">
-              <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" name="Vorname" type="text" placeholder="Vorname" required></div>
-              <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" name="Nachname" type="text" placeholder="Nachname" required></div>
+              <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" aria-label="Vorname" name="Vorname" type="text" placeholder="Vorname" required></div>
+              <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" aria-label="Nachname" name="Nachname" type="text" placeholder="Nachname" required></div>
             </div>
             <div class="fld-row">
-              <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" name="Telefon" type="tel" placeholder="Telefonnummer"></div>
-              <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" required></div>
+              <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" aria-label="Telefon" name="Telefon" type="tel" placeholder="Telefonnummer"></div>
+              <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" aria-label="E-Mail" name="E-Mail" type="email" placeholder="E-Mail-Adresse" required></div>
             </div>
             <div class="fld"><label for="thema">Thema</label><select id="thema" name="Thema"><option>Umnutzung (Nutzungsänderung)</option><option>Aufteilung</option><option>Aufmaß &amp; Pläne</option><option>Anbau &amp; Erweiterung</option><option>Etwas anderes</option></select></div>
-            <div class="fld"><label for="kf-msg">Ihre Nachricht an uns</label><textarea id="kf-msg" name="Nachricht" rows="3" placeholder="Worum geht es konkret? (optional)"></textarea></div>
+            <div class="fld"><label for="kf-msg">Ihre Nachricht an uns</label><textarea id="kf-msg" aria-label="Ihre Nachricht an uns" name="Nachricht" rows="3" placeholder="Worum geht es konkret? (optional)"></textarea></div>
             <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" style="margin:12px 0"></div>
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-label="Bitte leer lassen" aria-hidden="true">
             <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Anfrage senden <span class="ar">→</span></button>
             <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel)">Datenschutzerklärung</a>.</p>
             <div id="kfStatus" class="kf-status" style="display:none"></div>
@@ -914,6 +920,7 @@ h1,h2,h3{overflow-wrap:break-word}
   </div>
 </section>
 
+</main>
 <footer class="footer">
   <div class="spot"></div>
   <div class="container">
