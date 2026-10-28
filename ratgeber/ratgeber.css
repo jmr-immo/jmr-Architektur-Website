@@ -56,6 +56,9 @@ a{color:inherit;text-decoration:none}
 .btn-steel:hover{background:#16527c;box-shadow:0 16px 36px -12px rgba(31,111,165,.75)}
 @media(max-width:960px){.nlinks a:not(.btn){display:none}.nlinks a.nl-r{display:inline-block}}
 @media(max-width:520px){.nlinks a.nl-r{padding:.45rem .55rem}.nlinks .btn{margin-left:.25rem;padding:.55rem .95rem}}
+/* Mobiles Menü: „Ratgeber“ als Terracotta-Kästchen, mehr Abstand zum Knopf (Max, 28.10.2026) */
+@media(max-width:960px){.nlinks a.nl-r{background:#E1623D;color:#fff;font-weight:600;padding:.5rem .9rem;border-radius:8px;box-shadow:none}.nlinks a.nl-r:hover{color:#fff;background:#BE4A2A}.nlinks .btn{margin-left:.7rem}}
+@media(max-width:520px){.nlinks a.nl-r{padding:.5rem .7rem}.nlinks .btn{margin-left:.6rem}}
 @media(max-width:400px){.brand .nm{display:none}}
 
 /* Lesefortschritt */
@@ -81,6 +84,7 @@ a{color:inherit;text-decoration:none}
 .filter button:focus-visible,.karte:focus-visible,.btn:focus-visible{outline:2px solid var(--accent-d);outline-offset:3px}
 .liste{padding:clamp(1.4rem,3vh,2.2rem) 0 clamp(4rem,9vh,6rem)}
 .r-hinweis{margin:2.4rem auto 0;font-size:.82rem;color:var(--ink-soft);max-width:70ch;text-align:center}
+@media(max-width:640px){.r-head .container{text-align:left}.r-head h1{margin-left:0;margin-right:0}.r-lead{margin-left:0}.r-hinweis{margin-left:0;text-align:left}}   /* mobil linksbündig wie die Startseite */
 
 /* Karten (Übersicht und „Weiterlesen“): nur Foto und Überschrift */
 .raster{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,360px));justify-content:center;gap:clamp(.9rem,1.6vw,1.3rem)}
