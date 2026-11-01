@@ -115,7 +115,7 @@ section{padding:var(--pad) 0;position:relative}
   .lcol-text{order:1}.lcol-form{order:2}.lcol-arg{order:3}
 }
 .lhero h1{margin:1.4rem 0 0;color:#F7F5F0}
-.lhero .kicker{color:#F0A58C}
+.lhero .kicker{color:#F0A58C;letter-spacing:.14em;text-wrap:balance}
 .lhero .kicker::before{background:#F0A58C}
 .lhero .hero-lead{font-size:clamp(1.05rem,1.6vw,1.24rem);color:#c3d2dd;max-width:560px;margin:1.3rem 0 0}
 .lpoints{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.7rem}
@@ -213,6 +213,11 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 .qsteps{transition:min-height .3s cubic-bezier(.16,1,.3,1)}
 @media(prefers-reduced-motion:reduce){.qsteps{transition:none}}
 .qstep[hidden]{display:none}
+/* Die drei Fragen sind gleich hoch (hoeheAngleichen). "Naechster Schritt" sitzt unten,
+   damit der Knopf bei jeder Frage an derselben Stelle steht, auch bei nur zwei Antworten. */
+.qsteps{display:flex;flex-direction:column}
+.qstep:not([hidden]){flex:1 0 auto;display:flex;flex-direction:column}
+.qstep .qnav{margin-top:auto;padding-top:1.05rem}
 /* Ohne JavaScript bleibt der Fragenteil stehen, wo er ist. Dann zumindest
    die beiden Wege nennen, die auch ohne Skript funktionieren. */
 .qnoscript{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;font-size:.92rem;line-height:1.55;color:var(--ink-text)}
@@ -224,6 +229,8 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
    und ein Kasten im Kasten hat nur Hoehe gekostet. */
 .qaktuell{font-family:var(--disp);font-weight:600;font-size:1.28rem;letter-spacing:-.025em;color:var(--white);line-height:1.24;margin:.15rem 0 1.1rem;text-align:center}
 .qaktuell:focus{outline:none}
+/* Fragezeile gleich hoch fuer alle drei Fragen (min-height per Skript), Text mittig */
+.qaktuell{display:flex;align-items:center;justify-content:center}
 /* Rechner: Frage groesser, Zurueck klein oben links im Kasten statt in eigener Zeile */
 @media(min-width:701px){
   .ccard{padding-top:2.5rem}
@@ -272,6 +279,7 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 .qnext[aria-disabled="true"]:hover{transform:none;background:var(--accent-d)}
 .qnext.bereit{animation:qpuls .45s cubic-bezier(.16,1,.3,1) 1}
 @keyframes qpuls{0%{transform:scale(.98)}55%{transform:scale(1.022)}100%{transform:scale(1)}}
+.qzur-m{display:none}
 .qwarn{margin:.6rem 0 0;font-size:.84rem;font-weight:600;color:var(--accent-d);text-align:center}
 .qopts.fehlt{animation:qwackel .38s ease-in-out 1}
 @keyframes qwackel{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
@@ -506,7 +514,7 @@ p{text-wrap:pretty}
   .lhero .hero-lead{display:none}
   .lcol-text{text-align:center}
   .lhero h1{font-size:clamp(2.1rem,8.4vw,2.7rem);margin-top:.55rem}
-  .lhero .kicker{font-size:.64rem;letter-spacing:.18em;justify-content:center}
+  .lhero .kicker{font-size:.64rem;letter-spacing:.14em;justify-content:center;white-space:normal;text-wrap:balance;text-align:center}
   .lhero .kicker::before{display:none}
   /* Enger als vorher: Frage, Antworten und der Weiter-Knopf sollen auf dem
      Handy zusammen auf einen Schirm passen. Wer den Knopf erst nach dem
@@ -526,6 +534,8 @@ p{text-wrap:pretty}
         und ein weicher Schein im Terracotta-Ton. So passen alle vier
         Antworten ohne Scrollen auf den Schirm. */
   .qopt .qo-s{display:none}
+  /* Ja/Nein: die kurze Erlaeuterung bleibt auch auf dem Handy stehen */
+  .qstep[data-step="2"] .qopt .qo-s{display:block}
   .qopt{padding:.85rem 1rem;border-color:rgba(225,98,61,.3);
         box-shadow:0 0 0 3px rgba(225,98,61,.06),0 10px 22px -16px rgba(190,74,42,.75)}
   .qopt .qo-t{font-size:.98rem}
@@ -535,7 +545,16 @@ p{text-wrap:pretty}
   .qaktuell{font-size:1.34rem;margin:0 0 .85rem}
   /* Kontaktschritt: Zurueck links in der Zeile von "Fast geschafft." */
   /* Erste Frage: ohne Zurueck auch keine leere Zeile ueber den Antworten */
-  .ccard.s1 .qbar{display:none}
+  /* Zurueck steht auf dem Handy nicht unter der Frage, sonst springt der
+     Kasten ab Frage 2 um eine Zeile. Fragen 2 und 3: kleiner Knopf links
+     neben "Naechster Schritt". Kontaktschritt: in der Zeile von "Fast geschafft." */
+  .ccard:not(.s4) .qbar{display:none}
+  .qstep .qnav{flex-direction:row;flex-wrap:wrap;gap:.5rem}
+  .qstep .qnav .qnext{flex:1 1 0;min-width:0;width:auto;justify-content:center;padding-left:1rem;padding-right:1rem}
+  .qstep .qnav .qwarn{flex-basis:100%}
+  .qzur-m{display:inline-flex;align-items:center;justify-content:center;flex:none;width:3.3rem;
+          background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink-soft);
+          font-size:1.15rem;cursor:pointer;padding:0}
   .ccard.s4 .qbar{position:absolute;top:1.2rem;left:.75rem;margin:0;min-height:1.49rem;z-index:2}
   .qbar{margin-bottom:.8rem}
   .ccard{padding-top:1.2rem}
@@ -811,7 +830,7 @@ main:focus{outline:none}
   <div class="container">
     <div class="lgrid">
       <div class="lcol-text fade">
-        <span class="kicker">KfW 266 · Gewerbe zu Wohnen</span>
+        <span class="kicker">Förderung zur Umnutzung von Gewerbe zu Wohnraum</span>
         <h1 class="gh1"><span class="z">Bis zu</span><span class="z"><span class="mark">30.000&nbsp;€ Zuschuss<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 15C60 9.5 120 8 175 9.5C225 10.8 262 11.5 295 7.5"/></svg></span></span><span class="z">pro Wohnung.</span></h1>
         <p class="hero-lead">Beantworten Sie drei kurze Fragen zu Ihrem Objekt. Wir melden uns bei Ihnen und planen mit Ihnen den Weg zur maximalen Förderung. <strong class="fett">Kostenlos und unverbindlich.</strong></p>
         <div class="frist" id="frist" role="note"><span class="fz"><b id="fristZahl">62</b><small id="fristWort">Tage</small></span><span class="ft"><b>Anträge nur noch bis 31.12.2026</b><span>und nur, solange Fördermittel da sind.</span></span></div>
@@ -839,13 +858,13 @@ main:focus{outline:none}
             <input type="hidden" name="_subject" value="Neue Anfrage über die Landingpage KfW 266 (gewerbe-zu-wohnen)">
             <input type="hidden" name="Thema" value="Umnutzung KfW 266 (Landingpage)">
             <input type="hidden" name="Fläche heute" id="qa1" value="">
-            <input type="hidden" name="Wohnungen" id="qa2" value="">
+            <input type="hidden" name="Beheizt" id="qa2" value="">
             <input type="hidden" name="Stand" id="qa3" value="">
             <input type="hidden" name="Quelle" id="kf-quelle" value="">
 
             <div class="qsteps" id="qsteps">
             <!-- Schritt 1 -->
-            <div class="qstep" data-titel="Was ist heute in der Fläche?" data-step="1">
+            <div class="qstep" data-titel="Welches Gewerbe bzw. welche Nutzung liegt bei Ihnen vor?" data-step="1">
               <div class="qopts" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Laden oder Verkaufsfläche" data-kurz="Laden" data-code="laden">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Laden oder Verkaufsfläche</span><span class="qo-s">Der klassische Fall im Wohn- und Geschäftshaus.</span></span>
@@ -856,8 +875,8 @@ main:focus{outline:none}
                 <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Gastronomie" data-kurz="Gastronomie" data-code="gastro">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Gastronomie</span><span class="qo-s">Gaststätte, Café oder Imbiss.</span></span>
                 </button>
-                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Lager, Garage oder Scheune ohne Heizung" data-kurz="Unbeheizt" data-code="kalt">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Lager, Garage oder Scheune</span><span class="qo-s">Flächen, die bisher nicht beheizt waren.</span></span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Lager, Garage oder Scheune" data-kurz="Lager oder Garage" data-code="lager">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Lager, Garage oder Scheune</span><span class="qo-s">Auch Werkstatt oder Halle.</span></span>
                 </button>
               </div>
               <div class="qnav">
@@ -867,22 +886,17 @@ main:focus{outline:none}
             </div>
 
             <!-- Schritt 2 -->
-            <div class="qstep" data-titel="Wie viele Wohnungen sollen entstehen?" data-step="2" hidden>
+            <div class="qstep" data-titel="Gibt es Heizkörper in diesem Geschoss?" data-step="2" hidden>
               <div class="qopts" role="group" aria-labelledby="qaktuell">
-                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Eine Wohnung" data-kurz="1 Wohnung" data-code="we1">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Eine Wohnung</span><span class="qo-s">Bis zu 30.000 € Zuschuss möglich.</span></span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Ja, die Fläche ist beheizt" data-kurz="Beheizt" data-code="heizung-ja">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Ja</span><span class="qo-s">Oder eine andere Heizung, z. B. Fußbodenheizung.</span></span>
                 </button>
-                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Zwei bis drei Wohnungen" data-kurz="2 bis 3 Wohnungen" data-code="we23">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Zwei bis drei Wohnungen</span><span class="qo-s">Bis zu 90.000 € Zuschuss möglich.</span></span>
-                </button>
-                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Vier oder mehr Wohnungen" data-kurz="4 oder mehr" data-code="we4">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Vier oder mehr Wohnungen</span><span class="qo-s">Bis zu 300.000 € insgesamt möglich.</span></span>
-                </button>
-                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Anzahl Wohnungen noch offen" data-kurz="Noch offen" data-code="weoffen">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Weiß ich noch nicht</span><span class="qo-s">Das klären wir gemeinsam.</span></span>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Nein, die Fläche ist nicht beheizt" data-kurz="Nicht beheizt" data-code="heizung-nein">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Nein</span><span class="qo-s">Die Fläche wird bisher nicht beheizt.</span></span>
                 </button>
               </div>
               <div class="qnav">
+                <button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button>
                 <button class="btn btn-accent qnext" type="button" data-weiter="3" aria-disabled="true">Nächster Schritt <span class="ar">→</span></button>
                 <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
               </div>
@@ -905,6 +919,7 @@ main:focus{outline:none}
                 </button>
               </div>
               <div class="qnav">
+                <button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button>
                 <button class="btn btn-accent qnext" type="button" data-weiter="4" aria-disabled="true">Nächster Schritt <span class="ar">→</span></button>
                 <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
               </div>
@@ -1136,7 +1151,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var aktuell=document.getElementById('qaktuell');
   var zurueck=document.getElementById('qzurueck');
   var felder={1:document.getElementById('qa1'),2:document.getElementById('qa2'),3:document.getElementById('qa3')};
-  var codes={}, texte={}, kurze={}, jetzt=1;
+  var codes={}, texte={}, kurze={}, jetzt=1, titelMin=0;
   /* Benannt nach dem Schritt, auf dem der Druck landet. */
   var TRICHTER={2:'Page2',3:'Page3',4:'InitiateCheckout'};
 
@@ -1151,6 +1166,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        Ihr Wortlaut haengt als data-titel am Schritt. */
     var jetztEl=steps.filter(function(s){return +s.dataset.step===n;})[0];
     if(aktuell&&jetztEl) aktuell.textContent=jetztEl.dataset.titel||'';
+    if(aktuell) aktuell.style.minHeight=(n<4&&titelMin)?titelMin+'px':'';
     /* Im ersten Schritt gibt es kein Zurueck. Der Knopf wird nur
        unsichtbar, damit die Zeile ihre Breite behaelt. */
     if(zurueck) zurueck.classList.toggle('aus',n<=1);
@@ -1207,6 +1223,19 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     });
     steps.forEach(function(s,i){ s.hidden=merk[i]; });
     if(max) kasten.style.minHeight=max+'px';
+    /* Auch die Fragezeile: die laengste der drei Fragen bestimmt ihre Hoehe,
+       sonst wird der Kasten bei kuerzeren Fragen kleiner. */
+    if(aktuell){
+      var alt=aktuell.textContent, hoch=0;
+      aktuell.style.minHeight='';
+      steps.forEach(function(st){
+        if(+st.dataset.step===4) return;
+        aktuell.textContent=st.dataset.titel||'';
+        hoch=Math.max(hoch,aktuell.offsetHeight);
+      });
+      aktuell.textContent=alt; titelMin=hoch;
+      aktuell.style.minHeight=(jetzt<4&&hoch)?hoch+'px':'';
+    }
   }
 
   /* Jede Pille traegt zwei Fassungen: die ausfuehrliche fuer den Rechner
@@ -1262,6 +1291,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   form.addEventListener('click',function(e){
     var opt=e.target.closest('.qopt');
     if(opt){ waehle(opt); return; }
+    if(e.target.closest('.qzur-m')){ if(jetzt>1) zeige(jetzt-1,true); return; }
     var weiter=e.target.closest('.qnext');
     if(weiter){
       var ziel=+weiter.dataset.weiter;
