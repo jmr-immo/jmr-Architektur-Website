@@ -631,7 +631,8 @@ main:focus{outline:none}
 
 /* Ueberschrift: drei Zeilen, Unterstrich wie mit dem Stift gezogen */
 .gh1 .z{display:block}
-.gh1 .z:last-child{margin-top:.22em}
+/* Gleicher Abstand zwischen allen drei Zeilen, genug Luft fuer die Unterstreichung */
+.gh1 .z+.z{margin-top:.22em}
 .gh1 .mark{position:relative;display:inline-block;white-space:nowrap}
 .gh1 .skizze{position:absolute;left:-1%;top:86%;width:102%;height:auto;overflow:visible;fill:none;stroke:#E1623D;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;transform:rotate(-.8deg);transform-origin:left center;pointer-events:none}
 /* Wie mit dem Stift skizziert: ein Zug nach rechts, kurze Wende, locker zurueck. Zeichnet sich beim Laden einmal. */
