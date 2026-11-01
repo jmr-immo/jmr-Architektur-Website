@@ -6,7 +6,8 @@
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 <script src="../js/jmr-consent.js?v=3" defer></script>
 <script src="../js/jmr-faq.js" defer></script>
-<script src="../js/jmr-formular.js?v=6" defer></script>
+<script>window.jmrDankImKasten=true;</script>
+<script src="../js/jmr-formular.js?v=7" defer></script>
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
@@ -329,6 +330,7 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
    Wortschatz in schmalen Spalten zu grosse Luecken. */
 .qerg .qe-p{font-size:.93rem;line-height:1.6;color:var(--ink-soft);text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .qerg .qe-p+.qe-p{margin-top:.7rem}
+.qerg .qe-p.c{text-align:center}
 .qerg .qe-p b{color:var(--white);font-weight:600}
 /* "Unser Vorschlag:" steht als eigene Zeile ueber dem Absatz. */
 .qerg .qe-h{display:block;margin-bottom:.15rem;color:var(--white);font-weight:600;text-align:left}
@@ -921,7 +923,7 @@ main:focus{outline:none}
               <div class="fld"><label for="kf-msg">Nachricht <span class="opt">optional</span></label><textarea id="kf-msg" aria-label="Nachricht optional" name="Nachricht" rows="2" placeholder="Nachricht, z. B. Ort des Objekts, Fläche oder Ihre Frage (optional)"></textarea></div>
               <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" style="margin:12px 0"></div>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-label="Bitte leer lassen" aria-hidden="true">
-              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Einschätzung anzeigen <span class="ar">→</span></button>
+              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Anfrage senden <span class="ar">→</span></button>
               <div class="qvor">
                 <span>Wir rufen Sie persönlich an</span>
                 <span>Werktags binnen 24 Stunden</span>
@@ -933,11 +935,10 @@ main:focus{outline:none}
             </div>
           </form>
 
-          <!-- Einschätzung, erscheint nach dem Absenden -->
+          <!-- Dank, erscheint nach dem Absenden -->
           <div class="qerg" id="qerg" role="status" aria-live="polite">
-            <h4 id="qerg-t">Ihre Einschätzung:</h4>
-            <div id="qerg-b"></div>
-            <p class="qe-note">Grobe Orientierung anhand Ihrer Angaben, keine verbindliche Förderzusage. Ob und in welcher Höhe gefördert wird, entscheidet die KfW. Maßgeblich sind ihre aktuellen Bedingungen.</p>
+            <h4 id="qerg-t">Vielen Dank.</h4>
+            <p class="qe-p c">Ihre Anfrage ist eingegangen. Wir melden uns zeitnah bei Ihnen, um Ihr Vorhaben persönlich zu besprechen.</p>
           </div>
         </div>
         <a class="gtel-m" href="tel:+491789428464">Lieber anrufen? <b>0178 9428464</b></a>
@@ -1122,8 +1123,8 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
    versteckten Feldern und gehen mit der Anfrage ans Lead-Tool, damit dort
    schon steht, worum es geht. Abgeschickt wird das Formular
    von js/jmr-formular.js, dort haengt auch das Dankfenster dran.
-   Nach dem erfolgreichen Absenden (Ereignis "jmr:gesendet") bauen wir
-   aus den Antworten die Einschätzung im Kasten.
+   Nach dem erfolgreichen Absenden (Ereignis "jmr:gesendet") steht der
+   Dank im Kasten, ein Dankfenster gibt es auf dieser Seite nicht.
    ------------------------------------------------------------------ */
 (function(){
   var form=document.getElementById('kform'); if(!form) return;
@@ -1279,47 +1280,6 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(jetzt>1) zeige(jetzt-1,true);
   });
 
-  /* --- Einschätzung aus den drei Antworten ---------------------------- */
-  var FLAECHE={
-    'laden':'Ein Laden ist der klassische Fall für KfW 266: eine beheizte Gewerbefläche, aus der Wohnraum werden soll. Wichtig ist, dass sie baurechtlich als Laden genehmigt ist und nicht als Wohnung.',
-    'buero':'Büro und Praxis kommen in Frage, wenn sie baurechtlich als solche genehmigt sind. Eine Praxis in Räumen, die als Wohnung genehmigt sind, zählt dagegen nicht.',
-    'gastro':'Eine Gaststätte ist eine beheizte Nichtwohnfläche und kommt damit grundsätzlich in Frage. Gerade hier lohnt der frühe Blick auf Schallschutz und Grundriss, damit gute Wohnungen entstehen.',
-    'kalt':'Unbeheizte Flächen wie Lager, Garage oder Scheune fördert KfW 266 leider nicht. Eine Umnutzung zu Wohnraum kann trotzdem sinnvoll sein, dann mit anderer Förderung für die energetische Seite.'
-  };
-  var MENGE={
-    'we1':'Bei einer neuen Wohnung sind bis zu 30.000&nbsp;€ Zuschuss möglich: 30 Prozent von höchstens 100.000&nbsp;€ förderfähigen Umbaukosten.',
-    'we23':'Bei zwei Wohnungen sind bis zu 60.000&nbsp;€ Zuschuss möglich, bei drei bis zu 90.000&nbsp;€. Je Wohnung sind das 30 Prozent von höchstens 100.000&nbsp;€ Umbaukosten.',
-    'we4':'Bei vier Wohnungen sind bis zu 120.000&nbsp;€ Zuschuss möglich. Insgesamt gibt es höchstens 300.000&nbsp;€, andere De-minimis-Beihilfen der letzten drei Jahre werden angerechnet. Ab 100.000&nbsp;€ Zuschuss müssen die Aufträge im Wettbewerb vergeben werden, möglichst mit drei Angeboten. Das planen wir von Anfang an mit ein.',
-    'weoffen':'Wie viele Wohnungen sinnvoll sind, hängt von Fläche, Fenstern und Rettungswegen ab. Je neuer Wohnung sind bis zu 30.000&nbsp;€ Zuschuss möglich.'
-  };
-  var STAND={
-    'anfang':'Ein guter Zeitpunkt: Planung und Beratung dürfen schon vor dem Antrag starten. Der Antrag muss bis 31.12.2026 bei der KfW sein, davor braucht es das Energiekonzept für das Effizienzhaus 85 EE.',
-    'planung':'Dann geht es jetzt um das Energiekonzept und die Bestätigung zum Antrag. Beides muss stehen, bevor der Antrag bis 31.12.2026 bei der KfW eingeht.',
-    'kauf':'Gut, dass Sie vor dem Kauf rechnen. Wir prüfen vorab, ob Wohnen an dem Standort zulässig ist und ob das Objekt die Bedingungen erfüllt. Dann kann der Zuschuss sauber in Ihre Kalkulation.',
-    'beauftragt':'<b>Achtung:</b> Als Vorhabenbeginn gilt schon der Vertrag mit dem Handwerker. Wurde er vor der Zusage der KfW ohne aufschiebende Bedingung geschlossen, ist das Vorhaben begonnen und eine Förderung nicht mehr möglich. Nachträglich lässt sich die Bedingung nicht aufnehmen. Schicken Sie uns den Vertrag, wir prüfen das.'
-  };
-  var EMPFEHLUNG={
-    'kfw':'<b class="qe-h">Unser Vorschlag:</b>Ein kurzes Telefonat, in dem wir Ihr Objekt einordnen. Danach erstellen wir Energiekonzept und Bestätigung zum Antrag, damit Ihr Antrag rechtzeitig vor dem 31.12.2026 bei der KfW ist. Die Nutzungsänderung planen wir parallel.',
-    'kalt':'<b class="qe-h">Unser Vorschlag:</b>Ein kurzes Telefonat, in dem wir klären, ob sich die Umnutzung lohnt und welche Förderung für Ihre Fläche passt.',
-    'beauftragt':'<b class="qe-h">Unser Vorschlag:</b>Ein kurzes Telefonat, in dem wir Ihre Verträge ansehen und klären, ob eine Förderung noch möglich ist. Die Nutzungsänderung planen wir in jedem Fall mit Ihnen.'
-  };
-
-  function einordnung(){
-    var box=document.getElementById('qerg'), body=document.getElementById('qerg-b');
-    if(!box||!body) return;
-    var teile=[];
-    if(FLAECHE[codes[1]]) teile.push(FLAECHE[codes[1]]);
-    /* Bei unbeheizten Flaechen gibt es keinen KfW-266-Zuschuss, also auch
-       keine Betraege und keinen Hinweis auf die Frist. */
-    var kalt=(codes[1]==='kalt');
-    if(!kalt && MENGE[codes[2]]) teile.push(MENGE[codes[2]]);
-    if(!kalt && STAND[codes[3]]) teile.push(STAND[codes[3]]);
-    var NACHSATZ=' Wir melden uns zeitnah bei Ihnen, um Ihr Vorhaben persönlich zu besprechen.';
-    teile.push(EMPFEHLUNG[kalt?'kalt':(codes[3]==='beauftragt'?'beauftragt':'kfw')] + NACHSATZ);
-    body.innerHTML=teile.map(function(t){return '<p class="qe-p">'+t+'</p>';}).join('');
-    box.classList.add('da');
-  }
-
   document.addEventListener('jmr:gesendet',function(){
     /* Eigenes Ereignis nur fuer diese Landingpage. js/jmr-consent.js meldet
        bei jeder Anfrage "Lead"; hier kommt "CompleteRegistration" dazu, damit
@@ -1327,7 +1287,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        URL-Regel als eigenes Ereignis auswerten lassen. Gefeuert wird nur bei
        Einwilligung in "Marketing", die Pruefung steckt in jmrTrackMeta. */
     if(typeof window.jmrTrackMeta==='function'){ window.jmrTrackMeta('CompleteRegistration'); }
-    einordnung();
+    var dank=document.getElementById('qerg'); if(dank) dank.classList.add('da');
     /* Das Formular ist beantwortet, die Fragen brauchen wir nicht mehr. */
     steps.forEach(function(s){ s.hidden=true; });
     var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';

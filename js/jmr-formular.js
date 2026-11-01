@@ -334,7 +334,10 @@
       if (r.ok) {
         f.reset();
         document.dispatchEvent(new Event('jmr:gesendet'));
-        if (danken()) {
+        if (window.jmrDankImKasten) {
+          /* Die Seite zeigt den Dank selbst im Formularkasten (Landingpage). */
+          if (st) { st.style.display = 'none'; st.textContent = ''; st.className = 'kf-status'; }
+        } else if (danken()) {
           /* Das Fenster hat den Streifen im Kasten abgeloest. */
           if (st) { st.style.display = 'none'; st.textContent = ''; st.className = 'kf-status'; }
         } else {
