@@ -762,12 +762,23 @@ main:focus{outline:none}
 .ghin svg{color:var(--steel-d);flex-shrink:0;margin-top:.12rem}
 /* Ziel des Zeitstrahls: "Zuschuss" gross, im Farbverlauf wie "einer Hand" auf der Startseite */
 .fziel{text-align:center;margin-top:.4rem}
-.fziel::before{content:"";display:block;width:2px;height:2.4rem;margin:0 auto .9rem;background:linear-gradient(var(--accent),rgba(225,98,61,0))}
-.fziel-w{display:inline-block;font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,7.5vw,5rem);line-height:1;letter-spacing:.05em;text-transform:uppercase;
+.fziel::before{content:"";display:block;width:2px;height:3.2rem;margin:0 auto .9rem;background:linear-gradient(var(--accent),rgba(225,98,61,0))}
+.fziel-w{position:relative;display:inline-block;font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,7.5vw,5rem);line-height:1.05;letter-spacing:.05em;text-transform:uppercase}
+/* Zuerst milchiges Glas: halbtransparentes Weiss mit feiner Kante und weichem Schatten */
+.fz-glas{display:block;background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(236,241,247,.7) 55%,rgba(255,255,255,.85) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  -webkit-text-stroke:1px rgba(11,28,43,.16);filter:drop-shadow(0 10px 24px rgba(11,28,43,.2)) drop-shadow(0 1px 0 rgba(255,255,255,.9))}
+/* Darueber die Farbe wie "einer Hand" auf der Startseite. Eine weiche Maske laeuft
+   von oben nach unten, sobald das Wort im Blick ist (Klasse "farbig" per Skript). */
+.fz-farbe{position:absolute;inset:0;
   background:linear-gradient(96deg,#1F6FA5 0%,#5BD0E0 30%,#E1623D 55%,#5BD0E0 78%,#1F6FA5 100%);background-size:220% auto;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:fzielflow 8s ease-in-out infinite}
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:fzielflow 8s ease-in-out infinite;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 60%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 60%,transparent 100%);
+  -webkit-mask-size:100% 250%;mask-size:100% 250%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:0 100%;mask-position:0 100%;transition:-webkit-mask-position 2.4s cubic-bezier(.45,0,.2,1),mask-position 2.4s cubic-bezier(.45,0,.2,1)}
+.fziel-w.farbig .fz-farbe{-webkit-mask-position:0 0;mask-position:0 0}
 @keyframes fzielflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@media(prefers-reduced-motion:reduce){.fziel-w{animation:none}}
+@media(prefers-reduced-motion:reduce){.fz-farbe{animation:none;transition:none;-webkit-mask-position:0 0;mask-position:0 0}}
 @media(max-width:700px){.fziel::before{display:none}.fziel{margin-top:1.4rem}}
 .gstand{font-size:.76rem;color:var(--ink-soft);text-align:center;margin-top:2rem;line-height:1.6}
 
@@ -997,11 +1008,11 @@ main:focus{outline:none}
     <div class="flow" id="flow">
       <div class="flow-rail"></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">01</span><span class="stitle">Erstgespräch</span></div><p>Wir schauen uns Ihr Objekt und Ihr Vorhaben individuell an und sagen Ihnen direkt, ob KfW 266 grundsätzlich passt. Kostenlos und unverbindlich.</p></div>
-      <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Maximale Förderung planen</span></div><p>Wir prüfen, ob Wohnen zulässig ist und planen Grundrisse und Energiekonzept so, dass Sie das Maximum an Förderung herausholen. Etwa wie viele Wohnungen sinnvoll in die Fläche passen und welche Förderung für die Sanierung zusätzlich möglich ist. Denn jede neue Wohnung bringt bis zu 30.000&nbsp;€.</p></div>
+      <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Maximale Förderung planen</span></div><p>Wir prüfen, ob Wohnen zulässig ist und planen Grundrisse und Energiekonzept so, dass Sie das Maximum an Förderung herausholen.</p></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">03</span><span class="stitle">Antrag bei der KfW</span></div><p>Wir stellen die Bestätigung zum Antrag aus, Sie reichen den Antrag bei der KfW ein. Handwerker beauftragen Sie erst nach der Zusage der KfW.</p></div>
       <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Bauantrag &amp; Umbau</span></div><p>Wir planen die Nutzungsänderung, stellen den Bauantrag und bestätigen am Ende als Architekten die Umbaukosten für den Verwendungsnachweis.</p></div>
     </div>
-    <div class="fziel fade" aria-label="Am Ende: der Zuschuss"><span class="fziel-w">Zuschuss</span></div>
+    <div class="fziel fade" aria-label="Am Ende: der Zuschuss"><span class="fziel-w" id="fzielW"><span class="fz-glas">Zuschuss</span><span class="fz-farbe" aria-hidden="true">Zuschuss</span></span></div>
     <p class="gstand fade">Stand Oktober 2026. Angaben ohne Gewähr, maßgeblich sind die Bedingungen der KfW zum Zuschuss 266 „Gewerbe zu Wohnen“.</p>
   </div>
 </section>
@@ -1062,6 +1073,12 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
  if(RM){draw(0);return;}
  function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;[...V,...H].forEach(l=>{l.wait-=dt;if(Math.abs(l.p-l.t)<0.004&&l.wait<=0){l.t=Math.max(0.06,Math.min(0.94,l.base+(Math.random()-0.5)*0.26));l.wait=1.5+Math.random()*3.5;}l.p+=(l.t-l.p)*Math.min(1,l.spd*dt*6);});draw(now);requestAnimationFrame(step);}
  requestAnimationFrame(step);})();
+
+/* ZUSCHUSS am Ende des Zeitstrahls: wird farbig, sobald es ganz zu sehen ist */
+(function(){const w=document.getElementById('fzielW');if(!w)return;
+ if(!('IntersectionObserver' in window)){w.classList.add('farbig');return;}
+ const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){w.classList.add('farbig');o.disconnect();}}),{threshold:1,rootMargin:'0px 0px -12% 0px'});
+ o.observe(w);})();
 
 /* Ablauf: Etappe in Bildschirmmitte fokussieren */
 (function(){const fl=document.getElementById('flow');if(!fl)return;const steps=[...fl.querySelectorAll('.fstep')];const rail=fl.querySelector('.flow-rail');if(!steps.length)return;
