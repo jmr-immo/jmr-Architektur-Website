@@ -761,25 +761,20 @@ main:focus{outline:none}
 .ghin{margin-top:1.3rem;display:flex;gap:.8rem;align-items:flex-start;background:rgba(46,134,199,.08);border:1px solid rgba(46,134,199,.25);border-radius:12px;padding:1rem 1.2rem;font-size:.93rem;color:var(--ink-text);line-height:1.55}
 .ghin svg{color:var(--steel-d);flex-shrink:0;margin-top:.12rem}
 /* Ziel des Zeitstrahls: "Zuschuss" gross, im Farbverlauf wie "einer Hand" auf der Startseite */
-.fziel{text-align:center;margin-top:.4rem}
-.fziel::before{content:"";display:block;width:2px;height:3.2rem;margin:0 auto .9rem;background:linear-gradient(var(--accent),rgba(225,98,61,0))}
-.fziel-w{position:relative;display:inline-block;font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,7.5vw,5rem);line-height:1.05;letter-spacing:.05em;text-transform:uppercase}
-/* Zuerst milchiges Glas: halbtransparentes Weiss mit feiner Kante und weichem Schatten */
-.fz-glas{display:block;background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(236,241,247,.7) 55%,rgba(255,255,255,.85) 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-  -webkit-text-stroke:1px rgba(11,28,43,.16);filter:drop-shadow(0 10px 24px rgba(11,28,43,.2)) drop-shadow(0 1px 0 rgba(255,255,255,.9))}
-/* Darueber die Farbe wie "einer Hand" auf der Startseite. Eine weiche Maske laeuft
-   von oben nach unten, sobald das Wort im Blick ist (Klasse "farbig" per Skript). */
-.fz-farbe{position:absolute;inset:0;
-  background:linear-gradient(96deg,#1F6FA5 0%,#5BD0E0 30%,#E1623D 55%,#5BD0E0 78%,#1F6FA5 100%);background-size:220% auto;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:fzielflow 8s ease-in-out infinite;
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 60%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 60%,transparent 100%);
-  -webkit-mask-size:100% 250%;mask-size:100% 250%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-position:0 100%;mask-position:0 100%;transition:-webkit-mask-position 2.4s cubic-bezier(.45,0,.2,1),mask-position 2.4s cubic-bezier(.45,0,.2,1)}
-.fziel-w.farbig .fz-farbe{-webkit-mask-position:0 0;mask-position:0 0}
-@keyframes fzielflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@media(prefers-reduced-motion:reduce){.fz-farbe{animation:none;transition:none;-webkit-mask-position:0 0;mask-position:0 0}}
-@media(max-width:700px){.fziel::before{display:none}.fziel{margin-top:1.4rem}}
+.fziel{position:relative;isolation:isolate;text-align:center;margin-top:2.2rem}
+.fziel::before{content:"";display:block;width:2px;height:4.6rem;margin:0 auto 1.6rem;background:linear-gradient(var(--accent),rgba(225,98,61,0))}
+/* ZUSCHUSS: erst Glas (Woelbung, Glanzlicht, halbtransparent), dann laeuft Farbe
+   wie eine Fluessigkeit mit Wellenkante von oben nach unten hinein. */
+.fz-svg{display:block;width:min(88vw,640px);height:auto;margin:0 auto;overflow:visible;
+  filter:drop-shadow(0 18px 30px rgba(11,28,43,.16)) drop-shadow(0 2px 3px rgba(11,28,43,.10))}
+.fz-t{font-family:var(--disp);font-weight:700;font-size:156px;letter-spacing:.04em}
+.fz-glas{stroke:rgba(11,28,43,.13);stroke-width:1.4px;paint-order:stroke}
+/* Weicher Schein hinter dem Wort, der mit der Farbe kommt */
+.fziel .fz-schein{position:absolute;left:50%;bottom:-.5rem;width:min(80vw,560px);height:120px;transform:translateX(-50%) scale(.85);
+  background:radial-gradient(closest-side,rgba(91,208,224,.30),rgba(225,98,61,.22) 55%,rgba(225,98,61,0));filter:blur(18px);opacity:0;
+  transition:opacity 2.4s ease .6s,transform 2.8s cubic-bezier(.5,0,.25,1);pointer-events:none;z-index:-1}
+.fziel.farbig .fz-schein{opacity:1;transform:translateX(-50%) scale(1)}
+@media(max-width:700px){.fziel::before{display:none}.fziel{margin-top:2.6rem}}
 .gstand{font-size:.76rem;color:var(--ink-soft);text-align:center;margin-top:2rem;line-height:1.6}
 
 /* Trust-Leiste unter dem Hero, Bauart wie auf der Startseite */
@@ -1012,7 +1007,33 @@ main:focus{outline:none}
       <div class="fstep left"><div class="fhead"><span class="sidx">03</span><span class="stitle">Antrag bei der KfW</span></div><p>Wir stellen die Bestätigung zum Antrag aus, Sie reichen den Antrag bei der KfW ein. Handwerker beauftragen Sie erst nach der Zusage der KfW.</p></div>
       <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Bauantrag &amp; Umbau</span></div><p>Wir planen die Nutzungsänderung, stellen den Bauantrag und bestätigen am Ende als Architekten die Umbaukosten für den Verwendungsnachweis.</p></div>
     </div>
-    <div class="fziel fade" aria-label="Am Ende: der Zuschuss"><span class="fziel-w" id="fzielW"><span class="fz-glas">Zuschuss</span><span class="fz-farbe" aria-hidden="true">Zuschuss</span></span></div>
+    <div class="fziel fade"><span class="fz-schein" aria-hidden="true"></span><svg class="fz-svg" id="fzielW" viewBox="0 0 1000 190" role="img" aria-label="Zuschuss">
+      <defs>
+        <linearGradient id="fzVerlauf" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0" spreadMethod="reflect">
+          <stop offset="0" stop-color="#1F6FA5"/><stop offset=".3" stop-color="#5BD0E0"/><stop offset=".55" stop-color="#E1623D"/><stop offset=".78" stop-color="#5BD0E0"/><stop offset="1" stop-color="#1F6FA5"/>
+          <animateTransform attributeName="gradientTransform" type="translate" values="0 0;-1000 0;0 0" dur="9s" repeatCount="indefinite"/>
+        </linearGradient>
+        <linearGradient id="fzGlasFuell" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".92"/><stop offset=".48" stop-color="#e9f0f6" stop-opacity=".55"/><stop offset=".52" stop-color="#dfe8f1" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity=".8"/>
+        </linearGradient>
+        <!-- Glas: weiche Woelbung mit Glanzlicht oben links, dazu ein feiner heller Rand -->
+        <filter id="fzGlas" x="-10%" y="-30%" width="120%" height="160%" color-interpolation-filters="sRGB">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="weich"/>
+          <feSpecularLighting in="weich" surfaceScale="7" specularConstant="1.25" specularExponent="26" lighting-color="#ffffff" result="glanz">
+            <feDistantLight azimuth="235" elevation="52"/>
+          </feSpecularLighting>
+          <feComposite in="glanz" in2="SourceAlpha" operator="in" result="glanzIn"/>
+          <feComposite in="SourceGraphic" in2="glanzIn" operator="arithmetic" k1="0" k2="1" k3=".9" k4="0"/>
+        </filter>
+        <clipPath id="fzFuellung">
+          <path id="fzWelle" transform="translate(0 -10)" d="M-1000,-600 H2000 V0 Q1950,-9 1900,0 Q1850,9 1800,0 Q1750,-9 1700,0 Q1650,9 1600,0 Q1550,-9 1500,0 Q1450,9 1400,0 Q1350,-9 1300,0 Q1250,9 1200,0 Q1150,-9 1100,0 Q1050,9 1000,0 Q950,-9 900,0 Q850,9 800,0 Q750,-9 700,0 Q650,9 600,0 Q550,-9 500,0 Q450,9 400,0 Q350,-9 300,0 Q250,9 200,0 Q150,-9 100,0 Q50,9 0,0 Q-50,-9 -100,0 Q-150,9 -200,0 Q-250,-9 -300,0 Q-350,9 -400,0 Q-450,-9 -500,0 Q-550,9 -600,0 Q-650,-9 -700,0 Q-750,9 -800,0 Q-850,-9 -900,0 Q-950,9 -1000,0 Z">
+            <animateTransform id="fzFuellAnim" attributeName="transform" type="translate" from="0 -10" to="0 215" dur="2.8s" begin="indefinite" fill="freeze" additive="sum" calcMode="spline" keyTimes="0;1" keySplines=".5 0 .25 1"/>
+          </path>
+        </clipPath>
+      </defs>
+      <text class="fz-t fz-glas" x="500" y="150" text-anchor="middle" textLength="960" lengthAdjust="spacingAndGlyphs" fill="url(#fzGlasFuell)" filter="url(#fzGlas)">ZUSCHUSS</text>
+      <g clip-path="url(#fzFuellung)"><text class="fz-t" x="500" y="150" text-anchor="middle" textLength="960" lengthAdjust="spacingAndGlyphs" fill="url(#fzVerlauf)" filter="url(#fzGlas)">ZUSCHUSS</text></g>
+    </svg></div>
     <p class="gstand fade">Stand Oktober 2026. Angaben ohne Gewähr, maßgeblich sind die Bedingungen der KfW zum Zuschuss 266 „Gewerbe zu Wohnen“.</p>
   </div>
 </section>
@@ -1074,10 +1095,18 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
  function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;[...V,...H].forEach(l=>{l.wait-=dt;if(Math.abs(l.p-l.t)<0.004&&l.wait<=0){l.t=Math.max(0.06,Math.min(0.94,l.base+(Math.random()-0.5)*0.26));l.wait=1.5+Math.random()*3.5;}l.p+=(l.t-l.p)*Math.min(1,l.spd*dt*6);});draw(now);requestAnimationFrame(step);}
  requestAnimationFrame(step);})();
 
-/* ZUSCHUSS am Ende des Zeitstrahls: wird farbig, sobald es ganz zu sehen ist */
-(function(){const w=document.getElementById('fzielW');if(!w)return;
- if(!('IntersectionObserver' in window)){w.classList.add('farbig');return;}
- const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){w.classList.add('farbig');o.disconnect();}}),{threshold:1,rootMargin:'0px 0px -12% 0px'});
+/* ZUSCHUSS am Ende des Zeitstrahls: Farbe laeuft wie Fluessigkeit von oben nach
+   unten ein, sobald das Wort ganz zu sehen ist. Die Wellenkante wandert dabei seitlich. */
+(function(){const w=document.getElementById('fzielW');const p=document.getElementById('fzWelle');if(!w||!p)return;const box=w.closest('.fziel');
+ const DAUER=2800,WELLE=1700,START=-10,ZIEL=215;
+ const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+ function setz(x,y){p.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');}
+ function los(){if(box)box.classList.add('farbig');
+   if(RM){setz(0,ZIEL);return;}
+   const t0=performance.now();
+   (function bild(now){const k=Math.min(1,(now-t0)/DAUER);setz(-((now-t0)/WELLE*200)%200,START+(ZIEL-START)*ease(k));if(k<1)requestAnimationFrame(bild);})(t0);}
+ if(RM||!('IntersectionObserver' in window)){los();return;}
+ const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){los();o.disconnect();}}),{threshold:1,rootMargin:'0px 0px -12% 0px'});
  o.observe(w);})();
 
 /* Ablauf: Etappe in Bildschirmmitte fokussieren */
