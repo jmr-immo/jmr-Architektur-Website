@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-<script src="../js/jmr-consent.js?v=3" defer></script>
+<script src="../js/jmr-consent.js?v=4" defer></script>
 <script src="../js/jmr-faq.js" defer></script>
 <script>window.jmrDankImKasten=true;</script>
 <script src="../js/jmr-formular.js?v=7" defer></script>
@@ -1161,6 +1161,41 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   }
   window.jmrLpEreignis=einmal;
 
+  /* Dieselben Schritte zusaetzlich fuer Google Analytics (Kategorie
+     "Statistik") ueber window.jmrTrackEvent aus js/jmr-consent.js. Ohne
+     Einwilligung geht nichts raus. Uebertragen werden nur der Name des
+     Ereignisses und die Seite, keine Eingaben. Jedes Ereignis einmal je
+     Seitenaufruf; die Kampagne (utm_campaign) ordnet GA4 selbst zu.
+
+     cta_foerdercheck   Druck auf einen Verweis "Förder-Check" (#check)
+     quiz_start         erste Antwort in Frage 1 gewaehlt
+     quiz_frage_2       Frage 2 erreicht
+     quiz_frage_3       Frage 3 erreicht
+     quiz_kontakt       letzte Frage beantwortet, Kontaktschritt erreicht
+     generate_lead      Anfrage erfolgreich abgesendet
+     lp_scroll_ende     Seite bis ganz nach unten gescrollt */
+  var gaSchon={};
+  function statistik(name){
+    if(gaSchon[name]) return true;
+    if(typeof window.jmrTrackEvent!=='function') return false;
+    /* false heisst: keine Einwilligung, spaeter nachholen. Eine aeltere
+       js/jmr-consent.js aus dem Cache gibt nichts zurueck; dann gilt das
+       Ereignis als gemeldet, damit es nicht mehrfach rausgeht. */
+    if(window.jmrTrackEvent(name,{seite:'gewerbe-zu-wohnen'})!==false){
+      gaSchon[name]=true; return true;
+    }
+    return false;
+  }
+  window.jmrLpStatistik=statistik;
+
+  /* Ende der Seite: einmal, sobald der untere Rand (bis auf 40 px) im Bild ist. */
+  function scrollEnde(){
+    if(gaSchon.lp_scroll_ende) return;
+    var h=document.documentElement.scrollHeight-innerHeight;
+    if(h>0 && (window.pageYOffset||document.documentElement.scrollTop||0)>=h-40){ statistik('lp_scroll_ende'); }
+  }
+  addEventListener('scroll',scrollEnde,{passive:true});
+
   /* ViewContent: beim Laden liegt die Einwilligung meist noch nicht vor,
      denn js/jmr-consent.js wertet sie erst nach dem Seitenaufbau aus.
      Der Versuch steht trotzdem hier, falls das Skript frueher dran war;
@@ -1177,7 +1212,8 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(!a) return;
     var ziel=a.getAttribute('href')||'';
     if(ziel.indexOf('tel:')===0){ melde('Call'); return; }
-    if(ziel.indexOf('wa.me')>-1||ziel.indexOf('api.whatsapp.com')>-1){ melde('Whatsapp'); }
+    if(ziel.indexOf('wa.me')>-1||ziel.indexOf('api.whatsapp.com')>-1){ melde('Whatsapp'); return; }
+    if(ziel==='#check'){ statistik('cta_foerdercheck'); }
   },true);
 })();
 
@@ -1203,6 +1239,8 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   var codes={}, texte={}, kurze={}, jetzt=1, titelMin=0;
   /* Benannt nach dem Schritt, auf dem der Druck landet. */
   var TRICHTER={2:'Page2',3:'Page3',4:'InitiateCheckout'};
+  /* Dasselbe fuer Google Analytics, siehe jmrLpStatistik weiter oben. */
+  var TRICHTER_GA={2:'quiz_frage_2',3:'quiz_frage_3',4:'quiz_kontakt'};
 
   function zeige(n,fokus){
     jetzt=n;
@@ -1339,7 +1377,10 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
 
   form.addEventListener('click',function(e){
     var opt=e.target.closest('.qopt');
-    if(opt){ waehle(opt); return; }
+    if(opt){
+      if(jetzt===1 && typeof window.jmrLpStatistik==='function'){ window.jmrLpStatistik('quiz_start'); }
+      waehle(opt); return;
+    }
     if(e.target.closest('.qzur-m')){ if(jetzt>1) zeige(jetzt-1,true); return; }
     var weiter=e.target.closest('.qnext');
     if(weiter){
@@ -1350,6 +1391,9 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
          Auswahl nicht mitgezaehlt wird. */
       if(TRICHTER[ziel] && typeof window.jmrLpEreignis==='function'){
         window.jmrLpEreignis(TRICHTER[ziel]);
+      }
+      if(TRICHTER_GA[ziel] && typeof window.jmrLpStatistik==='function'){
+        window.jmrLpStatistik(TRICHTER_GA[ziel]);
       }
       zeige(Math.min(4,ziel),true);
       return;
@@ -1367,6 +1411,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
        URL-Regel als eigenes Ereignis auswerten lassen. Gefeuert wird nur bei
        Einwilligung in "Marketing", die Pruefung steckt in jmrTrackMeta. */
     if(typeof window.jmrTrackMeta==='function'){ window.jmrTrackMeta('CompleteRegistration'); }
+    if(typeof window.jmrLpStatistik==='function'){ window.jmrLpStatistik('generate_lead'); }
     var dank=document.getElementById('qerg'); if(dank) dank.classList.add('da');
     /* Das Formular ist beantwortet, die Fragen brauchen wir nicht mehr. */
     steps.forEach(function(s){ s.hidden=true; });

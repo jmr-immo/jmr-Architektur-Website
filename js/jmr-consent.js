@@ -226,11 +226,15 @@
       window.gtag('event', 'conversion', { 'send_to': CONFIG.conversionSendTo });
     }
   };
+  /* Gibt zurueck, ob das Ereignis rausgegangen ist (wie jmrTrackMeta), damit
+     Seiten ein Ereignis ohne Einwilligung offen lassen und spaeter nachholen. */
   window.jmrTrackEvent = function (name, params) {
     var st = readState();
     if (st && st.statistics && typeof window.gtag === 'function') {
       window.gtag('event', name, params || {});
+      return true;
     }
+    return false;
   };
   /* Meta-Pixel: "Lead" bei erfolgreich abgeschicktem Kontaktformular.
      Es werden keine Formularinhalte uebergeben, nur die Tatsache der Anfrage.
