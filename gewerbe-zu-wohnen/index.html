@@ -231,12 +231,23 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 .qaktuell:focus{outline:none}
 /* Fragezeile gleich hoch fuer alle drei Fragen (min-height per Skript), Text mittig */
 .qaktuell{display:flex;align-items:center;justify-content:center}
-/* Rechner: Frage groesser, Zurueck klein oben links im Kasten statt in eigener Zeile */
+/* Rechner: Frage groesser */
 @media(min-width:701px){
   .ccard{padding-top:2.5rem}
   .qaktuell{font-size:1.52rem;margin:0 0 1rem}
-  .qbar{position:absolute;top:.7rem;left:.85rem;margin:0;min-height:0;z-index:2}
 }
+/* Zurueck gibt es nur als Pfeil links neben dem Terrakotta-Knopf, ab Frage 2.
+   Die alte Zeile mit "Zurueck" (.qbar) bleibt fuer das Skript im Code, ist aber aus. */
+.qbar{display:none !important}
+.qstep .qnav{flex-direction:row;flex-wrap:wrap;gap:.5rem}
+.qstep .qnav .qnext{flex:1 1 0;min-width:0;width:auto;justify-content:center;padding-left:1rem;padding-right:1rem}
+.qstep .qnav .qwarn{flex-basis:100%}
+.qsend{display:flex;gap:.5rem}
+.qsend #kfSubmit{flex:1 1 0;min-width:0;justify-content:center}
+.qzur-m{display:inline-flex;align-items:center;justify-content:center;flex:none;width:3.3rem;
+        background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink-soft);
+        font-size:1.15rem;cursor:pointer;padding:0;transition:border-color .2s,color .2s}
+.qzur-m:hover{border-color:var(--accent);color:var(--accent-d)}
 .qopts{display:flex;flex-direction:column;gap:.55rem}
 .qopt{display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;cursor:pointer;font-family:var(--sans);transition:border-color .2s,box-shadow .2s,transform .2s}
 .qopt:hover{border-color:rgba(225,98,61,.55);transform:translateY(-1px);box-shadow:0 12px 26px -18px rgba(11,28,43,.5)}
@@ -279,7 +290,6 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 .qnext[aria-disabled="true"]:hover{transform:none;background:var(--accent-d)}
 .qnext.bereit{animation:qpuls .45s cubic-bezier(.16,1,.3,1) 1}
 @keyframes qpuls{0%{transform:scale(.98)}55%{transform:scale(1.022)}100%{transform:scale(1)}}
-.qzur-m{display:none}
 .qwarn{margin:.6rem 0 0;font-size:.84rem;font-weight:600;color:var(--accent-d);text-align:center}
 .qopts.fehlt{animation:qwackel .38s ease-in-out 1}
 @keyframes qwackel{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
@@ -543,19 +553,6 @@ p{text-wrap:pretty}
   .qopt.aktiv{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.16),0 10px 22px -16px rgba(190,74,42,.75)}
   .qopts{gap:.45rem}
   .qaktuell{font-size:1.34rem;margin:0 0 .85rem}
-  /* Kontaktschritt: Zurueck links in der Zeile von "Fast geschafft." */
-  /* Erste Frage: ohne Zurueck auch keine leere Zeile ueber den Antworten */
-  /* Zurueck steht auf dem Handy nicht unter der Frage, sonst springt der
-     Kasten ab Frage 2 um eine Zeile. Fragen 2 und 3: kleiner Knopf links
-     neben "Naechster Schritt". Kontaktschritt: in der Zeile von "Fast geschafft." */
-  .ccard:not(.s4) .qbar{display:none}
-  .qstep .qnav{flex-direction:row;flex-wrap:wrap;gap:.5rem}
-  .qstep .qnav .qnext{flex:1 1 0;min-width:0;width:auto;justify-content:center;padding-left:1rem;padding-right:1rem}
-  .qstep .qnav .qwarn{flex-basis:100%}
-  .qzur-m{display:inline-flex;align-items:center;justify-content:center;flex:none;width:3.3rem;
-          background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink-soft);
-          font-size:1.15rem;cursor:pointer;padding:0}
-  .ccard.s4 .qbar{position:absolute;top:1.2rem;left:.75rem;margin:0;min-height:1.49rem;z-index:2}
   .qbar{margin-bottom:.8rem}
   .ccard{padding-top:1.2rem}
 
@@ -763,17 +760,20 @@ main:focus{outline:none}
 /* Ziel des Zeitstrahls: "Zuschuss" gross, im Farbverlauf wie "einer Hand" auf der Startseite */
 .fziel{position:relative;isolation:isolate;text-align:center;margin-top:2.2rem}
 .fziel::before{content:"";display:block;width:2px;height:4.6rem;margin:0 auto 1.6rem;background:linear-gradient(var(--accent),rgba(225,98,61,0))}
-/* ZUSCHUSS: erst Glas (Woelbung, Glanzlicht, halbtransparent), dann laeuft Farbe
-   wie eine Fluessigkeit mit Wellenkante von oben nach unten hinein. */
-.fz-svg{display:block;width:min(88vw,640px);height:auto;margin:0 auto;overflow:visible;
-  filter:drop-shadow(0 18px 30px rgba(11,28,43,.16)) drop-shadow(0 2px 3px rgba(11,28,43,.10))}
-.fz-t{font-family:var(--disp);font-weight:700;font-size:156px;letter-spacing:.04em}
-.fz-glas{stroke:rgba(11,28,43,.13);stroke-width:1.4px;paint-order:stroke}
-/* Weicher Schein hinter dem Wort, der mit der Farbe kommt */
-.fziel .fz-schein{position:absolute;left:50%;bottom:-.5rem;width:min(80vw,560px);height:120px;transform:translateX(-50%) scale(.85);
-  background:radial-gradient(closest-side,rgba(91,208,224,.30),rgba(225,98,61,.22) 55%,rgba(225,98,61,0));filter:blur(18px);opacity:0;
-  transition:opacity 2.4s ease .6s,transform 2.8s cubic-bezier(.5,0,.25,1);pointer-events:none;z-index:-1}
-.fziel.farbig .fz-schein{opacity:1;transform:translateX(-50%) scale(1)}
+/* ZUSCHUSS: zuerst milchig hell, dann breitet sich die Farbe vom Strich oben
+   kreisfoermig ins Wort aus, gekoppelt an das Scrollen (--fz-r per Skript).
+   Ist es ganz farbig, laeuft der Farbverlauf darin weiter. */
+.fziel-w{position:relative;display:inline-block;font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,6vw,3.9rem);line-height:1.05;letter-spacing:.05em;text-transform:uppercase}
+.fz-glas{display:block;background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(236,241,247,.72) 55%,rgba(255,255,255,.88) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  -webkit-text-stroke:1px rgba(11,28,43,.14);filter:drop-shadow(0 8px 18px rgba(11,28,43,.12))}
+.fz-farbe{position:absolute;inset:0;
+  background:linear-gradient(96deg,#1F6FA5 0%,#5BD0E0 30%,#E1623D 55%,#5BD0E0 78%,#1F6FA5 100%);background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:fzielflow 8s ease-in-out infinite;
+  -webkit-mask-image:radial-gradient(circle var(--fz-r,0px) at 50% -6%,#000 0,#000 calc(100% - 46px),transparent 100%);
+          mask-image:radial-gradient(circle var(--fz-r,0px) at 50% -6%,#000 0,#000 calc(100% - 46px),transparent 100%)}
+@keyframes fzielflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media(prefers-reduced-motion:reduce){.fz-farbe{animation:none;-webkit-mask-image:none;mask-image:none}}
 @media(max-width:700px){.fziel::before{display:none}.fziel{margin-top:2.6rem}}
 .gstand{font-size:.76rem;color:var(--ink-soft);text-align:center;margin-top:2rem;line-height:1.6}
 
@@ -909,6 +909,9 @@ main:focus{outline:none}
                 <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Nein, die Fläche ist nicht beheizt" data-kurz="Nicht beheizt" data-code="heizung-nein">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Nein</span><span class="qo-s">Die Fläche wird bisher nicht beheizt.</span></span>
                 </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Weiß ich nicht" data-kurz="Weiß ich nicht" data-code="heizung-unklar">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Weiß ich nicht</span><span class="qo-s">Das klären wir gemeinsam.</span></span>
+                </button>
               </div>
               <div class="qnav">
                 <button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button>
@@ -954,7 +957,7 @@ main:focus{outline:none}
               <div class="fld"><label for="kf-msg">Nachricht <span class="opt">optional</span></label><textarea id="kf-msg" aria-label="Nachricht optional" name="Nachricht" rows="2" placeholder="Nachricht, z. B. Ort des Objekts, Fläche oder Ihre Frage (optional)"></textarea></div>
               <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" style="margin:12px 0"></div>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-label="Bitte leer lassen" aria-hidden="true">
-              <button type="submit" class="btn btn-accent" id="kfSubmit" style="width:100%;justify-content:center">Anfrage senden <span class="ar">→</span></button>
+              <div class="qsend"><button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button><button type="submit" class="btn btn-accent" id="kfSubmit">Anfrage senden <span class="ar">→</span></button></div>
               <div class="qvor">
                 <span>Wir rufen Sie persönlich an</span>
                 <span>Werktags binnen 24 Stunden</span>
@@ -1007,33 +1010,7 @@ main:focus{outline:none}
       <div class="fstep left"><div class="fhead"><span class="sidx">03</span><span class="stitle">Antrag bei der KfW</span></div><p>Wir stellen die Bestätigung zum Antrag aus, Sie reichen den Antrag bei der KfW ein. Handwerker beauftragen Sie erst nach der Zusage der KfW.</p></div>
       <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Bauantrag &amp; Umbau</span></div><p>Wir planen die Nutzungsänderung, stellen den Bauantrag und bestätigen am Ende als Architekten die Umbaukosten für den Verwendungsnachweis.</p></div>
     </div>
-    <div class="fziel fade"><span class="fz-schein" aria-hidden="true"></span><svg class="fz-svg" id="fzielW" viewBox="0 0 1000 190" role="img" aria-label="Zuschuss">
-      <defs>
-        <linearGradient id="fzVerlauf" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0" spreadMethod="reflect">
-          <stop offset="0" stop-color="#1F6FA5"/><stop offset=".3" stop-color="#5BD0E0"/><stop offset=".55" stop-color="#E1623D"/><stop offset=".78" stop-color="#5BD0E0"/><stop offset="1" stop-color="#1F6FA5"/>
-          <animateTransform attributeName="gradientTransform" type="translate" values="0 0;-1000 0;0 0" dur="9s" repeatCount="indefinite"/>
-        </linearGradient>
-        <linearGradient id="fzGlasFuell" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#fff" stop-opacity=".92"/><stop offset=".48" stop-color="#e9f0f6" stop-opacity=".55"/><stop offset=".52" stop-color="#dfe8f1" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity=".8"/>
-        </linearGradient>
-        <!-- Glas: weiche Woelbung mit Glanzlicht oben links, dazu ein feiner heller Rand -->
-        <filter id="fzGlas" x="-10%" y="-30%" width="120%" height="160%" color-interpolation-filters="sRGB">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="weich"/>
-          <feSpecularLighting in="weich" surfaceScale="7" specularConstant="1.25" specularExponent="26" lighting-color="#ffffff" result="glanz">
-            <feDistantLight azimuth="235" elevation="52"/>
-          </feSpecularLighting>
-          <feComposite in="glanz" in2="SourceAlpha" operator="in" result="glanzIn"/>
-          <feComposite in="SourceGraphic" in2="glanzIn" operator="arithmetic" k1="0" k2="1" k3=".9" k4="0"/>
-        </filter>
-        <clipPath id="fzFuellung">
-          <path id="fzWelle" transform="translate(0 -10)" d="M-1000,-600 H2000 V0 Q1950,-9 1900,0 Q1850,9 1800,0 Q1750,-9 1700,0 Q1650,9 1600,0 Q1550,-9 1500,0 Q1450,9 1400,0 Q1350,-9 1300,0 Q1250,9 1200,0 Q1150,-9 1100,0 Q1050,9 1000,0 Q950,-9 900,0 Q850,9 800,0 Q750,-9 700,0 Q650,9 600,0 Q550,-9 500,0 Q450,9 400,0 Q350,-9 300,0 Q250,9 200,0 Q150,-9 100,0 Q50,9 0,0 Q-50,-9 -100,0 Q-150,9 -200,0 Q-250,-9 -300,0 Q-350,9 -400,0 Q-450,-9 -500,0 Q-550,9 -600,0 Q-650,-9 -700,0 Q-750,9 -800,0 Q-850,-9 -900,0 Q-950,9 -1000,0 Z">
-            <animateTransform id="fzFuellAnim" attributeName="transform" type="translate" from="0 -10" to="0 215" dur="2.8s" begin="indefinite" fill="freeze" additive="sum" calcMode="spline" keyTimes="0;1" keySplines=".5 0 .25 1"/>
-          </path>
-        </clipPath>
-      </defs>
-      <text class="fz-t fz-glas" x="500" y="150" text-anchor="middle" textLength="960" lengthAdjust="spacingAndGlyphs" fill="url(#fzGlasFuell)" filter="url(#fzGlas)">ZUSCHUSS</text>
-      <g clip-path="url(#fzFuellung)"><text class="fz-t" x="500" y="150" text-anchor="middle" textLength="960" lengthAdjust="spacingAndGlyphs" fill="url(#fzVerlauf)" filter="url(#fzGlas)">ZUSCHUSS</text></g>
-    </svg></div>
+    <div class="fziel fade"><span class="fziel-w" id="fzielW" role="img" aria-label="Zuschuss"><span class="fz-glas" aria-hidden="true">Zuschuss</span><span class="fz-farbe" aria-hidden="true">Zuschuss</span></span></div>
     <p class="gstand fade">Stand Oktober 2026. Angaben ohne Gewähr, maßgeblich sind die Bedingungen der KfW zum Zuschuss 266 „Gewerbe zu Wohnen“.</p>
   </div>
 </section>
@@ -1095,19 +1072,19 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
  function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;[...V,...H].forEach(l=>{l.wait-=dt;if(Math.abs(l.p-l.t)<0.004&&l.wait<=0){l.t=Math.max(0.06,Math.min(0.94,l.base+(Math.random()-0.5)*0.26));l.wait=1.5+Math.random()*3.5;}l.p+=(l.t-l.p)*Math.min(1,l.spd*dt*6);});draw(now);requestAnimationFrame(step);}
  requestAnimationFrame(step);})();
 
-/* ZUSCHUSS am Ende des Zeitstrahls: Farbe laeuft wie Fluessigkeit von oben nach
-   unten ein, sobald das Wort ganz zu sehen ist. Die Wellenkante wandert dabei seitlich. */
-(function(){const w=document.getElementById('fzielW');const p=document.getElementById('fzWelle');if(!w||!p)return;const box=w.closest('.fziel');
- const DAUER=2800,WELLE=1700,START=-10,ZIEL=215;
- const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
- function setz(x,y){p.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');}
- function los(){if(box)box.classList.add('farbig');
-   if(RM){setz(0,ZIEL);return;}
-   const t0=performance.now();
-   (function bild(now){const k=Math.min(1,(now-t0)/DAUER);setz(-((now-t0)/WELLE*200)%200,START+(ZIEL-START)*ease(k));if(k<1)requestAnimationFrame(bild);})(t0);}
- if(RM||!('IntersectionObserver' in window)){los();return;}
- const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){los();o.disconnect();}}),{threshold:1,rootMargin:'0px 0px -12% 0px'});
- o.observe(w);})();
+/* ZUSCHUSS am Ende des Zeitstrahls: Die Farbe breitet sich vom Strich oben
+   kreisfoermig ins Wort aus, je weiter man scrollt. Unten im Blick = ganz farbig. */
+(function(){const w=document.getElementById('fzielW');if(!w)return;
+ if(RM){w.style.setProperty('--fz-r','9999px');return;}
+ let raf=0;
+ function upd(){raf=0;const r=w.getBoundingClientRect(),vh=innerHeight;
+   /* 0, wenn das Wort unten in den Bildschirm kommt; 1, wenn es bei 55 % der Hoehe steht */
+   const start=vh*.98,ende=vh*.55;let k=(start-r.top)/(start-ende);k=Math.max(0,Math.min(1,k));
+   const voll=Math.hypot(r.width/2,r.height*1.12)+60;
+   w.style.setProperty('--fz-r',(k*k*(3-2*k)*voll).toFixed(1)+'px');}
+ addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
+ addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
+ upd();})();
 
 /* Ablauf: Etappe in Bildschirmmitte fokussieren */
 (function(){const fl=document.getElementById('flow');if(!fl)return;const steps=[...fl.querySelectorAll('.fstep')];const rail=fl.querySelector('.flow-rail');if(!steps.length)return;
