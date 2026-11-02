@@ -527,9 +527,9 @@ p{text-wrap:pretty}
   .lhero{padding:78px 0 4rem}
   .lhero .hero-lead{display:none}
   .lcol-text{text-align:center}
-  .lhero h1{font-size:clamp(2.1rem,8.4vw,2.7rem);margin-top:.55rem}
-  .lhero .kicker{font-size:.64rem;letter-spacing:.14em;justify-content:center;white-space:normal;text-wrap:balance;text-align:center}
-  .lhero .kicker::before{display:none}
+  /* Handy: ohne Kicker, Ueberschrift etwas groesser (30.000 € Zuschuss passt bis 320 px in eine Zeile) */
+  .lhero h1{font-size:clamp(2.1rem,10.4vw,2.7rem);margin-top:0}
+  .lhero .kicker{display:none}
   /* Enger als vorher: Frage, Antworten und der Weiter-Knopf sollen auf dem
      Handy zusammen auf einen Schirm passen. Wer den Knopf erst nach dem
      Rollen sieht, sieht den naechsten Schritt nicht. */
