@@ -629,14 +629,6 @@ main:focus{outline:none}
 .gpill b{font-family:var(--disp);font-weight:600;font-size:.98rem;color:var(--ink);padding:.12rem .5rem;border-radius:999px;background:rgba(242,179,61,.16)}
 .gpill .lk{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(91,107,120,.4)}
 @media(max-width:640px){.gpill{margin-top:1rem;font-size:.8rem}.gpill .gsterne svg{width:12px;height:12px}}
-.gzitat{margin:1.8rem 0 0;padding:1.2rem 1.3rem 1.1rem;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);scroll-margin-top:96px}
-.gzitat .gz-kopf{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.gzitat .gz-kopf b{font-family:var(--disp);font-weight:600;font-size:1.05rem;color:#fff}
-.gzitat .gz-kopf a{margin-left:auto;font-size:.8rem;color:#c9d6e0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
-.gzitat .gz-kopf a:hover{color:#fff;text-decoration-color:var(--green)}
-.gzitat blockquote{margin:.75rem 0 0;font-size:1rem;line-height:1.5;color:#fff}
-.gzitat figcaption{margin-top:.45rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#8fa5b4}
-.gzitat .gz-hinw{margin:.8rem 0 0;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.1);font-size:.7rem;line-height:1.5;color:#8fa5b4}
 .gpill-m{display:none}
 @media(max-width:640px){
   /* Handy: Plakette unter dem Foto statt unter den Knoepfen, Hauptueberschrift etwas groesser */
@@ -644,6 +636,22 @@ main:focus{outline:none}
   .gpill-m{display:inline-flex;order:4;justify-self:center;margin-top:-1.3rem}
   .hero h1{font-size:clamp(2.1rem,9.8vw,2.35rem)}
 }
+/* Bewertungen im Kontaktbereich: unter Text und Formular ueber die volle Breite, zwei Blasen nebeneinander. */
+.gkont{margin-top:clamp(2.2rem,4vw,3rem);padding-top:clamp(1.6rem,3vw,2.2rem);border-top:1px solid rgba(255,255,255,.1);scroll-margin-top:96px}
+.gk-kopf{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem;margin-bottom:1.1rem;font-size:.88rem;color:#aebfcb}
+.gk-kopf b{font-family:var(--disp);font-weight:600;font-size:1.1rem;color:#fff}
+.gk-kopf a{margin-left:auto;color:#c9d6e0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
+.gk-kopf a:hover{color:#fff;text-decoration-color:var(--green)}
+.gk-reihe{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:start}
+.gk-blase{position:relative;margin:0 0 8px;display:flex;flex-direction:column;padding:1.25rem 1.4rem 1rem;border-radius:18px;border-bottom-left-radius:6px;background:#1a3345;border:1px solid rgba(255,255,255,.13)}
+.gk-blase::after{content:"";position:absolute;bottom:-7px;left:28px;width:12px;height:12px;background:#1a3345;border-right:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13);transform:rotate(45deg)}
+.gk-blase blockquote{margin:0;font-size:1rem;line-height:1.55;color:#fff}
+.gk-blase figcaption{display:flex;align-items:center;gap:.6rem;margin-top:.9rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:#8fa5b4}
+.gk-blase figcaption strong{color:#fff;font-weight:600;margin-right:.4rem}
+.gk-ini{flex-shrink:0;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:600;font-size:.68rem;letter-spacing:0;color:#fff;background:linear-gradient(135deg,var(--green),var(--green-d))}
+.gk-hinw{margin-top:1rem;font-size:.72rem;line-height:1.5;color:#7f95a4;max-width:860px}
+/* Handy: im Kontaktbereich keine Bewertungen, dort reicht die Plakette unter dem Foto (verweist direkt auf Google) */
+@media(max-width:640px){.gkont{display:none}}
 </style>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
@@ -687,7 +695,7 @@ main:focus{outline:none}
           <figcaption><strong>Maximilian Rudorf</strong><span>Freischaffender Architekt</span></figcaption>
         </figure>
       </div>
-      <a class="gpill gpill-m" href="#bewertung" aria-label="5,0 von 5 Sternen bei Google, zur Bewertung"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>bei Google · <span class="lk">2 Bewertungen</span></span></a>
+      <a class="gpill gpill-m" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="5,0 von 5 Sternen bei Google, Bewertungen auf Google ansehen"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>bei Google · <span class="lk">2 Bewertungen</span></span></a>
       <div class="hero-contact">
         <a class="tc-item" href="tel:+491789428464"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span><span>0178 9428464</span></a>
         <a class="tc-item" href="mailto:info@jmr-architektur.de"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><span>info@jmr-architektur.de</span></a>
@@ -933,12 +941,6 @@ main:focus{outline:none}
           <li class="half"><span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span> <a href="tel:+491789428464" style="color:inherit;text-decoration:none">0178 9428464</a></li>
           <li class="half"><span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span> <a href="mailto:info@jmr-architektur.de" style="color:inherit;text-decoration:none">info@jmr-architektur.de</a></li>
         </ul>
-        <figure class="gzitat" id="bewertung">
-          <div class="gz-kopf"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><a href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener">Alle Bewertungen auf Google ↗</a></div>
-          <blockquote>„Die Beratung und Geduld für uns als Laien und das Zwischenmenschliche stimmen einfach perfekt. Wir sind sehr zufrieden.“</blockquote>
-          <figcaption>Petra N. · Bauleitung gewerbliche Lagerhalle</figcaption>
-          <p class="gz-hinw">Auszug aus einer Bewertung in unserem Google-Unternehmensprofil (5,0 aus 2 Bewertungen). Google prüft nicht, ob Bewertende die Leistung tatsächlich in Anspruch genommen haben.</p>
-        </figure>
       </div>
       <div class="fade d1 kontakt-formcol">
         <div class="ccard">
@@ -966,6 +968,20 @@ main:focus{outline:none}
         </div>
       </div>
       <div class="kontakt-photo fade"></div>
+    </div>
+    <div class="gkont fade" id="bewertung">
+      <div class="gk-kopf"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>aus 2 Google-Bewertungen</span><a href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener">Auf Google ansehen ↗</a></div>
+      <div class="gk-reihe">
+        <figure class="gk-blase">
+          <blockquote>„Herr Rudorf begleitet in der Funktion des Bauleiters ein Bauvorhaben einer gewerblichen Lagerhalle. Die Beratung und Geduld für uns als Laien und das Zwischenmenschliche stimmen einfach perfekt. Wir sind sehr zufrieden. […]“</blockquote>
+          <figcaption><span class="gk-ini" aria-hidden="true">PN</span><span><strong>Petra N.</strong>Bauleitung · Gewerbliche Lagerhalle</span></figcaption>
+        </figure>
+        <figure class="gk-blase">
+          <blockquote>„Super Zusammenarbeit mit Max, top Leistung. Vielen Dank.“</blockquote>
+          <figcaption><span class="gk-ini" aria-hidden="true">AH</span><span><strong>Andreas H.</strong>Google-Bewertung</span></figcaption>
+        </figure>
+      </div>
+      <p class="gk-hinw">Wortlaut aus unserem Google-Unternehmensprofil, Namen abgekürzt, die erste Bewertung ohne ihren letzten Satz […]. Wir zeigen alle vorhandenen Bewertungen. Google prüft nicht, ob Bewertende die Leistung tatsächlich in Anspruch genommen haben.</p>
     </div>
   </div>
 </section>
