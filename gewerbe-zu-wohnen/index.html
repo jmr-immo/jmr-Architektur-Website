@@ -832,6 +832,86 @@ main:focus{outline:none}
 #ablauf .sh p b{color:var(--white);font-weight:600}
 .gtel-m{display:none}
 @media(max-width:700px){.gtel-m{display:block;text-align:center;margin-top:1.1rem;font-size:.95rem;color:#c3d2dd}.gtel-m b{color:#F7F5F0;font-weight:600;margin-left:.25rem;white-space:nowrap}}
+/* GOOGLE-BEWERTUNGEN: Verstaerker unter dem Foerder-Check und Stimmen-Leiste nach dem Trust-Band.
+   Texte unveraendert aus dem Google-Profil, Namen abgekuerzt, bewusst ohne Review-Schema (JSON-LD). */
+.gsterne{display:inline-flex;gap:2px;color:#F2B33D;line-height:0}
+.gsterne svg{width:15px;height:15px;fill:currentColor}
+.gbew{display:flex;align-items:center;gap:.95rem;margin-top:1rem;padding:.9rem 1.1rem;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:#c3d2dd;text-decoration:none;transition:background .25s,border-color .25s}
+.gbew:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.24)}
+.gbew-note{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding-right:.95rem;border-right:1px solid rgba(255,255,255,.14)}
+.gbew-note b{font-family:var(--disp);font-size:1.5rem;font-weight:600;line-height:1;color:#F7F5F0;letter-spacing:-.02em}
+.gbew-note .gsterne svg{width:11px;height:11px}
+.gbew-tx{min-width:0;display:flex;flex-direction:column;gap:.28rem}
+.gbew-tx q{font-size:.92rem;line-height:1.4;color:#F7F5F0;quotes:"\201E" "\201C"}
+.gbew-tx small{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:#8fa5b4}
+.gbew-ar{margin-left:auto;flex-shrink:0;color:#8fa5b4;font-size:1rem;transition:transform .25s,color .25s}
+.gbew:hover .gbew-ar{transform:translate(2px,-2px);color:#F0A58C}
+@media(max-width:700px){.gbew{margin-top:.9rem;padding:.8rem .95rem;gap:.8rem}.gbew-note{padding-right:.8rem}.gbew-tx q{font-size:.88rem}}
+
+.gstimmen{padding:clamp(2.6rem,6vh,4rem) 0 0}
+.gst-grid{display:grid;grid-template-columns:.8fr 1.25fr 1fr;gap:1.1rem;align-items:stretch}
+.gst-sum{display:flex;flex-direction:column;justify-content:center;gap:.55rem;padding:1.6rem 1.6rem;border-radius:var(--r-lg);background:#0c1e2c;color:#c3d2dd;text-decoration:none;position:relative;overflow:hidden;isolation:isolate}
+.gst-sum::after{content:"";position:absolute;inset:auto -30% -55% auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(225,98,61,.35),transparent 70%);z-index:-1}
+.gst-sum .kicker{color:#F0A58C;font-size:.62rem;letter-spacing:.18em}
+.gst-sum b{font-family:var(--disp);font-size:3rem;font-weight:600;line-height:1;color:#F7F5F0;letter-spacing:-.03em}
+.gst-sum .gsterne svg{width:18px;height:18px}
+.gst-sum span.l{font-size:.9rem}
+.gst-sum span.lk{margin-top:.4rem;font-size:.86rem;font-weight:600;color:#F7F5F0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(240,165,140,.6)}
+.gst-sum:hover span.lk{text-decoration-color:#F0A58C}
+.gst-card{margin:0;position:relative;display:flex;flex-direction:column;gap:.85rem;padding:1.6rem 1.7rem 1.4rem;border-radius:var(--r-lg);background:var(--panel);border:1px solid var(--line);box-shadow:0 22px 50px -38px rgba(11,28,43,.45)}
+.gst-card::before{content:"\201C";position:absolute;top:.75rem;right:1.25rem;font-family:var(--disp);font-size:4.2rem;line-height:1;height:2.2rem;overflow:hidden;color:rgba(225,98,61,.22);pointer-events:none}
+.gst-card blockquote{margin:0;font-size:1rem;line-height:1.55;color:var(--ink-text)}
+.gst-card figcaption{margin-top:auto;display:flex;align-items:center;gap:.7rem;padding-top:.85rem;border-top:1px solid var(--line)}
+.gst-ini{flex-shrink:0;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:600;font-size:.86rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-d))}
+.gst-wer{display:flex;flex-direction:column;line-height:1.25}
+.gst-wer strong{font-family:var(--disp);font-weight:600;font-size:.95rem;color:var(--white)}
+.gst-wer small{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+.gst-hinw{margin-top:1rem;font-size:.74rem;line-height:1.5;color:var(--ink-soft);text-align:center;max-width:760px;margin-left:auto;margin-right:auto}
+.gst-cards{display:contents}
+.gst-dots{display:none}
+@media(max-width:900px){.gst-grid{grid-template-columns:1fr 1fr}.gst-sum{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;text-align:left;gap:.45rem 1rem;padding:1.2rem 1.4rem}.gst-sum .kicker{flex-basis:100%}.gst-sum b{font-size:2.3rem}.gst-sum span.lk{margin:0 0 0 auto}}
+@media(max-width:620px){
+  /* Handy: Zusammenfassung kompakt, Zitate als Wischleiste mit angeschnittener zweiter Karte */
+  .gst-grid{grid-template-columns:1fr;gap:.85rem}
+  .gst-sum{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:.9rem;row-gap:.2rem;padding:1.1rem 1.25rem}
+  .gst-sum .kicker{display:none}
+  .gst-sum b{grid-row:1/3;font-size:2.4rem;align-self:center}
+  .gst-sum .gsterne{align-self:end}.gst-sum .gsterne svg{width:15px;height:15px}
+  .gst-sum span.l{display:none}
+  .gst-sum span.lk{margin:0;align-self:start;font-size:.84rem}
+  .gst-cards{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * 1.3rem);padding:.2rem 1.3rem 1.2rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .gst-cards::-webkit-scrollbar{display:none}
+  .gst-card{flex:0 0 86%;scroll-snap-align:center;padding:1.3rem 1.25rem 1.1rem}
+  .gst-card blockquote{font-size:.94rem}
+  .gst-dots{display:flex;justify-content:center;gap:.4rem;margin-top:-.4rem}
+  .gst-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .25s,width .25s}
+  .gst-dots i.an{width:18px;border-radius:3px;background:var(--accent)}
+  .gst-hinw{font-size:.7rem}
+}
+/* Desktop: beide Bewertungen als Sprechblasen unter dem Formular. Eigene Grid-Zeile 3 in der
+   Formularspalte, damit Formular (Zeilen 1 bis 2, mittig) und Text links exakt stehen bleiben.
+   Dafuer entfallen am Desktop der Einzel-Verstaerker und die Stimmen-Leiste. */
+.gblasen{display:none}
+@media(min-width:981px){
+  .gbew{display:none}
+  #stimmen{display:none}
+  .gblasen{display:block;grid-column:2;grid-row:3;margin-top:.4rem}
+  .gbl-kopf{display:flex;align-items:center;gap:.6rem;margin:0 .2rem .85rem;font-size:.84rem;color:#a8bcca}
+  .gbl-kopf b{font-family:var(--disp);font-weight:600;font-size:1rem;color:#F7F5F0}
+  .gbl-kopf a{margin-left:auto;color:#c3d2dd;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3);transition:color .2s,text-decoration-color .2s}
+  .gbl-kopf a:hover{color:#fff;text-decoration-color:#F0A58C}
+  .gblase{position:relative;margin:0 0 1.15rem;padding:1rem 1.15rem .85rem;border-radius:18px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .gblase::after{content:"";position:absolute;bottom:-7px;left:26px;width:12px;height:12px;background:#1a2d3c;border-right:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);transform:rotate(45deg)}
+  .gblase.re{margin-left:14%;border-bottom-right-radius:6px}
+  .gblase.re::after{left:auto;right:26px}
+  .gblase.li{margin-right:6%;border-bottom-left-radius:6px}
+  .gblase blockquote{margin:0;font-size:.92rem;line-height:1.5;color:#F7F5F0}
+  .gblase figcaption{display:flex;align-items:center;gap:.55rem;margin-top:.7rem}
+  .gblase .gst-ini{width:26px;height:26px;font-size:.66rem}
+  .gblase figcaption span:last-child{font-family:var(--mono);font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:#8fa5b4}
+  .gblase figcaption strong{color:#F7F5F0;font-weight:600;margin-right:.35rem}
+  .gbl-hinw{margin:.2rem .2rem 0;font-size:.68rem;line-height:1.5;color:#7f95a4}
+}
 </style>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
@@ -987,7 +1067,24 @@ main:focus{outline:none}
             <p class="qe-p c">Ihre Anfrage ist eingegangen. Wir melden uns zeitnah bei Ihnen, um Ihr Vorhaben persönlich zu besprechen.</p>
           </div>
         </div>
+        <a class="gbew" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="Google-Bewertungen von JMR Architektur ansehen, 5,0 von 5 Sternen">
+          <span class="gbew-note"><b>5,0</b><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span></span>
+          <span class="gbew-tx"><q>Super Zusammenarbeit mit Max, top Leistung.</q><small>Andreas H. · Google-Bewertung</small></span>
+          <span class="gbew-ar" aria-hidden="true">↗</span>
+        </a>
         <a class="gtel-m" href="tel:+491789428464">Lieber anrufen? <b>0178 9428464</b></a>
+      </div>
+      <div class="gblasen">
+        <div class="gbl-kopf"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>aus 2 Google-Bewertungen</span><a href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener">Auf Google ansehen ↗</a></div>
+        <figure class="gblase li">
+          <blockquote>„Herr Rudorf begleitet in der Funktion des Bauleiters ein Bauvorhaben einer gewerblichen Lagerhalle. Die Beratung und Geduld für uns als Laien und das Zwischenmenschliche stimmen einfach perfekt. Wir sind sehr zufrieden. […]“</blockquote>
+          <figcaption><span class="gst-ini" aria-hidden="true">PN</span><span><strong>Petra N.</strong>Bauleitung · Gewerbliche Lagerhalle</span></figcaption>
+        </figure>
+        <figure class="gblase re">
+          <blockquote>„Super Zusammenarbeit mit Max, top Leistung. Vielen Dank.“</blockquote>
+          <figcaption><span class="gst-ini" aria-hidden="true">AH</span><span><strong>Andreas H.</strong>Google-Bewertung</span></figcaption>
+        </figure>
+        <p class="gbl-hinw">Wortlaut aus unserem Google-Unternehmensprofil, Namen abgekürzt, die erste Bewertung ohne ihren letzten Satz […]. Wir zeigen alle vorhandenen Bewertungen. Google prüft nicht, ob Bewertende die Leistung tatsächlich in Anspruch genommen haben.</p>
       </div>
     </div>
   </div>
@@ -1010,6 +1107,46 @@ main:focus{outline:none}
     </div>
   </div>
 </div>
+
+<!-- STIMMEN: beide Google-Bewertungen, Hinweis nach § 5b Abs. 3 UWG direkt darunter -->
+<section class="gstimmen" id="stimmen" aria-label="Bewertungen unserer Kunden">
+  <div class="container">
+    <div class="gst-grid fade">
+      <a class="gst-sum" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener">
+        <span class="kicker">Bewertungen bei Google</span>
+        <b>5,0</b>
+        <span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span>
+        <span class="l">aus 2 Bewertungen</span>
+        <span class="lk">Auf Google ansehen ↗</span>
+      </a>
+      <div class="gst-cards">
+      <figure class="gst-card">
+        <span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span>
+        <blockquote>„Herr Rudorf begleitet in der Funktion des Bauleiters ein Bauvorhaben einer gewerblichen Lagerhalle. Die Beratung und Geduld für uns als Laien und das Zwischenmenschliche stimmen einfach perfekt. Wir sind sehr zufrieden. […]“</blockquote>
+        <figcaption><span class="gst-ini" aria-hidden="true">PN</span><span class="gst-wer"><strong>Petra N.</strong><small>Bauleitung · Gewerbliche Lagerhalle</small></span></figcaption>
+      </figure>
+      <figure class="gst-card">
+        <span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span>
+        <blockquote>„Super Zusammenarbeit mit Max, top Leistung. Vielen Dank.“</blockquote>
+        <figcaption><span class="gst-ini" aria-hidden="true">AH</span><span class="gst-wer"><strong>Andreas H.</strong><small>Google-Bewertung</small></span></figcaption>
+      </figure>
+      </div>
+    </div>
+    <div class="gst-dots" aria-hidden="true"><i class="an"></i><i></i></div>
+    <script>
+    (function(){
+      var w=document.querySelector('.gst-cards'),d=document.querySelectorAll('.gst-dots i');
+      if(!w||!d.length)return;
+      w.addEventListener('scroll',function(){
+        var k=w.children,n=0,m=1e9,mitte=w.scrollLeft+w.clientWidth/2;
+        for(var i=0;i<k.length;i++){var a=Math.abs(k[i].offsetLeft+k[i].offsetWidth/2-mitte);if(a<m){m=a;n=i}}
+        for(var j=0;j<d.length;j++)d[j].classList.toggle('an',j===n);
+      },{passive:true});
+    })();
+    </script>
+    <p class="gst-hinw">Wortlaut aus unserem Google-Unternehmensprofil, Namen abgekürzt, die erste Bewertung ohne ihren letzten Satz […]. Wir zeigen alle vorhandenen Bewertungen. Google prüft nicht, ob Bewertende die Leistung tatsächlich in Anspruch genommen haben.</p>
+  </div>
+</section>
 
 <!-- ABLAUF -->
 <section id="ablauf">
