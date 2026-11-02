@@ -778,14 +778,14 @@ main:focus{outline:none}
           mask-image:radial-gradient(circle var(--fz-r,0px) at 50% -6%,#000 0,#000 calc(100% - 46px),transparent 100%)}
 @keyframes fzielflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @media(prefers-reduced-motion:reduce){.fz-farbe{animation:none;-webkit-mask-image:none;mask-image:none}}
-/* Handy: ZUSCHUSS steht links wie die Schritte, mit Punkt auf der Zeitleiste.
+/* Handy: ZUSCHUSS steht mittig, links davor ein Punkt auf der Zeitleiste.
    Die Farbe breitet sich dort vom Punkt aus ins Wort aus. */
 @media(max-width:700px){
-  .fziel{text-align:left;padding-left:2.4rem;margin-top:.2rem}
+  .fziel{text-align:center;margin-top:.2rem}
   .fziel::before{position:absolute;left:11px;top:-2.4rem;width:2px;height:calc(50% + 2.4rem);margin:0;background:linear-gradient(rgba(225,98,61,.35),var(--accent))}
   .fziel::after{content:"";position:absolute;left:6px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.18)}
-  .fz-farbe{-webkit-mask-image:radial-gradient(circle var(--fz-r,0px) at -2.4rem 50%,#000 0,#000 calc(100% - 46px),transparent 100%);
-                    mask-image:radial-gradient(circle var(--fz-r,0px) at -2.4rem 50%,#000 0,#000 calc(100% - 46px),transparent 100%)}
+  .fz-farbe{-webkit-mask-image:radial-gradient(circle var(--fz-r,0px) at var(--fz-ox,-2.4rem) 50%,#000 0,#000 calc(100% - 46px),transparent 100%);
+                    mask-image:radial-gradient(circle var(--fz-r,0px) at var(--fz-ox,-2.4rem) 50%,#000 0,#000 calc(100% - 46px),transparent 100%)}
 }
 .gstand{font-size:.76rem;color:var(--ink-soft);text-align:center;margin-top:2rem;line-height:1.6}
 
@@ -1094,7 +1094,9 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
    /* Handy: spaeter einsetzen und erst weiter oben ganz farbig */
    const handy=matchMedia('(max-width:700px)').matches;
    const start=vh*(handy?.8:.98),ende=vh*(handy?.4:.55);let k=(start-r.top)/(start-ende);k=Math.max(0,Math.min(1,k));
-   const voll=Math.hypot(r.width+40,r.height)+60;
+   /* Handy: Farbe geht vom Punkt auf der Zeitleiste aus (12 px vom linken Rand) */
+   let ox=0; if(handy){const b=w.parentElement.getBoundingClientRect();ox=b.left+12-r.left;w.style.setProperty('--fz-ox',ox.toFixed(1)+'px');}
+   const voll=Math.hypot(r.width+Math.abs(ox)+40,r.height)+60;
    w.style.setProperty('--fz-r',(k*k*(3-2*k)*voll).toFixed(1)+'px');}
  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
  addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
