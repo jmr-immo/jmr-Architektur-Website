@@ -18,6 +18,9 @@
  * dieser Website und erst nach Einwilligung in die Kategorie "Marketing". Einzelne
  * Seiten koennen ihn abschalten mit window.jmrMetaPixel = false im <head> vor diesem
  * Skript. Bewusst KEIN <noscript>-Zaehlpixel, denn das wuerde ohne Einwilligung feuern.
+ * Eine Seite kann zusaetzlich einen zweiten Pixel anmelden mit
+ * window.jmrMetaPixelZusatz = '<Pixel-ID>' im <head> vor diesem Skript. Alle Ereignisse
+ * gehen dann an beide Pixel (fbq meldet an jeden mit init angemeldeten Pixel).
  */
 (function () {
   'use strict';
@@ -138,6 +141,10 @@
     })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     window.fbq('consent', 'grant');
     window.fbq('init', CONFIG.metaPixelId);
+    if (/^\d+$/.test(String(window.jmrMetaPixelZusatz || '')) &&
+        String(window.jmrMetaPixelZusatz) !== CONFIG.metaPixelId) {
+      window.fbq('init', String(window.jmrMetaPixelZusatz));
+    }
     window.fbq('track', 'PageView');
   }
   function stopMetaPixel() {
