@@ -989,11 +989,13 @@ main:focus{outline:none}
 .qp-check li{position:relative;padding-left:1.55rem;font-size:.86rem;line-height:1.35;color:var(--ink-text)}
 .qp-check li::before{content:'';position:absolute;left:0;top:.05rem;width:17px;height:17px;border-radius:50%;background:rgba(63,209,135,.18);border:1px solid rgba(63,209,135,.55)}
 .qp-check li::after{content:'';position:absolute;left:5px;top:.33rem;width:7px;height:4px;border-left:1.8px solid #1f8f57;border-bottom:1.8px solid #1f8f57;transform:rotate(-45deg)}
-.qp-extra{font-size:.8rem;color:var(--ink-soft);margin:0 0 .9rem}
+.qp-extra{font-size:.8rem;color:var(--ink-soft);margin:0 0 1rem}
 /* Hinweis zu den Plaenen: gruen = passt, gelb = pruefen, terrakotta = zuerst Akteneinsicht */
-.qp-plan{display:flex;gap:.75rem;align-items:flex-start;border-radius:12px;padding:.85rem .95rem;margin:0 0 1rem;border:1px solid;font-size:.84rem;line-height:1.45}
+.qp-plan{display:flex;gap:.75rem;align-items:flex-start;border-radius:12px;padding:.85rem .95rem;margin:0 0 1rem;border:1px solid;font-size:.84rem;line-height:1.45;margin-bottom:1.3rem}
 .qp-plan b{display:block;font-family:var(--disp);font-weight:600;font-size:1rem;letter-spacing:-.01em;color:var(--white);margin-bottom:.15rem}
 .qp-plan p{margin:0;color:var(--ink-text)}
+.qp-plan .qpl-teil{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed rgba(11,28,43,.18);color:var(--ink-soft)}
+.qp-plan .qpl-teil b{display:inline;font-family:var(--sans);font-size:inherit;color:var(--white);margin:0}
 .qpl-ic{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;font-size:.95rem;color:#fff}
 .qp-plan[data-art="ok"]{background:rgba(63,209,135,.1);border-color:rgba(63,209,135,.5)}
 .qp-plan[data-art="ok"] .qpl-ic{background:#1f8f57}
@@ -1004,9 +1006,6 @@ main:focus{outline:none}
 .qp-plan[data-art="stop"]{background:rgba(225,98,61,.1);border-color:rgba(225,98,61,.55)}
 .qp-plan[data-art="stop"] .qpl-ic{background:var(--accent-d)}
 .qp-plan[data-art="stop"] .qpl-ic::before{content:'!'}
-.qp-ihr{display:flex;gap:.7rem;align-items:flex-start;background:rgba(225,98,61,.08);border:1px solid rgba(225,98,61,.28);border-radius:12px;padding:.75rem .9rem;font-size:.84rem;line-height:1.45;color:var(--ink-text);margin-bottom:1.3rem}
-.qp-ihr b{color:var(--accent-d)}
-.qi-ic{flex:none;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent-d);background:#fff;border:1px solid rgba(225,98,61,.3)}
 .qp-ind{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;color:var(--white);line-height:1.2}
 .qweiter{font-family:var(--disp);font-weight:600;font-size:1.12rem;color:var(--white);text-align:left;line-height:1.3;margin:0 0 .8rem;padding-top:1.1rem;border-top:1px solid rgba(11,28,43,.1)}
 .qanruf{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;margin-top:.6rem;padding:.85rem 1rem;border-radius:8px;border:1.5px solid rgba(11,28,43,.22);background:rgba(255,255,255,.6);font-weight:600;font-size:.95rem;color:var(--white);transition:.2s}
@@ -1021,7 +1020,7 @@ main:focus{outline:none}
   .qhin1{font-size:.78rem}
   .qp-pos li{font-size:.8rem}
   .qp-check{grid-template-columns:1fr;gap:.4rem}
-  .qp-check li,.qp-ihr,.qp-plan{font-size:.8rem}
+  .qp-check li,.qp-plan{font-size:.8rem}
   .qweiter{font-size:1.02rem}
   .qok{font-size:.78rem}
   /* Handy: der Hinweis "Sie bleiben, wo Sie sind" weicht der Ueberschrift ueber dem Rechner */
@@ -1173,7 +1172,6 @@ main:focus{outline:none}
                   <div class="qp-sub">Größere Häuser rechnen wir einzeln.</div>
                 </div>
               </div>
-              <div class="qp-plan" id="qpPlanBox" data-art="ok" role="note"><span class="qpl-ic" aria-hidden="true"></span><div><b id="qplT">Gute Voraussetzung</b><p id="qplP"></p></div></div>
               <ul class="qp-check">
                 <li>Vorprüfung Ihrer Unterlagen</li>
                 <li>Aufteilungspläne aller Geschosse in 2 bis 3 Wochen</li>
@@ -1181,7 +1179,7 @@ main:focus{outline:none}
                 <li>Originale an Sie oder Ihren Notar</li>
               </ul>
               <p class="qp-extra">Dazu kommen nur die Gebühren Ihrer Bauaufsicht, ohne Aufschlag.</p>
-              <div class="qp-ihr"><span class="qi-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><span><b>Ihr Teil:</b> aktuelle, gut lesbare Pläne. Mit dem Auftrag erklären Sie, dass sie den genehmigten Stand zeigen und dem Zustand vor Ort entsprechen.</span></div>
+              <div class="qp-plan" id="qpPlanBox" data-art="ok" role="note"><span class="qpl-ic" aria-hidden="true"></span><div><b id="qplT">Gute Voraussetzung</b><p id="qplP"></p><p class="qpl-teil"><b>Ihr Teil:</b> aktuelle, gut lesbare Pläne. Mit dem Auftrag erklären Sie, dass sie den genehmigten Stand zeigen und dem Zustand vor Ort entsprechen.</p></div></div>
               <p class="qweiter" id="qweiter">Passt der Preis? Dann sichern Sie sich Ihr Angebot!</p>
               <div class="fld-row">
                 <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" aria-label="Vorname" name="Vorname" type="text" placeholder="Vorname" autocomplete="given-name" required></div>
