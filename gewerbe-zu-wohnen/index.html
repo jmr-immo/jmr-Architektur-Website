@@ -212,17 +212,19 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 .qbar .qline{flex:0 1 150px;min-width:48px;margin-left:auto;height:4px;border-radius:999px;background:rgba(11,28,43,.1);overflow:hidden}
 .qbar .qfill{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--steel-d),var(--accent));transition:width .45s cubic-bezier(.16,1,.3,1)}
 .qbar .qnum{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);white-space:nowrap}
-/* Die drei Fragen sind unterschiedlich lang, und nur zwei von ihnen haben
-   einen Zurueck-Knopf. Ohne Gegenmassnahme wuerde der Kasten bei jedem
-   Schritt springen. Das Skript misst deshalb die hoechste der drei Fragen
-   und setzt sie hier als Mindesthoehe. Der letzte Schritt mit dem Formular
-   darf darueber hinauswachsen. */
-.qsteps{transition:min-height .3s cubic-bezier(.16,1,.3,1)}
-@media(prefers-reduced-motion:reduce){.qsteps{transition:none}}
+/* Die Schritte sind unterschiedlich lang. Ohne Gegenmassnahme wuerde der
+   Kasten bei jedem Schritt springen. hoeheAngleichen() misst deshalb alle
+   vier Schritte samt Formular und setzt die hoechste Hoehe als Mindesthoehe
+   des Kastens (#check). "Naechster Schritt" sitzt unten, damit der Knopf bei
+   jeder Frage an derselben Stelle steht. */
 .qstep[hidden]{display:none}
-/* Die drei Fragen sind gleich hoch (hoeheAngleichen). "Naechster Schritt" sitzt unten,
-   damit der Knopf bei jeder Frage an derselben Stelle steht, auch bei nur zwei Antworten. */
 .qsteps{display:flex;flex-direction:column}
+/* Der ganze Kasten ist ueber alle vier Schritte gleich hoch (min-height per Skript,
+   gemessen inklusive Kontaktschritt). Der Platz, den ein kuerzerer Schritt uebrig
+   laesst, landet ueber den Knoepfen, nicht unter dem Kasten. */
+.ccard{display:flex;flex-direction:column}
+#kform{flex:1 0 auto;display:flex;flex-direction:column}
+.qsteps{flex:1 0 auto}
 .qstep:not([hidden]){flex:1 0 auto;display:flex;flex-direction:column}
 .qstep .qnav{margin-top:auto;padding-top:1.05rem}
 /* Ohne JavaScript bleibt der Fragenteil stehen, wo er ist. Dann zumindest
@@ -255,7 +257,8 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
         background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink-soft);
         font-size:1.15rem;cursor:pointer;padding:0;transition:border-color .2s,color .2s}
 .qzur-m:hover{border-color:var(--accent);color:var(--accent-d)}
-.qopts{display:flex;flex-direction:column;gap:.55rem}
+/* Raster mit gleich hohen Zeilen: Alle Antworten einer Frage sind so hoch wie die hoechste, auch wenn eine Erlaeuterung umbricht */
+.qopts{display:grid;grid-auto-rows:1fr;gap:.55rem}
 .qopt{display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;cursor:pointer;font-family:var(--sans);transition:border-color .2s,box-shadow .2s,transform .2s}
 .qopt:hover{border-color:rgba(225,98,61,.55);transform:translateY(-1px);box-shadow:0 12px 26px -18px rgba(11,28,43,.5)}
 .qopt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -324,8 +327,8 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 .kf-status{margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;font-size:.92rem;line-height:1.5}
 .kf-status.ok{background:rgba(63,209,135,.14);border:1px solid rgba(63,209,135,.45);color:#158a5a;font-weight:600}
 .kf-status.err{background:rgba(214,69,69,.1);border:1px solid rgba(214,69,69,.4);color:#b3271e}
-.form-note{font-family:var(--mono);font-size:.66rem;color:var(--ink-soft);margin-top:.85rem;line-height:1.55;text-align:center}
-.qvor{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin-top:.9rem;justify-content:center}
+.form-note{font-family:var(--mono);font-size:.66rem;color:var(--ink-soft);margin-top:.6rem;line-height:1.55;text-align:center}
+.qvor{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;margin-top:.7rem;justify-content:center}
 .qvor span{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--ink-soft)}
 .qvor span::before{content:'';width:14px;height:14px;border-radius:50%;background:rgba(63,209,135,.2);border:1px solid rgba(63,209,135,.5);flex-shrink:0}
 /* EINORDNUNG nach dem Absenden */
@@ -563,8 +566,6 @@ p{text-wrap:pretty}
         und ein weicher Schein im Terracotta-Ton. So passen alle vier
         Antworten ohne Scrollen auf den Schirm. */
   .qopt .qo-s{display:none}
-  /* Ja/Nein: die kurze Erlaeuterung bleibt auch auf dem Handy stehen */
-  .qstep[data-step="2"] .qopt .qo-s{display:block}
   .qopt{padding:.85rem 1rem;border-color:rgba(225,98,61,.3);
         box-shadow:0 0 0 3px rgba(225,98,61,.06),0 10px 22px -16px rgba(190,74,42,.75)}
   .qopt .qo-t{font-size:.98rem}
@@ -976,7 +977,7 @@ main:focus{outline:none}
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Gastronomie</span><span class="qo-s">Gaststätte, Café oder Imbiss.</span></span>
                 </button>
                 <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-wert="Lager, Garage oder Scheune" data-kurz="Lager oder Garage" data-code="lager">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Lager, Garage oder Scheune</span><span class="qo-s">Auch Werkstatt oder Halle.</span></span>
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Lager, Garage, Scheune</span><span class="qo-s">Auch Werkstatt oder Halle.</span></span>
                 </button>
               </div>
               <div class="qnav">
@@ -989,10 +990,10 @@ main:focus{outline:none}
             <div class="qstep" data-titel="Gibt es Heizkörper in diesem Geschoss?" data-step="2" hidden>
               <div class="qopts" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Ja, die Fläche ist beheizt" data-kurz="Beheizt" data-code="heizung-ja">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Ja</span><span class="qo-s">Oder eine andere Heizung, z. B. Fußbodenheizung.</span></span>
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Ja, beheizt</span><span class="qo-s">Heizkörper oder z. B. Fußbodenheizung.</span></span>
                 </button>
                 <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Nein, die Fläche ist nicht beheizt" data-kurz="Nicht beheizt" data-code="heizung-nein">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Nein</span><span class="qo-s">Die Fläche wird bisher nicht beheizt.</span></span>
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Nein, unbeheizt</span><span class="qo-s">Die Fläche wird bisher nicht beheizt.</span></span>
                 </button>
                 <button class="qopt" type="button" aria-pressed="false" data-frage="2" data-wert="Weiß ich nicht" data-kurz="Weiß ich nicht" data-code="heizung-unklar">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Weiß ich nicht</span><span class="qo-s">Das klären wir gemeinsam.</span></span>
@@ -1015,10 +1016,10 @@ main:focus{outline:none}
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Die Planung läuft schon</span><span class="qo-s">Es gibt erste Grundrisse oder ein Konzept.</span></span>
                 </button>
                 <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Objekt noch nicht gekauft, Kauf wird geprüft" data-kurz="Kauf in Prüfung" data-code="kauf">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Ich prüfe gerade einen Kauf</span><span class="qo-s">Der Zuschuss soll in die Kalkulation.</span></span>
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Ich prüfe einen Kauf</span><span class="qo-s">Der Zuschuss soll in die Kalkulation.</span></span>
                 </button>
                 <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Handwerker sind bereits beauftragt" data-kurz="Schon beauftragt" data-code="beauftragt">
-                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Handwerker sind schon beauftragt</span><span class="qo-s">Verträge für den Umbau sind unterschrieben.</span></span>
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Handwerker beauftragt</span><span class="qo-s">Verträge für den Umbau sind unterschrieben.</span></span>
                 </button>
               </div>
               <div class="qnav">
@@ -1040,7 +1041,7 @@ main:focus{outline:none}
                 <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" aria-label="E-Mail" name="E-Mail" type="email" placeholder="E-Mail" autocomplete="email" required></div>
               </div>
               <div class="fld"><label for="kf-msg">Nachricht <span class="opt">optional</span></label><textarea id="kf-msg" aria-label="Nachricht optional" name="Nachricht" rows="2" placeholder="Nachricht, z. B. Ort des Objekts, Fläche oder Ihre Frage (optional)"></textarea></div>
-              <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" style="margin:12px 0"></div>
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" data-appearance="interaction-only"></div>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-label="Bitte leer lassen" aria-hidden="true">
               <div class="qsend"><button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button><button type="submit" class="btn btn-accent" id="kfSubmit">Anfrage senden <span class="ar">→</span></button></div>
               <div class="qvor">
@@ -1412,24 +1413,12 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
      steht. */
   function hoeheAngleichen(){
     if(!kasten) return;
+    var karte=document.getElementById('check');
     kasten.style.minHeight='';
-    /* Auf dem Handy wird auch der Kontaktschritt mitgemessen: Die vier
-       Schritte liegen dort dicht beieinander, und mit ihm zusammen steht
-       der Kasten ueber den ganzen Weg still. Am Rechner bleibt er aussen
-       vor, das Formular ist dort deutlich hoeher und wuerde unter den
-       drei Fragen eine Bildschirmlaenge Leerraum lassen. */
-    var handy = !!(window.matchMedia && window.matchMedia('(max-width:700px)').matches);
-    var merk=steps.map(function(s){ return s.hidden; });
-    var max=0;
-    steps.forEach(function(s){
-      if(+s.dataset.step===4) return;
-      steps.forEach(function(a){ a.hidden = (a!==s); });
-      max=Math.max(max,s.offsetHeight);
-    });
-    steps.forEach(function(s,i){ s.hidden=merk[i]; });
-    if(max) kasten.style.minHeight=max+'px';
-    /* Auch die Fragezeile: die laengste der drei Fragen bestimmt ihre Hoehe,
-       sonst wird der Kasten bei kuerzeren Fragen kleiner. */
+    if(karte) karte.style.minHeight='';
+    /* Fragezeile: die laengste der drei Fragen bestimmt ihre Hoehe,
+       sonst wird der Kasten bei kuerzeren Fragen kleiner. Im
+       Kontaktschritt steht die kurze Zeile "Fast geschafft." ohne Vorgabe. */
     if(aktuell){
       var alt=aktuell.textContent, hoch=0;
       aktuell.style.minHeight='';
@@ -1439,8 +1428,22 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
         hoch=Math.max(hoch,aktuell.offsetHeight);
       });
       aktuell.textContent=alt; titelMin=hoch;
-      aktuell.style.minHeight=(jetzt<4&&hoch)?hoch+'px':'';
     }
+    /* Dann jeden der vier Schritte so aufbauen, wie zeige() es tut, und den
+       ganzen Kasten messen. Der hoechste Stand wird Mindesthoehe des Kastens.
+       So steht der Rand ueber den ganzen Weg still, auch beim Sprung ins
+       Formular. Ohne Fokuswechsel, nur Sichtbarkeit, Fragezeile und Klassen. */
+    var merk=steps.map(function(s){ return s.hidden; });
+    var altT=aktuell?aktuell.textContent:'', max=0;
+    [1,2,3,4].forEach(function(n){
+      steps.forEach(function(a){ a.hidden = (+a.dataset.step!==n); });
+      var el=steps.filter(function(a){return +a.dataset.step===n;})[0];
+      if(aktuell&&el){ aktuell.textContent=el.dataset.titel||''; aktuell.style.minHeight=(n<4&&titelMin)?titelMin+'px':''; }
+      if(karte){ karte.classList.toggle('s4',n===4); karte.classList.toggle('s1',n===1); max=Math.max(max,karte.offsetHeight); }
+    });
+    steps.forEach(function(s,i){ s.hidden=merk[i]; });
+    if(aktuell){ aktuell.textContent=altT; aktuell.style.minHeight=(jetzt<4&&titelMin)?titelMin+'px':''; }
+    if(karte){ karte.classList.toggle('s4',jetzt===4); karte.classList.toggle('s1',jetzt===1); if(max) karte.style.minHeight=max+'px'; }
   }
 
   /* Jede Pille traegt zwei Fassungen: die ausfuehrliche fuer den Rechner
@@ -1536,6 +1539,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     steps.forEach(function(s){ s.hidden=true; });
     var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';
     if(kasten) kasten.style.minHeight='';
+    var karteF=document.getElementById('check'); if(karteF) karteF.style.minHeight='';
     /* Die Zeile unter der Ueberschrift kuendigt die Fragen an. Sind sie
        beantwortet, hat sie sich erledigt: Der Hinweis auf den Rueckruf
        steht jetzt am Ende des Vorschlags. */
