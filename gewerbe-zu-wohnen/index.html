@@ -858,6 +858,32 @@ main:focus{outline:none}
   .gbew-tx small{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:#8fa5b4}
   .gbew-ar{margin-left:auto;flex-shrink:0;color:#8fa5b4;font-size:1rem}
 }
+/* Förder-Sektion KfW 266 & 261, übernommen aus umnutzung.html */
+.kfw{background:linear-gradient(135deg,#F6E7DF 0%,var(--bg) 52%,var(--bg-2) 100%);position:relative;overflow:hidden}
+.kfw::before{content:'266';position:absolute;left:-3%;top:46%;transform:translateY(-50%);font-family:var(--disp);font-weight:700;font-size:clamp(13rem,28vw,30rem);color:rgba(225,98,61,.05);line-height:1;pointer-events:none}
+.kfw-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;align-items:stretch;position:relative;z-index:1}
+@media(max-width:900px){.kfw-grid{grid-template-columns:1fr}}
+.kfw-intro .badge{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,var(--steel-d),var(--accent-d));padding:.5rem 1.1rem;border-radius:999px;margin-bottom:1.4rem;font-weight:700}
+.kfw-intro h2{margin-bottom:1.1rem}.kfw-intro p{font-size:1.08rem;color:var(--ink-text);max-width:480px}
+.kfw-intro .li{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.kfw-intro .li li{display:flex;gap:.7rem;font-size:1rem;color:var(--white)}
+.kfw-intro .li b{color:var(--accent)}
+.kfw-cards{display:flex;flex-direction:column;gap:1.1rem}
+.fcard{position:relative;border-radius:var(--r-lg);padding:1.8rem;border:1px solid var(--line);background:#FFFFFF}
+.fcard.lead{isolation:isolate;animation:breath 3.2s ease-in-out infinite}
+.fcard.lead::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:conic-gradient(from var(--a),transparent 0 6%,var(--accent) 22%,#F2A684 38%,var(--steel) 54%,var(--accent) 70%,transparent 86% 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 5s linear infinite;pointer-events:none}
+.fcard>*{position:relative;z-index:1}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin{to{--a:360deg}}
+@keyframes breath{0%,100%{box-shadow:0 0 0 1px rgba(225,98,61,.28),0 0 28px 0 rgba(225,98,61,.2)}50%{box-shadow:0 0 0 1px rgba(245,166,132,.5),0 0 60px 8px rgba(225,98,61,.38)}}
+@media(prefers-reduced-motion:reduce){.fcard.lead{animation:none}.fcard.lead::after{animation:none}}
+.fcard .ftop{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.3rem}
+.fcard .fno{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.fcard.alt .fno{color:var(--steel)}
+.fcard .fbig{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,4vw,2.8rem);color:var(--white);line-height:1;letter-spacing:-.03em}
+.fcard .fsub{color:var(--ink-soft);font-size:.92rem;margin-top:.5rem;line-height:1.5}
+.fnote{font-family:var(--mono);font-size:.64rem;color:var(--ink-soft);line-height:1.6;margin-top:1.4rem;max-width:520px}
+.fnote-center{max-width:760px;margin:2.6rem auto 0;text-align:center;position:relative;z-index:1}
 </style>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
@@ -1042,6 +1068,37 @@ main:focus{outline:none}
     </div>
   </div>
 </div>
+
+<!-- FÖRDERUNG: KfW 266 und 261, gleiche Sektion wie auf umnutzung.html#foerderung -->
+<section id="foerderung" class="kfw">
+  <div class="container">
+    <div class="kfw-grid">
+      <div class="kfw-intro fade">
+        <span class="badge">Förderung · KfW 266 &amp; 261</span>
+        <h2>Zwei Programme, die <em>ineinandergreifen</em>.</h2>
+        <p>Wenn Sie Gewerbe in Wohnraum umwandeln, gibt es gleich zwei passende Förderungen. Wir planen die Umnutzung so, dass beide greifen. Die jmr Energieberatung weist den nötigen Standard nach und wickelt die Förderung ab.</p>
+        <ul class="li">
+          <li><b>+</b> Bauantrag und Nutzungsänderung für die geplanten Wohneinheiten</li>
+          <li><b>+</b> Energiekonzept und Nachweis Effizienzhaus 85 EE</li>
+          <li><b>+</b> Förderabwicklung über einen gelisteten Energieeffizienz-Experten</li>
+        </ul>
+      </div>
+      <div class="kfw-cards fade d1">
+        <div class="fcard lead">
+          <div class="ftop"><span class="fno">KfW 266 · Zuschuss</span></div>
+          <div class="fbig">bis 30.000&nbsp;€</div>
+          <div class="fsub">je neuer Wohneinheit, das sind 30 Prozent der förderfähigen Kosten als direkter Zuschuss. Für neuen Wohnraum aus bestehender Gewerbefläche. Der Zuschuss ist befristet, Anträge sind bis zum 31. Dezember 2026 möglich.</div>
+        </div>
+        <div class="fcard alt">
+          <div class="ftop"><span class="fno">KfW 261 · Kredit</span></div>
+          <div class="fbig">bis 150.000&nbsp;€</div>
+          <div class="fsub">je Wohneinheit als zinsgünstiger Kredit für die energetische Qualität des fertigen Wohngebäudes; ein Tilgungszuschuss ist je nach erreichter Effizienzhaus-Stufe (ab EH&nbsp;55&nbsp;EE) möglich.</div>
+        </div>
+      </div>
+    </div>
+    <p class="fnote fnote-center">Stand August 2026. Angaben ohne Gewähr, maßgeblich sind die Bedingungen&nbsp;der&nbsp;KfW. Ob, in welcher Höhe und in welcher Kombination eine Förderung möglich ist, hängt vom Einzelfall ab.</p>
+  </div>
+</section>
 
 <!-- ABLAUF -->
 <section id="ablauf">
