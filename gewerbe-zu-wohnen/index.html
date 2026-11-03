@@ -415,6 +415,10 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
   .fstep.left p{margin-left:0}
   .fstep.left.active,.fstep.right.active{transform:scale(1.02)}
   .fstep .stitle{white-space:normal}
+  /* Schritt-Titel am Handy einzeilig ("Maximale Förderung planen"): etwas weniger Innenabstand, Titel mit der Breite skaliert */
+  .fstep,.fstep.left,.fstep.right{padding-left:1.1rem;padding-right:1.1rem}
+  .fstep .fhead{gap:.7rem}
+  .fstep .stitle{font-size:clamp(.9rem,calc(7.9vw - 12.5px),1.1rem)}
 }
 /* UEBER DAS BUERO */
 .team-hero{display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:clamp(1.6rem,4vw,3rem);align-items:start;margin-top:1rem}
@@ -1046,7 +1050,7 @@ main:focus{outline:none}
     <div class="flow" id="flow">
       <div class="flow-rail"></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">01</span><span class="stitle">Erstgespräch</span></div><p>Wir schauen uns Ihr Objekt und Ihr Vorhaben individuell an und sagen Ihnen direkt, ob KfW 266 grundsätzlich passt. Kostenlos und unverbindlich.</p></div>
-      <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Maximale Förderung<br class="br-m"> planen</span></div><p>Wir prüfen, ob Wohnen zulässig ist und planen Grundrisse und Energiekonzept so, dass Sie das Maximum an Förderung herausholen.</p></div>
+      <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Maximale Förderung planen</span></div><p>Wir prüfen, ob Wohnen zulässig ist und planen Grundrisse und Energiekonzept so, dass Sie das Maximum an Förderung herausholen.</p></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">03</span><span class="stitle">Antrag bei der KfW</span></div><p>Wir stellen die Bestätigung zum Antrag aus, Sie reichen den Antrag bei der KfW ein. Handwerker beauftragen Sie erst nach der Zusage der KfW.</p></div>
       <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Bauantrag &amp; Umbau</span></div><p>Wir planen die Nutzungsänderung, stellen den Bauantrag und bestätigen am Ende als Architekten die Umbaukosten für den Verwendungsnachweis.</p></div>
     </div>
