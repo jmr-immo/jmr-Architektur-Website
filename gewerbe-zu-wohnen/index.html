@@ -1246,6 +1246,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
    ViewContent        Aufruf dieser Landingpage
    Call               Druck auf eine Telefonnummer
    Whatsapp           Druck auf einen WhatsApp-Knopf
+   QuizStart          erste Antwort in Frage 1 gewaehlt (eigenes Ereignis)
    Page2              erster Druck auf "Naechster Schritt"
    Page3              zweiter Druck
    InitiateCheckout   dritter Druck, also der Sprung zum Kontaktschritt
@@ -1299,11 +1300,17 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
   }
   window.jmrLpStatistik=statistik;
 
-  /* Ende der Seite: einmal, sobald der untere Rand (bis auf 40 px) im Bild ist. */
+  /* Scrolltiefe: lp_scroll_25, _50 und _75 je einmal, sobald der untere
+     Bildrand so viel Prozent der Seitenhoehe erreicht hat; lp_scroll_ende,
+     sobald der untere Rand (bis auf 40 px) im Bild ist. */
   function scrollEnde(){
     if(gaSchon.lp_scroll_ende) return;
-    var h=document.documentElement.scrollHeight-innerHeight;
-    if(h>0 && (window.pageYOffset||document.documentElement.scrollTop||0)>=h-40){ statistik('lp_scroll_ende'); }
+    var doc=document.documentElement, oben=window.pageYOffset||doc.scrollTop||0;
+    var h=doc.scrollHeight-innerHeight;
+    if(h<=0) return;
+    var anteil=(oben+innerHeight)/doc.scrollHeight*100;
+    [25,50,75].forEach(function(p){ if(anteil>=p) statistik('lp_scroll_'+p); });
+    if(oben>=h-40){ statistik('lp_scroll_ende'); }
   }
   addEventListener('scroll',scrollEnde,{passive:true});
 
@@ -1490,6 +1497,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     var opt=e.target.closest('.qopt');
     if(opt){
       if(jetzt===1 && typeof window.jmrLpStatistik==='function'){ window.jmrLpStatistik('quiz_start'); }
+      if(jetzt===1 && typeof window.jmrLpEreignis==='function'){ window.jmrLpEreignis('QuizStart'); }
       waehle(opt); return;
     }
     if(e.target.closest('.qzur-m')){ if(jetzt>1) zeige(jetzt-1,true); return; }
