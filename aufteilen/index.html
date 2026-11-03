@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+<!-- Schriften des ersten Bildschirms frueh laden (Inter nur als lateinischer Auszug, 38 statt 225 KB) -->
+<link rel="preload" href="../fonts/Inter-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Switzer-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Switzer-400.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Zweiter Meta-Pixel nur fuer diese Landingpage: Datensatz "JMR Architektur Website" im Portfolio JMR Architektur, verbunden mit dem Werbekonto der KfW-266-Kampagne -->
+<script>window.jmrMetaPixelZusatz='1806674793927212';</script>
+<script src="../js/jmr-consent.js?v=5" defer></script>
+<script src="../js/jmr-faq.js" defer></script>
+<script>window.jmrDankImKasten=true;</script>
+<script src="../js/jmr-formular.js?v=7" defer></script>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+<title>Abgeschlossenheitsbescheinigung deutschlandweit, ohne Ortstermin · jmr Architektur</title>
+<meta name="description" content="Mehrfamilienhaus nach WEG aufteilen: Wir zeichnen den Aufteilungsplan aus Ihren Bestandsplänen und beantragen die Abgeschlossenheitsbescheinigung bei Ihrer Bauaufsicht. Digital, in ganz Deutschland.">
+<link rel="canonical" href="https://jmr-architektur.de/aufteilen/">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0c1e2c">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://jmr-architektur.de/aufteilen/">
+<meta property="og:site_name" content="jmr Architektur">
+<meta property="og:title" content="Haus aufteilen, ohne Ortstermin · Abgeschlossenheitsbescheinigung deutschlandweit">
+<meta property="og:description" content="Aufteilungsplan aus Ihren Bestandsplänen, Antrag bei Ihrer Bauaufsicht, Originale an Sie oder Ihren Notar. Digital, in ganz Deutschland.">
+<meta property="og:image" content="https://jmr-architektur.de/img/og-bild.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Aufteilung nach WEG, jmr Architektur">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Abgeschlossenheitsbescheinigung deutschlandweit · jmr Architektur">
+<meta name="twitter:description" content="Aufteilungsplan und Antrag bei Ihrer Bauaufsicht, ohne Ortstermin.">
+<meta name="twitter:image" content="https://jmr-architektur.de/img/og-bild.jpg">
+<style>
+@font-face{font-family:'Inter';src:url('../fonts/Inter-Variable.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Inter';src:url('../fonts/Inter-Variable-latin.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0020-007E,U+00A0-00FF,U+0131,U+0152-0153,U+2010-2027,U+2030-203A,U+20AC,U+2122,U+2190-2199,U+2212}
+@font-face{font-family:'Space Grotesk';src:url('../fonts/SpaceGrotesk-Variable.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('../fonts/Switzer-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('../fonts/Switzer-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('../fonts/Switzer-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('../fonts/Switzer-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --steel:#2E86C7;--steel-d:#1F6FA5;--terra:#E1623D;--terra-d:#BE4A2A;
+  --accent:#E1623D;--accent-d:#BE4A2A;--spark:#E8A23C;--eco:#3fd187;
+  --bg:#F4F2EC;--bg-2:#ECE9E0;--panel:#FFFFFF;--panel-2:#F5F1E8;
+  --ink-text:#33424e;--ink-soft:#5b6b78;--white:#0B1C2B;--line:#e2ded2;
+  --disp:'Switzer','Space Grotesk',-apple-system,sans-serif;--sans:'Inter',-apple-system,sans-serif;--mono:'Inter',-apple-system,sans-serif;
+  --maxw:1180px;--pad:clamp(58px,8vh,104px);--r:16px;--r-lg:16px;
+  --shadow:0 30px 70px -30px rgba(11,28,43,.18);
+}
+body{font-family:var(--sans);color:var(--ink-text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);font-weight:600;letter-spacing:-.03em;line-height:1.06;color:var(--white)}
+h1{font-size:clamp(2.6rem,4.8vw,4rem);letter-spacing:-.04em;line-height:1.04}
+h2{font-size:clamp(1.9rem,3.8vw,3rem);letter-spacing:-.03em;line-height:1.07}
+h3{font-size:clamp(1.18rem,1.9vw,1.5rem);font-weight:600}
+a{color:inherit;text-decoration:none}
+em{font-style:normal;color:var(--accent)}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.3rem,4vw,3rem)}
+section{padding:var(--pad) 0;position:relative}
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:.7rem}
+.kicker::before{content:'';width:30px;height:2px;background:var(--accent);border-radius:2px}
+.kicker.c{justify-content:center}.kicker.c::before{display:none}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--sans);font-weight:600;font-size:.95rem;padding:1.05rem 1.9rem;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:.25s}
+.btn-accent{background:var(--accent-d);color:#fff !important;box-shadow:0 14px 34px -14px rgba(190,74,42,.7)}
+.btn-accent:hover{transform:translateY(-2px);background:#a83e22;box-shadow:0 20px 44px -14px rgba(190,74,42,.85)}
+.btn-accent *{color:#fff !important}
+.btn-ghost{background:transparent;color:var(--white);border-color:rgba(11,28,43,.28)}
+.btn-ghost:hover{border-color:var(--white);background:rgba(11,28,43,.05)}
+.btn .ar{transition:transform .25s}.btn:hover .ar{transform:translateX(4px)}
+/* NAV: auf der Landingpage bewusst ohne Menue, nur Marke und Telefon */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.3rem,4vw,3rem);background:rgba(244,242,236,.75);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:.3s}
+.nav.scrolled{border-bottom-color:var(--line);background:rgba(244,242,236,.92)}
+/* Solange der dunkle Hero hinter der Kopfzeile liegt, steht sie selbst
+   dunkel und traegt das helle Zeichen. Danach wie auf allen Seiten. */
+.nav.dunkel{background:rgba(12,30,44,.6);border-bottom-color:transparent}
+.nav.dunkel .brand .nm{color:#F7F5F0}
+.nav.dunkel .nlinks .ntel{color:#F7F5F0}
+.nav.dunkel .nlinks .ntel:hover{background:rgba(255,255,255,.1)}
+.nav.dunkel .nlinks .ntel svg{color:#F0A58C}
+.nav .brand .mk-hell{display:none}
+.nav.dunkel .brand .mk-dunkel{display:none}
+.nav.dunkel .brand .mk-hell{display:block}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand .mk{height:30px;width:auto;display:block}
+.brand .nm{font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--white)}
+.nlinks{display:flex;align-items:center;gap:.1rem;font-size:.86rem}
+.nlinks .ntel{display:inline-flex;align-items:center;gap:.5rem;color:var(--white);font-weight:600;font-size:.92rem;padding:.5rem .75rem;border-radius:8px;transition:.2s}
+.nlinks .ntel:hover{background:rgba(11,28,43,.05)}
+.nlinks .ntel svg{color:var(--accent);flex-shrink:0}
+@media(max-width:560px){.nlinks .ntel span{display:none}.brand .nm{font-size:.98rem}}
+/* HERO: links Argument, rechts das Formular */
+/* Der Hero steht dunkel, damit der helle Fragenkasten darauf herausspringt.
+   Farben nach Hausvorgabe: #0c1e2c als Grund, aufgehellte Terracotta
+   (#F0A58C) fuer Kicker und Symbole, weil das kraeftige #E1623D auf dem
+   dunklen Grund unter den noetigen Kontrast faellt. */
+.lhero{position:relative;padding:112px 0 clamp(2.4rem,5vh,4rem);overflow:hidden;background:#0c1e2c}
+#planbg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+.lhero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(120% 95% at 82% 8%,rgba(225,98,61,.30) 0%,transparent 50%),radial-gradient(120% 120% at 0% 100%,rgba(31,111,165,.34) 0%,transparent 58%)}
+.lhero .container{position:relative;z-index:3}
+/* Zwei Spalten: links das Argument, rechts das Formular ueber beide Zeilen.
+   Auf schmalen Geraeten wird daraus eine Spalte, und zwar in dieser
+   Reihenfolge: Ueberschrift, Formular, dann der Rest. So steht die
+   Anfrage auf dem Handy direkt unter der ersten Aussage und nicht erst
+   nach einer Bildschirmlaenge Text. */
+.lgrid{display:grid;grid-template-columns:1fr minmax(430px,510px);grid-template-rows:auto 1fr;column-gap:clamp(1.8rem,4vw,3.4rem);row-gap:1.6rem}
+.lcol-text{grid-column:1;grid-row:1;align-self:end}
+.lcol-arg{grid-column:1;grid-row:2;align-self:start}
+.lcol-form{grid-column:2;grid-row:1/3;align-self:center}
+@media(max-width:980px){
+  .lgrid{grid-template-columns:1fr;grid-template-rows:none;row-gap:2rem}
+  .lcol-text,.lcol-arg,.lcol-form{grid-column:1;grid-row:auto;align-self:auto}
+  .lcol-text{order:1}.lcol-form{order:2}.lcol-arg{order:3}
+}
+.lhero h1{margin:1.4rem 0 0;color:#F7F5F0}
+.lhero .kicker{color:#F0A58C;letter-spacing:.14em;text-wrap:balance}
+.lhero .kicker::before{display:none}
+.lhero .hero-lead{font-size:clamp(1.05rem,1.6vw,1.24rem);color:#c3d2dd;max-width:560px;margin:1.3rem 0 0}
+.lpoints{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.7rem}
+.lpoints li{position:relative;padding-left:2rem;font-size:1rem;color:#d5e0e8;line-height:1.5;max-width:560px}
+/* Kreis und Haken teilen sich denselben Mittelpunkt: 10 px von links,
+   .32em plus den halben Kreis von oben. Der Haken wird ueber
+   translate(-50%,-50%) mit seiner eigenen Mitte auf diesen Punkt gelegt
+   und erst danach gedreht. Vorher war er ueber em-Werte gesetzt und sass
+   dadurch rund drei Pixel zu hoch. */
+.lpoints li::before{content:'';position:absolute;left:0;top:.32em;width:20px;height:20px;border-radius:50%;background:rgba(225,98,61,.22);border:1px solid rgba(240,165,140,.55)}
+.lpoints li::after{content:'';position:absolute;left:10px;top:calc(.32em + 10px);width:9px;height:5px;border-left:2px solid #F0A58C;border-bottom:2px solid #F0A58C;border-bottom-left-radius:1px;transform:translate(-50%,-50%) rotate(-45deg)}
+.ltrust{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.1rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.16)}
+.ltrust .tp{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:#a8bcca}
+.ltrust .tp svg{color:#F0A58C;flex-shrink:0}
+.ltel{display:inline-flex;align-items:center;gap:.8rem;margin-top:1.4rem}
+.ltel .ic{color:#F0A58C;border:1px solid rgba(255,255,255,.2);border-radius:11px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.07)}
+.ltel .tx{font-size:.9rem;color:#a8bcca;line-height:1.35}
+.ltel .tx b{display:block;font-family:var(--disp);font-size:1.22rem;font-weight:600;color:#F7F5F0;letter-spacing:-.02em}
+/* Bei "Ueber uns" steht dieselbe Telefonzeile auf hellem Grund. */
+#ueber .ltel .ic{color:var(--accent);border-color:rgba(11,28,43,.15);background:rgba(255,255,255,.5)}
+#ueber .ltel .tx{color:var(--ink-soft)}
+#ueber .ltel .tx b{color:var(--white)}
+/* QUIZ-KASTEN */
+.ccard{position:relative;overflow:hidden;background:linear-gradient(135deg,#F5E4DA,#E3EBF5);border:1px solid rgba(255,255,255,.5);border-radius:var(--r-lg);padding:2.1rem 1.9rem;box-shadow:0 44px 100px -34px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.25)}
+.ccard{scroll-margin-top:82px}
+.ccard > *{position:relative;z-index:1}
+/* HANDY-LEISTE
+   Wer weiter unten liest, hat den Fragenkasten nicht mehr auf dem Schirm.
+   Dann steht am unteren Rand ein Streifen mit dem Weg zurueck zum Check
+   und der Telefonnummer. Auf dem Rechner gibt es ihn nicht. */
+.mcta{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;align-items:center;gap:.6rem;
+      padding:.6rem clamp(.8rem,4vw,1.2rem);padding-bottom:calc(.6rem + env(safe-area-inset-bottom,0px));
+      background:rgba(244,242,236,.95);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+      box-shadow:0 -14px 34px -20px rgba(11,28,43,.45);
+      transform:translateY(115%);visibility:hidden;
+      transition:transform .28s cubic-bezier(.16,1,.3,1),visibility .28s}
+.mcta.da{transform:none;visibility:visible}
+.mcta .mcta-b{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+      background:var(--accent-d);color:#fff;font-family:var(--sans);font-weight:600;font-size:.95rem;
+      border-radius:8px;padding:.88rem 1rem;box-shadow:0 12px 26px -14px rgba(190,74,42,.85)}
+.mcta .mcta-t{flex:none;width:50px;height:50px;display:inline-flex;align-items:center;justify-content:center;
+      border:1px solid rgba(11,28,43,.2);border-radius:8px;color:var(--accent-d);background:#fff}
+/* In der Leiste steht WhatsApp statt der Telefonnummer: Die Nummer steht
+   schon oben in der Kopfzeile, und ueber WhatsApp schreibt es sich
+   nebenbei. Der schwebende runde Knopf tritt derweil zurueck, sonst
+   staende WhatsApp zweimal untereinander. */
+.mcta .mcta-wa{background:#25D366;border-color:#25D366;color:#fff}
+.mcta .mcta-wa svg{width:27px;height:27px;display:block}
+/* WHATSAPP
+   Runder Knopf unten rechts, auf allen Geraeten. Er sitzt ueber der
+   Handy-Leiste, sobald die auftaucht, und verschwindet, solange das
+   Datenschutz-Banner unten steht. Der Verweis laedt nichts von WhatsApp
+   nach: Erst der Druck darauf oeffnet die App. */
+.wa{position:fixed;right:clamp(.85rem,3vw,1.6rem);bottom:clamp(.85rem,3vw,1.6rem);z-index:95;
+    width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:#25D366;color:#fff;
+    box-shadow:0 16px 32px -12px rgba(37,211,102,.65),0 4px 12px rgba(11,28,43,.3);
+    /* Der Knopf bekommt eine eigene Ebene auf der Grafikkarte. Ohne sie
+       zeichnen manche Browser einen festen Knopf beim Rollen Bild fuer
+       Bild neu, und er zittert. Die Verschiebung um 0 haelt die Ebene,
+       contain haelt den Neuzeichenbereich beim Knopf selbst. */
+    transform:translate3d(0,0,0);will-change:transform;backface-visibility:hidden;contain:layout paint;
+    transition:transform .22s,opacity .25s,visibility .25s}
+/* Nur mit echtem Zeiger: Auf Tippgeraeten wechselt der Schwebezustand
+   beim Rollen unter dem Finger staendig hin und her, und der Knopf
+   waechst und schrumpft dabei. Genau das sah nach Zittern aus. */
+@media(hover:hover) and (pointer:fine){
+  .wa:hover{transform:translate3d(0,-3px,0) scale(1.05)}
+}
+.wa:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.wa svg{width:31px;height:31px;display:block;pointer-events:none}
+.wa.weg{opacity:0;visibility:hidden;pointer-events:none}
+body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.wa{transition:none}.wa:hover{transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:reduce){.mcta{transition:none}}
+/* Der Kopf des Kastens steht mittig: Ueberschrift, Einleitungssatz und
+   die laufende Frage auf einer Achse. Linksbuendig sass die Frage
+   ueber den Antworten wie ein Absatz, mittig liest sie sich als
+   Ueberschrift des Schrittes. */
+.ccard h3{margin-bottom:.3rem;color:var(--white);font-size:1.32rem;text-align:center}
+.ccard .ds{color:var(--ink-soft);font-size:.9rem;margin-bottom:1.3rem;text-align:center}
+@media(max-width:560px){.ccard{padding:1.6rem 1.3rem}}
+.qbar{display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem;min-height:26px}
+/* Zurueck steht links, Balken und Zaehler stehen rechts. Der Balken
+   nimmt deshalb nicht mehr den ganzen Rest ein, sondern haengt sich mit
+   margin-left an das rechte Ende. */
+.qbar .qline{flex:0 1 150px;min-width:48px;margin-left:auto;height:4px;border-radius:999px;background:rgba(11,28,43,.1);overflow:hidden}
+.qbar .qfill{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--steel-d),var(--accent));transition:width .45s cubic-bezier(.16,1,.3,1)}
+.qbar .qnum{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);white-space:nowrap}
+/* Die drei Fragen sind unterschiedlich lang, und nur zwei von ihnen haben
+   einen Zurueck-Knopf. Ohne Gegenmassnahme wuerde der Kasten bei jedem
+   Schritt springen. Das Skript misst deshalb die hoechste der drei Fragen
+   und setzt sie hier als Mindesthoehe. Der letzte Schritt mit dem Formular
+   darf darueber hinauswachsen. */
+.qsteps{transition:min-height .3s cubic-bezier(.16,1,.3,1)}
+@media(prefers-reduced-motion:reduce){.qsteps{transition:none}}
+.qstep[hidden]{display:none}
+/* Die drei Fragen sind gleich hoch (hoeheAngleichen). "Naechster Schritt" sitzt unten,
+   damit der Knopf bei jeder Frage an derselben Stelle steht, auch bei nur zwei Antworten. */
+.qsteps{display:flex;flex-direction:column}
+.qstep:not([hidden]){flex:1 0 auto;display:flex;flex-direction:column}
+.qstep .qnav{margin-top:auto;padding-top:1.05rem}
+/* Ohne JavaScript bleibt der Fragenteil stehen, wo er ist. Dann zumindest
+   die beiden Wege nennen, die auch ohne Skript funktionieren. */
+.qnoscript{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;font-size:.92rem;line-height:1.55;color:var(--ink-text)}
+.qnoscript a{color:var(--accent-d);font-weight:600}
+/* DIE LAUFENDE FRAGE
+   Sie steht oben im Kasten, wo vorher die Kapsel "4 Fragen · 1 Minute"
+   stand, und wechselt mit jedem Schritt. Ohne Rahmen und ohne Feld: Die
+   Kaestchen vor den Antworten sagen von selbst, dass ausgewaehlt wird,
+   und ein Kasten im Kasten hat nur Hoehe gekostet. */
+.qaktuell{font-family:var(--disp);font-weight:600;font-size:1.28rem;letter-spacing:-.025em;color:var(--white);line-height:1.24;margin:.15rem 0 1.1rem;text-align:center}
+.qaktuell:focus{outline:none}
+/* Fragezeile gleich hoch fuer alle drei Fragen (min-height per Skript), Text mittig */
+.qaktuell{display:flex;align-items:center;justify-content:center}
+/* Rechner: Frage groesser */
+@media(min-width:701px){
+  .ccard{padding-top:2.5rem}
+  .qaktuell{font-size:1.52rem;margin:0 0 1rem}
+}
+/* Zurueck gibt es nur als Pfeil links neben dem Terrakotta-Knopf, ab Frage 2.
+   Die alte Zeile mit "Zurueck" (.qbar) bleibt fuer das Skript im Code, ist aber aus. */
+.qbar{display:none !important}
+.qstep .qnav{flex-direction:row;flex-wrap:wrap;gap:.5rem}
+.qstep .qnav .qnext{flex:1 1 0;min-width:0;width:auto;justify-content:center;padding-left:1rem;padding-right:1rem}
+.qstep .qnav .qwarn{flex-basis:100%}
+.qsend{display:flex;gap:.5rem}
+.qsend #kfSubmit{flex:1 1 0;min-width:0;justify-content:center}
+.qzur-m{display:inline-flex;align-items:center;justify-content:center;flex:none;width:3.3rem;
+        background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink-soft);
+        font-size:1.15rem;cursor:pointer;padding:0;transition:border-color .2s,color .2s}
+.qzur-m:hover{border-color:var(--accent);color:var(--accent-d)}
+.qopts{display:flex;flex-direction:column;gap:.55rem}
+.qopt{display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;cursor:pointer;font-family:var(--sans);transition:border-color .2s,box-shadow .2s,transform .2s}
+.qopt:hover{border-color:rgba(225,98,61,.55);transform:translateY(-1px);box-shadow:0 12px 26px -18px rgba(11,28,43,.5)}
+.qopt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.qopt.aktiv{border-color:var(--accent);box-shadow:0 0 0 3px rgba(225,98,61,.15)}
+.qopt .qo-t{display:block;font-weight:600;font-size:.95rem;color:var(--white);line-height:1.3}
+.qopt .qo-s{display:block;font-size:.83rem;color:var(--ink-soft);line-height:1.4;margin-top:.15rem}
+/* ZURUECK steht oben rechts in der Zeile mit dem Fortschrittsbalken.
+   Vorher hatte er eine eigene Zeile unter dem Balken, und weil er im
+   ersten Schritt fehlt, ruckten die Antworten beim Weiterschalten um
+   seine Hoehe nach unten. Jetzt steht er ausserhalb der Schritte und
+   wird im ersten Schritt nur unsichtbar geschaltet, nicht entfernt:
+   Der Platz bleibt reserviert, es ruckt nichts. */
+.qzur{display:inline-flex;align-items:center;gap:.4rem;flex:none;margin:0;background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--ink-soft);padding:.3rem .55rem .3rem .4rem;border-radius:8px;transition:color .18s,background .18s;line-height:1.15;min-height:26px}
+.qzur:hover{color:var(--accent-d);background:rgba(11,28,43,.06)}
+.qzur .zp{font-size:1.1em;line-height:1}
+.qzur.aus{display:none}
+.qzur.aus + .qline{flex:1 1 auto;margin-left:0}
+/* Auf dem Handy bleibt der Zeigerzustand nach dem Tippen haengen. Dort
+   also kein Schwebe-Hintergrund. */
+@media(hover:none){.qzur:hover{color:var(--ink-soft);background:none}}
+/* AUSWAHLKAESTCHEN
+   Der Pfeil rechts hat gemeint: Antippen springt weiter. Weitergeschaltet
+   wird jetzt unten von Hand, deshalb steht links ein Kaestchen, das bei
+   der gewaehlten Antwort ein Haekchen zeigt. */
+.qopt .qo-box{flex:none;width:22px;height:22px;border-radius:6px;border:1.6px solid rgba(11,28,43,.3);background:#fff;position:relative;transition:background .18s,border-color .18s}
+.qopt .qo-box::after{content:'';position:absolute;left:50%;top:48%;width:10px;height:5px;border-left:2.2px solid #fff;border-bottom:2.2px solid #fff;border-bottom-left-radius:1px;transform:translate(-50%,-65%) rotate(-45deg) scale(.5);opacity:0;transition:opacity .16s,transform .16s}
+.qopt:hover .qo-box{border-color:rgba(225,98,61,.7)}
+.qopt.aktiv .qo-box{background:var(--accent);border-color:var(--accent)}
+.qopt.aktiv .qo-box::after{opacity:1;transform:translate(-50%,-65%) rotate(-45deg) scale(1)}
+.qopt .qo-tx{display:block}
+/* WEITER-KNOPF
+   Traegt die Leitfarbe und sitzt ueber die volle Breite unter den
+   Antworten. Solange nichts gewaehlt ist, steht er blass da und sagt beim
+   Antippen, was fehlt - abgeschaltet waere er auf dem Handy nicht als
+   Knopf zu erkennen. */
+.qnav{margin-top:1.05rem;display:flex;flex-direction:column;align-items:stretch}
+.qnext{width:100%;justify-content:center;padding:1rem 1.4rem}
+.qnext[aria-disabled="true"]{opacity:.42;box-shadow:none}
+.qnext[aria-disabled="true"]:hover{transform:none;background:var(--accent-d)}
+.qnext.bereit{animation:qpuls .45s cubic-bezier(.16,1,.3,1) 1}
+@keyframes qpuls{0%{transform:scale(.98)}55%{transform:scale(1.022)}100%{transform:scale(1)}}
+.qwarn{margin:.6rem 0 0;font-size:.84rem;font-weight:600;color:var(--accent-d);text-align:center}
+.qopts.fehlt{animation:qwackel .38s ease-in-out 1}
+@keyframes qwackel{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){.qnext.bereit,.qopts.fehlt{animation:none}}
+
+.qsum-lab{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:.45rem}
+.qsum{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
+/* Sagt vor dem Absenden, was danach passiert: Text sofort auf dem Schirm,
+   Anruf zusaetzlich. Vorher stand hier "Wohin duerfen wir die Einschaetzung
+   schicken?", was nach Versand per E-Mail klang. */
+.qhinweis{font-size:.9rem;color:var(--ink-soft);line-height:1.5;margin:-.3rem 0 1rem}
+.qchip{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent-d);background:rgba(225,98,61,.1);border:1px solid rgba(225,98,61,.3);border-radius:999px;padding:.28rem .7rem}
+.fld{margin-bottom:.85rem}.fld label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+/* Telefon und Postleitzahl sind Pflicht, damit ein Rueckruf moeglich ist und
+   klar ist, wo das Objekt steht. Gekennzeichnet wird deshalb das eine Feld,
+   das freiwillig ist, nicht die beiden anderen. */
+.ccard .fld label{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.fld label .opt{font-size:.92em;letter-spacing:.04em;text-transform:none;color:#94a3ad;font-style:italic}
+.fld input,.fld select,.fld textarea{width:100%;padding:.85rem 1.05rem;border:1px solid var(--line);border-radius:12px;font-family:var(--sans);font-size:.95rem;background:#FFFFFF;transition:.2s;color:var(--white);line-height:1.12}
+.fld input::placeholder,.fld textarea::placeholder{color:#6b7c88}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--accent);background:#FFFFFF;box-shadow:0 0 0 3px rgba(225,98,61,.15)}
+.fld-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:345px){.fld-row{grid-template-columns:1fr}}
+@media(max-width:560px){.fld{margin-bottom:.75rem}.fld label{margin-bottom:.3rem}.fld input,.fld textarea{font-size:16px;padding:.72rem .9rem}}
+.kf-status{margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;font-size:.92rem;line-height:1.5}
+.kf-status.ok{background:rgba(63,209,135,.14);border:1px solid rgba(63,209,135,.45);color:#158a5a;font-weight:600}
+.kf-status.err{background:rgba(214,69,69,.1);border:1px solid rgba(214,69,69,.4);color:#b3271e}
+.form-note{font-family:var(--mono);font-size:.66rem;color:var(--ink-soft);margin-top:.85rem;line-height:1.55;text-align:center}
+.qvor{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin-top:.9rem;justify-content:center}
+.qvor span{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--ink-soft)}
+.qvor span::before{content:'';width:14px;height:14px;border-radius:50%;background:rgba(63,209,135,.2);border:1px solid rgba(63,209,135,.5);flex-shrink:0}
+/* EINORDNUNG nach dem Absenden */
+/* Die Einschaetzung steht ohne eigenen Rahmen im Formularkasten: ein Kasten
+   im Kasten wirkte wie ein zweites Fenster. */
+.qerg{display:none;margin-top:1.1rem}
+.qerg.da{display:block;animation:qauf .5s cubic-bezier(.16,1,.3,1) both}
+@keyframes qauf{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* Die Ueberschrift traegt die Optik des frueheren Kennzeichens darueber:
+   Terrakotta, Grossbuchstaben, gesperrt. */
+/* Die Ueberschrift der Einschaetzung war eine kleine gesperrte Kapsel in
+   Terracotta und ging neben dem Text unter. Jetzt steht sie gross und
+   fett auf derselben Achse wie zuvor die Frage. */
+.qerg h4{font-family:var(--disp);font-size:1.7rem;letter-spacing:-.025em;text-transform:none;font-weight:700;color:var(--white);margin:.1rem 0 .9rem;line-height:1.2;text-align:center}
+/* Die Kapsel "Anfrage gesendet" setzt js/jmr-formular.js in die Ueberschrift
+   des Kastens. Sie steht rechtsbuendig in der Flucht des Kastens, waehrend
+   die Ueberschrift links bleibt. Der Selektor ist bewusst eine Stufe genauer
+   als der im Skript, denn dessen Stilblatt wird spaeter in den Kopf gehaengt.
+   Das margin-left haelt die Kapsel auch dann rechts, wenn die Zeile auf
+   schmalen Geraeten umbricht. */
+/* Die Kapsel "Anfrage gesendet" aus js/jmr-formular.js wird hier nicht
+   gebraucht: Das Dankfenster hat bestaetigt, und darunter steht die
+   Einschaetzung. Der Selektor ist eine Stufe genauer als der im Skript,
+   dessen Stilblatt spaeter in den Kopf gehaengt wird. */
+.ccard .jmrf-marke{display:none}
+/* Blocksatz mit Silbentrennung: ohne Trennung reisst der deutsche
+   Wortschatz in schmalen Spalten zu grosse Luecken. */
+.qerg .qe-p{font-size:.93rem;line-height:1.6;color:var(--ink-soft);text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.qerg .qe-p+.qe-p{margin-top:.7rem}
+.qerg .qe-p.c{text-align:center}
+.qerg .qe-p b{color:var(--white);font-weight:600}
+/* "Unser Vorschlag:" steht als eigene Zeile ueber dem Absatz. */
+.qerg .qe-h{display:block;margin-bottom:.15rem;color:var(--white);font-weight:600;text-align:left}
+.qerg .qe-note{font-family:var(--mono);font-size:.64rem;color:var(--ink-soft);line-height:1.55;margin-top:1rem;padding-top:.9rem;border-top:1px solid var(--line)}
+/* ABSCHNITTSKOPF */
+.sh{max-width:760px;margin-bottom:2.8rem}
+.sh.c{margin-left:auto;margin-right:auto;text-align:center}
+.sh.c .kicker{justify-content:center}.sh.c .kicker::before{display:none}
+.sh h2{margin:1.2rem 0 0}.sh p{font-size:1.08rem;color:var(--ink-soft);margin-top:1rem}
+.sh.c p{margin-left:auto;margin-right:auto}
+/* ERGEBNIS-KACHELN */
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media(max-width:900px){.res-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.res-grid{grid-template-columns:1fr}}
+.res{position:relative;display:flex;flex-direction:column;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1.9rem 1.7rem;overflow:hidden;isolation:isolate}
+.res::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(225,98,61,.16),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+.res>*{position:relative;z-index:1}
+.res:hover::before{opacity:1}
+@media(hover:none){.res::before,.res:hover::before{opacity:0}}
+.res-ic{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(150deg,var(--terra),var(--terra-d));box-shadow:0 12px 26px -12px rgba(225,98,61,.55);margin-bottom:1.2rem;flex-shrink:0;transition:transform .3s}
+.res-ic svg{width:24px;height:24px}
+.res:hover .res-ic{transform:scale(1.06) rotate(-3deg)}
+@media(prefers-reduced-motion:reduce){.res-ic,.res:hover .res-ic{transform:none}}
+.res h3{font-size:1.13rem;margin-bottom:.55rem;line-height:1.25;min-height:2.5em}
+.res p{color:var(--ink-soft);font-size:.94rem;line-height:1.55}
+.res>.res-opt{position:absolute;top:1.15rem;right:1.15rem;z-index:2;font-family:var(--mono);font-size:.55rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);background:rgba(11,28,43,.045);border:1px solid var(--line);border-radius:999px;padding:.2rem .58rem;white-space:nowrap}
+.res-note{max-width:780px;margin:2.4rem auto 0;text-align:center;font-size:1rem;color:var(--ink-soft);line-height:1.65}
+.res-note b{color:var(--white);font-weight:600}
+/* HINWEIS-BAND */
+.warnband{margin-top:2.4rem;display:flex;gap:1.2rem;align-items:flex-start;background:rgba(225,98,61,.09);border:1px solid rgba(225,98,61,.34);border-radius:var(--r-lg);padding:1.5rem 1.7rem}
+.warnband .wi{flex-shrink:0;width:42px;height:42px;border-radius:11px;background:rgba(225,98,61,.16);color:var(--accent-d);display:flex;align-items:center;justify-content:center}
+.warnband p{font-size:.99rem;color:var(--ink-text);line-height:1.62;margin:0}
+.warnband b{color:var(--white)}
+@media(max-width:560px){.warnband{flex-direction:column;gap:1rem;padding:1.3rem 1.2rem}}
+/* ABLAUF */
+.flow{position:relative;max-width:920px;margin:0 auto;padding:1rem 0}
+.flow-rail{position:absolute;left:50%;transform:translateX(-50%);top:.4rem;bottom:.4rem;width:2px;background:rgba(11,28,43,.12);overflow:hidden;z-index:0}
+.flow-rail::after{content:"";position:absolute;left:0;top:0;width:100%;height:var(--fp,0%);background:linear-gradient(var(--steel),var(--accent))}
+.fstep{position:relative;z-index:1;width:calc(50% - 1.2rem);box-sizing:border-box;background:linear-gradient(135deg,#F0D9CD,#DCE6F2);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem 1.7rem;margin-bottom:-.6rem;
+  transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .55s,filter .55s,box-shadow .55s,border-color .55s,background .55s;
+  opacity:.26;filter:saturate(.5);}
+.fstep.left{margin-right:auto;text-align:right;transform-origin:right center;transform:scale(.88) translateX(-8px)}
+.fstep.right{margin-left:auto;text-align:left;transform-origin:left center;transform:scale(.88) translateX(8px)}
+.fstep .fhead{display:flex;align-items:center;gap:.9rem}
+.br-m{display:none}
+.fstep.left .fhead{justify-content:flex-end}
+.fstep.right .fhead{justify-content:flex-start}
+.fstep .sidx{font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,3.2vw,2.4rem);color:var(--ink-soft);letter-spacing:-.03em;line-height:1;transition:.55s}
+.fstep .stitle{font-family:var(--disp);font-weight:600;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--white);letter-spacing:-.02em;margin:0;transition:.55s;white-space:nowrap}
+.fstep p{color:var(--ink-soft);font-size:.97rem;margin:.6rem 0 0;transition:.55s}
+.fstep.left p{margin-left:auto}
+.fstep.active{opacity:1;filter:none;background:linear-gradient(135deg,#F0D9CD,#DCE6F2);border-color:rgba(225,98,61,.55);box-shadow:0 26px 60px -28px rgba(225,98,61,.5),0 0 0 1px rgba(225,98,61,.22)}
+.fstep.left.active{transform:scale(1.05) translateX(-2px)}
+.fstep.right.active{transform:scale(1.05) translateX(2px)}
+.fstep.active .sidx{color:var(--accent)}
+@media(prefers-reduced-motion:reduce){.fstep{opacity:1;filter:none;transform:none}}
+@media(max-width:680px){
+  .flow-rail{left:11px;transform:none}
+  .fstep,.fstep.left,.fstep.right{width:auto;margin:0 0 1.2rem 2.4rem;text-align:left;transform-origin:left center;transform:scale(.92)}
+  .fstep.left .fhead,.fstep.right .fhead{justify-content:flex-start}
+  .br-m{display:inline}
+  /* Kontaktschritt: die drei Zeilen mit gruenen Punkten unter "Anfrage senden" entfallen am Handy */
+  .qvor{display:none}
+  .fstep.left p{margin-left:0}
+  .fstep.left.active,.fstep.right.active{transform:scale(1.02)}
+  .fstep .stitle{white-space:normal}
+  /* Schritt-Titel am Handy einzeilig ("Maximale Förderung planen"): etwas weniger Innenabstand, Titel mit der Breite skaliert */
+  .fstep,.fstep.left,.fstep.right{padding-left:1.1rem;padding-right:1.1rem}
+  .fstep .fhead{gap:.7rem}
+  .fstep .stitle{font-size:clamp(.9rem,calc(7.9vw - 12.5px),1.1rem)}
+}
+/* UEBER DAS BUERO */
+.team-hero{display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:clamp(1.6rem,4vw,3rem);align-items:start;margin-top:1rem}
+@media(max-width:860px){.team-hero{grid-template-columns:1fr;justify-items:center}}
+.team-photo{margin:0;width:100%;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 90px -40px rgba(11,28,43,.4)}
+@media(max-width:860px){.team-photo{width:100%;max-width:420px}}
+.team-img{display:block;width:100%;height:auto}
+.team-story p{color:var(--ink-text);font-size:1.02rem;line-height:1.7}
+.team-story p+p{margin-top:1rem}
+@media(max-width:860px){.team-story{max-width:560px}}
+/* FAQ */
+.faq-wrap{max-width:820px;margin:0 auto}
+.faq{border-bottom:1px solid var(--line);transition:border-color .25s}
+.faq summary{list-style:none;cursor:pointer;padding:1.4rem .2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:var(--disp);font-weight:600;font-size:1.1rem;color:var(--white)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .fq-i{flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--accent);transition:.25s;font-size:1.2rem;line-height:1}
+.faq[open] summary .fq-i{background:var(--accent);color:#fff;border-color:var(--accent);transform:rotate(45deg)}
+.faq .fq-a{padding:0 .2rem 1.4rem;color:var(--ink-soft);font-size:.97rem;line-height:1.65;max-width:680px}
+.fq-a p+p{margin-top:.85rem}
+/* ABSCHLUSS-BAND */
+.endcta{background:radial-gradient(120% 120% at 12% 0%,rgba(225,98,61,.16),transparent 55%),linear-gradient(150deg,#2C4A62,#16303F);text-align:center}
+.endcta h2{color:#fff;max-width:820px;margin:1.2rem auto 0}
+.endcta p{color:#c9d6e0;font-size:1.08rem;max-width:620px;margin:1.1rem auto 0}
+.endcta .eact{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2rem}
+.endcta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+.endcta .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.endcta .kicker{color:#f0a58c}
+.endcta .kicker::before{background:#f0a58c}
+/* FOOTER */
+.footer{padding:3rem 0 2.4rem;background:#08151F;color:#7d92a1;font-size:.85rem;position:relative;overflow:hidden}
+.ftop{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem;padding-bottom:1.8rem;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:1.5rem;position:relative;z-index:2}
+.ftop .bn{font-family:var(--mono);color:#7d92a1;font-weight:400;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+.ftop .bn .flogo{height:30px;width:auto;display:block;margin-bottom:.8rem}
+.ftop .bn small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;color:#7d92a1;text-transform:uppercase;margin-top:.4rem}
+.fcol{display:flex;flex-direction:column;align-items:flex-end;gap:1rem;position:relative;z-index:2}
+@media(max-width:760px){.fcol{align-items:flex-start}}
+.fnav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:1.4rem}.fnav a{color:#7d92a1}.fnav a:hover{color:#fff}
+@media(max-width:760px){.fnav{justify-content:flex-start;gap:.1rem 1.4rem}.fnav a{display:inline-block;padding:.62rem 0}.fbot a{display:inline-block;padding:.5rem .15rem}.brand{padding:.4rem 0}.footer .bn small{font-size:.7rem;line-height:1.5}}
+.fbot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.72rem;color:#5a6f7d;position:relative;z-index:2}
+.footer .spot{position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(75,163,214,.16),transparent 62%);opacity:0;transition:opacity .5s}
+.footer:hover .spot{opacity:1}
+/* UMBRUCH LANGER KOMPOSITA */
+h1,h2,h3,.stitle,.qaktuell{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+h1,h2,h3{text-wrap:balance}
+p,li,summary{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+p{text-wrap:pretty}
+.res,.fstep{min-width:0}
+/* SICHTBARKEIT JE NACH BREITE */
+.m-only{display:none}
+.m-only-i{display:none}
+@media(max-width:700px){.d-only{display:none}.d-only-i{display:none}.m-only{display:block}.m-only-i{display:inline}}
+/* MOTION */
+.fade{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.fade.vis{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+/* Hero: sofort sichtbar, nur eine kurze Bewegung nach oben (ohne Ausblenden, damit der erste Inhalt nicht wartet) */
+.hin{animation:hin .7s cubic-bezier(.16,1,.3,1) both}.hin2{animation-delay:.08s}
+@keyframes hin{from{transform:translateY(14px)}to{transform:none}}
+@media(prefers-reduced-motion:reduce){.hin{animation:none}}
+.prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:200}
+.prog-b{height:100%;width:0;background:linear-gradient(90deg,#1F6FA5,#5BD0E0,#E1623D)}
+@media(prefers-reduced-motion:reduce){.fade{transition:none;opacity:1;transform:none}.qerg.da{animation:none}}
+/* Aufklapp-Zeilen fuer die Ergebnis-Kacheln auf schmalen Geraeten
+   (gleiche Bauart wie auf den Unterseiten, bedient von js/jmr-faq.js) */
+.akk>summary{display:block;list-style:none;cursor:default}
+.akk>summary::-webkit-details-marker{display:none}
+.akk>summary::marker{content:''}
+.akk-x{display:none}
+@media (max-width:560px){
+  .akk-liste{gap:0;border-top:1px solid var(--line)}
+  .akk{--zeile:58px;display:block;background:none;border:0;transform:none;
+       border-bottom:1px solid var(--line);border-radius:0;padding:0}
+  .akk::before,.akk::after,.akk:hover::before,.akk:hover::after{display:none}
+  .akk>summary{display:flex;align-items:center;gap:.6rem;padding:.5rem .1rem;
+               min-height:var(--zeile);cursor:pointer}
+  .akk .res-ic{width:28px;height:28px;border-radius:9px;margin:0;box-shadow:none}
+  .akk .res-ic svg{width:15px;height:15px}
+  .akk:hover .res-ic{transform:none}
+  .akk h3{flex:1;min-width:0;margin:0;min-height:0;font-size:.95rem;line-height:1.25;
+          display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .akk-x{display:flex;flex-shrink:0;width:24px;height:24px;border-radius:50%;
+         border:1.5px solid var(--line);align-items:center;justify-content:center;
+         color:var(--accent);font-size:1.05rem;line-height:1;transition:.25s}
+  .akk[open]>summary .akk-x{background:var(--accent);color:#fff;
+                            border-color:var(--accent);transform:rotate(45deg)}
+  .akk-b{padding:0 .1rem 1.1rem calc(28px + .6rem)}
+  .akk-b p{font-size:.9rem}
+  .akk>.res-opt{top:var(--zeile);left:calc(28px + .6rem);right:auto;font-size:.68rem}
+  .akk:not([open])>.res-opt{display:none}
+  .akk-mark[open]>.akk-b{padding-top:1.95rem}
+}
+@media (max-width:375px){.akk h3{font-size:.88rem}}
+
+/* ===================================================================
+   HANDY-FASSUNG  ·  28.08.2026
+   Alles in diesem Block gilt nur bis 700 px. Am Bild auf dem Rechner
+   aendert sich dadurch nichts.
+
+   Leitgedanke, wie auf der Landingpage der Energieberatung: Auf dem
+   Handy zaehlt nur der Weg ins Formular. Deshalb steht oben so wenig
+   Text wie moeglich, der Fragenkasten beginnt fast am oberen Rand,
+   und direkt darunter folgt das Gesicht zum Angebot.
+   =================================================================== */
+.ltel-m{display:none}
+
+@media(max-width:700px){
+  /* 1  Der Fragenkasten rueckt nach oben: weniger Luft ueber der
+        Ueberschrift, kein Einleitungssatz, kleinere Zeile. Ueberschrift
+        und Kicker stehen mittig, und die Ueberschrift ist als Frage
+        formuliert, damit sie den Leser direkt anspricht. */
+  /* Unten mehr Luft, damit der dunkle Grund auf dem Handy ein Stueck
+     unter dem Fragenkasten weiterlaeuft und der Kasten nicht auf der
+     Kante zum naechsten Abschnitt sitzt. */
+  .lhero{padding:78px 0 4rem}
+  .lhero .hero-lead{display:none}
+  .lcol-text{text-align:center}
+  /* Handy: ohne Kicker, Ueberschrift etwas groesser (30.000 € Zuschuss passt bis 320 px in eine Zeile) */
+  .lhero h1{font-size:clamp(2.1rem,10.4vw,2.7rem);margin-top:0}
+  .lhero .kicker{display:none}
+  /* Enger als vorher: Frage, Antworten und der Weiter-Knopf sollen auf dem
+     Handy zusammen auf einen Schirm passen. Wer den Knopf erst nach dem
+     Rollen sieht, sieht den naechsten Schritt nicht. */
+  .lgrid{row-gap:1.1rem}
+
+  /* 2  Im Kasten steht oben, worum es geht, darunter als Kapsel der
+        Umfang. Beides in einer Zeile wurde auf 360 px zu gedraengt. */
+  .ccard{padding:1.35rem 1.15rem}
+  /* Die Ueberschrift im Kasten hiess auf dem Handy "Kostenloser
+     Kurz-Check". Genau das steht jetzt als Zeile ueber der grossen
+     Ueberschrift, also faellt sie hier weg. Am Rechner heisst sie
+     "Ihre Ersteinschaetzung" und bleibt stehen. */
+  .ccard h3{display:none}
+
+  /* 3  Antwortfelder: ohne Beschreibungstext, dafuer groessere Tippflaeche
+        und ein weicher Schein im Terracotta-Ton. So passen alle vier
+        Antworten ohne Scrollen auf den Schirm. */
+  .qopt .qo-s{display:none}
+  /* Ja/Nein: die kurze Erlaeuterung bleibt auch auf dem Handy stehen */
+  .qstep[data-step="2"] .qopt .qo-s{display:block}
+  .qopt{padding:.85rem 1rem;border-color:rgba(225,98,61,.3);
+        box-shadow:0 0 0 3px rgba(225,98,61,.06),0 10px 22px -16px rgba(190,74,42,.75)}
+  .qopt .qo-t{font-size:.98rem}
+  .qopt:active{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.14)}
+  .qopt.aktiv{border-color:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.16),0 10px 22px -16px rgba(190,74,42,.75)}
+  .qopts{gap:.45rem}
+  .qaktuell{font-size:1.34rem;margin:0 0 .85rem}
+  .qbar{margin-bottom:.8rem}
+  .ccard{padding-top:1.2rem}
+
+  /* 3b Weiter-Knopf auf dem Handy ueber die volle Breite. */
+  .qzur{font-size:.82rem;padding-left:.3rem;padding-right:.35rem}
+  .qnav{margin-top:.8rem}
+  .qnext{padding:.98rem 1.2rem;font-size:1rem}
+
+  /* 4  Reihenfolge der Abschnitte: nach dem Fragenkasten kommt sofort,
+        wer dahintersteht. Erst danach die Erklaerungen. Moeglich ist das,
+        weil der Seitenkoerper hier zu einer Spalte wird und die
+        Abschnitte ihre Reihenfolge selbst bestimmen. */
+  /* Die Argumentspalte (drei Haken, "Bauvorlageberechtigt", Telefonzeile)
+     stand auf dem Handy unter dem Fragenkasten und schob "Ueber uns" nach
+     unten. Auf dem Handy entfaellt sie deshalb; die Telefonnummer steht in
+     der Kopfzeile und noch einmal bei "Ueber uns". Auf dem Rechner bleibt
+     sie stehen, dort steht sie links neben dem Kasten. */
+  .lcol-arg{display:none}
+  .mcta{display:flex}
+  body{display:flex;flex-direction:column}
+  .lhero{order:1}
+  #ueber{order:2;background:var(--bg) !important}
+  #leistung{order:3}
+  #ablauf{order:4}
+  #faq{order:5}
+  .endcta{order:6}
+  .footer{order:7}
+
+  /* 5  Ueber das Buero: Bild, zwei Saetze, Telefonnummer. Mehr nicht. */
+  #ueber{padding-top:2.6rem}
+  #ueber .sh{margin-bottom:1.4rem}
+  .team-hero{gap:1.2rem;margin-top:0}
+  .team-photo{max-width:340px}
+  .team-story{text-align:center}
+  .team-story p{font-size:.98rem}
+  .ltel-m{display:inline-flex;margin-top:1.2rem;text-align:left}
+
+  /* 6  Der Schlusssatz des Ergebnis-Abschnitts faellt weg. Er richtet sich
+        an den Notar-Teil und ist auf dem Handy nur ein langer Block. */
+  #leistung .res-note{display:none}
+  .warnband{margin-top:1.8rem}
+
+  /* 7  Beschriftungen ueber den Feldern entfallen, der Platzhalter im Feld
+        genuegt. Ausgeblendet wird nur fuer das Auge: Die Beschriftung
+        bleibt im Quelltext stehen, damit Vorlesesoftware und die
+        automatische Ausfuellhilfe des Browsers weiter wissen, welches
+        Feld welches ist. Dieselbe Technik nutzt aufteilung.html bereits
+        fuer die schmalen Feldpaare. */
+  .ccard .fld label{position:absolute;width:1px;height:1px;padding:0;margin:0;
+                    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .ccard .fld{margin-bottom:.6rem}
+
+  /* 8  Letzter Schritt: die gewaehlten Antworten und die Zeile darueber
+        stehen mittig, damit der Kasten von oben bis unten eine Achse hat. */
+  /* Die getroffene Auswahl steht auf dem Handy nicht noch einmal ueber
+     dem Formular: Sie wurde gerade angeklickt und kostet nur Hoehe. */
+  .qsum,.qsum-lab{display:none}
+  /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
+  .qchip{white-space:nowrap}
+  /* Der kurze Satz unter "Fast geschafft" steht auch auf dem Handy, mittig. */
+  .qhinweis{text-align:center;margin:0 0 .8rem}
+
+  /* 9  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
+        Handy wirkt der weisse Block darin wie ein zweites Fenster, und
+        die Ueberschrift daueber sagt nichts, was der Kopf des Kastens
+        nicht schon sagt. Die gruene Kapsel entfaellt aus demselben
+        Grund: Das Dankfenster hat die Bestaetigung bereits gegeben. */
+  .qerg h4{font-size:1.52rem;margin-bottom:.8rem}
+  .qerg .qe-p{font-size:.95rem}
+}
+/* Sprunglink zum Inhalt: nur bei Tastatur-Fokus sichtbar */
+.skip-link{position:absolute;left:1rem;top:-120px;z-index:300;padding:.75rem 1.2rem;background:var(--steel);color:#fff;border-radius:var(--r);font-weight:600;text-decoration:none}
+.skip-link:focus{top:1rem;outline:2px solid #fff;outline-offset:2px}
+main:focus{outline:none}
+/* Kammereintrag im Abschnitt Über das Büro */
+.team-story p.kammer{margin-top:1.4rem;padding-top:1.1rem;border-top:1px solid var(--line,rgba(11,28,43,.12));font-size:.9rem;line-height:1.6}
+.team-story p.kammer a{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+
+/* =================================================================
+   Landingpage Gewerbe zu Wohnen (KfW 266), Ergaenzungen
+   Grundlage ist das Stilblatt von /haus-aufteilen/. Hier steht nur,
+   was diese Seite zusaetzlich braucht.
+   ================================================================= */
+/* dezenter Weg zur Website in der Kopfzeile */
+.nlinks .nsite{display:inline-flex;align-items:center;gap:.35rem;color:var(--ink-soft);font-weight:500;font-size:.82rem;padding:.45rem .7rem;border-radius:8px;transition:.2s;margin-right:.2rem}
+.nlinks .nsite:hover{color:var(--white);background:rgba(11,28,43,.05)}
+.nlinks .nsite svg{opacity:.75;flex-shrink:0}
+.nav.dunkel .nlinks .nsite{color:#a8bcca}
+.nav.dunkel .nlinks .nsite:hover{color:#F7F5F0;background:rgba(255,255,255,.1)}
+@media(max-width:560px){.nlinks .nsite{padding:.45rem .5rem}.nlinks .nsite .lt-l{display:none}}
+@media(min-width:561px){.nlinks .nsite .lt-k{display:none}}
+
+/* Ueberschrift: drei Zeilen, Unterstrich wie mit dem Stift gezogen */
+.gh1 .z{display:block}
+/* Rahmenzeilen "Bis zu" und "pro Wohnung." duenner, die Summe bleibt kraeftig */
+.gh1 .z-leicht{font-weight:400}
+/* Gleicher Abstand zwischen allen drei Zeilen, genug Luft fuer die Unterstreichung */
+.gh1 .z+.z{margin-top:.22em}
+.gh1 .mark{position:relative;display:inline-block;white-space:nowrap}
+.gh1 .skizze{position:absolute;left:-1%;top:86%;width:102%;height:auto;overflow:visible;fill:none;stroke:#E1623D;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+/* Wie mit dem Stift skizziert: ein Zug nach rechts, kurze Wende, locker zurueck. Zeichnet sich beim Laden einmal. */
+.gh1 .skizze path{stroke-dasharray:1;stroke-dashoffset:1;animation:gskizze .9s cubic-bezier(.45,0,.25,1) .3s forwards}
+@keyframes gskizze{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.gh1 .skizze path{animation:none;stroke-dashoffset:0}}
+
+/* Frist im Hero */
+.lhero .hero-lead .fett{color:#F7F5F0;font-weight:700}
+.frist{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.5rem;margin-top:1.6rem;padding:1rem 1.5rem 1.05rem 1.15rem;border-radius:16px;
+  background:linear-gradient(100deg,rgba(225,98,61,.30),rgba(225,98,61,.12));border:1.5px solid rgba(240,140,105,.75);
+  box-shadow:0 18px 40px -22px rgba(225,98,61,.75);animation:fglow 2.6s ease-in-out infinite}
+/* Blickfang: "Nur noch 59 Tage möglich!", Zahl gross in Terrakotta, zaehlt taeglich herunter */
+.frist .fkopf{display:flex;align-items:baseline;flex-wrap:wrap;gap:.15em .3em;font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,2.5vw,2.15rem);line-height:1.1;letter-spacing:-.02em;color:#F7F5F0}
+.frist .fz{font-size:1.45em;line-height:.9;letter-spacing:-.04em;color:#EC6A42;font-variant-numeric:tabular-nums;text-shadow:0 0 22px rgba(225,98,61,.45)}
+.frist .fsub{font-size:.92rem;line-height:1.35;color:#F0B9A5}
+.frist .f-plus{display:none}
+@keyframes fglow{0%,100%{box-shadow:0 18px 40px -22px rgba(225,98,61,.75),0 0 0 0 rgba(240,140,105,0)}50%{box-shadow:0 18px 40px -22px rgba(225,98,61,.75),0 0 0 5px rgba(240,140,105,.16)}}
+@media(max-width:700px){
+  .frist{margin-top:1rem;align-items:center;text-align:center;gap:.4rem;padding:.8rem .5rem .85rem;width:100%;max-width:380px}
+  .frist .fkopf{justify-content:center;gap:.15em .25em;font-size:clamp(1.1rem,5.9vw,1.6rem)}
+  /* Handy: Komma statt "und", Zusatzzeile ab 360 px einzeilig (darunter darf sie umbrechen) */
+  .frist .fsub{font-size:clamp(.66rem,3vw,.8rem)}
+  .frist .f-und{display:none}.frist .f-plus{display:inline}
+}
+@media(prefers-reduced-motion:reduce){.frist{animation:none}}
+
+/* Zahlenband */
+.gzahlen{background:var(--bg-2);border-bottom:1px solid var(--line);padding:0}
+.gzahlen .container{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem 1rem;padding-top:2.1rem;padding-bottom:2.1rem}
+@media(max-width:760px){.gzahlen .container{grid-template-columns:1fr 1fr;padding-top:1.7rem;padding-bottom:1.7rem}}
+.gz{text-align:center}
+.gz .n{font-family:var(--disp);font-weight:700;font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--white);letter-spacing:-.03em;line-height:1}
+.gz .n .u{color:var(--accent)}
+.gz .l{font-size:.84rem;color:var(--ink-soft);margin-top:.45rem;line-height:1.4}
+
+/* Rechner */
+.grech{display:grid;grid-template-columns:1fr .9fr;gap:1.3rem;align-items:stretch;max-width:1000px;margin:0 auto}
+@media(max-width:860px){.grech{grid-template-columns:1fr}}
+.gr-in,.gr-out{border-radius:var(--r);padding:clamp(1.5rem,3vw,2.2rem)}
+.gr-in{background:var(--panel);border:1px solid var(--line)}
+.gr-rg{margin-bottom:1.9rem}.gr-rg:last-child{margin-bottom:0}
+.gr-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.8rem}
+.gr-top label{font-weight:600;color:var(--white);font-size:.98rem}
+.gr-top output{font-family:var(--disp);font-weight:700;font-size:1.35rem;color:var(--accent-d);letter-spacing:-.02em;white-space:nowrap}
+.gr-rg small{display:block;font-size:.8rem;color:var(--ink-soft);margin-top:.55rem;line-height:1.45}
+.gr-rg input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;--p:50%;padding:0;border:0}
+.gr-rg input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--accent) var(--p),#e4dfd3 var(--p))}
+.gr-rg input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:#e4dfd3}
+.gr-rg input[type=range]::-moz-range-progress{height:6px;border-radius:6px;background:var(--accent)}
+.gr-rg input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-9px;border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 3px 10px rgba(11,28,43,.2)}
+.gr-rg input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 3px 10px rgba(11,28,43,.2)}
+.gr-rg input[type=range]:focus-visible{outline:none}
+.gr-rg input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 5px rgba(225,98,61,.22)}
+.gr-out{background:radial-gradient(120% 120% at 100% 0%,rgba(225,98,61,.24),transparent 55%),linear-gradient(150deg,#2C4A62,#16303F);color:#fff;display:flex;flex-direction:column}
+.gr-out .l{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+.gr-out .big{font-family:var(--disp);font-weight:700;font-size:clamp(2.7rem,6vw,4rem);letter-spacing:-.04em;line-height:1;margin:.7rem 0 .4rem;color:#fff}
+.gr-out .sub{color:rgba(255,255,255,.78);font-size:.95rem}
+.gr-out .rows{margin:1.3rem 0 1.5rem;border-top:1px solid rgba(255,255,255,.14)}
+.gr-out .rows div{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:.9rem;color:rgba(255,255,255,.8)}
+.gr-out .rows b{color:#fff;font-weight:600;white-space:nowrap}
+.gr-out .btn{margin-top:auto;width:100%;justify-content:center}
+.gnote{font-size:.78rem;color:var(--ink-soft);line-height:1.6;max-width:760px;margin:1.3rem auto 0;text-align:center}
+
+/* Saarland-Satz */
+.gsatz{padding:clamp(56px,9vh,100px) 0;background:linear-gradient(135deg,#F0D9CD,#DCE6F2)}
+.gsatz .big{font-family:var(--disp);font-weight:600;font-size:clamp(1.55rem,3.6vw,2.6rem);line-height:1.2;letter-spacing:-.03em;color:var(--white);max-width:920px;margin:0 auto;text-align:center}
+.gsatz .big .hl{color:var(--accent)}
+.gsatz .sub{margin:1.2rem auto 0;font-size:1.04rem;color:var(--ink-text);max-width:640px;text-align:center}
+
+/* Was gefoerdert wird */
+.gfoe{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.6rem,4vw,3.4rem);align-items:center}
+@media(max-width:900px){.gfoe{grid-template-columns:1fr}}
+.gba{position:relative;aspect-ratio:1044/745;border-radius:var(--r);overflow:hidden;background:#fff;border:1px solid var(--line);--split:50%}
+.gba img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+.gba .nach{clip-path:inset(0 0 0 var(--split))}
+.gba .li{position:absolute;top:0;bottom:0;left:var(--split);width:2px;transform:translateX(-50%);background:#fff;box-shadow:0 0 0 1px rgba(11,28,43,.18);pointer-events:none}
+.gba .gr{position:absolute;top:50%;left:var(--split);transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 3px 10px rgba(11,28,43,.24);display:flex;align-items:center;justify-content:center;color:var(--accent);pointer-events:none}
+.gba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;-webkit-appearance:none;appearance:none}
+.gba .lb{position:absolute;top:.9rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:.28rem .7rem;border-radius:999px;pointer-events:none;transition:opacity .3s}
+.gba .lb.v{left:.9rem;color:var(--steel-d);background:rgba(31,111,165,.12);border:1px solid rgba(31,111,165,.3)}
+.gba .lb.n{right:.9rem;color:var(--accent-d);background:rgba(225,98,61,.12);border:1px solid rgba(225,98,61,.3)}
+.gba-cap{font-size:.8rem;color:var(--ink-soft);margin-top:.7rem;text-align:center}
+.glist{display:flex;flex-direction:column;gap:1.1rem}
+.gbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1.5rem 1.6rem}
+.gbox h3{font-size:1.1rem;display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem}
+.gbox h3 .ic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gbox.ja h3 .ic{background:rgba(63,209,135,.16);color:#1a8b5e}
+.gbox.nein h3 .ic{background:rgba(11,28,43,.06);color:var(--ink-soft)}
+.gbox ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.gbox li{position:relative;padding-left:1.3rem;font-size:.95rem;line-height:1.45;color:var(--ink-text)}
+.gbox li::before{content:'';position:absolute;left:0;top:.5em;width:7px;height:7px;border-radius:50%;background:var(--eco)}
+.gbox.nein li{color:var(--ink-soft)}
+.gbox.nein li::before{background:#b9b3a6}
+
+/* Bedingungen */
+.gbed{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+@media(max-width:1000px){.gbed{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.gbed{grid-template-columns:1fr}}
+.gb{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1.7rem 1.5rem 1.6rem;overflow:hidden}
+.gb::after{content:'';position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--steel),var(--accent))}
+.gb .pn{font-family:var(--disp);font-weight:700;font-size:1.7rem;color:rgba(225,98,61,.35);line-height:1;letter-spacing:-.03em}
+.gb h3{margin:.65rem 0 .5rem;font-size:1.1rem;line-height:1.22}
+.gb p{color:var(--ink-soft);font-size:.92rem;line-height:1.55}
+.ghin{margin-top:1.3rem;display:flex;gap:.8rem;align-items:flex-start;background:rgba(46,134,199,.08);border:1px solid rgba(46,134,199,.25);border-radius:12px;padding:1rem 1.2rem;font-size:.93rem;color:var(--ink-text);line-height:1.55}
+.ghin svg{color:var(--steel-d);flex-shrink:0;margin-top:.12rem}
+/* Ziel des Zeitstrahls: "Zuschuss" gross, im Farbverlauf wie "einer Hand" auf der Startseite */
+.fziel{position:relative;isolation:isolate;text-align:center;margin-top:2.2rem}
+.fziel::before{content:"";display:block;width:2px;height:4.6rem;margin:0 auto 1.6rem;background:linear-gradient(var(--accent),rgba(225,98,61,0))}
+/* ZUSCHUSS: zuerst milchig hell, dann breitet sich die Farbe vom Strich oben
+   kreisfoermig ins Wort aus, gekoppelt an das Scrollen (--fz-r per Skript).
+   Ist es ganz farbig, laeuft der Farbverlauf darin weiter. */
+.fziel-w{position:relative;display:inline-block;font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,6vw,3.9rem);line-height:1.05;letter-spacing:.05em;text-transform:uppercase}
+.fz-glas{display:block;background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(236,241,247,.72) 55%,rgba(255,255,255,.88) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  -webkit-text-stroke:1px rgba(11,28,43,.14);filter:drop-shadow(0 8px 18px rgba(11,28,43,.12))}
+.fz-farbe{position:absolute;inset:0;
+  background:linear-gradient(96deg,#1F6FA5 0%,#5BD0E0 30%,#E1623D 55%,#5BD0E0 78%,#1F6FA5 100%);background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:fzielflow 8s ease-in-out infinite;
+  -webkit-mask-image:radial-gradient(circle var(--fz-r,0px) at 50% -6%,#000 0,#000 calc(100% - 46px),transparent 100%);
+          mask-image:radial-gradient(circle var(--fz-r,0px) at 50% -6%,#000 0,#000 calc(100% - 46px),transparent 100%)}
+@keyframes fzielflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media(prefers-reduced-motion:reduce){.fz-farbe{animation:none;-webkit-mask-image:none;mask-image:none}}
+/* Handy: ZUSCHUSS steht mittig, links davor ein Punkt auf der Zeitleiste.
+   Die Farbe breitet sich dort vom Punkt aus ins Wort aus. */
+@media(max-width:700px){
+  .fziel{text-align:center;margin-top:.2rem}
+  .fziel::before{position:absolute;left:11px;top:-2.4rem;width:2px;height:calc(50% + 2.4rem);margin:0;background:linear-gradient(rgba(225,98,61,.35),var(--accent))}
+  .fziel::after{content:"";position:absolute;left:6px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(225,98,61,.18)}
+  .fz-farbe{-webkit-mask-image:radial-gradient(circle var(--fz-r,0px) at var(--fz-ox,-2.4rem) 50%,#000 0,#000 calc(100% - 46px),transparent 100%);
+                    mask-image:radial-gradient(circle var(--fz-r,0px) at var(--fz-ox,-2.4rem) 50%,#000 0,#000 calc(100% - 46px),transparent 100%)}
+}
+.gstand{font-size:.76rem;color:var(--ink-soft);text-align:center;margin-top:2rem;line-height:1.6}
+
+/* Trust-Leiste unter dem Hero, Bauart wie auf der Startseite */
+.gtrust{padding:1.6rem 0;background:#fff;border-bottom:1px solid var(--line)}
+.gtrust-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:1.1rem 2.2rem}
+.tfact{display:flex;align-items:center;gap:.7rem;min-width:0}
+.tfact .tt{min-width:0}
+.tfact .ti{flex-shrink:0;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--steel-d);background:rgba(31,111,165,.08)}
+.tfact .ti svg{width:18px;height:18px}
+.tfact .tt{display:flex;flex-direction:column;line-height:1.2}
+.tfact .tt strong{font-family:var(--disp);font-weight:600;font-size:.92rem;color:var(--white)}
+.tfact .tt small{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+.tfact-eee{display:inline-flex;align-items:center;padding-left:2.2rem;border-left:1px solid var(--line)}
+.tfact-eee img{height:40px;width:auto;display:block}
+@media(max-width:1060px){.tfact-eee{flex-basis:100%;justify-content:center;padding-left:0;border-left:0}}
+.gtrust-track{display:contents}
+.gtrust .dup{display:none}
+@media(max-width:700px){
+  /* Laufband: zwei gleiche Saetze hintereinander, verschoben wird um genau einen.
+     Abstand als margin am Element statt gap, damit beide Haelften exakt gleich breit sind. */
+  .gtrust{padding:1.15rem 0}
+  .gtrust .container{padding:0;max-width:none}
+  .gtrust-row{display:block;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+  .gtrust-track{display:flex;align-items:center;width:max-content;animation:glauf 26s linear infinite;will-change:transform}
+  .gtrust .dup{display:flex}
+  .gtrust-track>*{flex-shrink:0;margin-right:2.4rem}
+  .tfact .tt{white-space:nowrap}
+  .tfact .tt strong{font-size:.88rem}
+  .tfact .tt small{font-size:.57rem}
+  .tfact-eee{padding:0;border:0;flex-basis:auto}
+  .tfact-eee img{height:34px}
+}
+@keyframes glauf{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(max-width:700px) and (prefers-reduced-motion:reduce){
+  .gtrust-row{-webkit-mask-image:none;mask-image:none}
+  .gtrust-track{animation:none;width:auto;flex-wrap:wrap;justify-content:center;gap:1rem 1.6rem;padding:0 1.2rem}
+  .gtrust-track>*{margin-right:0}
+  .gtrust .dup{display:none}
+}
+.fld textarea{resize:vertical;min-height:70px;line-height:1.5}
+#ablauf .gstand{margin-top:2.6rem}
+#ablauf .sh p b{color:var(--white);font-weight:600}
+.gtel-m{display:none}
+@media(max-width:700px){.gtel-m{display:block;text-align:center;margin-top:1.1rem;font-size:.95rem;color:#c3d2dd}.gtel-m b{color:#F7F5F0;font-weight:600;margin-left:.25rem;white-space:nowrap}}
+/* GOOGLE-BEWERTUNG: nur eine kleine Plakette im Hero (wie auf der Startseite), verweist auf das Google-Profil.
+   Bewusst ohne Review-Schema (JSON-LD). */
+.gsterne{display:inline-flex;gap:2px;color:#F2B33D;line-height:0}
+.gsterne svg{width:14px;height:14px;fill:currentColor}
+.gpill{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.1rem;padding:.42rem .95rem .42rem .55rem;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);font-size:.84rem;color:#c3d2dd;text-decoration:none;transition:border-color .25s,background .25s,transform .25s}
+.gpill:hover{background:rgba(255,255,255,.11);border-color:rgba(240,165,140,.55);transform:translateY(-1px)}
+.gpill b{font-family:var(--disp);font-weight:600;font-size:.98rem;color:#F7F5F0;padding:.1rem .5rem;border-radius:999px;background:rgba(242,179,61,.18)}
+.gpill .lk{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
+@media(max-width:700px){.gpill{margin-top:.9rem;font-size:.8rem}.gpill .gsterne svg{width:12px;height:12px}}
+/* Handy und Tablet (einspaltig): statt der Plakette im Hero eine Zitat-Blase von Andreas H. unter dem Formular */
+.gbew{display:none}
+@media(max-width:980px){
+  .lcol-text .gpill{display:none}
+  .gbew{display:flex;align-items:center;gap:.8rem;margin-top:1.6rem;padding:.8rem .95rem;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:#c3d2dd;text-decoration:none}
+  .gbew-note{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding-right:.8rem;border-right:1px solid rgba(255,255,255,.14)}
+  .gbew-note b{font-family:var(--disp);font-size:1.5rem;font-weight:600;line-height:1;color:#F7F5F0;letter-spacing:-.02em}
+  .gbew-note .gsterne svg{width:11px;height:11px}
+  .gbew-tx{min-width:0;display:flex;flex-direction:column;gap:.28rem}
+  .gbew-tx q{font-size:.88rem;line-height:1.4;color:#F7F5F0;quotes:"\201E" "\201C"}
+  .gbew-tx small{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:#8fa5b4}
+  .gbew-ar{margin-left:auto;flex-shrink:0;color:#8fa5b4;font-size:1rem}
+}
+/* Förder-Sektion KfW 266 & 261, übernommen aus umnutzung.html */
+.kfw{background:linear-gradient(135deg,#F6E7DF 0%,var(--bg) 52%,var(--bg-2) 100%);position:relative;overflow:hidden}
+.kfw::before{content:'266';position:absolute;left:-3%;top:46%;transform:translateY(-50%);font-family:var(--disp);font-weight:700;font-size:clamp(13rem,28vw,30rem);color:rgba(225,98,61,.05);line-height:1;pointer-events:none}
+.kfw-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;align-items:stretch;position:relative;z-index:1}
+@media(max-width:900px){.kfw-grid{grid-template-columns:1fr}}
+.kfw-intro .badge{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,var(--steel-d),var(--accent-d));padding:.5rem 1.1rem;border-radius:999px;margin-bottom:1.4rem;font-weight:700}
+.kfw-intro h2{margin-bottom:1.1rem}.kfw-intro p{font-size:1.08rem;color:var(--ink-text);max-width:480px}
+.kfw-intro .li{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.kfw-intro .li li{display:flex;gap:.7rem;font-size:1rem;color:var(--white)}
+.kfw-intro .li b{color:var(--accent)}
+.kfw-cards{display:flex;flex-direction:column;gap:1.1rem}
+/* Handy: Foerder-Sektion mittig wie die uebrigen Abschnitte, die grosse 266 liegt hinter der Einleitung statt hinter der ersten Karte */
+@media(max-width:700px){
+  .kfw::before{left:50%;top:7.5rem;transform:translateX(-50%);font-size:clamp(9rem,46vw,13rem)}
+  .kfw-intro{text-align:center}
+  .kfw-intro p{margin-left:auto;margin-right:auto}
+  .kfw-intro .li li{display:block;text-align:center}
+  .kfw-intro .li b{margin-right:.4rem}
+  .kfw .fcard{text-align:center}
+  .kfw .fcard .ftop{justify-content:center}
+}
+.fcard{position:relative;border-radius:var(--r-lg);padding:1.8rem;border:1px solid var(--line);background:#FFFFFF}
+.fcard.lead{isolation:isolate;animation:breath 3.2s ease-in-out infinite}
+.fcard.lead::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:conic-gradient(from var(--a),transparent 0 6%,var(--accent) 22%,#F2A684 38%,var(--steel) 54%,var(--accent) 70%,transparent 86% 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 5s linear infinite;pointer-events:none}
+.fcard>*{position:relative;z-index:1}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin{to{--a:360deg}}
+@keyframes breath{0%,100%{box-shadow:0 0 0 1px rgba(225,98,61,.28),0 0 28px 0 rgba(225,98,61,.2)}50%{box-shadow:0 0 0 1px rgba(245,166,132,.5),0 0 60px 8px rgba(225,98,61,.38)}}
+@media(prefers-reduced-motion:reduce){.fcard.lead{animation:none}.fcard.lead::after{animation:none}}
+.fcard .ftop{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.3rem}
+.fcard .fno{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.fcard.alt .fno{color:var(--steel)}
+.fcard .fbig{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,4vw,2.8rem);color:var(--white);line-height:1;letter-spacing:-.03em}
+.fcard .fsub{color:var(--ink-soft);font-size:.92rem;margin-top:.5rem;line-height:1.5}
+.fnote{font-family:var(--mono);font-size:.64rem;color:var(--ink-soft);line-height:1.6;margin-top:1.4rem;max-width:520px}
+.fnote-center{max-width:760px;margin:2.6rem auto 0;text-align:center;position:relative;z-index:1}
+
+/* Grosse Hintergrundzahl der Foerder-Sektion: hier WEG statt 266 */
+.kfw::before{content:'WEG'}
+/* Nur auf dieser Seite: Hinweis "Sie bleiben, wo Sie sind" im Hero,
+   ruhig statt der pulsierenden Frist-Kapsel der KfW-Seite */
+.vbox{display:flex;align-items:flex-start;gap:.85rem;margin-top:1.6rem;padding:1rem 1.3rem 1.05rem 1rem;border-radius:16px;max-width:540px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18)}
+.vbox .vi{flex-shrink:0;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#F0A58C;background:rgba(225,98,61,.16);border:1px solid rgba(240,140,105,.4)}
+.vbox .vt{display:flex;flex-direction:column;gap:.2rem;line-height:1.4}
+.vbox .vt b{font-family:var(--disp);font-weight:600;font-size:1.12rem;letter-spacing:-.015em;color:#F7F5F0}
+.vbox .vt>span{font-size:.9rem;color:#a8bcca}
+@media(max-width:700px){
+  .vbox{margin:1rem auto 0;text-align:left;padding:.75rem .9rem;gap:.7rem;max-width:380px}
+  .vbox .vi{width:34px;height:34px}
+  .vbox .vt b{font-size:.98rem}
+  .vbox{align-items:center}
+  /* Die KfW-Seite zeigt in Frage 2 (Ja/Nein) die Erlaeuterung auch am Handy, hier nicht */
+  .qstep[data-step="2"] .qopt .qo-s{display:none}
+  .vbox .vt>span{font-size:.82rem}
+}
+
+/* FESTPREIS-RECHNER im Fragenkasten */
+.queber{text-align:center;margin:0 0 1.1rem}
+.qu-k{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#F0A58C}
+.qu-t{hyphens:manual;-webkit-hyphens:manual;font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,2.3vw,1.95rem);color:#F7F5F0;letter-spacing:-.025em;line-height:1.15;margin:.4rem 0 0}
+.qu-s{font-size:.93rem;color:#a8bcca;line-height:1.5;margin:.45rem auto 0;max-width:440px}
+.qp-blk{font-size:.8rem;color:var(--ink-soft);line-height:1.5;margin-top:.6rem;text-align:left}
+.qp-blk b{display:block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);font-weight:700;margin-bottom:.1rem}
+.qp-ihr{background:rgba(225,98,61,.07);border:1px solid rgba(225,98,61,.25);border-radius:10px;padding:.6rem .75rem;color:var(--ink-text)}
+.qp-ihr b{color:var(--accent-d)}
+.qok{display:flex;align-items:flex-start;gap:.65rem;margin:.2rem 0 .3rem;font-size:.82rem;line-height:1.45;color:var(--ink-text);cursor:pointer;text-align:left}
+.qok input{flex:none;width:19px;height:19px;margin-top:.1rem;accent-color:var(--accent-d);cursor:pointer}
+.qhin1{font-size:.84rem;color:var(--ink-soft);text-align:center;margin:-.55rem 0 .9rem;line-height:1.45}
+.qhin1.unten{margin:.8rem 0 0}
+/* Zahlenkacheln statt Liste: Vollgeschosse */
+.qopts.qzahl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem}
+.qzahl .qopt{flex-direction:column;justify-content:center;gap:.1rem;padding:.85rem .2rem;text-align:center}
+.qzahl .qo-box{display:none}
+.qzahl .qo-tx{text-align:center}
+.qzahl .qopt .qo-t{font-family:var(--disp);font-weight:700;font-size:1.45rem;letter-spacing:-.02em;line-height:1.1}
+.qzahl .qopt .qo-s{display:block!important;font-size:.66rem;margin:0}
+.qzahl .qopt.aktiv{background:var(--accent-d);border-color:var(--accent-d)}
+.qzahl .qopt.aktiv .qo-t,.qzahl .qopt.aktiv .qo-s{color:#fff}
+/* Schalter: Dachgeschoss ausgebaut */
+.qdg{display:flex;align-items:center;gap:.8rem;width:100%;margin-top:.75rem;padding:.8rem 1rem;background:rgba(255,255,255,.55);border:1px dashed rgba(11,28,43,.22);border-radius:12px;cursor:pointer;font-family:var(--sans);text-align:left;transition:border-color .2s,background .2s}
+.qdg:hover{border-color:rgba(225,98,61,.55)}
+.qdg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.qdg .kb{flex:none;width:22px;height:22px;border-radius:6px;border:1.6px solid rgba(11,28,43,.3);background:#fff;position:relative;transition:.18s}
+.qdg .kb::after{content:'';position:absolute;left:50%;top:48%;width:10px;height:5px;border-left:2.2px solid #fff;border-bottom:2.2px solid #fff;transform:translate(-50%,-65%) rotate(-45deg);opacity:0}
+.qdg[aria-pressed="true"]{background:#fff;border-style:solid;border-color:var(--accent)}
+.qdg[aria-pressed="true"] .kb{background:var(--accent);border-color:var(--accent)}
+.qdg[aria-pressed="true"] .kb::after{opacity:1}
+.qdg .tx{font-size:.92rem;font-weight:600;color:var(--white);line-height:1.3}
+.qdg .tx small{display:block;font-weight:400;font-size:.8rem;color:var(--ink-soft)}
+/* Zaehler: Einheiten */
+.qzaehler{display:flex;align-items:center;justify-content:center;gap:1.4rem;padding:1.1rem 0 .4rem}
+.qz-b{width:58px;height:58px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:1.7rem;line-height:1;color:var(--white);cursor:pointer;transition:.2s;box-shadow:0 10px 22px -16px rgba(11,28,43,.5)}
+.qz-b:hover{border-color:var(--accent);color:var(--accent-d)}
+.qz-b:disabled{opacity:.35;cursor:default}
+.qz-w{min-width:3.2ch;text-align:center;font-family:var(--disp);font-weight:700;font-size:3.4rem;letter-spacing:-.03em;line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
+.qz-e{display:block;text-align:center;font-size:.86rem;font-weight:600;color:var(--ink-soft);margin-top:.1rem}
+/* Ergebnis: Festpreis */
+.qpreis{text-align:center;background:#fff;border:1px solid rgba(225,98,61,.35);border-radius:14px;padding:1.1rem 1.1rem 1rem;margin:0 0 1.1rem;box-shadow:0 18px 40px -26px rgba(190,74,42,.6)}
+.qp-big{font-family:var(--disp);font-weight:700;font-size:clamp(2.4rem,5vw,3rem);letter-spacing:-.035em;line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
+.qp-sub{font-size:.84rem;color:var(--ink-soft);margin-top:.35rem}
+.qp-pos{list-style:none;margin:.85rem 0 0;padding:.75rem 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:.25rem;text-align:left}
+.qp-pos li{display:flex;justify-content:space-between;gap:1rem;font-size:.84rem;color:var(--ink-text)}
+.qp-pos li span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.qp-pos li.qp-k{font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.qp-ind{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;color:var(--white);line-height:1.2}
+.qweiter{font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--white);text-align:center;margin:0 0 .8rem}
+.qanruf{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;margin-top:.6rem;padding:.85rem 1rem;border-radius:8px;border:1.5px solid rgba(11,28,43,.22);background:rgba(255,255,255,.6);font-weight:600;font-size:.95rem;color:var(--white);transition:.2s}
+.qanruf:hover{border-color:var(--white);background:#fff}
+.qanruf svg{color:var(--accent-d);flex:none}
+.qanruf span{white-space:nowrap}
+@media(max-width:700px){
+  .qopts.qzahl{gap:.35rem}
+  .qzahl .qopt{padding:.75rem .1rem}
+  .qzahl .qopt .qo-t{font-size:1.25rem}
+  .qzahl .qopt .qo-s{font-size:.58rem}
+  .qhin1{font-size:.78rem}
+  .qp-pos li{font-size:.8rem}
+  .qp-blk{font-size:.76rem}
+  .qok{font-size:.78rem}
+  /* Handy: der Hinweis "Sie bleiben, wo Sie sind" weicht der Ueberschrift ueber dem Rechner */
+  .vbox{display:none}
+  .queber{margin:.3rem 0 .9rem}
+  .qu-k{font-size:.6rem}
+  .qu-t{font-size:1.4rem}
+  .qu-s{display:none}
+  .qz-b{width:52px;height:52px}
+  .qz-w{font-size:3rem}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div class="prog"><div class="prog-b" id="pb"></div></div>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="brand"><img class="mk mk-dunkel" src="../img/logo-blue-s.png" alt="jmr Architektur" width="115" height="90"><img class="mk mk-hell" src="../img/logo-white-s.png" alt="" aria-hidden="true" width="115" height="90"><span class="nm">jmr Architektur</span></a>
+  <div class="nlinks">
+    <a class="nsite" href="../index.html" title="Zur Website von jmr Architektur"><span class="lt-l">Zur Website</span><span class="lt-k">Website</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    <a class="ntel" href="tel:+491789428464">
+      <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg>
+      <span>0178 9428464</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO mit Anfrage-Formular -->
+<main id="main" tabindex="-1">
+<header class="lhero" id="top">
+  <canvas id="planbg" aria-hidden="true"></canvas>
+  <div class="container">
+    <div class="lgrid">
+      <div class="lcol-text hin">
+        <span class="kicker">Abgeschlossenheitsbescheinigung · digital</span>
+        <h1 class="gh1"><span class="z z-leicht">Haus aufteilen,</span><span class="z"><span class="mark">ohne Ortstermin<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 11.3C55 9.5 115 10.9 175 9.9C225 9.1 265 10.7 295 9.2"/></svg></span></span><span class="z z-leicht">deutschlandweit.</span></h1>
+        <p class="hero-lead">Sie möchten Wohnungen einzeln verkaufen oder vererben? Wir zeichnen den Aufteilungsplan aus Ihren Bestandsplänen und beantragen die Abgeschlossenheitsbescheinigung bei Ihrer Bauaufsicht.<br><strong class="fett">Den Endpreis berechnen Sie rechts in drei Fragen.</strong></p>
+        <div class="vbox" role="note"><span class="vi" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="vt"><b>Sie bleiben, wo Sie sind.</b><span><span class="d-only-i">Pläne und Fotos per Upload, Abstimmung per Telefon oder Video. Nur Unterschriften und Originale gehen per Post.</span><span class="m-only-i">Upload, Telefon und Video. Originale per Post.</span></span></span></div>
+        <a class="gpill" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="5,0 von 5 Sternen bei Google, Bewertungen auf Google ansehen"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>bei Google · <span class="lk">2 Bewertungen</span></span></a>
+      </div>
+
+      <div class="lcol-arg fade d2">
+        <a class="ltel" href="tel:+491789428464">
+          <span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></span>
+          <span class="tx"><b>0178 9428464</b>Lieber direkt sprechen? Rufen Sie uns an.</span>
+        </a>
+      </div>
+
+      <div class="lcol-form hin hin2">
+        <div class="queber">
+          <span class="qu-k">Für Eigentümer und Investoren</span>
+          <h2 class="qu-t">Abgeschlossenheits&shy;bescheinigung zum Festpreis</h2>
+          <p class="qu-s">Aufteilungsplan, Antrag bei Ihrer Bauaufsicht, Unterlagen für den Notar. Ihren Endpreis sehen Sie nach 3&nbsp;Fragen.</p>
+        </div>
+        <div class="ccard" id="check">
+          <p class="qaktuell" id="qaktuell" tabindex="-1"></p>
+
+          <noscript>
+            <p class="qnoscript">Für die Fragen braucht dieser Kasten JavaScript. Rufen Sie uns gern direkt an: <a href="tel:+491789428464">0178 9428464</a> oder schreiben Sie an <a href="mailto:info@jmr-architektur.de">info@jmr-architektur.de</a>.</p>
+          </noscript>
+          <div class="qbar">
+            <button class="qzur aus" type="button" id="qzurueck"><span class="zp" aria-hidden="true">←</span> Zurück</button>
+          </div>
+
+          <form id="kform" action="https://jmr-lead-tool.pages.dev/api/lead?sec=architektur" method="POST">
+            <input type="hidden" name="_subject" value="Neue Anfrage über die Landingpage Aufteilen (bundesweit)">
+            <input type="hidden" name="Thema" value="Aufteilung">
+            <input type="hidden" name="Seite" value="Landingpage Aufteilen bundesweit">
+            <input type="hidden" name="Vollgeschosse" id="qa1" value="">
+            <input type="hidden" name="Einheiten" id="qa2" value="2">
+            <input type="hidden" name="Pläne" id="qa3" value="">
+            <input type="hidden" name="Dachgeschoss" id="qaDg" value="nicht ausgebaut">
+            <input type="hidden" name="Festpreis netto" id="qaNetto" value="">
+            <input type="hidden" name="Festpreis brutto" id="qaBrutto" value="">
+            <input type="hidden" name="Quelle" id="kf-quelle" value="">
+
+            <div class="qsteps" id="qsteps">
+            <!-- Schritt 1: Vollgeschosse und Dachgeschoss -->
+            <div class="qstep" data-titel="Wie viele Vollgeschosse hat das Haus?" data-step="1">
+              <p class="qhin1">Erdgeschoss und Obergeschosse, ohne Keller und Dach.</p>
+              <div class="qopts qzahl" role="group" aria-labelledby="qaktuell">
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-zahl="2" data-wert="1 bis 2 Vollgeschosse" data-kurz="1 bis 2 Vollgeschosse" data-code="vg2" aria-label="1 bis 2 Vollgeschosse">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">1–2</span><span class="qo-s">Geschosse</span></span>
+                </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-zahl="3" data-wert="3 Vollgeschosse" data-kurz="3 Vollgeschosse" data-code="vg3" aria-label="3 Vollgeschosse">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">3</span><span class="qo-s">Geschosse</span></span>
+                </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-zahl="4" data-wert="4 Vollgeschosse" data-kurz="4 Vollgeschosse" data-code="vg4" aria-label="4 Vollgeschosse">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">4</span><span class="qo-s">Geschosse</span></span>
+                </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-zahl="5" data-wert="5 Vollgeschosse" data-kurz="5 Vollgeschosse" data-code="vg5" aria-label="5 Vollgeschosse">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">5</span><span class="qo-s">Geschosse</span></span>
+                </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="1" data-zahl="6" data-wert="6 oder mehr Vollgeschosse" data-kurz="6 oder mehr Vollgeschosse" data-code="vg6" aria-label="6 oder mehr Vollgeschosse">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">6+</span><span class="qo-s">Geschosse</span></span>
+                </button>
+              </div>
+              <button class="qdg" type="button" id="qdg" aria-pressed="false"><span class="kb" aria-hidden="true"></span><span class="tx">Dachgeschoss ist ausgebaut<small>Mit Wohnraum, der aufgeteilt wird.</small></span></button>
+              <div class="qnav">
+                <button class="btn btn-accent qnext" type="button" data-weiter="2" aria-disabled="true">Nächster Schritt <span class="ar">→</span></button>
+                <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
+              </div>
+            </div>
+
+            <!-- Schritt 2: Einheiten, Zaehler statt Auswahl -->
+            <div class="qstep" data-titel="Wie viele Einheiten sollen entstehen?" data-step="2" data-frei hidden>
+              <div class="qzaehler" role="group" aria-label="Zahl der Einheiten">
+                <button class="qz-b" type="button" data-schritt="-1" aria-label="Eine Einheit weniger">−</button>
+                <div><output class="qz-w" id="qeAnz" aria-live="polite">2</output><span class="qz-e">Einheiten</span></div>
+                <button class="qz-b" type="button" data-schritt="1" aria-label="Eine Einheit mehr">+</button>
+              </div>
+              <p class="qhin1 unten">Wohnungen und Gewerbeeinheiten zusammen, ohne Stellplätze.</p>
+              <div class="qnav">
+                <button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button>
+                <button class="btn btn-accent qnext" type="button" data-weiter="3">Nächster Schritt <span class="ar">→</span></button>
+                <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
+              </div>
+            </div>
+
+            <!-- Schritt 3 -->
+            <div class="qstep" data-titel="Welche Pläne haben Sie zu dem Haus?" data-step="3" hidden>
+              <div class="qopts" role="group" aria-labelledby="qaktuell">
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Genehmigte Pläne aus der Bauakte" data-kurz="Genehmigte Pläne" data-code="plan-genehmigt">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Genehmigte Pläne</span><span class="qo-s">Aus der Bauakte, mit Genehmigungsstempel.</span></span>
+                </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Pläne ohne Genehmigungsvermerk" data-kurz="Pläne ohne Stempel" data-code="plan-ohne">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Pläne ohne Stempel</span><span class="qo-s">Zum Beispiel aus dem Kaufvertrag.</span></span>
+                </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Keine oder nur einzelne Pläne" data-kurz="Kaum Pläne" data-code="plan-keine">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Kaum oder keine Pläne</span><span class="qo-s">Wir sagen Ihnen, wie Sie an die Bauakte kommen.</span></span>
+                </button>
+                <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Weiß ich nicht" data-kurz="Weiß ich nicht" data-code="plan-unklar">
+                  <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Weiß ich nicht</span><span class="qo-s">Das klären wir gemeinsam.</span></span>
+                </button>
+              </div>
+              <div class="qnav">
+                <button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button>
+                <button class="btn btn-accent qnext" type="button" data-weiter="4" aria-disabled="true">Nächster Schritt <span class="ar">→</span></button>
+                <p class="qwarn" role="status" hidden>Bitte wählen Sie zuerst eine Antwort aus.</p>
+              </div>
+            </div>
+
+            <!-- Schritt 4: Kontakt -->
+            <div class="qstep" data-titel="Ihr Endpreis" data-step="4" hidden>
+              <div class="qpreis" id="qpreis" aria-live="polite">
+                <div id="qpFest">
+                  <div class="qp-big" id="qpBrutto">714 €</div>
+                  <div class="qp-sub">Festpreis inkl. 19&nbsp;% USt · <span id="qpNetto">600 €</span> netto</div>
+                  <ul class="qp-pos" id="qpPos"></ul>
+                </div>
+                <div id="qpIndiv" hidden>
+                  <div class="qp-ind">Angebot nach Rücksprache</div>
+                  <div class="qp-sub">Ab sechs Geschossen mit Wohnraum rechnen wir Ihr Haus einzeln.</div>
+                </div>
+                <div class="qp-blk"><b>Im Preis enthalten</b>Vorprüfung, Aufteilungsplan aller Geschosse mit Keller und Dach, Antrag bei Ihrer Bauaufsicht, Versand der Originale an Sie oder Ihren Notar.</div>
+                <div class="qp-blk"><b>Nicht enthalten</b>Die Gebühren Ihrer Bauaufsicht. Sie richten sich nach dem Land, wir geben sie ohne Aufschlag weiter.</div>
+                <div class="qp-blk qp-ihr"><b>Ihr Teil</b>Sie schicken uns gut lesbare Pläne aller Geschosse. Und Sie bestätigen uns schriftlich, dass die Pläne dem genehmigten Stand laut Bauakte und dem Bestand vor Ort entsprechen.<span id="qpPlan" hidden> Haben Sie keine Pläne, brauchen wir zuerst die Bauakte. Wir sagen Ihnen, wie Sie sie bekommen.</span></div>
+              </div>
+              <p class="qweiter">Passt der Preis? Wir rufen Sie zurück.</p>
+              <div class="fld-row">
+                <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" aria-label="Vorname" name="Vorname" type="text" placeholder="Vorname" autocomplete="given-name" required></div>
+                <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" aria-label="Nachname" name="Nachname" type="text" placeholder="Nachname" autocomplete="family-name" required></div>
+              </div>
+              <div class="fld-row">
+                <div class="fld"><label for="kf-tel">Telefon</label><input id="kf-tel" aria-label="Telefon" name="Telefon" type="tel" placeholder="Telefon" autocomplete="tel" required></div>
+                <div class="fld"><label for="kf-mail">E-Mail</label><input id="kf-mail" aria-label="E-Mail" name="E-Mail" type="email" placeholder="E-Mail" autocomplete="email" required></div>
+              </div>
+              <div class="fld"><label for="kf-ort">Ort des Hauses</label><input id="kf-ort" aria-label="Ort des Hauses, PLZ und Ort" name="Objekt" type="text" placeholder="Ort des Hauses (PLZ und Ort)" autocomplete="off" required></div>
+              <label class="qok"><input type="checkbox" name="Bestätigung Pläne" value="Ja: gut lesbare Pläne und schriftliche Bestätigung des genehmigten Stands nach Bauakte und vor Ort zugesagt" required><span>Ich schicke gut lesbare Pläne und bestätige schriftlich, dass sie dem genehmigten Stand laut Bauakte und dem Bestand vor Ort entsprechen.</span></label>
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAAE89pf5xM8kY9vmY" style="margin:12px 0"></div>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-label="Bitte leer lassen" aria-hidden="true">
+              <div class="qsend"><button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button><button type="submit" class="btn btn-accent" id="kfSubmit">Rückruf anfordern <span class="ar">→</span></button></div>
+              <a class="qanruf" href="tel:+491789428464"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg><span>Lieber anrufen: <b>0178&nbsp;9428464</b></span></a>
+              <div class="qvor">
+                <span>Werktags binnen 24 Stunden</span>
+                <span>Unverbindlich</span>
+              </div>
+              <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu. Mehr dazu in der <a href="../datenschutz.html" target="_blank" rel="noopener" style="color:var(--steel)">Datenschutzerklärung</a>.</p>
+              <div id="kfStatus" class="kf-status" style="display:none"></div>
+            </div>
+            </div>
+          </form>
+
+          <!-- Dank, erscheint nach dem Absenden -->
+          <div class="qerg" id="qerg" role="status" aria-live="polite">
+            <h4 id="qerg-t">Vielen Dank.</h4>
+            <p class="qe-p c">Ihre Anfrage ist eingegangen. Wir rufen Sie zeitnah an und sagen Ihnen, welche Unterlagen wir für die Vorprüfung brauchen.</p>
+          </div>
+        </div>
+        <a class="gbew" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="Google-Bewertungen von JMR Architektur ansehen, 5,0 von 5 Sternen">
+          <span class="gbew-note"><b>5,0</b><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span></span>
+          <span class="gbew-tx"><q>Super Zusammenarbeit mit Max, top Leistung.</q><small>Andreas H. · Google-Bewertung</small></span>
+          <span class="gbew-ar" aria-hidden="true">↗</span>
+        </a>
+        <a class="gtel-m" href="tel:+491789428464">Lieber anrufen? <b>0178 9428464</b></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TRUST: Laufband wie auf der KfW-Landingpage, hier ohne EEE-Logo -->
+<div class="gtrust" aria-label="Darauf können Sie sich verlassen">
+  <div class="container">
+    <div class="gtrust-row">
+      <div class="gtrust-track">
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span><span class="tt"><strong>Ganz Deutschland</strong><small>alle 16 Bundesländer</small></span></div>
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="tt"><strong>Digital</strong><small>Upload, Telefon, Video</small></span></div>
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/></svg></span><span class="tt"><strong>Architekt</strong><small>Kammer RLP Nr. 110467</small></span></div>
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span><span class="tt"><strong>Festpreis</strong><small>sofort im Rechner</small></span></div>
+      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span><span class="tt"><strong>Ganz Deutschland</strong><small>alle 16 Bundesländer</small></span></div>
+      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="tt"><strong>Digital</strong><small>Upload, Telefon, Video</small></span></div>
+      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/></svg></span><span class="tt"><strong>Architekt</strong><small>Kammer RLP Nr. 110467</small></span></div>
+      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span><span class="tt"><strong>Festpreis</strong><small>sofort im Rechner</small></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BUNDESWEIT: Aufbau wie die Förder-Sektion der KfW-Landingpage (.kfw) -->
+<section id="bundesweit" class="kfw">
+  <div class="container">
+    <div class="kfw-grid">
+      <div class="kfw-intro fade">
+        <span class="badge">Ein Maßstab für ganz Deutschland</span>
+        <h2>Gleiche Regeln, <em>egal&nbsp;wo</em> Ihr Haus steht.</h2>
+        <p>Ob eine Wohnung abgeschlossen ist, prüft jede Bauaufsicht nach dem Wohnungseigentumsgesetz und nach derselben Verwaltungsvorschrift des Bundes. Deshalb erstellen wir Ihren Aufteilungsplan von Zweibrücken aus für jedes Bundesland.</p>
+        <ul class="li">
+          <li><b>+</b> Vorprüfung von Abgeschlossenheit, Planstand und Umwandlungsregeln am Standort</li>
+          <li><b>+</b> Aufteilungsplan aller Geschosse mit Keller und Dach, Schnitt, Ansichten und Lageplan</li>
+          <li><b>+</b> Antrag bei Ihrer Bauaufsicht und Versand der Originale an Sie oder Ihren Notar</li>
+        </ul>
+      </div>
+      <div class="kfw-cards fade d1">
+        <div class="fcard lead">
+          <div class="ftop"><span class="fno">Bundesweit gleich</span></div>
+          <div class="fbig">§&nbsp;7 WEG</div>
+          <div class="fsub">ist die Grundlage der Bescheinigung. Geprüft wird nach der Verwaltungsvorschrift des Bundes von 2021: Sind die Wohnungen in sich abgeschlossen, sind Stellplätze und Freiflächen bemaßt.</div>
+        </div>
+        <div class="fcard alt">
+          <div class="ftop"><span class="fno">Je nach Land verschieden</span></div>
+          <div class="fbig">Ihr Bauamt</div>
+          <div class="fsub">Zuständigkeit, Gebühren und Einreichweg regelt jedes Land selbst. Wir klären das vor dem Antrag für Ihre Bauaufsicht. Die Gebühren des Amts rechnen wir ohne Aufschlag weiter.</div>
+        </div>
+      </div>
+    </div>
+    <p class="fnote fnote-center">Voraussetzung ist, dass Ihre Pläne mit dem gebauten Bestand und der Genehmigung übereinstimmen. Teilungserklärung und Gemeinschaftsordnung erstellt Ihr Notar. Zur Bearbeitungszeit der Ämter können wir keine Zusage machen.</p>
+  </div>
+</section>
+
+<!-- ABLAUF -->
+<section id="ablauf">
+  <div class="container">
+    <div class="sh c fade"><span class="kicker c">Schritt für Schritt</span><h2>So läuft es bei uns.</h2><p>Ein fester Ansprechpartner vom Festpreis bis zur Bescheinigung. <b>Sie müssen dafür nicht zu uns, wir nicht zu Ihnen.</b></p></div>
+    <div class="flow" id="flow">
+      <div class="flow-rail"></div>
+      <div class="fstep left"><div class="fhead"><span class="sidx">01</span><span class="stitle">Unterlagen senden</span></div><p>Grundbuchauszug, Pläne aller Geschosse, Schnitt, Ansichten, Lageplan und Fotos der Wohnungseingänge. Per Upload oder E-Mail.</p></div>
+      <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Vorprüfung</span></div><p>Wir prüfen Abgeschlossenheit, Planstand und ob am Standort die Umwandlung in Eigentumswohnungen genehmigt werden muss. Passt alles, gilt Ihr Festpreis aus dem Rechner.</p></div>
+      <div class="fstep left"><div class="fhead"><span class="sidx">03</span><span class="stitle">Aufteilungsplan</span></div><p>Wir zeichnen alle Geschosse im Maßstab 1&nbsp;:&nbsp;100, nummerieren die Einheiten und legen sie farbig an. Sie geben den Plan frei und unterschreiben Antrag und Vollmacht.</p></div>
+      <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Antrag beim Bauamt</span></div><p>Wir reichen bei Ihrer zuständigen Bauaufsicht ein und beantworten Rückfragen. Will das Amt das Haus ansehen, öffnen Sie oder Ihre Hausverwaltung die Tür.</p></div>
+      <div class="fstep left"><div class="fhead"><span class="sidx">05</span><span class="stitle">Originale zum Notar</span></div><p>Die gesiegelte Bescheinigung mit den Plänen geht per Post an Sie oder direkt an Ihren Notar. Er beurkundet die Teilungserklärung.</p></div>
+    </div>
+    <div class="fziel fade"><span class="fziel-w" id="fzielW" role="img" aria-label="Aufgeteilt"><span class="fz-glas" aria-hidden="true">Aufgeteilt</span><span class="fz-farbe" aria-hidden="true">Aufgeteilt</span></span></div>
+    <p class="gstand fade">Stand November 2026. Grundlage sind § 7 Abs. 4 WEG und die Allgemeine Verwaltungsvorschrift vom 6. Juli 2021. Zuständigkeit, Verfahren und Gebühren regelt das jeweilige Land.</p>
+  </div>
+</section>
+
+
+<!-- Handy: fester Streifen am unteren Rand, siehe .mcta im Stilblatt -->
+<div class="mcta" id="mcta" aria-hidden="true">
+  <a class="mcta-b" href="#check">Festpreis berechnen <span class="ar">→</span></a>
+  <a class="mcta-t" href="tel:+491789428464" aria-label="Anrufen: 0178 9428464"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4.5L7.5 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V20a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 4z"/></svg></a>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="spot"></div>
+  <div class="container">
+    <div class="ftop">
+      <div class="bn">
+        <img class="flogo" src="../img/logo-white-s.png" alt="jmr Architektur" width="115" height="90">
+        jmr Architektur
+        <small>Architektur · Aufteilungsplan · Abgeschlossenheit</small>
+      </div>
+      <div class="fcol">
+        <div class="fnav">
+          <a href="../index.html">Zur Website</a>
+          <a href="../aufteilung.html">Aufteilung</a>
+          <a href="#check">Festpreis-Rechner</a>
+        </div>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 jmr Architektur · Architekturbüro Maximilian Rudorf</span>
+      <span><a href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener">Bewertungen bei Google</a> · <a href="../impressum.html" target="_blank" rel="noopener">Impressum</a> · <a href="../datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const pb=document.getElementById('pb'),nav=document.getElementById('nav');
+const heroEl=document.getElementById('top');
+function sc(){const h=document.documentElement.scrollHeight-innerHeight;pb.style.width=(scrollY/h*100)+'%';nav.classList.toggle('scrolled',scrollY>20);
+ if(heroEl) nav.classList.toggle('dunkel',heroEl.getBoundingClientRect().bottom>70);}
+addEventListener('scroll',sc,{passive:true});sc();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.12});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+document.querySelectorAll('.footer').forEach(s=>s.addEventListener('mousemove',e=>{const r=s.getBoundingClientRect();s.style.setProperty('--mx',(e.clientX-r.left)+'px');s.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+
+/* Grundriss-Hintergrund, wie auf den Unterseiten */
+(function(){const c=document.getElementById('planbg');if(!c)return;const x=c.getContext('2d');let w,h,dpr=Math.min(devicePixelRatio||1,2);
+ function size(){w=c.offsetWidth;h=c.offsetHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);}size();addEventListener('resize',size);
+ function mk(n){const a=[];for(let i=0;i<n;i++){const b=(i+0.5)/n;a.push({base:b,p:b,t:b,spd:0.10+Math.random()*0.14,wait:Math.random()*4});}return a;}
+ let V=mk(6),H=mk(4);let last=performance.now();
+ function draw(now){x.clearRect(0,0,w,h);const t=now*0.00015;
+   V.forEach((l,i)=>{const X=l.p*w,a=0.11+0.07*Math.sin(t*7+i);x.strokeStyle='rgba(126,183,224,'+a.toFixed(3)+')';x.lineWidth=(i%2===0)?1.3:.8;x.beginPath();x.moveTo(X,0);x.lineTo(X,h);x.stroke();});
+   H.forEach((l,i)=>{const Y=l.p*h,a=0.11+0.07*Math.sin(t*6+i*1.7);x.strokeStyle='rgba(126,183,224,'+a.toFixed(3)+')';x.lineWidth=(i%2===0)?1.3:.8;x.beginPath();x.moveTo(0,Y);x.lineTo(w,Y);x.stroke();});
+   for(let vi=0;vi<V.length;vi+=2)for(let hi=0;hi<H.length;hi+=2){const X=V[vi].p*w,Y=H[hi].p*h,a=0.18+0.16*(0.5+0.5*Math.sin(t*9+vi*2+hi*3));x.fillStyle='rgba(240,140,105,'+a.toFixed(3)+')';x.fillRect(X-10,Y-1,20,2);x.fillRect(X-1,Y-10,2,20);}}
+ if(RM){draw(0);return;}
+ /* Nur zeichnen, solange der Hero sichtbar ist: spart Rechenzeit und Akku beim Scrollen */
+ let an=true,rid=0;new IntersectionObserver(es=>{an=es[0].isIntersecting;if(an&&!rid){last=performance.now();rid=requestAnimationFrame(step);}}).observe(c);
+ function step(now){rid=0;if(!an)return;const dt=Math.min(0.05,(now-last)/1000);last=now;[...V,...H].forEach(l=>{l.wait-=dt;if(Math.abs(l.p-l.t)<0.004&&l.wait<=0){l.t=Math.max(0.06,Math.min(0.94,l.base+(Math.random()-0.5)*0.26));l.wait=1.5+Math.random()*3.5;}l.p+=(l.t-l.p)*Math.min(1,l.spd*dt*6);});draw(now);rid=requestAnimationFrame(step);}
+ rid=requestAnimationFrame(step);})();
+
+/* AUFGETEILT am Ende des Zeitstrahls: Die Farbe breitet sich vom Strich oben
+   kreisfoermig ins Wort aus, je weiter man scrollt. Unten im Blick = ganz farbig. */
+(function(){const w=document.getElementById('fzielW');if(!w)return;
+ if(RM){w.style.setProperty('--fz-r','9999px');return;}
+ let raf=0;
+ function upd(){raf=0;const r=w.getBoundingClientRect(),vh=innerHeight;
+   /* 0, wenn das Wort unten in den Bildschirm kommt; 1, wenn es bei 55 % der Hoehe steht */
+   /* Handy: spaeter einsetzen und erst weiter oben ganz farbig */
+   const handy=matchMedia('(max-width:700px)').matches;
+   const start=vh*(handy?.8:.98),ende=vh*(handy?.4:.55);let k=(start-r.top)/(start-ende);k=Math.max(0,Math.min(1,k));
+   /* Handy: Farbe geht vom Punkt auf der Zeitleiste aus (12 px vom linken Rand) */
+   let ox=0; if(handy){const b=w.parentElement.getBoundingClientRect();ox=b.left+12-r.left;w.style.setProperty('--fz-ox',ox.toFixed(1)+'px');}
+   const voll=Math.hypot(r.width+Math.abs(ox)+40,r.height)+60;
+   w.style.setProperty('--fz-r',(k*k*(3-2*k)*voll).toFixed(1)+'px');}
+ addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
+ addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
+ upd();})();
+
+/* Ablauf: Etappe in Bildschirmmitte fokussieren */
+(function(){const fl=document.getElementById('flow');if(!fl)return;const steps=[...fl.querySelectorAll('.fstep')];const rail=fl.querySelector('.flow-rail');if(!steps.length)return;
+ if(RM){steps.forEach(s=>s.classList.add('active'));if(rail)rail.style.setProperty('--fp','100%');return;}
+ let active=-1,raf=0;
+ function upd(){raf=0;const mid=innerHeight*0.5;let best=0,bd=1e9;
+   steps.forEach((s,i)=>{const r=s.getBoundingClientRect();const c=r.top+r.height/2;const d=Math.abs(c-mid);if(d<bd){bd=d;best=i;}});
+   if(best!==active){active=best;steps.forEach((s,i)=>s.classList.toggle('active',i===active));}
+   if(rail){
+     const first=steps[0].getBoundingClientRect();const lastr=steps[steps.length-1].getBoundingClientRect();
+     const cFirst=first.top+first.height/2, cLast=lastr.top+lastr.height/2;
+     let pct=cLast>cFirst?((mid-cFirst)/(cLast-cFirst))*100:100;
+     pct=Math.max(0,Math.min(100,pct));
+     rail.style.setProperty('--fp',pct+'%');}}
+ addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
+ addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});
+ upd();})();
+
+/* Ab hier ein eigener Block: Das Quiz ist das Herzstueck dieser Seite.
+   Stolpert oben etwas (etwa der Grundriss-Hintergrund auf einem alten
+   Browser), soll es davon nicht mitgerissen werden. */
+</script>
+<script>
+/* ------------------------------------------------------------------
+   Ereignisse fuer das Werbekonto
+   ------------------------------------------------------------------
+   Alles laeuft ueber window.jmrTrackMeta aus js/jmr-consent.js. Damit
+   geht nichts raus, solange nicht in die Kategorie "Marketing"
+   eingewilligt wurde, und uebertragen wird ausschliesslich der Name des
+   Ereignisses, keine Eingaben und keine Telefonnummer.
+
+   ViewContent        Aufruf dieser Landingpage
+   Call               Druck auf eine Telefonnummer
+   Whatsapp           Druck auf einen WhatsApp-Knopf
+   Page2              erster Druck auf "Naechster Schritt"
+   Page3              zweiter Druck
+   InitiateCheckout   dritter Druck, also der Sprung zum Kontaktschritt
+   Lead               erfolgreich abgesendetes Formular. Das meldet
+                      bereits js/jmr-consent.js beim Ereignis
+                      "jmr:gesendet", hier wird es deshalb nicht noch
+                      einmal gemeldet: Zwei Meldungen je Anfrage wuerden
+                      die Zahlen im Werbekonto verdoppeln.
+   CompleteRegistration  ebenfalls beim Absenden, siehe weiter unten.
+   ------------------------------------------------------------------ */
+(function(){
+  function melde(name){
+    return (typeof window.jmrTrackMeta==='function') ? !!window.jmrTrackMeta(name) : false;
+  }
+  /* Die Trichterschritte zaehlen einmal je Seitenaufruf. Wer zurueck und
+     wieder vor geht, soll die Zahlen nicht aufblaehen. Gemerkt wird erst,
+     wenn die Meldung wirklich rausgegangen ist: Ohne Einwilligung bleibt
+     der Schritt offen und wird nachgeholt, sobald sie vorliegt. */
+  var schon={};
+  function einmal(name){
+    if(schon[name]) return true;
+    if(melde(name)){ schon[name]=true; return true; }
+    return false;
+  }
+  window.jmrLpEreignis=einmal;
+
+  /* Dieselben Schritte zusaetzlich fuer Google Analytics (Kategorie
+     "Statistik") ueber window.jmrTrackEvent aus js/jmr-consent.js. Ohne
+     Einwilligung geht nichts raus. Uebertragen werden nur der Name des
+     Ereignisses und die Seite, keine Eingaben. Jedes Ereignis einmal je
+     Seitenaufruf; die Kampagne (utm_campaign) ordnet GA4 selbst zu.
+
+     cta_selbstcheck    Druck auf einen Verweis "Selbstcheck" (#check)
+     quiz_start         erste Antwort in Frage 1 gewaehlt
+     quiz_frage_2       Frage 2 erreicht
+     quiz_frage_3       Frage 3 erreicht
+     quiz_kontakt       letzte Frage beantwortet, Kontaktschritt erreicht
+     generate_lead      Anfrage erfolgreich abgesendet
+     lp_scroll_ende     Seite bis ganz nach unten gescrollt */
+  var gaSchon={};
+  function statistik(name){
+    if(gaSchon[name]) return true;
+    if(typeof window.jmrTrackEvent!=='function') return false;
+    /* false heisst: keine Einwilligung, spaeter nachholen. Eine aeltere
+       js/jmr-consent.js aus dem Cache gibt nichts zurueck; dann gilt das
+       Ereignis als gemeldet, damit es nicht mehrfach rausgeht. */
+    if(window.jmrTrackEvent(name,{seite:'aufteilen'})!==false){
+      gaSchon[name]=true; return true;
+    }
+    return false;
+  }
+  window.jmrLpStatistik=statistik;
+
+  /* Ende der Seite: einmal, sobald der untere Rand (bis auf 40 px) im Bild ist. */
+  function scrollEnde(){
+    if(gaSchon.lp_scroll_ende) return;
+    var h=document.documentElement.scrollHeight-innerHeight;
+    if(h>0 && (window.pageYOffset||document.documentElement.scrollTop||0)>=h-40){ statistik('lp_scroll_ende'); }
+  }
+  addEventListener('scroll',scrollEnde,{passive:true});
+
+  /* ViewContent: beim Laden liegt die Einwilligung meist noch nicht vor,
+     denn js/jmr-consent.js wertet sie erst nach dem Seitenaufbau aus.
+     Der Versuch steht trotzdem hier, falls das Skript frueher dran war;
+     der Regelfall ist die Meldung "jmr:einwilligung" darunter. */
+  einmal('ViewContent');
+  document.addEventListener('jmr:einwilligung',function(){ einmal('ViewContent'); });
+
+  /* Telefon und WhatsApp: ein Zuhoerer fuer die ganze Seite, damit auch
+     Verweise erfasst werden, die erst spaeter dazukommen. In der
+     Erfassungsphase, weil der Druck die Seite verlaesst. Ohne Sperre:
+     Jeder Anrufversuch ist ein eigenes Signal. */
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a'):null;
+    if(!a) return;
+    var ziel=a.getAttribute('href')||'';
+    if(ziel.indexOf('tel:')===0){ melde('Call'); return; }
+    if(ziel.indexOf('wa.me')>-1||ziel.indexOf('api.whatsapp.com')>-1){ melde('Whatsapp'); return; }
+    if(ziel==='#check'){ statistik('cta_selbstcheck'); }
+  },true);
+})();
+
+/* ------------------------------------------------------------------
+   Quiz im Formularkasten
+   ------------------------------------------------------------------
+   Vier Schritte in einem einzigen <form>. Die drei Antworten landen in
+   versteckten Feldern und gehen mit der Anfrage ans Lead-Tool, damit dort
+   schon steht, worum es geht. Abgeschickt wird das Formular
+   von js/jmr-formular.js, dort haengt auch das Dankfenster dran.
+   Nach dem erfolgreichen Absenden (Ereignis "jmr:gesendet") steht der
+   Dank im Kasten, ein Dankfenster gibt es auf dieser Seite nicht.
+   ------------------------------------------------------------------ */
+(function(){
+  var form=document.getElementById('kform'); if(!form) return;
+  var steps=[].slice.call(form.querySelectorAll('.qstep'));
+  var fill=document.getElementById('qfill'), num=document.getElementById('qnum');
+  var kasten=document.getElementById('qsteps');
+  var sum=document.getElementById('qsum');
+  var aktuell=document.getElementById('qaktuell');
+  var zurueck=document.getElementById('qzurueck');
+  var felder={1:document.getElementById('qa1'),2:document.getElementById('qa2'),3:document.getElementById('qa3')};
+  var codes={}, texte={}, kurze={}, jetzt=1, titelMin=0;
+  /* Benannt nach dem Schritt, auf dem der Druck landet. */
+  var TRICHTER={2:'Page2',3:'Page3',4:'InitiateCheckout'};
+  /* Dasselbe fuer Google Analytics, siehe jmrLpStatistik weiter oben. */
+  var TRICHTER_GA={2:'quiz_frage_2',3:'quiz_frage_3',4:'quiz_kontakt'};
+
+  function zeige(n,fokus){
+    jetzt=n;
+    steps.forEach(function(s){ s.hidden = (+s.dataset.step !== n); });
+    /* Der Balken zeigt, wie viel schon hinter einem liegt: beim Einstieg
+       also nichts, im letzten Schritt sind alle drei Fragen beantwortet. */
+    if(fill) fill.style.width=Math.round((n-1)/3*100)+'%';
+    if(num) num.textContent=n+' von 4';
+    /* Die Frage steht einmal oben im Kasten und wechselt mit dem Schritt.
+       Ihr Wortlaut haengt als data-titel am Schritt. */
+    var jetztEl=steps.filter(function(s){return +s.dataset.step===n;})[0];
+    if(aktuell&&jetztEl) aktuell.textContent=jetztEl.dataset.titel||'';
+    if(aktuell) aktuell.style.minHeight=(n<4&&titelMin)?titelMin+'px':'';
+    /* Im ersten Schritt gibt es kein Zurueck. Der Knopf wird nur
+       unsichtbar, damit die Zeile ihre Breite behaelt. */
+    if(zurueck) zurueck.classList.toggle('aus',n<=1);
+    /* Im Kontaktschritt steht Zurueck auf dem Handy in der Zeile der Ueberschrift. */
+    var karteS=document.getElementById('check'); if(karteS){ karteS.classList.toggle('s4',n===4); karteS.classList.toggle('s1',n===1); }
+    if(n===4){ bauSumme(); if(typeof window.jmrFestpreis==='function') window.jmrFestpreis(); }
+    /* Beim Weiterschalten wandert der Fokus auf die neue Frage. Sonst
+       haengt er an einer Schaltflaeche, die es gerade nicht mehr gibt,
+       und die Tastaturbedienung faengt wieder ganz oben an. */
+    if(fokus){
+      /* Nur der Fokus wandert mit, die Seite bleibt stehen: preventScroll
+         verhindert das Rollen, das der Browser sonst von sich aus macht.
+         Der Kasten ist ueber alle vier Schritte gleich hoch, es verschiebt
+         sich also nichts, und ein selbsttaetiger Sprung beim Antworten
+         fuehlt sich an, als haette man etwas falsch gemacht. */
+      if(aktuell){ aktuell.focus({preventScroll:true}); }
+    }
+  }
+
+  /* Rollt den Fragenkasten unter die feste Kopfzeile. Nur auf dem Handy,
+     und nur noch nach dem Absenden: Sonst stuende die Einschaetzung nach
+     dem Schliessen des Dankfensters ausserhalb des Blickfelds. Beim
+     Weiterschalten zwischen den Fragen wird nicht mehr gerollt. */
+  function inSicht(){
+    if(!(window.matchMedia && window.matchMedia('(max-width:700px)').matches)) return;
+    var karte=document.querySelector('.ccard'); if(!karte) return;
+    var y=karte.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop)-80;
+    if(y<0) y=0;
+    try{ window.scrollTo({top:y,behavior:RM?'auto':'smooth'}); }catch(e){ window.scrollTo(0,y); }
+  }
+
+  /* Misst die drei Fragen nacheinander und haelt den Kasten auf der Hoehe
+     der laengsten. Ohne das wandert der Rand des Kastens bei jedem Schritt,
+     weil die Antworten verschieden lang sind und der Zurueck-Knopf erst ab
+     Schritt zwei dazukommt. Der vierte Schritt bleibt aussen vor, das
+     Formular darf hoeher sein. Nach dem Absenden wird die Hoehe wieder
+     freigegeben, damit die Einschätzung nicht in einem zu grossen Kasten
+     steht. */
+  function hoeheAngleichen(){
+    if(!kasten) return;
+    kasten.style.minHeight='';
+    /* Auf dem Handy wird auch der Kontaktschritt mitgemessen: Die vier
+       Schritte liegen dort dicht beieinander, und mit ihm zusammen steht
+       der Kasten ueber den ganzen Weg still. Am Rechner bleibt er aussen
+       vor, das Formular ist dort deutlich hoeher und wuerde unter den
+       drei Fragen eine Bildschirmlaenge Leerraum lassen. */
+    var handy = !!(window.matchMedia && window.matchMedia('(max-width:700px)').matches);
+    var merk=steps.map(function(s){ return s.hidden; });
+    var max=0;
+    steps.forEach(function(s){
+      if(+s.dataset.step===4) return;
+      steps.forEach(function(a){ a.hidden = (a!==s); });
+      max=Math.max(max,s.offsetHeight);
+    });
+    steps.forEach(function(s,i){ s.hidden=merk[i]; });
+    if(max) kasten.style.minHeight=max+'px';
+    /* Auch die Fragezeile: die laengste der drei Fragen bestimmt ihre Hoehe,
+       sonst wird der Kasten bei kuerzeren Fragen kleiner. */
+    if(aktuell){
+      var alt=aktuell.textContent, hoch=0;
+      aktuell.style.minHeight='';
+      steps.forEach(function(st){
+        if(+st.dataset.step===4) return;
+        aktuell.textContent=st.dataset.titel||'';
+        hoch=Math.max(hoch,aktuell.offsetHeight);
+      });
+      aktuell.textContent=alt; titelMin=hoch;
+      aktuell.style.minHeight=(jetzt<4&&hoch)?hoch+'px':'';
+    }
+  }
+
+  /* Jede Pille traegt zwei Fassungen: die ausfuehrliche fuer den Rechner
+     und eine kurze fuer das Handy, wo "Dachgeschoss, Keller oder Gewerbe
+     wird Wohnraum" sonst zweizeilig umbricht. Welche zu sehen ist,
+     entscheidet das Stilblatt ueber d-only-i und m-only-i. Ans Lead-Tool
+     geht in jedem Fall die ausfuehrliche Fassung. */
+  function bauSumme(){
+    if(!sum) return;
+    sum.innerHTML='';
+    [1,2,3].forEach(function(i){
+      if(!texte[i]) return;
+      var c=document.createElement('span'); c.className='qchip';
+      var lang=document.createElement('span'); lang.className='d-only-i'; lang.textContent=texte[i];
+      var knapp=document.createElement('span'); knapp.className='m-only-i'; knapp.textContent=kurze[i]||texte[i];
+      c.appendChild(lang); c.appendChild(knapp); sum.appendChild(c);
+    });
+  }
+
+  function schrittEl(n){
+    return steps.filter(function(s){ return +s.dataset.step===n; })[0];
+  }
+
+  /* Eine Antwort anwaehlen. Weitergeschaltet wird nicht mehr automatisch:
+     Wer sich vertippt, konnte vorher nur ueber "Zurueck" korrigieren, und
+     der Sprung nach dem Antippen wirkte wie ein Fehler. Jetzt bleibt die
+     Auswahl stehen, bis unten "Naechster Schritt" gedrueckt wird. */
+  function waehle(opt){
+    var f=+opt.dataset.frage;
+    texte[f]=opt.dataset.wert; codes[f]=opt.dataset.code; kurze[f]=opt.dataset.kurz||opt.dataset.wert;
+    if(felder[f]) felder[f].value=opt.dataset.wert;
+    var geschwister=opt.parentNode.querySelectorAll('.qopt');
+    [].forEach.call(geschwister,function(g){ g.classList.remove('aktiv'); g.setAttribute('aria-pressed','false'); });
+    opt.classList.add('aktiv'); opt.setAttribute('aria-pressed','true');
+    var st=schrittEl(f); if(!st) return;
+    var warn=st.querySelector('.qwarn'); if(warn) warn.hidden=true;
+    var knopf=st.querySelector('.qnext');
+    if(knopf && knopf.getAttribute('aria-disabled')==='true'){
+      knopf.removeAttribute('aria-disabled');
+      knopf.classList.add('bereit');
+      setTimeout(function(){ knopf.classList.remove('bereit'); },600);
+    }
+  }
+
+  /* Weiterdruecken ohne Auswahl sagt, was fehlt, statt nichts zu tun. */
+  function fehlt(n){
+    var st=schrittEl(n); if(!st) return;
+    var warn=st.querySelector('.qwarn'); if(warn) warn.hidden=false;
+    var liste=st.querySelector('.qopts');
+    if(liste){ liste.classList.remove('fehlt'); void liste.offsetWidth; liste.classList.add('fehlt'); }
+  }
+
+  form.addEventListener('click',function(e){
+    var opt=e.target.closest('.qopt');
+    if(opt){
+      if(jetzt===1 && typeof window.jmrLpStatistik==='function'){ window.jmrLpStatistik('quiz_start'); }
+      waehle(opt); return;
+    }
+    if(e.target.closest('.qzur-m')){ if(jetzt>1) zeige(jetzt-1,true); return; }
+    var weiter=e.target.closest('.qnext');
+    if(weiter){
+      var ziel=+weiter.dataset.weiter;
+      if(!texte[ziel-1] && !schrittEl(ziel-1).hasAttribute('data-frei')){ fehlt(ziel-1); return; }
+      /* Trichterschritt melden, benannt nach dem Schritt, auf dem man
+         landet. Erst nach der Pruefung oben, damit ein Druck ohne
+         Auswahl nicht mitgezaehlt wird. */
+      if(TRICHTER[ziel] && typeof window.jmrLpEreignis==='function'){
+        window.jmrLpEreignis(TRICHTER[ziel]);
+      }
+      if(TRICHTER_GA[ziel] && typeof window.jmrLpStatistik==='function'){
+        window.jmrLpStatistik(TRICHTER_GA[ziel]);
+      }
+      zeige(Math.min(4,ziel),true);
+      return;
+    }
+  });
+
+  if(zurueck) zurueck.addEventListener('click',function(){
+    if(jetzt>1) zeige(jetzt-1,true);
+  });
+
+  document.addEventListener('jmr:gesendet',function(){
+    /* Eigenes Ereignis nur fuer diese Landingpage. js/jmr-consent.js meldet
+       bei jeder Anfrage "Lead"; hier kommt "CompleteRegistration" dazu, damit
+       sich die Anfragen aus der Kampagne im Werbekonto ohne Umweg ueber eine
+       URL-Regel als eigenes Ereignis auswerten lassen. Gefeuert wird nur bei
+       Einwilligung in "Marketing", die Pruefung steckt in jmrTrackMeta. */
+    if(typeof window.jmrTrackMeta==='function'){ window.jmrTrackMeta('CompleteRegistration'); }
+    if(typeof window.jmrLpStatistik==='function'){ window.jmrLpStatistik('generate_lead'); }
+    var dank=document.getElementById('qerg'); if(dank) dank.classList.add('da');
+    /* Das Formular ist beantwortet, die Fragen brauchen wir nicht mehr. */
+    steps.forEach(function(s){ s.hidden=true; });
+    var bar=document.querySelector('.qbar'); if(bar) bar.style.display='none';
+    if(kasten) kasten.style.minHeight='';
+    /* Die Zeile unter der Ueberschrift kuendigt die Fragen an. Sind sie
+       beantwortet, hat sie sich erledigt: Der Hinweis auf den Rueckruf
+       steht jetzt am Ende des Vorschlags. */
+    var kopf=document.querySelector('.ccard .ds'); if(kopf) kopf.style.display='none';
+    if(aktuell) aktuell.style.display='none';
+    /* Die Ueberschrift des Kastens kuendigt den Check an. Ist er erledigt,
+       traegt die Einschaetzung ihre eigene Ueberschrift, und zwei
+       Ueberschriften uebereinander waeren eine zu viel. */
+    var h3=document.querySelector('.ccard h3'); if(h3) h3.style.display='none';
+    var qk=document.getElementById('qkopf'); if(qk) qk.style.display='none';
+    /* Das Dankfenster liegt ueber der Seite und wird mit einem Druck
+       geschlossen. Damit die Einschaetzung danach nicht irgendwo hinter
+       dem Fenster steht, rollt der Kasten schon jetzt in den Blick. */
+    setTimeout(inSicht,400);
+  });
+
+  /* Fester Streifen am unteren Rand, nur auf dem Handy. Er kommt, sobald
+     der Fragenkasten aus dem Blick ist, und bleibt weg, solange das
+     Datenschutz-Banner unten steht oder die Anfrage schon draussen ist. */
+  (function(){
+    var leiste=document.getElementById('mcta');
+    var karte=document.getElementById('check');
+    if(!leiste||!karte) return;
+    var fertig=false, warteRaf=0;
+    function bannerOffen(){
+      var b=document.getElementById('jmr-consent');
+      if(!b) return false;
+      try{ return getComputedStyle(b).display!=='none'; }catch(e){ return false; }
+    }
+    function pruefe(){
+      warteRaf=0;
+      var handy=window.matchMedia && window.matchMedia('(max-width:700px)').matches;
+      var r=karte.getBoundingClientRect();
+      var imBlick=(r.bottom>96 && r.top<window.innerHeight-70);
+      var zeigen=handy && !fertig && !imBlick && !bannerOffen() &&
+                 (window.pageYOffset||document.documentElement.scrollTop||0)>200;
+      leiste.classList.toggle('da',zeigen);
+      leiste.setAttribute('aria-hidden',zeigen?'false':'true');
+      /* Der WhatsApp-Knopf rueckt ueber die Leiste und tritt hinter dem
+         Datenschutz-Banner ganz zurueck. */
+      document.body.classList.toggle('leiste-an',zeigen);
+      var wa=document.getElementById('wa');
+      if(wa) wa.classList.toggle('weg',bannerOffen());
+    }
+    function anstossen(){ if(!warteRaf) warteRaf=requestAnimationFrame(pruefe); }
+    addEventListener('scroll',anstossen,{passive:true});
+    addEventListener('resize',anstossen,{passive:true});
+    /* Nach einem Klick auf das Datenschutz-Banner neu urteilen. */
+    document.addEventListener('click',function(){ setTimeout(pruefe,80); },true);
+    document.addEventListener('jmr:gesendet',function(){ fertig=true; pruefe(); });
+    pruefe();
+  })();
+
+  zeige(1);
+  hoeheAngleichen();
+  /* Noch einmal messen, sobald die Schriften geladen sind: mit der
+     Ersatzschrift fallen die Zeilen anders um als mit Switzer und Inter.
+     Und noch einmal, wenn sich die Fensterbreite aendert. */
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(hoeheAngleichen); }
+  var warte=0;
+  addEventListener('resize',function(){
+    clearTimeout(warte);
+    warte=setTimeout(function(){ if(jetzt<4) hoeheAngleichen(); },180);
+  },{passive:true});
+})();
+</script>
+<script>
+/* ------------------------------------------------------------------
+   Festpreis-Rechner (Preisregeln von Max, 03.11.2026)
+   ------------------------------------------------------------------
+   Grundpreis 600 EUR netto fuer 1 bis 2 Geschosse mit Wohnraum.
+   Jedes weitere Vollgeschoss und ein ausgebautes Dachgeschoss je +200 EUR.
+   Keller und nicht ausgebautes Dach sind inklusive.
+   Ab der dritten Einheit je +50 EUR.
+   Ab 6 Geschossen (Vollgeschosse plus ausgebautes Dach) kein Festpreis,
+   sondern Angebot nach Ruecksprache. Angezeigt wird der Endpreis inkl.
+   19 % USt (Preisangabenverordnung), darunter netto.
+   ------------------------------------------------------------------ */
+(function(){
+  var GRUND=600, JE_GESCHOSS=200, JE_EINHEIT=50, UST=0.19, GRENZE=6, MIN_E=2, MAX_E=60;
+  var form=document.getElementById('kform'); if(!form) return;
+  var dg=document.getElementById('qdg'), anz=document.getElementById('qeAnz');
+  var fE=document.getElementById('qa2'), fDg=document.getElementById('qaDg');
+  var einheiten=MIN_E;
+  var fmt=function(n){ return new Intl.NumberFormat('de-DE',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2}).format(n)+'\u00a0€'; };
+
+  if(dg) dg.addEventListener('click',function(){
+    var an=dg.getAttribute('aria-pressed')!=='true';
+    dg.setAttribute('aria-pressed',an?'true':'false');
+    if(fDg) fDg.value=an?'ausgebaut':'nicht ausgebaut';
+  });
+
+  function setzeE(n){
+    einheiten=Math.max(MIN_E,Math.min(MAX_E,n));
+    if(anz) anz.textContent=einheiten;
+    if(fE) fE.value=einheiten;
+    [].forEach.call(form.querySelectorAll('.qz-b'),function(b){
+      b.disabled = (+b.dataset.schritt<0 && einheiten<=MIN_E) || (+b.dataset.schritt>0 && einheiten>=MAX_E);
+    });
+  }
+  form.addEventListener('click',function(e){
+    var b=e.target.closest('.qz-b'); if(b) setzeE(einheiten+(+b.dataset.schritt));
+  });
+  setzeE(MIN_E);
+
+  window.jmrFestpreis=function(){
+    var a=form.querySelector('.qstep[data-step="1"] .qopt.aktiv');
+    var vg=a?+a.dataset.zahl:2, mitDg=dg&&dg.getAttribute('aria-pressed')==='true';
+    var geschosse=vg+(mitDg?1:0);
+    var plan=form.querySelector('.qstep[data-step="3"] .qopt.aktiv');
+    var fest=document.getElementById('qpFest'), ind=document.getElementById('qpIndiv');
+    var pk=document.getElementById('qpPlan');
+    if(pk) pk.hidden=!(plan&&plan.dataset.code==='plan-keine');
+    var nB=document.getElementById('qaNetto'), bB=document.getElementById('qaBrutto');
+    var titel=document.getElementById('qaktuell');
+    if(titel) titel.textContent=(geschosse>=GRENZE)?'Ihr Ergebnis':'Ihr Endpreis';
+    if(geschosse>=GRENZE){
+      fest.hidden=true; ind.hidden=false;
+      nB.value='Angebot nach Rücksprache'; bB.value='';
+      return;
+    }
+    fest.hidden=false; ind.hidden=true;
+    var extraG=Math.max(0,geschosse-2), extraE=Math.max(0,einheiten-2);
+    var netto=GRUND+extraG*JE_GESCHOSS+extraE*JE_EINHEIT;
+    var brutto=Math.round(netto*(1+UST)*100)/100;
+    document.getElementById('qpBrutto').textContent=fmt(brutto);
+    document.getElementById('qpNetto').textContent=fmt(netto);
+    var pos=[['Grundpreis bis 2 Geschosse',GRUND]];
+    if(extraG) pos.push(['+ '+extraG+(extraG===1?' Geschoss':' Geschosse')+' à 200 €',extraG*JE_GESCHOSS]);
+    if(extraE) pos.push(['+ '+extraE+(extraE===1?' Einheit':' Einheiten')+' à 50 € (ab der 3.)',extraE*JE_EINHEIT]);
+    var ul=document.getElementById('qpPos'); ul.innerHTML='<li class="qp-k"><span>Zusammensetzung</span><span>netto</span></li>';
+    pos.forEach(function(p){
+      var li=document.createElement('li'),l=document.createElement('span'),r=document.createElement('span');
+      l.textContent=p[0]; r.textContent=fmt(p[1]); li.appendChild(l); li.appendChild(r); ul.appendChild(li);
+    });
+    nB.value=fmt(netto); bB.value=fmt(brutto);
+  };
+})();
+</script>
+<script>
+/* ------------------------------------------------------------------
+   Nur auf dieser Seite: Spam-Schutz und Herkunft
+   ------------------------------------------------------------------ */
+/* Spam-Schutz (Cloudflare Turnstile) erst laden, wenn jemand den Selbstcheck
+   benutzt. Bis zum Absenden vergehen mindestens drei Klicks und die Kontaktdaten,
+   das reicht fuer die unsichtbare Pruefung. Spart beim Seitenaufruf Ladezeit. */
+(function(){var box=document.getElementById('check'),geladen=false;if(!box)return;
+ function laden(){if(geladen)return;geladen=true;
+   ['pointerdown','keydown','focusin','touchstart'].forEach(function(t){box.removeEventListener(t,laden,true);});
+   window.jmrTurnstileDa=function(){document.querySelectorAll('#check .cf-turnstile').forEach(function(el){if(!el.childElementCount)turnstile.render(el);});};
+   var sc=document.createElement('script');sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=jmrTurnstileDa';sc.async=true;document.head.appendChild(sc);}
+ ['pointerdown','keydown','focusin','touchstart'].forEach(function(t){box.addEventListener(t,laden,{capture:true,passive:true});});})();
+
+(function(){
+  /* Herkunft der Anfrage (UTM-Parameter der Anzeige) ins Feld "Quelle",
+     damit im Lead-Tool steht, woher sie kam. */
+  var q=document.getElementById('kf-quelle');
+  if(q){
+    try{
+      var p=new URLSearchParams(location.search),teile=[];
+      ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(k){ if(p.get(k)) teile.push(k.replace('utm_','')+'='+p.get(k)); });
+      if(p.get('fbclid')) teile.push('fbclid');
+      if(!teile.length && document.referrer) teile.push('ref='+document.referrer.split('/')[2]);
+      q.value=teile.join(', ')||'direkt';
+    }catch(e){}
+  }
+})();
+</script>
+</body>
+</html>
