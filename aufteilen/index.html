@@ -253,7 +253,8 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
         background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink-soft);
         font-size:1.15rem;cursor:pointer;padding:0;transition:border-color .2s,color .2s}
 .qzur-m:hover{border-color:var(--accent);color:var(--accent-d)}
-.qopts{display:flex;flex-direction:column;gap:.55rem}
+/* Raster mit gleich hohen Zeilen: Alle Antworten einer Frage sind so hoch wie die hoechste, auch wenn eine Erlaeuterung umbricht */
+.qopts{display:grid;grid-auto-rows:1fr;gap:.55rem}
 .qopt{display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;cursor:pointer;font-family:var(--sans);transition:border-color .2s,box-shadow .2s,transform .2s}
 .qopt:hover{border-color:rgba(225,98,61,.55);transform:translateY(-1px);box-shadow:0 12px 26px -18px rgba(11,28,43,.5)}
 .qopt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -940,7 +941,8 @@ main:focus{outline:none}
   .lhero .kicker{display:inline-flex;justify-content:center;font-size:.62rem;margin-bottom:.55rem}
   /* "Haus aufteilen lassen," passt so bis 320 px in eine Zeile */
   .lhero h1.gh1{font-size:clamp(1.85rem,9.5vw,2.5rem)}
-  .hsub{font-size:1.08rem;margin-top:.7rem;color:#e6edf2}
+  /* Ein Satz in einer Zeile: Schrift waechst mit der Breite, passt bis 320 px */
+  .hsub{font-size:min(1.08rem,3.95vw);white-space:nowrap;margin-top:.7rem;color:#e6edf2}
 }
 
 /* FESTPREIS-RECHNER im Fragenkasten: alles linksbuendig, Fortschritt oben */
@@ -1187,8 +1189,8 @@ main:focus{outline:none}
               <div class="qpreis" id="qpreis" aria-live="polite">
                 <div id="qpFest">
                   <span class="qp-lab">Festpreis inkl. 19&nbsp;% USt</span>
-                  <div class="qp-big" id="qpBrutto">1.059,10 €</div>
-                  <div class="qp-sub"><span id="qpNetto">890 €</span> netto</div>
+                  <div class="qp-big" id="qpBrutto">714 €</div>
+                  <div class="qp-sub"><span id="qpNetto">600 €</span> netto</div>
                   <ul class="qp-pos" id="qpPos"></ul>
                 </div>
                 <div id="qpIndiv" hidden>
@@ -1781,9 +1783,9 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
 </script>
 <script>
 /* ------------------------------------------------------------------
-   Festpreis-Rechner (Preisregeln von Max, 03.11.2026, angehoben am selben Tag)
+   Festpreis-Rechner (Preisregeln von Max, 03.11.2026; Aufschlaege angehoben, Grundpreis bleibt 600 EUR)
    ------------------------------------------------------------------
-   Grundpreis 890 EUR netto fuer 1 bis 2 Geschosse mit Wohnraum.
+   Grundpreis 600 EUR netto fuer 1 bis 2 Geschosse mit Wohnraum.
    Jedes weitere Vollgeschoss und ein ausgebautes Dachgeschoss je +220 EUR.
    Keller und nicht ausgebautes Dach sind inklusive.
    Ab der dritten Einheit je +60 EUR.
@@ -1792,7 +1794,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
    19 % USt (Preisangabenverordnung), darunter netto.
    ------------------------------------------------------------------ */
 (function(){
-  var GRUND=890, JE_GESCHOSS=220, JE_EINHEIT=60, UST=0.19, GRENZE=6, MIN_E=2, MAX_E=60;
+  var GRUND=600, JE_GESCHOSS=220, JE_EINHEIT=60, UST=0.19, GRENZE=6, MIN_E=2, MAX_E=60;
   var form=document.getElementById('kform'); if(!form) return;
   var dg=document.getElementById('qdg'), anz=document.getElementById('qeAnz');
   var fE=document.getElementById('qa2'), fDg=document.getElementById('qaDg');
