@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+<!-- Schriften des ersten Bildschirms frueh laden (Inter nur als lateinischer Auszug, 38 statt 225 KB) -->
+<link rel="preload" href="../fonts/Inter-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Switzer-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/Switzer-400.woff2" as="font" type="font/woff2" crossorigin>
 <script src="../js/jmr-consent.js?v=4" defer></script>
 <script src="../js/jmr-faq.js" defer></script>
 <script>window.jmrDankImKasten=true;</script>
@@ -35,6 +39,7 @@
 <meta name="twitter:image" content="https://jmr-architektur.de/img/og-bild.jpg">
 <style>
 @font-face{font-family:'Inter';src:url('../fonts/Inter-Variable.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Inter';src:url('../fonts/Inter-Variable-latin.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0020-007E,U+00A0-00FF,U+0131,U+0152-0153,U+2010-2027,U+2030-203A,U+20AC,U+2122,U+2190-2199,U+2212}
 @font-face{font-family:'Space Grotesk';src:url('../fonts/SpaceGrotesk-Variable.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
 @font-face{font-family:'Switzer';src:url('../fonts/Switzer-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Switzer';src:url('../fonts/Switzer-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
@@ -309,11 +314,11 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 .ccard .fld label{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .fld label .opt{font-size:.92em;letter-spacing:.04em;text-transform:none;color:#94a3ad;font-style:italic}
 .fld input,.fld select,.fld textarea{width:100%;padding:.85rem 1.05rem;border:1px solid var(--line);border-radius:12px;font-family:var(--sans);font-size:.95rem;background:#FFFFFF;transition:.2s;color:var(--white);line-height:1.12}
-.fld input::placeholder{color:#94a3ad}
+.fld input::placeholder,.fld textarea::placeholder{color:#6b7c88}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--accent);background:#FFFFFF;box-shadow:0 0 0 3px rgba(225,98,61,.15)}
 .fld-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 @media(max-width:345px){.fld-row{grid-template-columns:1fr}}
-@media(max-width:560px){.fld{margin-bottom:.75rem}.fld label{margin-bottom:.3rem}.fld input{font-size:16px;padding:.72rem .9rem}}
+@media(max-width:560px){.fld{margin-bottom:.75rem}.fld label{margin-bottom:.3rem}.fld input,.fld textarea{font-size:16px;padding:.72rem .9rem}}
 .kf-status{margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;font-size:.92rem;line-height:1.5}
 .kf-status.ok{background:rgba(63,209,135,.14);border:1px solid rgba(63,209,135,.45);color:#158a5a;font-weight:600}
 .kf-status.err{background:rgba(214,69,69,.1);border:1px solid rgba(214,69,69,.4);color:#b3271e}
@@ -474,6 +479,10 @@ p{text-wrap:pretty}
 .fade{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .fade.vis{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+/* Hero: sofort sichtbar, nur eine kurze Bewegung nach oben (ohne Ausblenden, damit der erste Inhalt nicht wartet) */
+.hin{animation:hin .7s cubic-bezier(.16,1,.3,1) both}.hin2{animation-delay:.08s}
+@keyframes hin{from{transform:translateY(14px)}to{transform:none}}
+@media(prefers-reduced-motion:reduce){.hin{animation:none}}
 .prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:200}
 .prog-b{height:100%;width:0;background:linear-gradient(90deg,#1F6FA5,#5BD0E0,#E1623D)}
 @media(prefers-reduced-motion:reduce){.fade{transition:none;opacity:1;transform:none}.qerg.da{animation:none}}
@@ -869,6 +878,16 @@ main:focus{outline:none}
 .kfw-intro .li li{display:flex;gap:.7rem;font-size:1rem;color:var(--white)}
 .kfw-intro .li b{color:var(--accent)}
 .kfw-cards{display:flex;flex-direction:column;gap:1.1rem}
+/* Handy: Foerder-Sektion mittig wie die uebrigen Abschnitte, die grosse 266 liegt hinter der Einleitung statt hinter der ersten Karte */
+@media(max-width:700px){
+  .kfw::before{left:50%;top:7.5rem;transform:translateX(-50%);font-size:clamp(9rem,46vw,13rem)}
+  .kfw-intro{text-align:center}
+  .kfw-intro p{margin-left:auto;margin-right:auto}
+  .kfw-intro .li li{display:block;text-align:center}
+  .kfw-intro .li b{margin-right:.4rem}
+  .kfw .fcard{text-align:center}
+  .kfw .fcard .ftop{justify-content:center}
+}
 .fcard{position:relative;border-radius:var(--r-lg);padding:1.8rem;border:1px solid var(--line);background:#FFFFFF}
 .fcard.lead{isolation:isolate;animation:breath 3.2s ease-in-out infinite}
 .fcard.lead::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:conic-gradient(from var(--a),transparent 0 6%,var(--accent) 22%,#F2A684 38%,var(--steel) 54%,var(--accent) 70%,transparent 86% 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 5s linear infinite;pointer-events:none}
@@ -885,7 +904,6 @@ main:focus{outline:none}
 .fnote{font-family:var(--mono);font-size:.64rem;color:var(--ink-soft);line-height:1.6;margin-top:1.4rem;max-width:520px}
 .fnote-center{max-width:760px;margin:2.6rem auto 0;text-align:center;position:relative;z-index:1}
 </style>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -908,7 +926,7 @@ main:focus{outline:none}
   <canvas id="planbg" aria-hidden="true"></canvas>
   <div class="container">
     <div class="lgrid">
-      <div class="lcol-text fade">
+      <div class="lcol-text hin">
         <span class="kicker">Förderung zur Umnutzung von Gewerbe zu Wohnraum</span>
         <h1 class="gh1"><span class="z z-leicht">Bis zu</span><span class="z"><span class="mark">30.000&nbsp;€ Zuschuss<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 11.3C55 9.5 115 10.9 175 9.9C225 9.1 265 10.7 295 9.2"/></svg></span></span><span class="z z-leicht">pro Wohnung.</span></h1>
         <p class="hero-lead">Beantworten Sie drei kurze Fragen zu Ihrem Objekt. Wir melden uns bei Ihnen und planen mit Ihnen den Weg zur maximalen Förderung.<br><strong class="fett">Kostenlos und unverbindlich.</strong></p>
@@ -923,7 +941,7 @@ main:focus{outline:none}
         </a>
       </div>
 
-      <div class="lcol-form fade d1">
+      <div class="lcol-form hin hin2">
         <div class="ccard" id="check">
           <p class="qaktuell" id="qaktuell" tabindex="-1"></p>
 
@@ -1170,8 +1188,10 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
    H.forEach((l,i)=>{const Y=l.p*h,a=0.11+0.07*Math.sin(t*6+i*1.7);x.strokeStyle='rgba(126,183,224,'+a.toFixed(3)+')';x.lineWidth=(i%2===0)?1.3:.8;x.beginPath();x.moveTo(0,Y);x.lineTo(w,Y);x.stroke();});
    for(let vi=0;vi<V.length;vi+=2)for(let hi=0;hi<H.length;hi+=2){const X=V[vi].p*w,Y=H[hi].p*h,a=0.18+0.16*(0.5+0.5*Math.sin(t*9+vi*2+hi*3));x.fillStyle='rgba(240,140,105,'+a.toFixed(3)+')';x.fillRect(X-10,Y-1,20,2);x.fillRect(X-1,Y-10,2,20);}}
  if(RM){draw(0);return;}
- function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;[...V,...H].forEach(l=>{l.wait-=dt;if(Math.abs(l.p-l.t)<0.004&&l.wait<=0){l.t=Math.max(0.06,Math.min(0.94,l.base+(Math.random()-0.5)*0.26));l.wait=1.5+Math.random()*3.5;}l.p+=(l.t-l.p)*Math.min(1,l.spd*dt*6);});draw(now);requestAnimationFrame(step);}
- requestAnimationFrame(step);})();
+ /* Nur zeichnen, solange der Hero sichtbar ist: spart Rechenzeit und Akku beim Scrollen */
+ let an=true,rid=0;new IntersectionObserver(es=>{an=es[0].isIntersecting;if(an&&!rid){last=performance.now();rid=requestAnimationFrame(step);}}).observe(c);
+ function step(now){rid=0;if(!an)return;const dt=Math.min(0.05,(now-last)/1000);last=now;[...V,...H].forEach(l=>{l.wait-=dt;if(Math.abs(l.p-l.t)<0.004&&l.wait<=0){l.t=Math.max(0.06,Math.min(0.94,l.base+(Math.random()-0.5)*0.26));l.wait=1.5+Math.random()*3.5;}l.p+=(l.t-l.p)*Math.min(1,l.spd*dt*6);});draw(now);rid=requestAnimationFrame(step);}
+ rid=requestAnimationFrame(step);})();
 
 /* ZUSCHUSS am Ende des Zeitstrahls: Die Farbe breitet sich vom Strich oben
    kreisfoermig ins Wort aus, je weiter man scrollt. Unten im Blick = ganz farbig. */
@@ -1575,6 +1595,16 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
 /* ------------------------------------------------------------------
    Nur auf dieser Seite: Frist, Rechner, Vorher/Nachher, Herkunft
    ------------------------------------------------------------------ */
+/* Spam-Schutz (Cloudflare Turnstile) erst laden, wenn jemand den Foerder-Check
+   benutzt. Bis zum Absenden vergehen mindestens drei Klicks und die Kontaktdaten,
+   das reicht fuer die unsichtbare Pruefung. Spart beim Seitenaufruf Ladezeit. */
+(function(){var box=document.getElementById('check'),geladen=false;if(!box)return;
+ function laden(){if(geladen)return;geladen=true;
+   ['pointerdown','keydown','focusin','touchstart'].forEach(function(t){box.removeEventListener(t,laden,true);});
+   window.jmrTurnstileDa=function(){document.querySelectorAll('#check .cf-turnstile').forEach(function(el){if(!el.childElementCount)turnstile.render(el);});};
+   var sc=document.createElement('script');sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=jmrTurnstileDa';sc.async=true;document.head.appendChild(sc);}
+ ['pointerdown','keydown','focusin','touchstart'].forEach(function(t){box.addEventListener(t,laden,{capture:true,passive:true});});})();
+
 (function(){
   /* Resttage bis Antragsschluss 31.12.2026, Ende des Tages, deutsche Zeit.
      Nach Ablauf verschwindet die Kapsel. */
