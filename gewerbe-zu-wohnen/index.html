@@ -651,10 +651,12 @@ main:focus{outline:none}
 
 /* Ueberschrift: drei Zeilen, Unterstrich wie mit dem Stift gezogen */
 .gh1 .z{display:block}
+/* Rahmenzeilen "Bis zu" und "pro Wohnung." duenner, die Summe bleibt kraeftig */
+.gh1 .z-leicht{font-weight:400}
 /* Gleicher Abstand zwischen allen drei Zeilen, genug Luft fuer die Unterstreichung */
 .gh1 .z+.z{margin-top:.22em}
 .gh1 .mark{position:relative;display:inline-block;white-space:nowrap}
-.gh1 .skizze{position:absolute;left:-1%;top:86%;width:102%;height:auto;overflow:visible;fill:none;stroke:#E1623D;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;transform:rotate(-.8deg);transform-origin:left center;pointer-events:none}
+.gh1 .skizze{position:absolute;left:-1%;top:86%;width:102%;height:auto;overflow:visible;fill:none;stroke:#E1623D;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 /* Wie mit dem Stift skizziert: ein Zug nach rechts, kurze Wende, locker zurueck. Zeichnet sich beim Laden einmal. */
 .gh1 .skizze path{stroke-dasharray:1;stroke-dashoffset:1;animation:gskizze .9s cubic-bezier(.45,0,.25,1) .3s forwards}
 @keyframes gskizze{to{stroke-dashoffset:0}}
@@ -669,11 +671,14 @@ main:focus{outline:none}
 .frist .fkopf{display:flex;align-items:baseline;flex-wrap:wrap;gap:.15em .3em;font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,2.5vw,2.15rem);line-height:1.1;letter-spacing:-.02em;color:#F7F5F0}
 .frist .fz{font-size:1.45em;line-height:.9;letter-spacing:-.04em;color:#EC6A42;font-variant-numeric:tabular-nums;text-shadow:0 0 22px rgba(225,98,61,.45)}
 .frist .fsub{font-size:.92rem;line-height:1.35;color:#F0B9A5}
+.frist .f-plus{display:none}
 @keyframes fglow{0%,100%{box-shadow:0 18px 40px -22px rgba(225,98,61,.75),0 0 0 0 rgba(240,140,105,0)}50%{box-shadow:0 18px 40px -22px rgba(225,98,61,.75),0 0 0 5px rgba(240,140,105,.16)}}
 @media(max-width:700px){
-  .frist{margin-top:1rem;align-items:center;text-align:center;gap:.4rem;padding:.8rem .7rem .85rem;width:100%;max-width:380px}
+  .frist{margin-top:1rem;align-items:center;text-align:center;gap:.4rem;padding:.8rem .5rem .85rem;width:100%;max-width:380px}
   .frist .fkopf{justify-content:center;gap:.15em .25em;font-size:clamp(1.1rem,5.9vw,1.6rem)}
-  .frist .fsub{font-size:.8rem}
+  /* Handy: Komma statt "und", Zusatzzeile ab 360 px einzeilig (darunter darf sie umbrechen) */
+  .frist .fsub{font-size:clamp(.66rem,3vw,.8rem)}
+  .frist .f-und{display:none}.frist .f-plus{display:inline}
 }
 @media(prefers-reduced-motion:reduce){.frist{animation:none}}
 
@@ -875,9 +880,9 @@ main:focus{outline:none}
     <div class="lgrid">
       <div class="lcol-text fade">
         <span class="kicker">Förderung zur Umnutzung von Gewerbe zu Wohnraum</span>
-        <h1 class="gh1"><span class="z">Bis zu</span><span class="z"><span class="mark">30.000&nbsp;€ Zuschuss<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 12C70 9.6 150 8.9 220 9.6C255 10 278 10.1 295 8.6"/></svg></span></span><span class="z">pro Wohnung.</span></h1>
+        <h1 class="gh1"><span class="z z-leicht">Bis zu</span><span class="z"><span class="mark">30.000&nbsp;€ Zuschuss<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 11.3C55 9.5 115 10.9 175 9.9C225 9.1 265 10.7 295 9.2"/></svg></span></span><span class="z z-leicht">pro Wohnung.</span></h1>
         <p class="hero-lead">Beantworten Sie drei kurze Fragen zu Ihrem Objekt. Wir melden uns bei Ihnen und planen mit Ihnen den Weg zur maximalen Förderung.<br><strong class="fett">Kostenlos und unverbindlich.</strong></p>
-        <div class="frist" id="frist" role="note"><b class="fkopf">Nur noch <span class="fz" id="fristZahl">59</span> <span id="fristWort">Tage</span> möglich!</b><span class="fsub">Anträge nur bis 31.12.2026 und solange Fördermittel da sind.</span></div>
+        <div class="frist" id="frist" role="note"><b class="fkopf">Nur noch <span class="fz" id="fristZahl">59</span> <span id="fristWort">Tage</span> möglich!</b><span class="fsub">Anträge nur bis 31.12.2026<span class="f-und"> und</span><span class="f-plus">,</span> solange Fördermittel da sind.</span></div>
         <a class="gpill" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="5,0 von 5 Sternen bei Google, Bewertungen auf Google ansehen"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>bei Google · <span class="lk">2 Bewertungen</span></span></a>
       </div>
 
