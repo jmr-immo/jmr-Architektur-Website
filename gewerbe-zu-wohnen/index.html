@@ -662,23 +662,18 @@ main:focus{outline:none}
 
 /* Frist im Hero */
 .lhero .hero-lead .fett{color:#F7F5F0;font-weight:700}
-.frist{display:inline-flex;align-items:center;gap:1rem;margin-top:1.6rem;padding:.7rem 1.4rem .7rem .7rem;border-radius:16px;
+.frist{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.5rem;margin-top:1.6rem;padding:1rem 1.5rem 1.05rem 1.15rem;border-radius:16px;
   background:linear-gradient(100deg,rgba(225,98,61,.30),rgba(225,98,61,.12));border:1.5px solid rgba(240,140,105,.75);
   box-shadow:0 18px 40px -22px rgba(225,98,61,.75);animation:fglow 2.6s ease-in-out infinite}
-.frist .fz{flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:72px;height:66px;padding:0 .5rem;border-radius:11px;
-  background:linear-gradient(160deg,#E8714A,#BE4A2A);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
-.frist .fz b{font-family:var(--disp);font-weight:700;font-size:2.1rem;line-height:1;letter-spacing:-.03em}
-.frist .fz small{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-top:.22rem;opacity:.92}
-.frist .ft{display:flex;flex-direction:column;gap:.15rem;line-height:1.3;text-align:left}
-.frist .ft b{font-family:var(--disp);font-weight:600;font-size:1.12rem;color:#F7F5F0;letter-spacing:-.01em}
-.frist .ft span{font-size:.88rem;color:#F0B9A5}
+/* Blickfang: "Nur noch 59 Tage möglich!", Zahl gross in Terrakotta, zaehlt taeglich herunter */
+.frist .fkopf{display:flex;align-items:baseline;flex-wrap:wrap;gap:.15em .3em;font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,2.5vw,2.15rem);line-height:1.1;letter-spacing:-.02em;color:#F7F5F0}
+.frist .fz{font-size:1.45em;line-height:.9;letter-spacing:-.04em;color:#EC6A42;font-variant-numeric:tabular-nums;text-shadow:0 0 22px rgba(225,98,61,.45)}
+.frist .fsub{font-size:.92rem;line-height:1.35;color:#F0B9A5}
 @keyframes fglow{0%,100%{box-shadow:0 18px 40px -22px rgba(225,98,61,.75),0 0 0 0 rgba(240,140,105,0)}50%{box-shadow:0 18px 40px -22px rgba(225,98,61,.75),0 0 0 5px rgba(240,140,105,.16)}}
 @media(max-width:700px){
-  .frist{margin-top:1rem;gap:.8rem;padding:.55rem 1rem .55rem .55rem;width:100%;max-width:380px}
-  .frist .fz{min-width:60px;height:56px}
-  .frist .fz b{font-size:1.75rem}
-  .frist .ft b{font-size:.98rem}
-  .frist .ft span{font-size:.8rem}
+  .frist{margin-top:1rem;align-items:center;text-align:center;gap:.4rem;padding:.8rem .7rem .85rem;width:100%;max-width:380px}
+  .frist .fkopf{justify-content:center;gap:.15em .25em;font-size:clamp(1.1rem,5.9vw,1.6rem)}
+  .frist .fsub{font-size:.8rem}
 }
 @media(prefers-reduced-motion:reduce){.frist{animation:none}}
 
@@ -882,7 +877,7 @@ main:focus{outline:none}
         <span class="kicker">Förderung zur Umnutzung von Gewerbe zu Wohnraum</span>
         <h1 class="gh1"><span class="z">Bis zu</span><span class="z"><span class="mark">30.000&nbsp;€ Zuschuss<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 12C70 9.6 150 8.9 220 9.6C255 10 278 10.1 295 8.6"/></svg></span></span><span class="z">pro Wohnung.</span></h1>
         <p class="hero-lead">Beantworten Sie drei kurze Fragen zu Ihrem Objekt. Wir melden uns bei Ihnen und planen mit Ihnen den Weg zur maximalen Förderung.<br><strong class="fett">Kostenlos und unverbindlich.</strong></p>
-        <div class="frist" id="frist" role="note"><span class="fz"><b id="fristZahl">62</b><small id="fristWort">Tage</small></span><span class="ft"><b>Anträge nur noch bis 31.12.2026</b><span>und nur, solange Fördermittel da sind.</span></span></div>
+        <div class="frist" id="frist" role="note"><b class="fkopf">Nur noch <span class="fz" id="fristZahl">59</span> <span id="fristWort">Tage</span> möglich!</b><span class="fsub">Anträge nur bis 31.12.2026 und solange Fördermittel da sind.</span></div>
         <a class="gpill" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="5,0 von 5 Sternen bei Google, Bewertungen auf Google ansehen"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>bei Google · <span class="lk">2 Bewertungen</span></span></a>
       </div>
 
