@@ -926,6 +926,14 @@ main:focus{outline:none}
 
 /* Hero: "Haus aufteilen lassen," soll am Rechner in einer Zeile stehen */
 .lhero h1.gh1{font-size:clamp(2.5rem,4.1vw,3.5rem)}
+/* So funktioniert's: zwei kompaktere Karten mit Satz statt grosser Zahl */
+#so-gehts .kfw-cards{align-self:center;gap:.9rem}
+#so-gehts .fcard{padding:1.2rem 1.4rem}
+/* Die Fusszeilen-Regel .ftop greift sonst auch hier und macht 1,8rem Luft unter der Kapsel */
+#so-gehts .fcard .ftop{padding-bottom:0;border-bottom:0;margin-bottom:.45rem}
+#so-gehts .nw{white-space:nowrap}
+#so-gehts .fcard .fbig{font-size:clamp(1.2rem,1.9vw,1.5rem);line-height:1.22;letter-spacing:-.02em}
+#so-gehts .fcard .fsub{font-size:.88rem}
 /* Hero: Unterzeile unter der Ueberschrift, auch am Handy sichtbar */
 .hsub{font-family:var(--disp);font-weight:500;font-size:clamp(1.2rem,1.9vw,1.5rem);letter-spacing:-.015em;line-height:1.3;color:#F7F5F0;margin-top:1.1rem}
 @media(max-width:700px){
@@ -937,20 +945,28 @@ main:focus{outline:none}
 
 /* FESTPREIS-RECHNER im Fragenkasten: alles linksbuendig, Fortschritt oben */
 .ccard{text-align:left}
-.ccard .qaktuell{justify-content:flex-start;text-align:left;margin:.2rem 0 .5rem}
-.qgang{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.7rem}
+/* Keine automatische Silbentrennung im Rechner, die Saetze sind kurz genug */
+#check,#check *{-webkit-hyphens:manual;hyphens:manual}
+.ccard .qaktuell{justify-content:center;text-align:center;margin:.15rem 0 .45rem}
+.qgang{display:flex;align-items:center;justify-content:center;margin-bottom:.55rem}
 .qg-t{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent-d)}
 /* Schritt 2 (Zaehler fuer die Einheiten) steht ganz mittig */
-#check.q-mitte .qaktuell{justify-content:center;text-align:center}
 /* Im Ergebnis steht "Ihr Endpreis" klein oben, die grosse Zeile entfaellt */
 #check.s4 .qaktuell{display:none}
-#check.q-mitte .qzaehler{padding-top:1.4rem}
 .qok{display:flex;align-items:flex-start;gap:.65rem;margin:.2rem 0 .3rem;font-size:.82rem;line-height:1.45;color:var(--ink-text);cursor:pointer;text-align:left}
 .qok input{flex:none;width:19px;height:19px;margin-top:.1rem;accent-color:var(--accent-d);cursor:pointer}
-.qhin1{font-size:.86rem;color:var(--ink-soft);text-align:left;margin:0 0 1rem;line-height:1.45}
-.qhin1.unten{margin:.8rem 0 0;text-align:center}
+.qhin1{font-size:.86rem;color:var(--ink-soft);text-align:center;margin:0 auto 1.15rem;max-width:44ch;line-height:1.45;text-wrap:balance}
 /* Zahlenkacheln statt Liste: Vollgeschosse */
 .qopts.qzahl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem}
+/* Fragen 1 und 3 in derselben Kachelform: gleich hohe Kaesten, Text mittig */
+.qzahl .qopt{min-height:74px}
+.qopts.qkachel{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;flex:1 0 auto;align-content:center}
+.qkachel .qopt{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.2rem;padding:.8rem .7rem;min-height:74px}
+.qkachel .qo-box{display:none}
+.qkachel .qo-tx{text-align:center}
+.qkachel .qopt .qo-s{font-size:.74rem;margin:0}
+.qkachel .qopt.aktiv{background:var(--accent-d);border-color:var(--accent-d)}
+.qkachel .qopt.aktiv .qo-t,.qkachel .qopt.aktiv .qo-s{color:#fff}
 .qzahl .qopt{flex-direction:column;justify-content:center;gap:.1rem;padding:.85rem .2rem;text-align:center}
 .qzahl .qo-box{display:none}
 .qzahl .qo-tx{text-align:center}
@@ -959,7 +975,7 @@ main:focus{outline:none}
 .qzahl .qopt.aktiv{background:var(--accent-d);border-color:var(--accent-d)}
 .qzahl .qopt.aktiv .qo-t,.qzahl .qopt.aktiv .qo-s{color:#fff}
 /* Schalter: Dachgeschoss ausgebaut */
-.qdg{display:flex;align-items:center;gap:.8rem;width:100%;margin-top:.75rem;padding:.8rem 1rem;background:rgba(255,255,255,.55);border:1px dashed rgba(11,28,43,.22);border-radius:12px;cursor:pointer;font-family:var(--sans);text-align:left;transition:border-color .2s,background .2s}
+.qdg{display:flex;align-items:center;justify-content:center;gap:.8rem;width:100%;margin-top:.6rem;padding:.8rem 1rem;background:rgba(255,255,255,.55);border:1px dashed rgba(11,28,43,.22);border-radius:12px;cursor:pointer;font-family:var(--sans);text-align:left;transition:border-color .2s,background .2s}
 .qdg:hover{border-color:rgba(225,98,61,.55)}
 .qdg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .qdg .kb{flex:none;width:22px;height:22px;border-radius:6px;border:1.6px solid rgba(11,28,43,.3);background:#fff;position:relative;transition:.18s}
@@ -970,14 +986,15 @@ main:focus{outline:none}
 .qdg .tx{font-size:.92rem;font-weight:600;color:var(--white);line-height:1.3}
 .qdg .tx small{display:block;font-weight:400;font-size:.8rem;color:var(--ink-soft)}
 /* Zaehler: Einheiten */
-.qzaehler{display:flex;align-items:center;justify-content:center;gap:1.4rem;padding:1.1rem 0 .4rem}
+.qz-wrap{flex:1 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.2rem 0 .4rem}
+.qzaehler{display:grid;grid-template-columns:58px 5.5rem 58px;align-items:center;justify-items:center;gap:1.1rem}
 .qz-b{width:58px;height:58px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:1.7rem;line-height:1;color:var(--white);cursor:pointer;transition:.2s;box-shadow:0 10px 22px -16px rgba(11,28,43,.5)}
 .qz-b:hover{border-color:var(--accent);color:var(--accent-d)}
 .qz-b:disabled{opacity:.35;cursor:default}
 .qz-w{min-width:3.2ch;text-align:center;font-family:var(--disp);font-weight:700;font-size:3.4rem;letter-spacing:-.03em;line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
-.qz-e{display:block;text-align:center;font-size:.86rem;font-weight:600;color:var(--ink-soft);margin-top:.1rem}
+.qz-e{display:block;text-align:center;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-top:.55rem}
 /* Ergebnis: Festpreis */
-.qpreis{text-align:left;background:#fff;border:1px solid rgba(225,98,61,.35);border-radius:14px;padding:1.15rem 1.25rem 1rem;margin:0 0 1rem;box-shadow:0 18px 40px -26px rgba(190,74,42,.6)}
+.qpreis{text-align:center;background:#fff;border:1px solid rgba(225,98,61,.35);border-radius:14px;padding:1.15rem 1.25rem 1rem;margin:0 0 1rem;box-shadow:0 18px 40px -26px rgba(190,74,42,.6)}
 .qp-big{font-family:var(--disp);font-weight:700;font-size:clamp(2.4rem,5vw,3rem);letter-spacing:-.035em;line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
 .qp-lab{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:.35rem}
 .qp-sub{font-size:.86rem;color:var(--ink-soft);margin-top:.3rem}
@@ -985,11 +1002,12 @@ main:focus{outline:none}
 .qp-pos li{display:flex;justify-content:space-between;gap:1rem;font-size:.84rem;color:var(--ink-text)}
 .qp-pos li span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
 .qp-pos li span:first-child{color:var(--ink-soft)}
-.qp-check{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.45rem .9rem;margin:0 0 .7rem;padding:0}
-.qp-check li{position:relative;padding-left:1.55rem;font-size:.86rem;line-height:1.35;color:var(--ink-text)}
+/* Leistungen mittig unter dem Preis: zwei Spalten als Block zentriert, Haken untereinander */
+.qp-check{list-style:none;display:grid;grid-template-columns:repeat(2,auto);justify-content:center;gap:.45rem 1.5rem;margin:.2rem 0 .75rem;padding:0}
+.qp-check li{position:relative;padding-left:1.55rem;font-size:.86rem;line-height:1.35;color:var(--ink-text);white-space:nowrap}
 .qp-check li::before{content:'';position:absolute;left:0;top:.05rem;width:17px;height:17px;border-radius:50%;background:rgba(63,209,135,.18);border:1px solid rgba(63,209,135,.55)}
 .qp-check li::after{content:'';position:absolute;left:5px;top:.33rem;width:7px;height:4px;border-left:1.8px solid #1f8f57;border-bottom:1.8px solid #1f8f57;transform:rotate(-45deg)}
-.qp-extra{font-size:.8rem;color:var(--ink-soft);margin:0 0 1rem}
+.qp-extra{font-size:.8rem;color:var(--ink-soft);margin:0 0 1rem;text-align:center}
 /* Hinweis zu den Plaenen: gruen = passt, gelb = pruefen, terrakotta = zuerst Akteneinsicht */
 .qp-plan{display:flex;gap:.75rem;align-items:flex-start;border-radius:12px;padding:.85rem .95rem;margin:0 0 1rem;border:1px solid;font-size:.84rem;line-height:1.45;margin-bottom:1.3rem}
 .qp-plan b{display:block;font-family:var(--disp);font-weight:600;font-size:1rem;letter-spacing:-.01em;color:var(--white);margin-bottom:.15rem}
@@ -1007,7 +1025,7 @@ main:focus{outline:none}
 .qp-plan[data-art="stop"] .qpl-ic{background:var(--accent-d)}
 .qp-plan[data-art="stop"] .qpl-ic::before{content:'!'}
 .qp-ind{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;color:var(--white);line-height:1.2}
-.qweiter{font-family:var(--disp);font-weight:600;font-size:1.12rem;color:var(--white);text-align:left;line-height:1.3;margin:0 0 .8rem;padding-top:1.1rem;border-top:1px solid rgba(11,28,43,.1)}
+.qweiter{font-family:var(--disp);font-weight:600;font-size:1.12rem;color:var(--white);text-align:center;line-height:1.3;margin:0 0 .8rem;padding-top:1.1rem;border-top:1px solid rgba(11,28,43,.1)}
 .qanruf{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;margin-top:.6rem;padding:.85rem 1rem;border-radius:8px;border:1.5px solid rgba(11,28,43,.22);background:rgba(255,255,255,.6);font-weight:600;font-size:.95rem;color:var(--white);transition:.2s}
 .qanruf:hover{border-color:var(--white);background:#fff}
 .qanruf svg{color:var(--accent-d);flex:none}
@@ -1019,13 +1037,16 @@ main:focus{outline:none}
   .qzahl .qopt .qo-s{font-size:.58rem}
   .qhin1{font-size:.78rem}
   .qp-pos li{font-size:.8rem}
-  .qp-check{grid-template-columns:1fr;gap:.4rem}
+  .qp-check{grid-template-columns:auto;gap:.4rem}
   .qp-check li,.qp-plan{font-size:.8rem}
   .qweiter{font-size:1.02rem}
   .qok{font-size:.78rem}
   /* Handy: der Hinweis "Sie bleiben, wo Sie sind" weicht der Ueberschrift ueber dem Rechner */
   .vbox{display:none}
   .qz-b{width:52px;height:52px}
+  .qzaehler{grid-template-columns:52px 4.8rem 52px;gap:.9rem}
+  .qzahl .qopt,.qkachel .qopt{min-height:64px}
+  .qkachel .qopt .qo-t{font-size:.9rem}
   .qz-w{font-size:3rem}
 }
 </style>
@@ -1121,12 +1142,15 @@ main:focus{outline:none}
 
             <!-- Schritt 2: Einheiten, Zaehler statt Auswahl -->
             <div class="qstep" data-titel="Wie viele Einheiten sollen entstehen?" data-step="2" data-frei hidden>
-              <div class="qzaehler" role="group" aria-label="Zahl der Einheiten">
-                <button class="qz-b" type="button" data-schritt="-1" aria-label="Eine Einheit weniger">−</button>
-                <div><output class="qz-w" id="qeAnz" aria-live="polite">2</output><span class="qz-e">Einheiten</span></div>
-                <button class="qz-b" type="button" data-schritt="1" aria-label="Eine Einheit mehr">+</button>
+              <p class="qhin1">Wohnungen und Gewerbeeinheiten zusammen, ohne Stellplätze.</p>
+              <div class="qz-wrap">
+                <div class="qzaehler" role="group" aria-label="Zahl der Einheiten">
+                  <button class="qz-b" type="button" data-schritt="-1" aria-label="Eine Einheit weniger">−</button>
+                  <output class="qz-w" id="qeAnz" aria-live="polite">2</output>
+                  <button class="qz-b" type="button" data-schritt="1" aria-label="Eine Einheit mehr">+</button>
+                </div>
+                <span class="qz-e">Einheiten</span>
               </div>
-              <p class="qhin1 unten">Wohnungen und Gewerbeeinheiten zusammen, ohne Stellplätze.</p>
               <div class="qnav">
                 <button class="qzur-m" type="button" aria-label="Zurück zur vorigen Frage"><span aria-hidden="true">←</span></button>
                 <button class="btn btn-accent qnext" type="button" data-weiter="3">Nächster Schritt <span class="ar">→</span></button>
@@ -1136,7 +1160,8 @@ main:focus{outline:none}
 
             <!-- Schritt 3 -->
             <div class="qstep" data-titel="Welche Pläne haben Sie zu dem Haus?" data-step="3" hidden>
-              <div class="qopts" role="group" aria-labelledby="qaktuell">
+              <p class="qhin1">Ideal sind Pläne mit Genehmigungsstempel aus der Bauakte.</p>
+              <div class="qopts qkachel" role="group" aria-labelledby="qaktuell">
                 <button class="qopt" type="button" aria-pressed="false" data-frage="3" data-wert="Genehmigte Pläne aus der Bauakte" data-kurz="Genehmigte Pläne" data-code="plan-genehmigt">
                   <span class="qo-box" aria-hidden="true"></span><span class="qo-tx"><span class="qo-t">Genehmigte Pläne</span><span class="qo-s">Aus der Bauakte, mit Genehmigungsstempel.</span></span>
                 </button>
@@ -1162,8 +1187,8 @@ main:focus{outline:none}
               <div class="qpreis" id="qpreis" aria-live="polite">
                 <div id="qpFest">
                   <span class="qp-lab">Festpreis inkl. 19&nbsp;% USt</span>
-                  <div class="qp-big" id="qpBrutto">714 €</div>
-                  <div class="qp-sub"><span id="qpNetto">600 €</span> netto</div>
+                  <div class="qp-big" id="qpBrutto">1.059,10 €</div>
+                  <div class="qp-sub"><span id="qpNetto">890 €</span> netto</div>
                   <ul class="qp-pos" id="qpPos"></ul>
                 </div>
                 <div id="qpIndiv" hidden>
@@ -1174,9 +1199,9 @@ main:focus{outline:none}
               </div>
               <ul class="qp-check">
                 <li>Vorprüfung Ihrer Unterlagen</li>
-                <li>Aufteilungspläne aller Geschosse in 2 bis 3 Wochen</li>
-                <li>Antrag bei Ihrer Bauaufsicht</li>
-                <li>Originale an Sie oder Ihren Notar</li>
+                <li>Aufteilungspläne in 2–3 Wochen</li>
+                <li>Antrag und Abstimmung bis zum Bescheid</li>
+                <li>Originale an Sie oder den Notar</li>
               </ul>
               <p class="qp-extra">Dazu kommen nur die Gebühren Ihrer Bauaufsicht, ohne Aufschlag.</p>
               <div class="qp-plan" id="qpPlanBox" data-art="ok" role="note"><span class="qpl-ic" aria-hidden="true"></span><div><b id="qplT">Gute Voraussetzung</b><p id="qplP"></p><p class="qpl-teil"><b>Ihr Teil:</b> aktuelle, gut lesbare Pläne. Mit dem Auftrag erklären Sie, dass sie den genehmigten Stand zeigen und dem Zustand vor Ort entsprechen.</p></div></div>
@@ -1227,14 +1252,14 @@ main:focus{outline:none}
   <div class="container">
     <div class="gtrust-row">
       <div class="gtrust-track">
-      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span><span class="tt"><strong>Ganz Deutschland</strong><small>alle 16 Bundesländer</small></span></div>
-      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="tt"><strong>Digital</strong><small>Upload, Telefon, Video</small></span></div>
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="tt"><strong>In 2 Wochen</strong><small>zum Ergebnis</small></span></div>
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="tt"><strong>Rein digital</strong><small>Upload, Telefon, Video</small></span></div>
       <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/></svg></span><span class="tt"><strong>Architekt</strong><small>Kammer RLP Nr. 110467</small></span></div>
-      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span><span class="tt"><strong>Festpreis</strong><small>sofort im Rechner</small></span></div>
-      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span><span class="tt"><strong>Ganz Deutschland</strong><small>alle 16 Bundesländer</small></span></div>
-      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="tt"><strong>Digital</strong><small>Upload, Telefon, Video</small></span></div>
+      <div class="tfact"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span><span class="tt"><strong>Festpreis</strong><small>sofort einsehen</small></span></div>
+      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="tt"><strong>In 2 Wochen</strong><small>zum Ergebnis</small></span></div>
+      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="tt"><strong>Rein digital</strong><small>Upload, Telefon, Video</small></span></div>
       <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5 5 2.5-1.5-8"/></svg></span><span class="tt"><strong>Architekt</strong><small>Kammer RLP Nr. 110467</small></span></div>
-      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span><span class="tt"><strong>Festpreis</strong><small>sofort im Rechner</small></span></div>
+      <div class="tfact dup" aria-hidden="true"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span><span class="tt"><strong>Festpreis</strong><small>sofort einsehen</small></span></div>
       </div>
     </div>
   </div>
@@ -1251,23 +1276,23 @@ main:focus{outline:none}
         <ul class="li">
           <li><b>+</b> Sie liefern aktuelle und gut lesbare Pläne aller Geschosse, dazu Schnitt, Ansichten und Lageplan. Ohne diese Pläne können wir nicht arbeiten.</li>
           <li><b>+</b> Mit der Beauftragung erklären Sie, dass die Pläne den aktuell genehmigten Stand zeigen und dem baulichen Zustand vor Ort entsprechen.</li>
-          <li><b>+</b> Wir prüfen die Pläne auf Abgeschlossenheit, zeichnen die Aufteilungspläne und reichen sie ein. Nur Unterschriften und die gesiegelten Originale gehen per Post.</li>
+          <li><b>+</b> Wir prüfen die Pläne auf Abgeschlossenheit, zeichnen die Aufteilungspläne, stellen den Antrag und übernehmen die Abstimmung mit Ihrer Bauaufsicht bis zum Bescheid. Nur Unterschriften und die gesiegelten Originale gehen per Post.</li>
         </ul>
       </div>
       <div class="kfw-cards fade d1">
         <div class="fcard lead">
-          <div class="ftop"><span class="fno">Ihre Aufteilungspläne</span></div>
-          <div class="fbig">2–3 Wochen</div>
-          <div class="fsub">Innerhalb von 2 Wochen, spätestens nach 3 Wochen, je nach Umfang des Projekts. Die Zeit läuft ab Eingang Ihrer vollständigen Unterlagen.</div>
+          <div class="ftop"><span class="fno">Lieferzeit</span></div>
+          <div class="fbig">Ihre Aufteilungspläne erhalten Sie <span class="nw">in 2–3 Wochen</span></div>
+          <div class="fsub">Je nach Umfang des Projekts, ab Eingang Ihrer vollständigen Unterlagen.</div>
         </div>
         <div class="fcard alt">
-          <div class="ftop"><span class="fno">Wichtig zu wissen</span></div>
-          <div class="fbig">Ihre Pläne</div>
-          <div class="fsub">Wir sehen Ihr Haus nicht vor Ort. Für die Richtigkeit Ihrer Pläne und ihre Übereinstimmung mit dem baulichen Zustand vor Ort können wir deshalb keine Gewähr übernehmen.</div>
+          <div class="ftop"><span class="fno">Ihr Teil</span></div>
+          <div class="fbig">Sie schicken uns Ihre aktuelle Bauakte</div>
+          <div class="fsub">Wir sehen Ihr Haus nicht vor Ort. Für die Richtigkeit der Pläne und ihre Übereinstimmung mit dem baulichen Zustand vor Ort können wir deshalb keine Gewähr übernehmen.</div>
         </div>
       </div>
     </div>
-    <p class="fnote fnote-center">Die Abgeschlossenheit prüft jede Bauaufsicht nach § 7 WEG und derselben Verwaltungsvorschrift des Bundes. Zuständigkeit und Gebühren regelt das Land. Teilungserklärung und Gemeinschaftsordnung erstellt Ihr Notar. Zur Bearbeitungszeit der Ämter können wir keine Zusage machen.</p>
+    <p class="fnote fnote-center">Die Abgeschlossenheit prüft jede Bauaufsicht nach § 7 WEG und derselben Verwaltungsvorschrift des Bundes. Zuständigkeit und Gebühren regelt das Land. Teilungserklärung und Gemeinschaftsordnung erstellt Ihr Notar. Die Bescheinigung stellt Ihre Bauaufsicht aus. Wir begleiten den Antrag bis zum Bescheid, zur Bearbeitungszeit der Ämter können wir aber keine Zusage machen.</p>
   </div>
 </section>
 
@@ -1280,7 +1305,7 @@ main:focus{outline:none}
       <div class="fstep left"><div class="fhead"><span class="sidx">01</span><span class="stitle">Unterlagen senden</span></div><p>Grundbuchauszug, aktuelle Pläne aller Geschosse, Schnitt, Ansichten, Lageplan und Fotos der Wohnungseingänge. Per Upload oder E-Mail.</p></div>
       <div class="fstep right"><div class="fhead"><span class="sidx">02</span><span class="stitle">Vorprüfung</span></div><p>Wir prüfen Abgeschlossenheit, Planstand und ob am Standort die Umwandlung in Eigentumswohnungen genehmigt werden muss. Passt alles, gilt Ihr Festpreis aus dem Rechner.</p></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">03</span><span class="stitle">Aufteilungsplan</span></div><p>In 2 bis 3 Wochen zeichnen wir alle Geschosse im Maßstab 1&nbsp;:&nbsp;100, nummerieren die Einheiten und legen sie farbig an. Sie geben den Plan frei und unterschreiben Antrag und Vollmacht.</p></div>
-      <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Antrag beim Bauamt</span></div><p>Wir reichen bei Ihrer zuständigen Bauaufsicht ein und beantworten Rückfragen. Will das Amt das Haus ansehen, öffnen Sie oder Ihre Hausverwaltung die Tür.</p></div>
+      <div class="fstep right"><div class="fhead"><span class="sidx">04</span><span class="stitle">Antrag beim Bauamt</span></div><p>Wir reichen bei Ihrer zuständigen Bauaufsicht ein, beantworten Rückfragen und reichen nach, bis der Bescheid da ist. Will das Amt das Haus ansehen, öffnen Sie oder Ihre Hausverwaltung die Tür.</p></div>
       <div class="fstep left"><div class="fhead"><span class="sidx">05</span><span class="stitle">Originale zum Notar</span></div><p>Die gesiegelte Bescheinigung mit den Plänen geht per Post an Sie oder direkt an Ihren Notar. Er beurkundet die Teilungserklärung.</p></div>
     </div>
     <div class="fziel fade"><span class="fziel-w" id="fzielW" role="img" aria-label="Aufgeteilt"><span class="fz-glas" aria-hidden="true">Aufgeteilt</span><span class="fz-farbe" aria-hidden="true">Aufgeteilt</span></span></div>
@@ -1756,18 +1781,18 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
 </script>
 <script>
 /* ------------------------------------------------------------------
-   Festpreis-Rechner (Preisregeln von Max, 03.11.2026)
+   Festpreis-Rechner (Preisregeln von Max, 03.11.2026, angehoben am selben Tag)
    ------------------------------------------------------------------
-   Grundpreis 600 EUR netto fuer 1 bis 2 Geschosse mit Wohnraum.
-   Jedes weitere Vollgeschoss und ein ausgebautes Dachgeschoss je +200 EUR.
+   Grundpreis 890 EUR netto fuer 1 bis 2 Geschosse mit Wohnraum.
+   Jedes weitere Vollgeschoss und ein ausgebautes Dachgeschoss je +220 EUR.
    Keller und nicht ausgebautes Dach sind inklusive.
-   Ab der dritten Einheit je +50 EUR.
+   Ab der dritten Einheit je +60 EUR.
    Ab 6 Geschossen (Vollgeschosse plus ausgebautes Dach) kein Festpreis,
    sondern Angebot nach Ruecksprache. Angezeigt wird der Endpreis inkl.
    19 % USt (Preisangabenverordnung), darunter netto.
    ------------------------------------------------------------------ */
 (function(){
-  var GRUND=600, JE_GESCHOSS=200, JE_EINHEIT=50, UST=0.19, GRENZE=6, MIN_E=2, MAX_E=60;
+  var GRUND=890, JE_GESCHOSS=220, JE_EINHEIT=60, UST=0.19, GRENZE=6, MIN_E=2, MAX_E=60;
   var form=document.getElementById('kform'); if(!form) return;
   var dg=document.getElementById('qdg'), anz=document.getElementById('qeAnz');
   var fE=document.getElementById('qa2'), fDg=document.getElementById('qaDg');
@@ -1799,7 +1824,6 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(!gang) return;
     var n=0; [].forEach.call(form.querySelectorAll('.qstep'),function(s){ if(!s.hidden) n=+s.dataset.step; });
     gang.style.display=n?'':'none';
-    var karte=document.getElementById('check'); if(karte) karte.classList.toggle('q-mitte',n===2);
     var ind=document.getElementById('qpIndiv');
     gangT.textContent=n>=4?((ind&&!ind.hidden)?'Ihr Ergebnis':'Ihr Endpreis'):'Frage '+n+' von 3';
   }
@@ -1838,8 +1862,8 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     document.getElementById('qpBrutto').textContent=fmt(brutto);
     document.getElementById('qpNetto').textContent=fmt(netto);
     var pos=[['Grundpreis bis 2 Geschosse',GRUND]];
-    if(extraG) pos.push(['+ '+extraG+(extraG===1?' Geschoss':' Geschosse')+' à 200 €',extraG*JE_GESCHOSS]);
-    if(extraE) pos.push(['+ '+extraE+(extraE===1?' Einheit':' Einheiten')+' à 50 € (ab der 3.)',extraE*JE_EINHEIT]);
+    if(extraG) pos.push(['+ '+extraG+(extraG===1?' Geschoss':' Geschosse')+' à '+JE_GESCHOSS+' €',extraG*JE_GESCHOSS]);
+    if(extraE) pos.push(['+ '+extraE+(extraE===1?' Einheit':' Einheiten')+' à '+JE_EINHEIT+' € (ab der 3.)',extraE*JE_EINHEIT]);
     var ul=document.getElementById('qpPos'); ul.innerHTML='';
     pos.forEach(function(p){
       var li=document.createElement('li'),l=document.createElement('span'),r=document.createElement('span');
