@@ -632,7 +632,7 @@ p{text-wrap:pretty}
   .qsum,.qsum-lab{display:none}
   /* Kurzfassung in einer Zeile: umbrochene Pillen wirken wie ein Fehler. */
   .qchip{white-space:nowrap}
-  /* Der kurze Satz unter "Fast geschafft" steht auch auf dem Handy, mittig. */
+  /* Der kurze Satz unter der Ueberschrift des Kontaktschritts steht auch auf dem Handy, mittig. */
   .qhinweis{text-align:center;margin:0 0 .8rem}
 
   /* 9  Die Einschaetzung steht ohne eigenen Kasten im Kasten. Auf dem
@@ -642,6 +642,20 @@ p{text-wrap:pretty}
         Grund: Das Dankfenster hat die Bestaetigung bereits gegeben. */
   .qerg h4{font-size:1.52rem;margin-bottom:.8rem}
   .qerg .qe-p{font-size:.95rem}
+}
+/* Handy: Foerder-Check etwas gestaucht, Fragen und Kontaktschritt gleichmaessig */
+@media(max-width:700px){
+  .ccard{padding-top:1.05rem;padding-bottom:1.1rem}
+  .qopt{padding:.7rem 1rem}
+  .qaktuell{margin-bottom:.7rem}
+  .qstep .qnav{padding-top:.75rem}
+  .qstep .qnav .qnext,.qsend #kfSubmit{padding-top:.82rem;padding-bottom:.82rem;min-height:49px}
+  .qhinweis{white-space:nowrap;margin-bottom:.65rem}
+  .ccard .fld{margin-bottom:.5rem}
+  .ccard .fld-row{gap:.5rem}
+  .ccard .fld input{padding-top:.6rem;padding-bottom:.6rem}
+  .ccard .fld textarea{padding-top:.5rem;padding-bottom:.5rem;min-height:0}
+  .form-note{margin-top:.5rem}
 }
 /* Sprunglink zum Inhalt: nur bei Tastatur-Fokus sichtbar */
 .skip-link{position:absolute;left:1rem;top:-120px;z-index:300;padding:.75rem 1.2rem;background:var(--steel);color:#fff;border-radius:var(--r);font-weight:600;text-decoration:none}
@@ -1030,8 +1044,8 @@ main:focus{outline:none}
             </div>
 
             <!-- Schritt 4: Kontakt -->
-            <div class="qstep" data-titel="Fast geschafft." data-step="4" hidden>
-              <p class="qhinweis">Wir setzen uns zeitnah mit Ihnen in Verbindung.</p>
+            <div class="qstep" data-titel="Ihr unverbindliches Angebot." data-step="4" hidden>
+              <p class="qhinweis">Wir melden uns und prüfen Ihr Objekt.</p>
               <div class="fld-row">
                 <div class="fld"><label for="kf-vn">Vorname</label><input id="kf-vn" aria-label="Vorname" name="Vorname" type="text" placeholder="Vorname" autocomplete="given-name" required></div>
                 <div class="fld"><label for="kf-nn">Nachname</label><input id="kf-nn" aria-label="Nachname" name="Nachname" type="text" placeholder="Nachname" autocomplete="family-name" required></div>
@@ -1418,7 +1432,7 @@ document.querySelectorAll('.res').forEach(c=>c.addEventListener('mousemove',e=>{
     if(karte) karte.style.minHeight='';
     /* Fragezeile: die laengste der drei Fragen bestimmt ihre Hoehe,
        sonst wird der Kasten bei kuerzeren Fragen kleiner. Im
-       Kontaktschritt steht die kurze Zeile "Fast geschafft." ohne Vorgabe. */
+       Kontaktschritt steht die Ueberschrift des Formulars ohne Vorgabe. */
     if(aktuell){
       var alt=aktuell.textContent, hoch=0;
       aktuell.style.minHeight='';
