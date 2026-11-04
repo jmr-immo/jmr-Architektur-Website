@@ -907,22 +907,9 @@ main:focus{outline:none}
 
 /* Grosse Hintergrundzahl der Foerder-Sektion: hier WEG statt 266 */
 .kfw::before{content:'WEG'}
-/* Nur auf dieser Seite: Hinweis "Sie bleiben, wo Sie sind" im Hero,
-   ruhig statt der pulsierenden Frist-Kapsel der KfW-Seite */
-.vbox{display:flex;align-items:flex-start;gap:.85rem;margin-top:1.6rem;padding:1rem 1.3rem 1.05rem 1rem;border-radius:16px;max-width:540px;
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18)}
-.vbox .vi{flex-shrink:0;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#F0A58C;background:rgba(225,98,61,.16);border:1px solid rgba(240,140,105,.4)}
-.vbox .vt{display:flex;flex-direction:column;gap:.2rem;line-height:1.4}
-.vbox .vt b{font-family:var(--disp);font-weight:600;font-size:1.12rem;letter-spacing:-.015em;color:#F7F5F0}
-.vbox .vt>span{font-size:.9rem;color:#a8bcca}
 @media(max-width:700px){
-  .vbox{margin:1rem auto 0;text-align:left;padding:.75rem .9rem;gap:.7rem;max-width:380px}
-  .vbox .vi{width:34px;height:34px}
-  .vbox .vt b{font-size:.98rem}
-  .vbox{align-items:center}
   /* Die KfW-Seite zeigt in Frage 2 (Ja/Nein) die Erlaeuterung auch am Handy, hier nicht */
   .qstep[data-step="2"] .qopt .qo-s{display:none}
-  .vbox .vt>span{font-size:.82rem}
 }
 
 /* Hero: "Haus aufteilen lassen," soll am Rechner in einer Zeile stehen */
@@ -1043,8 +1030,6 @@ main:focus{outline:none}
   .qp-check li,.qp-plan{font-size:.8rem}
   .qweiter{font-size:1.02rem}
   .qok{font-size:.78rem}
-  /* Handy: der Hinweis "Sie bleiben, wo Sie sind" weicht der Ueberschrift ueber dem Rechner */
-  .vbox{display:none}
   .qz-b{width:52px;height:52px}
   .qzaehler{grid-template-columns:52px 4.8rem 52px;gap:.9rem}
   .qzahl .qopt,.qkachel .qopt{min-height:64px}
@@ -1079,7 +1064,6 @@ main:focus{outline:none}
         <h1 class="gh1"><span class="z z-leicht">Haus aufteilen lassen,</span><span class="z">ohne Ortstermin,</span><span class="z"><span class="mark">rein digital<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 11.3C55 9.5 115 10.9 175 9.9C225 9.1 265 10.7 295 9.2"/></svg></span></span></h1>
         <p class="hsub">Erhalten Sie Ihre Aufteilungspläne zum Festpreis.</p>
         <p class="hero-lead">Wir zeichnen den Aufteilungsplan aus Ihren Bestandsplänen und beantragen die Abgeschlossenheitsbescheinigung bei Ihrer Bauaufsicht, in ganz Deutschland.<br><strong class="fett">Den Endpreis berechnen Sie rechts in drei Fragen.</strong></p>
-        <div class="vbox" role="note"><span class="vi" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12 7v5M9.5 9.5 12 7l2.5 2.5"/></svg></span><span class="vt"><b>Sie bleiben, wo Sie sind.</b><span><span class="d-only-i">Pläne und Fotos per Upload, Abstimmung per Telefon oder Video. Nur Unterschriften und Originale gehen per Post.</span><span class="m-only-i">Upload, Telefon und Video. Originale per Post.</span></span></span></div>
         <a class="gpill" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="5,0 von 5 Sternen bei Google, Bewertungen auf Google ansehen"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>bei Google · <span class="lk">2 Bewertungen</span></span></a>
       </div>
 
