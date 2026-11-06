@@ -435,7 +435,7 @@ body.leiste-an .wa{opacity:0;visibility:hidden;pointer-events:none}
 @media(max-width:860px){.team-hero{grid-template-columns:1fr;justify-items:center}}
 .team-photo{margin:0;width:100%;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 90px -40px rgba(11,28,43,.4)}
 @media(max-width:860px){.team-photo{width:100%;max-width:420px}}
-.team-img{display:block;width:100%;height:auto}
+.team-img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 63%}
 .team-story p{color:var(--ink-text);font-size:1.02rem;line-height:1.7}
 .team-story p+p{margin-top:1rem}
 @media(max-width:860px){.team-story{max-width:560px}}
@@ -601,12 +601,11 @@ p{text-wrap:pretty}
   .endcta{order:6}
   .footer{order:7}
 
-  /* 5  Ueber das Buero: Bild, zwei Saetze, Telefonnummer. Mehr nicht. */
+  /* 5  Ueber das Buero */
   #ueber{padding-top:2.6rem}
   #ueber .sh{margin-bottom:1.4rem}
   .team-hero{gap:1.2rem;margin-top:0}
   .team-photo{max-width:340px}
-  .team-story{text-align:center}
   .team-story p{font-size:.98rem}
   .ltel-m{display:inline-flex;margin-top:1.2rem;text-align:left}
 
@@ -663,7 +662,12 @@ p{text-wrap:pretty}
 main:focus{outline:none}
 /* Kammereintrag im Abschnitt Über das Büro */
 .team-story p.kammer{margin-top:1.4rem;padding-top:1.1rem;border-top:1px solid var(--line,rgba(11,28,43,.12));font-size:.9rem;line-height:1.6}
-.team-story p.kammer a{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.team-story p.kammer a{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:600;display:block;width:fit-content;margin-top:.35rem}
+@media(max-width:640px){.team-story p.kammer a{white-space:nowrap}}
+.team-story p.ig-zeile{margin-top:.9rem;font-size:.88rem;line-height:1.5}
+.team-story p.ig-zeile a{color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:.45rem;transition:color .2s}
+.team-story p.ig-zeile a:hover{color:var(--terra-d)}
+.team-story p.ig-zeile .ig-ico{color:var(--terra);flex:none}
 
 /* =================================================================
    Landingpage Gewerbe zu Wohnen (KfW 266), Ergaenzungen
@@ -1103,6 +1107,25 @@ main:focus{outline:none}
     </div>
   </div>
 </div>
+
+<!-- ÜBER UNS: Text wie index.html#ueber -->
+<section id="ueber">
+  <div class="container">
+    <div class="sh fade"><span class="kicker">Über uns</span><h2>Planung mit Erfahrung im Bestand.</h2></div>
+    <div class="team-hero fade">
+      <figure class="team-photo">
+        <img class="team-img" src="../img/ueber-uns-kfw.webp" width="1023" height="1537" alt="Zwei Planer besprechen Grundrisspläne an einem Tisch" loading="lazy" decoding="async">
+      </figure>
+      <div class="team-story">
+        <p>Das Büro von Maximilian Rudorf ist auf das Bauen im Bestand spezialisiert: Umnutzung, Aufteilung, Umbau und Sanierung, von der ersten Bewertung bis zum genehmigten Plan.</p>
+        <p>Was sinnvoll und genehmigungsfähig ist, klären wir vor der ersten Zeichnung. So vermeiden Sie teure Umwege, und Sie haben über das gesamte Vorhaben einen festen Ansprechpartner.</p>
+        <p>Gerade im Bestand steckt der Aufwand im Detail: Tragwerk, vorhandene Substanz und das geltende Baurecht müssen zusammenpassen. Wir nehmen den Bestand genau auf, denken die Lösung von Anfang an zu Ende und behalten Aufwand und Kosten realistisch im Blick.</p>
+        <p class="kammer">Maximilian Rudorf ist Architekt, Mitglied der Architektenkammer Rheinland-Pfalz (Eintragungsnummer 110467) und bauvorlageberechtigt. <a href="https://www.diearchitekten.org/quicklinks/architektexperte-finden/" target="_blank" rel="noopener">Zur Architektenliste der Kammer</a></p>
+        <p class="ig-zeile"><a href="https://www.instagram.com/max_rudorf/" target="_blank" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg><span>Tipps aus der Praxis auf <strong>Instagram</strong></span></a></p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FÖRDERUNG: KfW 266 und 261, gleiche Sektion wie auf umnutzung.html#foerderung -->
 <section id="foerderung" class="kfw">
