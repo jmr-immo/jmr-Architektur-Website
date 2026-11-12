@@ -665,6 +665,14 @@ main:focus{outline:none}
 .team-story p.ig-zeile a{color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:.45rem;transition:color .2s}
 .team-story p.ig-zeile a:hover{color:var(--terra-d)}
 .team-story p.ig-zeile .ig-ico{color:var(--terra);flex:none}
+/* Ueber uns mittig (Max, 12.11.2026): Kopf, Bild und Text in einer
+   zentrierten Spalte statt Bild links und Text rechts. */
+#ueber .team-hero{grid-template-columns:minmax(0,1fr);justify-items:center;max-width:720px;margin-left:auto;margin-right:auto}
+#ueber .team-photo{max-width:720px}
+#ueber .team-img{aspect-ratio:3/2;object-position:50% 58%}
+#ueber .team-story{text-align:center;hyphens:manual;-webkit-hyphens:manual}
+#ueber .team-story p{text-wrap:pretty}
+#ueber .team-story p.kammer a{margin-left:auto;margin-right:auto}
 
 /* =================================================================
    Landingpage Gewerbe zu Wohnen (KfW 266), Ergaenzungen
@@ -1108,7 +1116,7 @@ main:focus{outline:none}
 <!-- ÜBER UNS: Text wie index.html#ueber -->
 <section id="ueber">
   <div class="container">
-    <div class="sh fade"><span class="kicker">Über uns</span><h2>Planung mit Erfahrung im Bestand.</h2></div>
+    <div class="sh c fade"><span class="kicker">Über uns</span><h2>Planung mit Erfahrung im Bestand.</h2></div>
     <div class="team-hero fade">
       <figure class="team-photo">
         <img class="team-img" src="../img/ueber-uns-kfw.webp" width="1023" height="1537" alt="Zwei Planer besprechen Grundrisspläne an einem Tisch" loading="lazy" decoding="async">
