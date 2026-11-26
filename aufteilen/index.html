@@ -651,12 +651,10 @@ main:focus{outline:none}
 .team-story p.ig-zeile .ig-ico{color:var(--terra);flex:none}
 /* Ueber uns mittig (Max, 12.11.2026): Kopf, Bild und Text in einer
    zentrierten Spalte statt Bild links und Text rechts, wie /gewerbe-zu-wohnen/. */
-#ueber .team-hero{grid-template-columns:minmax(0,1fr);justify-items:center;max-width:720px;margin-left:auto;margin-right:auto}
-#ueber .team-photo{max-width:720px}
-#ueber .team-img{aspect-ratio:3/2;object-position:50% 58%}
-#ueber .team-story{text-align:center;hyphens:manual;-webkit-hyphens:manual}
+#ueber .team-hero{align-items:center}
+#ueber .team-img{aspect-ratio:1023/1537;object-position:50% 50%}
 #ueber .team-story p{text-wrap:pretty;hyphens:manual;-webkit-hyphens:manual}
-#ueber .team-story p.kammer a{margin-left:auto;margin-right:auto}
+@media(max-width:700px){#ueber .team-img{aspect-ratio:4/5;object-position:50% 25%}}
 
 /* =================================================================
    Landingpage Gewerbe zu Wohnen (KfW 266), Ergaenzungen
@@ -1043,7 +1041,7 @@ main:focus{outline:none}
         <span class="kicker">Für Eigentümer und Investoren</span>
         <h1 class="gh1"><span class="z z-leicht">Haus aufteilen lassen,</span><span class="z">ohne Ortstermin,</span><span class="z"><span class="mark">komplett online<svg class="skizze" viewBox="0 0 300 30" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 11.3C55 9.5 115 10.9 175 9.9C225 9.1 265 10.7 295 9.2"/></svg></span></span></h1>
         <p class="hsub">Erhalten Sie Ihre Aufteilungspläne zum Festpreis.</p>
-        <p class="hero-lead">Wir zeichnen den Aufteilungsplan aus Ihren genehmigten Plänen und beantragen die Abgeschlossenheitsbescheinigung bei Ihrer Bauaufsicht. Ohne Termin, ohne Behördengang, in ganz Deutschland.<br><strong class="fett">Beantworten Sie drei kurze Fragen.<br>Wir melden uns zeitnah mit Ihrem Angebot bei Ihnen.</strong></p>
+        <p class="hero-lead">Wir zeichnen den Aufteilungsplan aus Ihren genehmigten Plänen und beantragen die Abgeschlossenheitsbescheinigung bei Ihrer Bauaufsicht. Ohne Termin, ohne Behördengang, in ganz Deutschland.<br><strong class="fett">Erhalten Sie Ihr Festpreis-Angebot</strong></p>
         <a class="gpill" href="https://www.google.com/maps?cid=15554166909089199657" target="_blank" rel="noopener" aria-label="5,0 von 5 Sternen bei Google, Bewertungen auf Google ansehen"><span class="gsterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>bei Google · <span class="lk">2 Bewertungen</span></span></a>
       </div>
 
@@ -1211,7 +1209,7 @@ main:focus{outline:none}
 <!-- ÜBER UNS: Text wie index.html#ueber -->
 <section id="ueber">
   <div class="container">
-    <div class="sh c fade"><span class="kicker">Über uns</span><h2>Planung mit Erfahrung im Bestand.</h2></div>
+    <div class="sh fade"><span class="kicker">Über uns</span><h2>Planung mit Erfahrung im Bestand.</h2></div>
     <div class="team-hero fade">
       <figure class="team-photo">
         <img class="team-img" src="../img/ueber-uns-kfw.webp" width="1023" height="1537" alt="Zwei Planer besprechen Grundrisspläne an einem Tisch" loading="lazy" decoding="async">
